@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 #pip install progressbar
 #pip install paramiko
 #pip install scp
@@ -18,8 +20,9 @@ BASE_DIR = os.getcwd()
 SRC_DIR = os.path.join(BASE_DIR, "src")
 ORIG_DIR = os.path.join(BASE_DIR, "orig")
 
-def executeCommand(command):
-    print ">>> " + command
+def executeCommand(command, verbose = True):
+    if verbose:
+        print ">>> " + command
     res = subprocess.call(shlex.split(command));
     if res != 0:
         raise ValueError("Command returned non-zero status.");
@@ -61,7 +64,7 @@ def cloneRepository(type, url, target_name, revision = None):
 
 def extractFile(filename, target_dir):
     if os.path.exists(target_dir):
-        print "WARNING: Skipping file extraction of " + filename + "; target directory already exists"
+        print "Skipping file extraction of " + filename + "; target directory already exists"
         return
 
     print "Extracting file " + filename
@@ -116,9 +119,21 @@ def downloadAndExtractFile(url, target_dir_name):
     extractFile(target_filename, os.path.join(SRC_DIR, target_dir_name))
 
 
-def applyPatchFile(filename, directory):
-    # TODO: implement
+def applyPatchFile(patch_name, dir_name):
+    # we're assuming the patch was applied like in this example:
+    # diff -rupN ./src/AGAST/ ../external/src/AGAST/ > ./patches/agast.patch
+    print "Applying patch to " + dir_name
+    patch_dir = os.path.join(BASE_DIR, "patches")
+    # TODO: make this command work; it somehow fails when called from the script, but works when called from the command line
+    executeCommand("patch -d " + os.path.join(SRC_DIR, dir_name) + "/ -p3 < " + os.path.join(patch_dir, patch_name) + ".patch")
     pass;
+
+
+def runScript(script_name):
+    print "Running script " + script_name
+    patch_dir = os.path.join(BASE_DIR, "patches")
+    filename = os.path.join(patch_dir, script_name)
+    executeCommand(filename, False);
 
 
 def main():
@@ -134,31 +149,40 @@ def main():
 
     # TODO: use JSON schema to describe repositories instead of hardcoding them here
 
-    downloadAndExtractFile("http://www.edwardrosten.com/work/fast-C-src-2.1.zip", "FAST")
-    downloadAndExtractFile("http://downloads.sourceforge.net/project/agastpp/v1_1/agast%2B%2B_1_1.tar.gz", "AGAST")
-
-    downloadAndExtractFile("http://zlib.net/zlib-1.2.8.tar.gz", "zlib")
-    downloadAndExtractFile("http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz", "bzip2")
-    downloadAndExtractFile("http://www.ijg.org/files/jpegsrc.v9a.tar.gz", "libjpeg")
-    downloadAndExtractFile("http://downloads.sourceforge.net/libpng/libpng-1.6.17.tar.gz", "libpng")
-    downloadAndExtractFile("http://downloads.sourceforge.net/giflib/giflib-5.1.1.tar.gz", "giflib")
-
-    downloadAndExtractFile("http://downloads.sourceforge.net/project/boost/boost/1.58.0/boost_1_58_0.tar.bz2", "boost")
-
-    downloadAndExtractFile("http://downloads.sourceforge.net/project/dclib/dlib/v18.16/dlib-18.16.tar.bz2", "dlib")
-    downloadAndExtractFile("http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz", "libiconv")
-
-    cloneRepository("git", "https://github.com/philsquared/Catch.git", "Catch")
-    cloneRepository("svn", "http://googletest.googlecode.com/svn/tags/release-1.7.0", "googletest")
-
-    cloneRepository("hg", "ssh://hg@bitbucket.org/eigen/eigen", "Eigen", "b9210aebb4dd4ba8bea7e5ba9dc4242a380be9cc")
-    cloneRepository("git", "https://github.com/miloyip/rapidjson.git", "rapidjson", "eb53791411a5c6466fd38021ff832f71ac17231f")
-    cloneRepository("git", "https://github.com/lastfm/last.json.git", "lastfm-last.json", "85fd751646b67be81dd3535e164d8faced54f4e0")
+#    downloadAndExtractFile("http://www.edwardrosten.com/work/fast-C-src-2.1.zip", "FAST")
+##    applyPatchFile("fast", "FAST")
+#
+#    downloadAndExtractFile("http://downloads.sourceforge.net/project/agastpp/v1_1/agast%2B%2B_1_1.tar.gz", "AGAST")
+##    applyPatchFile("agast", "AGAST")
+#
+#    downloadAndExtractFile("http://zlib.net/zlib-1.2.8.tar.gz", "zlib")
+#    downloadAndExtractFile("http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz", "bzip2")
+#    downloadAndExtractFile("http://www.ijg.org/files/jpegsrc.v9a.tar.gz", "libjpeg")
+#    runScript("libjpeg.sh")
+#    downloadAndExtractFile("http://downloads.sourceforge.net/libpng/libpng-1.6.17.tar.gz", "libpng")
+#    runScript("libpng.sh")
+#    downloadAndExtractFile("http://downloads.sourceforge.net/giflib/giflib-5.1.0.tar.gz", "giflib")
+#    applyPatchFile("giflib", "giflib")
+#
+#    downloadAndExtractFile("http://downloads.sourceforge.net/project/boost/boost/1.58.0/boost_1_58_0.tar.bz2", "boost")
+#
+#    downloadAndExtractFile("http://downloads.sourceforge.net/project/dclib/dlib/v18.16/dlib-18.16.tar.bz2", "dlib")
+#    downloadAndExtractFile("http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz", "libiconv")
+#    applyPatchFile("libiconv", "libiconv")
+#
+#    cloneRepository("git", "https://github.com/philsquared/Catch.git", "Catch")
+#    cloneRepository("svn", "http://googletest.googlecode.com/svn/tags/release-1.7.0", "googletest")
+#
+#    cloneRepository("hg", "ssh://hg@bitbucket.org/eigen/eigen", "eigen", "b9210aebb4dd4ba8bea7e5ba9dc4242a380be9cc")
+##    applyPatchFile("eigen", "eigen")
+#    cloneRepository("git", "https://github.com/miloyip/rapidjson.git", "rapidjson", "eb53791411a5c6466fd38021ff832f71ac17231f")
+#    cloneRepository("git", "https://github.com/lastfm/last.json.git", "lastfm-last.json", "85fd751646b67be81dd3535e164d8faced54f4e0")
+    # TODO: create diff for ZXing
     cloneRepository("git", "https://github.com/zxing/zxing", "zxing", "542319c18f4c5ae41059e6187b1cc94aeba6b0d8")
-    cloneRepository("git", "https://github.com/jlblancoc/nanoflann.git", "nanoflann")
-    cloneRepository("git", "https://github.com/google/snappy.git", "snappy")
-    cloneRepository("git", "https://github.com/vlfeat/vlfeat.git", "vlfeat")
-    cloneRepository("hg", "https://code.google.com/p/poly2tri", "poly2tri")
+#    cloneRepository("git", "https://github.com/jlblancoc/nanoflann.git", "nanoflann")
+#    cloneRepository("git", "https://github.com/google/snappy.git", "snappy")
+#    cloneRepository("git", "https://github.com/vlfeat/vlfeat.git", "vlfeat")
+#    cloneRepository("hg", "https://code.google.com/p/poly2tri", "poly2tri")
 
     # TODO: how can we reconstruct the following directories from the old repository?
     # - maxsum

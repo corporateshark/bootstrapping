@@ -1,0 +1,14 @@
+diff -rupN ./src/giflib/lib/egif_lib.c ../external/src/giflib/lib/egif_lib.c
+--- ./src/giflib/lib/egif_lib.c	2014-05-14 23:43:21.000000000 +0200
++++ ../external/src/giflib/lib/egif_lib.c	2015-01-05 18:36:19.000000000 +0100
+@@ -25,6 +25,10 @@ two modules will be linked.  Preserve th
+ #include "gif_lib.h"
+ #include "gif_lib_private.h"
+ 
++# define S_IREAD        S_IRUSR
++# define S_IWRITE       S_IWUSR
++# define S_IEXEC        S_IXUSR
++
+ /* Masks given codes to BitsPerPixel, to make sure all codes are in range: */
+ /*@+charint@*/
+ static const GifPixelType CodeMask[] = {

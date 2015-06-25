@@ -1,0 +1,1290 @@
+diff -rupN ./src/AGAST/AstDetector.cc ../external/src/AGAST/AstDetector.cc
+--- ./src/AGAST/AstDetector.cc	2011-12-07 11:15:41.000000000 +0100
++++ ../external/src/AGAST/AstDetector.cc	1970-01-01 01:00:00.000000000 +0100
+@@ -1,64 +0,0 @@
+-//
+-//    AstDetector - the interface class for the AGAST corner detector
+-//
+-//    Copyright (C) 2010  Elmar Mair
+-//    All rights reserved.
+-//
+-//    Redistribution and use in source and binary forms, with or without
+-//    modification, are permitted provided that the following conditions are met:
+-//        * Redistributions of source code must retain the above copyright
+-//          notice, this list of conditions and the following disclaimer.
+-//        * Redistributions in binary form must reproduce the above copyright
+-//          notice, this list of conditions and the following disclaimer in the
+-//          documentation and/or other materials provided with the distribution.
+-//        * Neither the name of the <organization> nor the
+-//          names of its contributors may be used to endorse or promote products
+-//          derived from this software without specific prior written permission.
+-//
+-//    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+-//    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+-//    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+-//    DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+-//    DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+-//    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+-//    LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+-//    ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+-//    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+-//    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-
+-#include "AstDetector.h"
+-#include "cvWrapper.h"
+-
+-using namespace std;
+-
+-void AstDetector::score(const unsigned char* i)
+-{
+-	unsigned int n=0;
+-    unsigned int num_corners=corners_all.size();
+-
+-	if(num_corners > scores.capacity())
+-	{
+-		if(scores.capacity()==0)
+-		{
+-			scores.reserve(512 > num_corners ? 512 : num_corners);
+-		}
+-		else
+-		{
+-			unsigned int nScores = scores.capacity()*2;
+-			if(num_corners > nScores)
+-				nScores = num_corners;
+-			scores.reserve(nScores);
+-		}
+-	}
+-
+-    scores.resize(num_corners);
+-
+-    for(; n < num_corners; n++)
+-        scores[n] = cornerScore(i + corners_all[n].y*xsize + corners_all[n].x);
+-}
+-
+-vector<CvPoint>& AstDetector::nms(const unsigned char* im)
+-{
+-	score(im);
+-	return nonMaximumSuppression();
+-}
+diff -rupN ./src/AGAST/AstDetector.h ../external/src/AGAST/AstDetector.h
+--- ./src/AGAST/AstDetector.h	2011-12-07 11:15:47.000000000 +0100
++++ ../external/src/AGAST/AstDetector.h	2014-11-28 10:59:12.000000000 +0100
+@@ -30,36 +30,49 @@
+ #define ASTDETECTOR_H
+ 
+ #include <vector>
+-
+-struct CvPoint;
++#include "Point.h"
+ 
+ class AstDetector
+ {
+-	public:
+-		AstDetector():xsize(0),ysize(0),b(-1) {}
+-		AstDetector(int width, int height, int thr):xsize(width),ysize(height),b(thr) {}
+-		virtual ~AstDetector(){;}
+-		virtual std::vector<struct CvPoint>& detect(const unsigned char* im)=0;
+-		virtual int get_borderWidth()=0;
+-		std::vector<struct CvPoint>& nms(const unsigned char* im);
+-		std::vector<struct CvPoint>& processImage(const unsigned char* im) {detect(im); return nms(im);}
+-		std::vector<struct CvPoint>& get_corners_all(){return corners_all;}
+-		std::vector<struct CvPoint>& get_corners_nms(){return corners_nms;}
+-		void set_threshold(int b_){b=b_;}
+-		void set_imageSize(int xsize_, int ysize_){xsize=xsize_; ysize=ysize_; init_pattern();}
+-
+-	protected:
+-		virtual void init_pattern()=0;
+-		virtual int cornerScore(const unsigned char* p)=0;
+-		void score(const unsigned char* i);
+-		std::vector<struct CvPoint>& nonMaximumSuppression();
+-
+-		std::vector<struct CvPoint> corners_all;
+-		std::vector<struct CvPoint> corners_nms;
+-		std::vector<int> scores;
+-		std::vector<int> nmsFlags;
+-		int xsize, ysize;
+-		int b;
++public:
++	AstDetector() : xsize(0), ysize(0), stride(0), b(-1) {}
++	AstDetector(int width, int height, int stride, int thr) : xsize(width), ysize(height), stride(stride), b(thr) {}
++	virtual ~AstDetector() {}
++
++	virtual std::vector<AGASTPoint>& detect(const unsigned char* im) = 0;
++	virtual int get_borderWidth() = 0;
++
++	void score(const unsigned char* i);
++	void nonMaximumSuppression();
++
++	void processImage(const unsigned char* im) { detect(im); score(im); nonMaximumSuppression(); }
++
++	std::vector<AGASTPoint>& get_corners_all() { return corners_all; }
++	std::vector<AGASTPoint>& get_corners_nms() { return corners_nms; }
++
++	void set_threshold(int b_){b=b_;}
++	void set_imageSize(int xsize_, int ysize_, int stride_) { xsize = xsize_; ysize = ysize_; stride = stride_; init_pattern(); }
++
++	virtual int cornerScore(const unsigned char* p)=0;
++
++protected:
++	virtual void init_pattern()=0;
++
++	std::vector<AGASTPoint> corners_all;
++	std::vector<AGASTPoint> corners_nms;
++	std::vector<int> nmsFlags;
++	int xsize, ysize, stride;
++	int b;
+ };
+ 
++inline void AstDetector::score(const unsigned char* i)
++{
++    const unsigned int num_corners = corners_all.size();
++    for (unsigned int n = 0; n < num_corners; n++)
++    {
++    	AGASTPoint& p = corners_all[n];
++        p.score = cornerScore(i + p.y * stride + p.x);
++    }
++}
++
+ #endif /* AGASTDETECTOR_H */
+diff -rupN ./src/AGAST/Point.h ../external/src/AGAST/Point.h
+--- ./src/AGAST/Point.h	1970-01-01 01:00:00.000000000 +0100
++++ ../external/src/AGAST/Point.h	2014-11-28 10:59:12.000000000 +0100
+@@ -0,0 +1,41 @@
++//
++//    cvWrapper - header file to define CvPoint in case openCV is not installed
++//
++//    Copyright (C) 2010  Elmar Mair
++//    All rights reserved.
++//
++//    Redistribution and use in source and binary forms, with or without
++//    modification, are permitted provided that the following conditions are met:
++//        * Redistributions of source code must retain the above copyright
++//          notice, this list of conditions and the following disclaimer.
++//        * Redistributions in binary form must reproduce the above copyright
++//          notice, this list of conditions and the following disclaimer in the
++//          documentation and/or other materials provided with the distribution.
++//        * Neither the name of the <organization> nor the
++//          names of its contributors may be used to endorse or promote products
++//          derived from this software without specific prior written permission.
++//
++//    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
++//    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
++//    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
++//    DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
++//    DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
++//    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
++//    LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
++//    ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++//    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
++//    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++
++#ifndef POINT_H_
++#define POINT_H_
++
++struct AGASTPoint
++{
++	int x;
++	int y;
++	int score;
++	AGASTPoint() : x(-1), y(-1), score(-1) {}
++	AGASTPoint(int ax, int ay, int ascore=-1) : x(ax), y(ay), score(ascore) {}
++};
++
++#endif /* POINT_H_ */
+diff -rupN ./src/AGAST/agast5_8.cc ../external/src/AGAST/agast5_8.cc
+--- ./src/AGAST/agast5_8.cc	2011-12-07 11:13:35.000000000 +0100
++++ ../external/src/AGAST/agast5_8.cc	2014-11-28 10:59:12.000000000 +0100
+@@ -37,23 +37,22 @@
+ 
+ #include <stdint.h>																			
+ #include <stdlib.h>
+-#include "cvWrapper.h"
+ #include "agast5_8.h"
+ 
+ using namespace std;
+ 
+-vector<CvPoint>& AgastDetector5_8::detect(const unsigned char* im)
++vector<AGASTPoint>& AgastDetector5_8::detect(const unsigned char* im)
+ {
+ 	int total=0;
+ 	int nExpectedCorners=corners_all.capacity();
+-	CvPoint h;
++	AGASTPoint h;
+ 	register int x, y;
+ 	register int xsizeB=xsize - 2;
+ 	register int ysizeB=ysize - 1;
+ 	register int_fast16_t offset0, offset1, offset2, offset3, offset4, offset5, offset6, offset7;
+ 	register int width;
+ 
+-	corners_all.resize(0);
++	corners_all.clear();
+ 
+ 	offset0=s_offset0;
+ 	offset1=s_offset1;
+@@ -63,7 +62,7 @@ vector<CvPoint>& AgastDetector5_8::detec
+ 	offset5=s_offset5;
+ 	offset6=s_offset6;
+ 	offset7=s_offset7;
+-	width=xsize;
++	width = stride;
+ 
+ 	for(y=1; y < ysizeB; y++)
+ 	{										
+diff -rupN ./src/AGAST/agast5_8.h ../external/src/AGAST/agast5_8.h
+--- ./src/AGAST/agast5_8.h	2011-12-07 11:13:43.000000000 +0100
++++ ../external/src/AGAST/agast5_8.h	2014-11-28 10:59:12.000000000 +0100
+@@ -33,18 +33,18 @@
+ #include <stdint.h>
+ #include "AstDetector.h"
+ 
+-struct CvPoint;
+-
+ class AgastDetector5_8 : public AstDetector
+ {
+ 	public:
+-		AgastDetector5_8():AstDetector(){;}
+-		AgastDetector5_8(int width, int height, int thr):AstDetector(width, height, thr){init_pattern();};
++		AgastDetector5_8() : AstDetector() {}
++		AgastDetector5_8(int width, int height, int stride, int thr) : AstDetector(width, height, stride, thr) { init_pattern(); }
+ 		~AgastDetector5_8(){}
+-		std::vector<struct CvPoint>& detect(const unsigned char* im);
+-		std::vector<struct CvPoint>& nms(const unsigned char* im);
++		std::vector<AGASTPoint>& detect(const unsigned char* im);
++		std::vector<AGASTPoint>& nms(const unsigned char* im);
+ 		int get_borderWidth(){return borderWidth;}
+ 
++		int cornerScore(const unsigned char* p);
++
+ 	private:
+ 		static const int borderWidth=1;
+ 		int_fast16_t s_offset0;
+@@ -56,17 +56,16 @@ class AgastDetector5_8 : public AstDetec
+ 		int_fast16_t s_offset6;
+ 		int_fast16_t s_offset7;
+ 
+-		int cornerScore(const unsigned char* p);
+ 		void init_pattern()
+ 		{
+-			s_offset0=(-1)+(0)*xsize;
+-			s_offset1=(-1)+(-1)*xsize;
+-			s_offset2=(0)+(-1)*xsize;
+-			s_offset3=(1)+(-1)*xsize;
+-			s_offset4=(1)+(0)*xsize;
+-			s_offset5=(1)+(1)*xsize;
+-			s_offset6=(0)+(1)*xsize;
+-			s_offset7=(-1)+(1)*xsize;
++			s_offset0=(-1)+(0)*stride;
++			s_offset1=(-1)+(-1)*stride;
++			s_offset2=(0)+(-1)*stride;
++			s_offset3=(1)+(-1)*stride;
++			s_offset4=(1)+(0)*stride;
++			s_offset5=(1)+(1)*stride;
++			s_offset6=(0)+(1)*stride;
++			s_offset7=(-1)+(1)*stride;
+ 		}
+ };
+ 
+diff -rupN ./src/AGAST/agast5_8_nms.cc ../external/src/AGAST/agast5_8_nms.cc
+--- ./src/AGAST/agast5_8_nms.cc	2011-12-07 11:13:25.000000000 +0100
++++ ../external/src/AGAST/agast5_8_nms.cc	2014-11-28 10:59:12.000000000 +0100
+@@ -29,7 +29,6 @@
+ 
+ #include <stdint.h>
+ #include <stdlib.h>
+-#include "cvWrapper.h"
+ #include "agast5_8.h"
+ 
+ using namespace std;
+diff -rupN ./src/AGAST/agast7_12d.cc ../external/src/AGAST/agast7_12d.cc
+--- ./src/AGAST/agast7_12d.cc	2011-12-07 11:13:58.000000000 +0100
++++ ../external/src/AGAST/agast7_12d.cc	2014-11-28 10:59:12.000000000 +0100
+@@ -37,23 +37,22 @@
+ 
+ #include <stdint.h>																			
+ #include <stdlib.h>
+-#include "cvWrapper.h"
+ #include "agast7_12d.h"
+ 
+ using namespace std;
+ 
+-vector<CvPoint>& AgastDetector7_12d::detect(const unsigned char* im)
++vector<AGASTPoint>& AgastDetector7_12d::detect(const unsigned char* im)
+ {
+ 	int total=0;
+ 	int nExpectedCorners=corners_all.capacity();
+-	CvPoint h;
++	AGASTPoint h;
+ 	register int x, y;
+ 	register int xsizeB=xsize - 4;
+ 	register int ysizeB=ysize - 3;
+ 	register int_fast16_t offset0, offset1, offset2, offset3, offset4, offset5, offset6, offset7, offset8, offset9, offset10, offset11;
+ 	register int width;
+ 
+-	corners_all.resize(0);
++	corners_all.clear();
+ 
+ 	offset0=s_offset0;
+ 	offset1=s_offset1;
+@@ -67,7 +66,7 @@ vector<CvPoint>& AgastDetector7_12d::det
+ 	offset9=s_offset9;
+ 	offset10=s_offset10;
+ 	offset11=s_offset11;
+-	width=xsize;
++	width = stride;
+ 
+ 	for(y=3; y < ysizeB; y++)
+ 	{										
+diff -rupN ./src/AGAST/agast7_12d.h ../external/src/AGAST/agast7_12d.h
+--- ./src/AGAST/agast7_12d.h	2011-12-07 11:14:06.000000000 +0100
++++ ../external/src/AGAST/agast7_12d.h	2014-11-28 10:59:12.000000000 +0100
+@@ -33,17 +33,17 @@
+ #include <stdint.h>
+ #include "AstDetector.h"
+ 
+-struct CvPoint;
+-
+ class AgastDetector7_12d: public AstDetector
+ {
+ 	public:
+-		AgastDetector7_12d():AstDetector(){;}
+-		AgastDetector7_12d(int width, int height, int thr):AstDetector(width, height, thr){init_pattern();};
+-		~AgastDetector7_12d(){}
+-		std::vector<struct CvPoint>& detect(const unsigned char* im);
+-		std::vector<struct CvPoint>& nms(const unsigned char* im);
+-		int get_borderWidth(){return borderWidth;}
++		AgastDetector7_12d() : AstDetector() {}
++		AgastDetector7_12d(int width, int height, int stride, int thr) : AstDetector(width, height, stride, thr) { init_pattern(); }
++		~AgastDetector7_12d() {}
++		std::vector<AGASTPoint>& detect(const unsigned char* im);
++		std::vector<AGASTPoint>& nms(const unsigned char* im);
++		int get_borderWidth() { return borderWidth; }
++
++		int cornerScore(const unsigned char* p);
+ 
+ 	private:
+ 		static const int borderWidth=3;
+@@ -60,21 +60,20 @@ class AgastDetector7_12d: public AstDete
+ 		int_fast16_t s_offset10;
+ 		int_fast16_t s_offset11;
+ 
+-		int cornerScore(const unsigned char* p);
+ 		void init_pattern()
+ 		{
+-			s_offset0=(-3)+(0)*xsize;
+-			s_offset1=(-2)+(-1)*xsize;
+-			s_offset2=(-1)+(-2)*xsize;
+-			s_offset3=(0)+(-3)*xsize;
+-			s_offset4=(1)+(-2)*xsize;
+-			s_offset5=(2)+(-1)*xsize;
+-			s_offset6=(3)+(0)*xsize;
+-			s_offset7=(2)+(1)*xsize;
+-			s_offset8=(1)+(2)*xsize;
+-			s_offset9=(0)+(3)*xsize;
+-			s_offset10=(-1)+(2)*xsize;
+-			s_offset11=(-2)+(1)*xsize;
++			s_offset0=(-3)+(0)*stride;
++			s_offset1=(-2)+(-1)*stride;
++			s_offset2=(-1)+(-2)*stride;
++			s_offset3=(0)+(-3)*stride;
++			s_offset4=(1)+(-2)*stride;
++			s_offset5=(2)+(-1)*stride;
++			s_offset6=(3)+(0)*stride;
++			s_offset7=(2)+(1)*stride;
++			s_offset8=(1)+(2)*stride;
++			s_offset9=(0)+(3)*stride;
++			s_offset10=(-1)+(2)*stride;
++			s_offset11=(-2)+(1)*stride;
+ 		}
+ };
+ 
+diff -rupN ./src/AGAST/agast7_12d_nms.cc ../external/src/AGAST/agast7_12d_nms.cc
+--- ./src/AGAST/agast7_12d_nms.cc	2011-12-07 11:14:42.000000000 +0100
++++ ../external/src/AGAST/agast7_12d_nms.cc	2014-11-28 10:59:12.000000000 +0100
+@@ -29,7 +29,6 @@
+ 
+ #include <stdint.h>
+ #include <stdlib.h>
+-#include "cvWrapper.h"
+ #include "agast7_12d.h"
+ 
+ using namespace std;
+diff -rupN ./src/AGAST/agast7_12s.cc ../external/src/AGAST/agast7_12s.cc
+--- ./src/AGAST/agast7_12s.cc	2011-12-07 11:14:52.000000000 +0100
++++ ../external/src/AGAST/agast7_12s.cc	2014-11-28 10:59:12.000000000 +0100
+@@ -37,23 +37,22 @@
+ 
+ #include <stdint.h>																			
+ #include <stdlib.h>
+-#include "cvWrapper.h"
+ #include "agast7_12s.h"
+ 
+ using namespace std;
+ 
+-vector<CvPoint>& AgastDetector7_12s::detect(const unsigned char* im)
++vector<AGASTPoint>& AgastDetector7_12s::detect(const unsigned char* im)
+ {
+ 	int total=0;
+ 	int nExpectedCorners=corners_all.capacity();
+-	CvPoint h;
++	AGASTPoint h;
+ 	register int x, y;
+ 	register int xsizeB=xsize - 3; //2, +1 due to faster test x>xsizeB
+ 	register int ysizeB=ysize - 2;
+ 	register int_fast16_t offset0, offset1, offset2, offset3, offset4, offset5, offset6, offset7, offset8, offset9, offset10, offset11;
+ 	register int width;
+ 
+-	corners_all.resize(0);
++	corners_all.clear();
+ 
+ 	offset0=s_offset0;
+ 	offset1=s_offset1;
+@@ -67,7 +66,7 @@ vector<CvPoint>& AgastDetector7_12s::det
+ 	offset9=s_offset9;
+ 	offset10=s_offset10;
+ 	offset11=s_offset11;
+-	width=xsize;
++	width = stride;
+ 
+ 	for(y=2; y < ysizeB; y++)
+ 	{										
+diff -rupN ./src/AGAST/agast7_12s.h ../external/src/AGAST/agast7_12s.h
+--- ./src/AGAST/agast7_12s.h	2011-12-07 11:15:35.000000000 +0100
++++ ../external/src/AGAST/agast7_12s.h	2014-11-28 10:59:12.000000000 +0100
+@@ -33,17 +33,17 @@
+ #include <stdint.h>
+ #include "AstDetector.h"
+ 
+-struct CvPoint;
+-
+ class AgastDetector7_12s : public AstDetector
+ {
+ 	public:
+-		AgastDetector7_12s():AstDetector(){;}
+-		AgastDetector7_12s(int width, int height, int thr):AstDetector(width, height, thr){init_pattern();};
+-		~AgastDetector7_12s(){}
+-		std::vector<struct CvPoint>& detect(const unsigned char* im);
+-		std::vector<struct CvPoint>& nms(const unsigned char* im);
+-		int get_borderWidth(){return borderWidth;}
++		AgastDetector7_12s() : AstDetector() {}
++		AgastDetector7_12s(int width, int height, int stride, int thr) : AstDetector(width, height, stride, thr) { init_pattern(); }
++		~AgastDetector7_12s() {}
++		std::vector<AGASTPoint>& detect(const unsigned char* im);
++		std::vector<AGASTPoint>& nms(const unsigned char* im);
++		int get_borderWidth() { return borderWidth; }
++
++		int cornerScore(const unsigned char* p);
+ 
+ 	private:
+ 		static const int borderWidth=2;
+@@ -60,22 +60,20 @@ class AgastDetector7_12s : public AstDet
+ 		int_fast16_t s_offset10;
+ 		int_fast16_t s_offset11;
+ 
+-
+-		int cornerScore(const unsigned char* p);
+ 		void init_pattern()
+ 		{
+-			s_offset0=(-2)+(0)*xsize;
+-			s_offset1=(-2)+(-1)*xsize;
+-			s_offset2=(-1)+(-2)*xsize;
+-			s_offset3=(0)+(-2)*xsize;
+-			s_offset4=(1)+(-2)*xsize;
+-			s_offset5=(2)+(-1)*xsize;
+-			s_offset6=(2)+(0)*xsize;
+-			s_offset7=(2)+(1)*xsize;
+-			s_offset8=(1)+(2)*xsize;
+-			s_offset9=(0)+(2)*xsize;
+-			s_offset10=(-1)+(2)*xsize;
+-			s_offset11=(-2)+(1)*xsize;
++			s_offset0=(-2)+(0)*stride;
++			s_offset1=(-2)+(-1)*stride;
++			s_offset2=(-1)+(-2)*stride;
++			s_offset3=(0)+(-2)*stride;
++			s_offset4=(1)+(-2)*stride;
++			s_offset5=(2)+(-1)*stride;
++			s_offset6=(2)+(0)*stride;
++			s_offset7=(2)+(1)*stride;
++			s_offset8=(1)+(2)*stride;
++			s_offset9=(0)+(2)*stride;
++			s_offset10=(-1)+(2)*stride;
++			s_offset11=(-2)+(1)*stride;
+ 		}
+ };
+ 
+diff -rupN ./src/AGAST/agast7_12s_nms.cc ../external/src/AGAST/agast7_12s_nms.cc
+--- ./src/AGAST/agast7_12s_nms.cc	2011-12-07 11:14:36.000000000 +0100
++++ ../external/src/AGAST/agast7_12s_nms.cc	2014-11-28 10:59:12.000000000 +0100
+@@ -29,7 +29,6 @@
+ 
+ #include <stdint.h>
+ #include <stdlib.h>
+-#include "cvWrapper.h"
+ #include "agast7_12s.h"
+ 
+ using namespace std;
+diff -rupN ./src/AGAST/cvWrapper.h ../external/src/AGAST/cvWrapper.h
+--- ./src/AGAST/cvWrapper.h	2011-12-07 11:15:53.000000000 +0100
++++ ../external/src/AGAST/cvWrapper.h	1970-01-01 01:00:00.000000000 +0100
+@@ -1,43 +0,0 @@
+-//
+-//    cvWrapper - header file to define CvPoint in case openCV is not installed
+-//
+-//    Copyright (C) 2010  Elmar Mair
+-//    All rights reserved.
+-//
+-//    Redistribution and use in source and binary forms, with or without
+-//    modification, are permitted provided that the following conditions are met:
+-//        * Redistributions of source code must retain the above copyright
+-//          notice, this list of conditions and the following disclaimer.
+-//        * Redistributions in binary form must reproduce the above copyright
+-//          notice, this list of conditions and the following disclaimer in the
+-//          documentation and/or other materials provided with the distribution.
+-//        * Neither the name of the <organization> nor the
+-//          names of its contributors may be used to endorse or promote products
+-//          derived from this software without specific prior written permission.
+-//
+-//    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+-//    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+-//    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+-//    DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+-//    DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+-//    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+-//    LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+-//    ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+-//    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+-//    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-
+-#ifndef CVWRAPPER_H_
+-#define CVWRAPPER_H_
+-
+-#ifdef HAVE_OPENCV
+-	#include <cv.h>
+-#else
+-	typedef struct CvPoint
+-	{
+-		int x;
+-		int y;
+-	}
+-	CvPoint;
+-#endif
+-
+-#endif /* CVWRAPPER_H_ */
+diff -rupN ./src/AGAST/demo.cc ../external/src/AGAST/demo.cc
+--- ./src/AGAST/demo.cc	2011-12-07 11:16:01.000000000 +0100
++++ ../external/src/AGAST/demo.cc	1970-01-01 01:00:00.000000000 +0100
+@@ -1,193 +0,0 @@
+-//
+-//    demo - demonstration code to show the usage of AGAST, an adaptive and
+-//           generic corner detector based on the accelerated segment test
+-//
+-//    Copyright (C) 2010  Elmar Mair
+-//    All rights reserved.
+-//
+-//    Redistribution and use in source and binary forms, with or without
+-//    modification, are permitted provided that the following conditions are met:
+-//        * Redistributions of source code must retain the above copyright
+-//          notice, this list of conditions and the following disclaimer.
+-//        * Redistributions in binary form must reproduce the above copyright
+-//          notice, this list of conditions and the following disclaimer in the
+-//          documentation and/or other materials provided with the distribution.
+-//        * Neither the name of the <organization> nor the
+-//          names of its contributors may be used to endorse or promote products
+-//          derived from this software without specific prior written permission.
+-//
+-//    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+-//    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+-//    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+-//    DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+-//    DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+-//    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+-//    LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+-//    ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+-//    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+-//    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-
+-#include <iostream>
+-#include <vector>
+-#include <cvaux.h>
+-#include <highgui.h>
+-#include "agast5_8.h"
+-#include "agast7_12s.h"
+-#include "agast7_12d.h"
+-#include "oast9_16.h"
+-
+-using namespace std;
+-
+-//threshold for accelerated segment test (16-, 12- and 8-pixel mask)
+-#define AST_THR_16	40
+-#define AST_THR_12	38
+-#define AST_THR_8	27
+-
+-enum AST_PATTERN {OAST9_16, AGAST7_12d, AGAST7_12s, AGAST5_8, AST_PATTERN_LENGTH};
+-
+-
+-static void drawResult(IplImage const * const imageGray, IplImage * const imageOut, const vector<CvPoint> corners_all, const vector<CvPoint> corners_nms)
+-{
+-	cvCvtColor( imageGray, imageOut, CV_GRAY2RGB );
+-	for(unsigned int i=0; i < corners_all.size(); i++ )
+-	{
+-		cvLine( imageOut, cvPoint( corners_all[i].x, corners_all[i].y ), cvPoint( corners_all[i].x, corners_all[i].y ), CV_RGB(255,0,0) );
+-	}
+-	for(unsigned int i=0; i < corners_nms.size(); i++ )
+-	{
+-		//points
+-		cvLine( imageOut, cvPoint( corners_nms[i].x, corners_nms[i].y ), cvPoint( corners_nms[i].x, corners_nms[i].y ), CV_RGB(0,255,0) );
+-		//crosses
+-//		cvLine( imageOut, cvPoint( corners_nms[i].x-1, corners_nms[i].y ),	cvPoint( corners_nms[i].x+1, corners_nms[i].y ), CV_RGB(0,255,0) );
+-//		cvLine( imageOut,	cvPoint( corners_nms[i].x, corners_nms[i].y-1 ), cvPoint( corners_nms[i].x, corners_nms[i].y+1 ), CV_RGB(0,255,0) );
+-	}
+-}
+-
+-
+-int main(int argc, char* argv[])
+-{
+-	char *name_imageIn;
+-	IplImage *imageIn, *imageGray, *imageOut;
+-	int rows, cols;
+-
+-	//check program parameters
+-	if( argc !=2 ) {
+-		printf( "Wrong number of arguments - need 1 argument:\ndemo <image_in.xxx>\ne.g. demo demo.ppm\n" );
+-		exit(0);
+-	}
+-	name_imageIn = argv[1];
+-
+-	cout << "Starting demo...\n";
+-
+-	//load image and convert it to 8 bit grayscale
+-	imageIn = cvLoadImage( name_imageIn, -1 );
+-	if(!imageIn)
+-	{
+-		cout << "Image \"" << name_imageIn << "\" could not be loaded.\n";
+-	    exit(0);
+-	}
+-	imageGray = cvCreateImage( cvGetSize( imageIn ), IPL_DEPTH_8U, 1);
+-	cvCvtColor( imageIn, imageGray, CV_RGB2GRAY );
+-
+-	cols = imageGray->width;
+-	rows = imageGray->height;
+-
+-	imageOut=cvCreateImage( cvGetSize( imageIn ), IPL_DEPTH_8U, 3);
+-
+-	for(int j=0; j<AST_PATTERN_LENGTH; j++)
+-	{
+-		cvCvtColor( imageGray, imageOut, CV_GRAY2RGB );
+-		switch(j)
+-		{
+-			case OAST9_16:
+-			{
+-				cout << "OAST9_16:   ";
+-				OastDetector9_16 ad9_16(cols, rows, AST_THR_16);
+-				ad9_16.processImage((unsigned char *)imageGray->imageData);
+-				vector<CvPoint> corners_all=ad9_16.get_corners_all();
+-				vector<CvPoint> corners_nms=ad9_16.get_corners_nms();
+-
+-				cout << corners_all.size() << " corner responses - " << corners_nms.size() << " corners after non-maximum suppression." << endl;
+-				drawResult(imageGray, imageOut, corners_all, corners_nms);
+-				cvSaveImage( "oast9_16.ppm", imageOut );
+-				break;
+-			}
+-			case AGAST7_12d:
+-			{
+-				cout << "AGAST7_12d: ";
+-				AgastDetector7_12d ad7_12d(cols, rows, AST_THR_12);
+-				ad7_12d.processImage((unsigned char *)imageGray->imageData);
+-				vector<CvPoint> corners_all=ad7_12d.get_corners_all();
+-				vector<CvPoint> corners_nms=ad7_12d.get_corners_nms();
+-
+-				cout << corners_all.size() << " corner responses - " << corners_nms.size() << " corners after non-maximum suppression." << endl;
+-				drawResult(imageGray, imageOut, corners_all, corners_nms);
+-				cvSaveImage( "agast7_12d.ppm", imageOut );
+-				break;
+-			}
+-			case AGAST7_12s:
+-			{
+-				cout << "AGAST7_12s: ";
+-				AgastDetector7_12s ad7_12s(cols, rows, AST_THR_12);
+-				ad7_12s.processImage((unsigned char *)imageGray->imageData);
+-				vector<CvPoint> corners_all=ad7_12s.get_corners_all();
+-				vector<CvPoint> corners_nms=ad7_12s.get_corners_nms();
+-
+-				cout << corners_all.size() << " corner responses - " << corners_nms.size() << " corners after non-maximum suppression." << endl;
+-				drawResult(imageGray, imageOut, corners_all, corners_nms);
+-				cvSaveImage( "agast7_12s.ppm", imageOut );
+-				break;
+-			}
+-			case AGAST5_8:
+-			{
+-				cout << "AGAST5_8:   ";
+-				AgastDetector5_8 ad5_8(cols, rows, AST_THR_8);
+-				ad5_8.processImage((unsigned char *)imageGray->imageData);
+-				vector<CvPoint> corners_all=ad5_8.get_corners_all();
+-				vector<CvPoint> corners_nms=ad5_8.get_corners_nms();
+-
+-				cout << corners_all.size() << " corner responses - " << corners_nms.size() << " corners after non-maximum suppression." << endl;
+-				drawResult(imageGray, imageOut, corners_all, corners_nms);
+-				cvSaveImage( "agast5_8.ppm", imageOut );
+-
+-				//parallel image processing by two detectors (possible threads)
+-				AgastDetector5_8 ad5_8_thread1; //necessary to access get_borderWidth() in VisualStudio
+-				ad5_8_thread1 = AgastDetector5_8(cols, ceil(static_cast<float>(rows)*0.5)+ad5_8_thread1.get_borderWidth(), AST_THR_8);
+-				AgastDetector5_8 ad5_8_thread2(cols, floor(static_cast<float>(rows)*0.5)+ad5_8_thread1.get_borderWidth(), AST_THR_8);
+-				ad5_8_thread1.processImage((unsigned char *)imageGray->imageData);
+-				ad5_8_thread2.processImage(((unsigned char *)imageGray->imageData)+((int)ceil((float)rows*0.5)-ad5_8_thread2.get_borderWidth())*cols);
+-				vector<CvPoint> corners_all_thread1=ad5_8_thread1.get_corners_all();
+-				vector<CvPoint> corners_all_thread2=ad5_8_thread2.get_corners_all();
+-				vector<CvPoint> corners_nms_thread1=ad5_8_thread1.get_corners_nms();
+-				vector<CvPoint> corners_nms_thread2=ad5_8_thread2.get_corners_nms();
+-
+-				//adjust thread2 responses from ROI to whole image scope
+-				int offset=((int)ceil((float)rows*0.5)-ad5_8_thread2.get_borderWidth());
+-				for(vector<CvPoint>::iterator i=corners_all_thread2.begin(); i<corners_all_thread2.end(); i++)
+-					i->y+=offset;
+-				for(vector<CvPoint>::iterator i=corners_nms_thread2.begin(); i<corners_nms_thread2.end(); i++)
+-					i->y+=offset;
+-
+-				cout << "  thread 1:   " << corners_all_thread1.size() << " corner responses - " << corners_nms_thread1.size() << " corners after non-maximum suppression." << endl;
+-				cout << "  thread 2:   " << corners_all_thread2.size() << " corner responses - " << corners_nms_thread2.size() << " corners after non-maximum suppression." << endl;
+-				cout << "  thread 1+2: " << corners_all_thread1.size() + corners_all_thread2.size() << " corner responses - " << corners_nms_thread1.size() + corners_nms_thread2.size() << " corners after non-maximum suppression." << endl;
+-				drawResult(imageGray, imageOut, corners_all_thread1, corners_nms_thread1);
+-				cvSaveImage( "agast5_8_thread1.ppm", imageOut );
+-				drawResult(imageGray, imageOut, corners_all_thread2, corners_nms_thread2);
+-				cvSaveImage( "agast5_8_thread2.ppm", imageOut );
+-				break;
+-			}
+-			default:
+-				break;
+-		}
+-	}
+-
+-	//free OpenCV memory
+-	cvReleaseImage(&imageIn);
+-	cvReleaseImage(&imageGray);
+-	cvReleaseImage(&imageOut);
+-
+-	cout << "...done!\n";
+-
+-	return 0;
+-}
+diff -rupN ./src/AGAST/demo.cc0 ../external/src/AGAST/demo.cc0
+--- ./src/AGAST/demo.cc0	1970-01-01 01:00:00.000000000 +0100
++++ ../external/src/AGAST/demo.cc0	2014-11-28 10:59:12.000000000 +0100
+@@ -0,0 +1,193 @@
++//
++//    demo - demonstration code to show the usage of AGAST, an adaptive and
++//           generic corner detector based on the accelerated segment test
++//
++//    Copyright (C) 2010  Elmar Mair
++//    All rights reserved.
++//
++//    Redistribution and use in source and binary forms, with or without
++//    modification, are permitted provided that the following conditions are met:
++//        * Redistributions of source code must retain the above copyright
++//          notice, this list of conditions and the following disclaimer.
++//        * Redistributions in binary form must reproduce the above copyright
++//          notice, this list of conditions and the following disclaimer in the
++//          documentation and/or other materials provided with the distribution.
++//        * Neither the name of the <organization> nor the
++//          names of its contributors may be used to endorse or promote products
++//          derived from this software without specific prior written permission.
++//
++//    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
++//    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
++//    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
++//    DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
++//    DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
++//    (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
++//    LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
++//    ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++//    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
++//    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++
++#include <iostream>
++#include <vector>
++#include <cvaux.h>
++#include <highgui.h>
++#include "agast5_8.h"
++#include "agast7_12s.h"
++#include "agast7_12d.h"
++#include "oast9_16.h"
++
++using namespace std;
++
++//threshold for accelerated segment test (16-, 12- and 8-pixel mask)
++#define AST_THR_16	40
++#define AST_THR_12	38
++#define AST_THR_8	27
++
++enum AST_PATTERN {OAST9_16, AGAST7_12d, AGAST7_12s, AGAST5_8, AST_PATTERN_LENGTH};
++
++
++static void drawResult(IplImage const * const imageGray, IplImage * const imageOut, const vector<CvPoint> corners_all, const vector<CvPoint> corners_nms)
++{
++	cvCvtColor( imageGray, imageOut, CV_GRAY2RGB );
++	for(unsigned int i=0; i < corners_all.size(); i++ )
++	{
++		cvLine( imageOut, cvPoint( corners_all[i].x, corners_all[i].y ), cvPoint( corners_all[i].x, corners_all[i].y ), CV_RGB(255,0,0) );
++	}
++	for(unsigned int i=0; i < corners_nms.size(); i++ )
++	{
++		//points
++		cvLine( imageOut, cvPoint( corners_nms[i].x, corners_nms[i].y ), cvPoint( corners_nms[i].x, corners_nms[i].y ), CV_RGB(0,255,0) );
++		//crosses
++//		cvLine( imageOut, cvPoint( corners_nms[i].x-1, corners_nms[i].y ),	cvPoint( corners_nms[i].x+1, corners_nms[i].y ), CV_RGB(0,255,0) );
++//		cvLine( imageOut,	cvPoint( corners_nms[i].x, corners_nms[i].y-1 ), cvPoint( corners_nms[i].x, corners_nms[i].y+1 ), CV_RGB(0,255,0) );
++	}
++}
++
++
++int main(int argc, char* argv[])
++{
++	char *name_imageIn;
++	IplImage *imageIn, *imageGray, *imageOut;
++	int rows, cols;
++
++	//check program parameters
++	if( argc !=2 ) {
++		printf( "Wrong number of arguments - need 1 argument:\ndemo <image_in.xxx>\ne.g. demo demo.ppm\n" );
++		exit(0);
++	}
++	name_imageIn = argv[1];
++
++	cout << "Starting demo...\n";
++
++	//load image and convert it to 8 bit grayscale
++	imageIn = cvLoadImage( name_imageIn, -1 );
++	if(!imageIn)
++	{
++		cout << "Image \"" << name_imageIn << "\" could not be loaded.\n";
++	    exit(0);
++	}
++	imageGray = cvCreateImage( cvGetSize( imageIn ), IPL_DEPTH_8U, 1);
++	cvCvtColor( imageIn, imageGray, CV_RGB2GRAY );
++
++	cols = imageGray->width;
++	rows = imageGray->height;
++
++	imageOut=cvCreateImage( cvGetSize( imageIn ), IPL_DEPTH_8U, 3);
++
++	for(int j=0; j<AST_PATTERN_LENGTH; j++)
++	{
++		cvCvtColor( imageGray, imageOut, CV_GRAY2RGB );
++		switch(j)
++		{
++			case OAST9_16:
++			{
++				cout << "OAST9_16:   ";
++				OastDetector9_16 ad9_16(cols, rows, AST_THR_16);
++				ad9_16.processImage((unsigned char *)imageGray->imageData);
++				vector<CvPoint> corners_all=ad9_16.get_corners_all();
++				vector<CvPoint> corners_nms=ad9_16.get_corners_nms();
++
++				cout << corners_all.size() << " corner responses - " << corners_nms.size() << " corners after non-maximum suppression." << endl;
++				drawResult(imageGray, imageOut, corners_all, corners_nms);
++				cvSaveImage( "oast9_16.ppm", imageOut );
++				break;
++			}
++			case AGAST7_12d:
++			{
++				cout << "AGAST7_12d: ";
++				AgastDetector7_12d ad7_12d(cols, rows, AST_THR_12);
++				ad7_12d.processImage((unsigned char *)imageGray->imageData);
++				vector<CvPoint> corners_all=ad7_12d.get_corners_all();
++				vector<CvPoint> corners_nms=ad7_12d.get_corners_nms();
++
++				cout << corners_all.size() << " corner responses - " << corners_nms.size() << " corners after non-maximum suppression." << endl;
++				drawResult(imageGray, imageOut, corners_all, corners_nms);
++				cvSaveImage( "agast7_12d.ppm", imageOut );
++				break;
++			}
++			case AGAST7_12s:
++			{
++				cout << "AGAST7_12s: ";
++				AgastDetector7_12s ad7_12s(cols, rows, AST_THR_12);
++				ad7_12s.processImage((unsigned char *)imageGray->imageData);
++				vector<CvPoint> corners_all=ad7_12s.get_corners_all();
++				vector<CvPoint> corners_nms=ad7_12s.get_corners_nms();
++
++				cout << corners_all.size() << " corner responses - " << corners_nms.size() << " corners after non-maximum suppression." << endl;
++				drawResult(imageGray, imageOut, corners_all, corners_nms);
++				cvSaveImage( "agast7_12s.ppm", imageOut );
++				break;
++			}
++			case AGAST5_8:
++			{
++				cout << "AGAST5_8:   ";
++				AgastDetector5_8 ad5_8(cols, rows, AST_THR_8);
++				ad5_8.processImage((unsigned char *)imageGray->imageData);
++				vector<CvPoint> corners_all=ad5_8.get_corners_all();
++				vector<CvPoint> corners_nms=ad5_8.get_corners_nms();
++
++				cout << corners_all.size() << " corner responses - " << corners_nms.size() << " corners after non-maximum suppression." << endl;
++				drawResult(imageGray, imageOut, corners_all, corners_nms);
++				cvSaveImage( "agast5_8.ppm", imageOut );
++
++				//parallel image processing by two detectors (possible threads)
++				AgastDetector5_8 ad5_8_thread1; //necessary to access get_borderWidth() in VisualStudio
++				ad5_8_thread1 = AgastDetector5_8(cols, ceil(static_cast<float>(rows)*0.5)+ad5_8_thread1.get_borderWidth(), AST_THR_8);
++				AgastDetector5_8 ad5_8_thread2(cols, floor(static_cast<float>(rows)*0.5)+ad5_8_thread1.get_borderWidth(), AST_THR_8);
++				ad5_8_thread1.processImage((unsigned char *)imageGray->imageData);
++				ad5_8_thread2.processImage(((unsigned char *)imageGray->imageData)+((int)ceil((float)rows*0.5)-ad5_8_thread2.get_borderWidth())*cols);
++				vector<CvPoint> corners_all_thread1=ad5_8_thread1.get_corners_all();
++				vector<CvPoint> corners_all_thread2=ad5_8_thread2.get_corners_all();
++				vector<CvPoint> corners_nms_thread1=ad5_8_thread1.get_corners_nms();
++				vector<CvPoint> corners_nms_thread2=ad5_8_thread2.get_corners_nms();
++
++				//adjust thread2 responses from ROI to whole image scope
++				int offset=((int)ceil((float)rows*0.5)-ad5_8_thread2.get_borderWidth());
++				for(vector<CvPoint>::iterator i=corners_all_thread2.begin(); i<corners_all_thread2.end(); i++)
++					i->y+=offset;
++				for(vector<CvPoint>::iterator i=corners_nms_thread2.begin(); i<corners_nms_thread2.end(); i++)
++					i->y+=offset;
++
++				cout << "  thread 1:   " << corners_all_thread1.size() << " corner responses - " << corners_nms_thread1.size() << " corners after non-maximum suppression." << endl;
++				cout << "  thread 2:   " << corners_all_thread2.size() << " corner responses - " << corners_nms_thread2.size() << " corners after non-maximum suppression." << endl;
++				cout << "  thread 1+2: " << corners_all_thread1.size() + corners_all_thread2.size() << " corner responses - " << corners_nms_thread1.size() + corners_nms_thread2.size() << " corners after non-maximum suppression." << endl;
++				drawResult(imageGray, imageOut, corners_all_thread1, corners_nms_thread1);
++				cvSaveImage( "agast5_8_thread1.ppm", imageOut );
++				drawResult(imageGray, imageOut, corners_all_thread2, corners_nms_thread2);
++				cvSaveImage( "agast5_8_thread2.ppm", imageOut );
++				break;
++			}
++			default:
++				break;
++		}
++	}
++
++	//free OpenCV memory
++	cvReleaseImage(&imageIn);
++	cvReleaseImage(&imageGray);
++	cvReleaseImage(&imageOut);
++
++	cout << "...done!\n";
++
++	return 0;
++}
+diff -rupN ./src/AGAST/nonMaximumSuppression.cc ../external/src/AGAST/nonMaximumSuppression.cc
+--- ./src/AGAST/nonMaximumSuppression.cc	2011-12-07 11:16:08.000000000 +0100
++++ ../external/src/AGAST/nonMaximumSuppression.cc	2014-11-28 10:59:12.000000000 +0100
+@@ -30,122 +30,104 @@
+ //    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ 
+ #include <stdlib.h>
+-#include "cvWrapper.h"
++#include "Point.h"
+ #include "AstDetector.h"
+ 
+ using namespace std;
+ 
+-
+-vector<CvPoint>& AstDetector::nonMaximumSuppression()
++void AstDetector::nonMaximumSuppression()
+ {
+-	int currCorner_ind;
+-	int lastRow=0, next_lastRow=0;
+-	vector<CvPoint>::const_iterator currCorner;
+-	int lastRowCorner_ind=0, next_lastRowCorner_ind=0;
+-	vector<int>::iterator nmsFlags_p;
+-	vector<CvPoint>::iterator currCorner_nms;
+-	int j;
+-	int numCorners_all=corners_all.size();
+-	int nMaxCorners=corners_nms.capacity();
+-
+-	currCorner=corners_all.begin();
+-
+-	if(numCorners_all > nMaxCorners)
+-	{
+-		if(nMaxCorners==0)
+-		{
+-			nMaxCorners=512 > numCorners_all ? 512 : numCorners_all;
+-			corners_nms.reserve(nMaxCorners);
+-			nmsFlags.reserve(nMaxCorners);
+-		}
+-		else
+-		{
+-			nMaxCorners *=2;
+-			if(numCorners_all > nMaxCorners)
+-				nMaxCorners = numCorners_all;
+-			corners_nms.reserve(nMaxCorners);
+-			nmsFlags.reserve(nMaxCorners);
+-		}
+-	}
+-	corners_nms.resize(numCorners_all);
+-	nmsFlags.resize(numCorners_all);
+-
+-	nmsFlags_p=nmsFlags.begin();
+-	currCorner_nms=corners_nms.begin();
++	const int numCorners_all = corners_all.size();
+ 
+ 	//set all flags to MAXIMUM
+-	for(j=numCorners_all; j>0; j--)
+-		*nmsFlags_p++=-1;
+-	nmsFlags_p=nmsFlags.begin();
++	nmsFlags.assign(numCorners_all, -1);
+ 
+-	for(currCorner_ind=0; currCorner_ind<numCorners_all; currCorner_ind++)
+-	{
+-		int t;
++	int lastRow = 0, next_lastRow = 0;
++	int lastRowCorner_ind = 0, next_lastRowCorner_ind = 0;
+ 
++	vector<AGASTPoint>::const_iterator currCorner = corners_all.begin();
++	for (int currCorner_ind = 0; currCorner_ind < numCorners_all; currCorner_ind++)
++	{
+ 		//check above
+-		if(lastRow+1 < currCorner->y)
++		if (lastRow + 1 < currCorner->y)
+ 		{
+ 			lastRow=next_lastRow;
+ 			lastRowCorner_ind=next_lastRowCorner_ind;
+ 		}
+-		if(next_lastRow!=currCorner->y)
++
++		if (next_lastRow != currCorner->y)
+ 		{
+ 			next_lastRow=currCorner->y;
+ 			next_lastRowCorner_ind=currCorner_ind;
+ 		}
+-		if(lastRow+1==currCorner->y)
++
++		if (lastRow + 1 == currCorner->y)
+ 		{
+ 			//find the corner above the current one
+ 			while((corners_all[lastRowCorner_ind].x < currCorner->x) && (corners_all[lastRowCorner_ind].y == lastRow))
++			{
+ 				lastRowCorner_ind++;
++			}
+ 
+-			if( (corners_all[lastRowCorner_ind].x == currCorner->x) && (lastRowCorner_ind!=currCorner_ind) )
++			if ((corners_all[lastRowCorner_ind].x == currCorner->x) && (lastRowCorner_ind!=currCorner_ind))
+ 			{
+-				int t=lastRowCorner_ind;
+-				while(nmsFlags[t]!=-1) //find the maximum in this block
++				int t = lastRowCorner_ind;
++
++				while (nmsFlags[t]!=-1) //find the maximum in this block
++				{
+ 					t=nmsFlags[t];
++				}
+ 
+-				if( scores[currCorner_ind] < scores[t] )
++				if (corners_all[currCorner_ind].score < corners_all[t].score)
+ 				{
+-					nmsFlags[currCorner_ind]=t;
++					nmsFlags[currCorner_ind] = t;
+ 				}
+ 				else
+-					nmsFlags[t]=currCorner_ind;
++				{
++					nmsFlags[t] = currCorner_ind;
++				}
+ 			}
+ 		}
+ 
+ 		//check left
+-		t=currCorner_ind-1;
+-		if( (currCorner_ind!=0) && (corners_all[t].y == currCorner->y) && (corners_all[t].x+1 == currCorner->x) )
++		int t = currCorner_ind-1;
++
++		if ((currCorner_ind!=0) && (corners_all[t].y == currCorner->y) && (corners_all[t].x+1 == currCorner->x))
+ 		{
+-			int currCornerMaxAbove_ind=nmsFlags[currCorner_ind];
++			int currCornerMaxAbove_ind = nmsFlags[currCorner_ind];
+ 
+-			while(nmsFlags[t]!=-1) //find the maximum in that area
+-				t=nmsFlags[t];
++			while (nmsFlags[t]!=-1) //find the maximum in that area
++			{
++				t = nmsFlags[t];
++			}
+ 
+-			if(currCornerMaxAbove_ind==-1) //no maximum above
++			if (currCornerMaxAbove_ind==-1) //no maximum above
+ 			{
+-				if(t!=currCorner_ind)
++				if (t != currCorner_ind)
+ 				{
+-					if( scores[currCorner_ind] < scores[t] )
+-						nmsFlags[currCorner_ind]=t;
++					if (corners_all[currCorner_ind].score < corners_all[t].score)
++					{
++						nmsFlags[currCorner_ind] = t;
++					}
+ 					else
+-						nmsFlags[t]=currCorner_ind;
++					{
++						nmsFlags[t] = currCorner_ind;
++					}
+ 				}
+ 			}
+-			else	//maximum above
++			else //maximum above
+ 			{
+-				if(t!=currCornerMaxAbove_ind)
++				if (t != currCornerMaxAbove_ind)
+ 				{
+-					if(scores[currCornerMaxAbove_ind] < scores[t])
++					if (corners_all[currCornerMaxAbove_ind].score < corners_all[t].score)
+ 					{
+-						nmsFlags[currCornerMaxAbove_ind]=t;
+-						nmsFlags[currCorner_ind]=t;
++						nmsFlags[currCornerMaxAbove_ind] = t;
++						nmsFlags[currCorner_ind] = t;
+ 					}
+ 					else
+ 					{
+-						nmsFlags[t]=currCornerMaxAbove_ind;
+-						nmsFlags[currCorner_ind]=currCornerMaxAbove_ind;
++						nmsFlags[t] = currCornerMaxAbove_ind;
++						nmsFlags[currCorner_ind] = currCornerMaxAbove_ind;
+ 					}
+ 				}
+ 			}
+@@ -155,13 +137,14 @@ vector<CvPoint>& AstDetector::nonMaximum
+ 	}
+ 
+ 	//collecting maximum corners
+-	corners_nms.resize(0);
+-	for(currCorner_ind=0; currCorner_ind<numCorners_all; currCorner_ind++)
++	corners_nms.clear();
++
++	vector<int>::iterator nmsFlags_p = nmsFlags.begin();
++	for (int currCorner_ind = 0; currCorner_ind < numCorners_all; currCorner_ind++)
+ 	{
+-		if(*nmsFlags_p++ == -1)
++		if (*nmsFlags_p++ == -1)
++		{
+ 			corners_nms.push_back(corners_all[currCorner_ind]);
++		}
+ 	}
+-
+-	return corners_nms;
+ }
+-
+diff -rupN ./src/AGAST/oast9_16.cc ../external/src/AGAST/oast9_16.cc
+--- ./src/AGAST/oast9_16.cc	2011-12-07 11:16:22.000000000 +0100
++++ ../external/src/AGAST/oast9_16.cc	2014-11-28 10:59:12.000000000 +0100
+@@ -36,23 +36,22 @@
+ 
+ #include <stdint.h>																			
+ #include <stdlib.h>
+-#include "cvWrapper.h"
+ #include "oast9_16.h"
+ 
+ using namespace std;
+ 
+-vector<CvPoint>& OastDetector9_16::detect(const unsigned char* im)
++vector<AGASTPoint>& OastDetector9_16::detect(const unsigned char* im)
+ {
+-	int total=0;
++	int total = 0;
+ 	int nExpectedCorners=corners_all.capacity();
+-	CvPoint h;
++	AGASTPoint h;
+ 	register int x, y;
+-	register int xsizeB=xsize - 4;
+-	register int ysizeB=ysize - 3;
++	register int xsizeB = xsize - 4;
++	register int ysizeB = ysize - 3;
+     register int_fast16_t offset0, offset1, offset2, offset3, offset4, offset5, offset6, offset7, offset8, offset9, offset10, offset11, offset12, offset13, offset14, offset15;
+     register int width;
+ 
+-	corners_all.resize(0);
++	corners_all.clear();
+ 
+     offset0=s_offset0;
+     offset1=s_offset1;
+@@ -70,7 +69,7 @@ vector<CvPoint>& OastDetector9_16::detec
+     offset13=s_offset13;
+     offset14=s_offset14;
+     offset15=s_offset15;
+-    width=xsize;
++    width = stride;
+ 
+ 	for(y=3; y < ysizeB; y++)			
+ 	{										
+diff -rupN ./src/AGAST/oast9_16.h ../external/src/AGAST/oast9_16.h
+--- ./src/AGAST/oast9_16.h	2011-12-07 11:16:44.000000000 +0100
++++ ../external/src/AGAST/oast9_16.h	2014-11-28 10:59:12.000000000 +0100
+@@ -33,20 +33,20 @@
+ #include <stdint.h>
+ #include "AstDetector.h"
+ 
+-struct CvPoint;
+-
+ class OastDetector9_16 : public AstDetector
+ {
+ 	public:
+-		OastDetector9_16():AstDetector(){;}
+-		OastDetector9_16(int width, int height, int thr):AstDetector(width, height, thr){init_pattern();};
++		OastDetector9_16() : AstDetector() {}
++		OastDetector9_16(int width, int height, int stride, int thr) : AstDetector(width, height, stride, thr) { init_pattern(); }
+ 		~OastDetector9_16(){}
+-		std::vector<struct CvPoint>& detect(const unsigned char* im);
+-		std::vector<struct CvPoint>& nms(const unsigned char* im);
+-		int get_borderWidth(){return borderWidth;}
++		std::vector<AGASTPoint>& detect(const unsigned char* im);
++		std::vector<AGASTPoint>& nms(const unsigned char* im);
++		int get_borderWidth() { return borderWidth; }
++
++		int cornerScore(const unsigned char* p);
+ 
+ 	private:
+-		static const int borderWidth=3;
++		static const int borderWidth = 3;
+ 		int_fast16_t s_offset0;
+ 		int_fast16_t s_offset1;
+ 		int_fast16_t s_offset2;
+@@ -64,25 +64,24 @@ class OastDetector9_16 : public AstDetec
+ 		int_fast16_t s_offset14;
+ 		int_fast16_t s_offset15;
+ 
+-		int cornerScore(const unsigned char* p);
+ 		void init_pattern()
+ 		{
+-			s_offset0=(-3)+(0)*xsize;
+-			s_offset1=(-3)+(-1)*xsize;
+-			s_offset2=(-2)+(-2)*xsize;
+-			s_offset3=(-1)+(-3)*xsize;
+-			s_offset4=(0)+(-3)*xsize;
+-			s_offset5=(1)+(-3)*xsize;
+-			s_offset6=(2)+(-2)*xsize;
+-			s_offset7=(3)+(-1)*xsize;
+-			s_offset8=(3)+(0)*xsize;
+-			s_offset9=(3)+(1)*xsize;
+-			s_offset10=(2)+(2)*xsize;
+-			s_offset11=(1)+(3)*xsize;
+-			s_offset12=(0)+(3)*xsize;
+-			s_offset13=(-1)+(3)*xsize;
+-			s_offset14=(-2)+(2)*xsize;
+-			s_offset15=(-3)+(1)*xsize;
++			s_offset0=(-3)+(0)*stride;
++			s_offset1=(-3)+(-1)*stride;
++			s_offset2=(-2)+(-2)*stride;
++			s_offset3=(-1)+(-3)*stride;
++			s_offset4=(0)+(-3)*stride;
++			s_offset5=(1)+(-3)*stride;
++			s_offset6=(2)+(-2)*stride;
++			s_offset7=(3)+(-1)*stride;
++			s_offset8=(3)+(0)*stride;
++			s_offset9=(3)+(1)*stride;
++			s_offset10=(2)+(2)*stride;
++			s_offset11=(1)+(3)*stride;
++			s_offset12=(0)+(3)*stride;
++			s_offset13=(-1)+(3)*stride;
++			s_offset14=(-2)+(2)*stride;
++			s_offset15=(-3)+(1)*stride;
+ 		}
+ };
+ 
+diff -rupN ./src/AGAST/oast9_16_nms.cc ../external/src/AGAST/oast9_16_nms.cc
+--- ./src/AGAST/oast9_16_nms.cc	2011-12-07 11:16:30.000000000 +0100
++++ ../external/src/AGAST/oast9_16_nms.cc	2014-11-28 10:59:12.000000000 +0100
+@@ -29,7 +29,6 @@
+ 
+ #include <stdint.h>
+ #include <stdlib.h>
+-#include "cvWrapper.h"
+ #include "oast9_16.h"
+ 
+ using namespace std;

@@ -1,0 +1,85 @@
+diff -rupN ./src/Eigen/Eigen/src/Core/CoreEvaluators.h ../external/src/Eigen/Eigen/src/Core/CoreEvaluators.h
+--- ./src/Eigen/Eigen/src/Core/CoreEvaluators.h	2015-06-25 16:23:42.000000000 +0200
++++ ../external/src/Eigen/Eigen/src/Core/CoreEvaluators.h	2015-02-16 12:07:47.000000000 +0100
+@@ -837,7 +837,9 @@ struct block_evaluator<ArgType, BlockRow
+     : mapbase_evaluator<XprType, typename XprType::PlainObject>(block) 
+   {
+     // FIXME this should be an internal assertion
++#if !defined(_MSC_VER)
+     eigen_assert(EIGEN_IMPLIES(evaluator<XprType>::Flags&AlignedBit, (size_t(block.data()) % EIGEN_ALIGN_BYTES) == 0) && "data is not aligned");
++#endif
+   }
+ };
+ 
+diff -rupN ./src/Eigen/Eigen/src/Core/arch/NEON/Complex.h ../external/src/Eigen/Eigen/src/Core/arch/NEON/Complex.h
+--- ./src/Eigen/Eigen/src/Core/arch/NEON/Complex.h	2015-06-25 16:23:42.000000000 +0200
++++ ../external/src/Eigen/Eigen/src/Core/arch/NEON/Complex.h	2015-01-07 10:58:02.000000000 +0100
+@@ -10,6 +10,9 @@
+ #ifndef EIGEN_COMPLEX_NEON_H
+ #define EIGEN_COMPLEX_NEON_H
+ 
++#pragma GCC diagnostic push
++#pragma GCC diagnostic ignored "-Wuninitialized"
++
+ namespace Eigen {
+ 
+ namespace internal {
+@@ -463,4 +466,6 @@ EIGEN_STRONG_INLINE void ptranspose(Pack
+ 
+ } // end namespace Eigen
+ 
++#pragma GCC diagnostic pop
++
+ #endif // EIGEN_COMPLEX_NEON_H
+diff -rupN ./src/Eigen/Eigen/src/Core/arch/NEON/PacketMath.h ../external/src/Eigen/Eigen/src/Core/arch/NEON/PacketMath.h
+--- ./src/Eigen/Eigen/src/Core/arch/NEON/PacketMath.h	2015-06-25 16:23:42.000000000 +0200
++++ ../external/src/Eigen/Eigen/src/Core/arch/NEON/PacketMath.h	2015-01-08 11:12:43.000000000 +0100
+@@ -12,6 +12,9 @@
+ #ifndef EIGEN_PACKET_MATH_NEON_H
+ #define EIGEN_PACKET_MATH_NEON_H
+ 
++#pragma GCC diagnostic push
++#pragma GCC diagnostic ignored "-Wuninitialized"
++
+ namespace Eigen {
+ 
+ namespace internal {
+@@ -492,7 +495,7 @@ ptranspose(PacketBlock<Packet4i,4>& kern
+ //---------- double ----------
+ #if EIGEN_ARCH_ARM64
+ 
+-#if EIGEN_COMP_GNUC_STRICT && __ANDROID__
++//#if EIGEN_COMP_GNUC_STRICT && __ANDROID__
+ // Bug 907: workaround missing declarations of the following two functions in the ADK
+ __extension__ static __inline uint64x2_t __attribute__ ((__always_inline__))
+ vreinterpretq_u64_f64 (float64x2_t __a)
+@@ -505,7 +508,7 @@ vreinterpretq_f64_u64 (uint64x2_t __a)
+ {
+   return (float64x2_t) __a;
+ }
+-#endif
++//#endif
+ 
+ typedef float64x2_t Packet2d;
+ typedef float64x1_t Packet1d;
+@@ -667,4 +670,6 @@ ptranspose(PacketBlock<Packet2d,2>& kern
+ 
+ } // end namespace Eigen
+ 
++#pragma GCC diagnostic pop
++
+ #endif // EIGEN_PACKET_MATH_NEON_H
+diff -rupN ./src/Eigen/unsupported/Eigen/src/NumericalDiff/NumericalDiff.h ../external/src/Eigen/unsupported/Eigen/src/NumericalDiff/NumericalDiff.h
+--- ./src/Eigen/unsupported/Eigen/src/NumericalDiff/NumericalDiff.h	2015-06-25 16:23:41.000000000 +0200
++++ ../external/src/Eigen/unsupported/Eigen/src/NumericalDiff/NumericalDiff.h	2015-01-07 10:58:02.000000000 +0100
+@@ -52,6 +52,10 @@ public:
+         NumericalDiff(const T0& a0, const T1& a1) : Functor(a0, a1), epsfcn(0) {}
+     template<typename T0, typename T1, typename T2>
+         NumericalDiff(const T0& a0, const T1& a1, const T2& a2) : Functor(a0, a1, a2), epsfcn(0) {}
++    template<typename T0, typename T1, typename T2, typename T3>
++        NumericalDiff(const T0& a0, const T1& a1, const T2& a2, const T3& a3) : Functor(a0, a1, a2, a3), epsfcn(0) {}
++    template<typename T0, typename T1, typename T2, typename T3, typename T4>
++        NumericalDiff(const T0& a0, const T1& a1, const T2& a2, const T3& a3, const T4& a4) : Functor(a0, a1, a2, a3, a4), epsfcn(0) {}
+ 
+     enum {
+         InputsAtCompileTime = Functor::InputsAtCompileTime,
