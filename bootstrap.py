@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# Dependencies:
+# Dependencies (not needed at the moment; commented out below)
 # > pip install progressbar
 # > pip install paramiko
 # > pip install scp
@@ -12,9 +12,9 @@ import urllib
 import zipfile
 import tarfile
 
-import progressbar
-import paramiko
-import scp
+#import progressbar
+#import paramiko
+#import scp
 
 BASE_DIR = os.getcwd()
 SRC_DIR = os.path.join(BASE_DIR, "src")
@@ -94,20 +94,20 @@ def extractFile(filename, target_dir):
     os.rename(extract_dir_abs, target_dir)
 
 
-def downloadSCP(hostname, username, path, target_dir):
-    ssh = paramiko.SSHClient()
-    ssh.load_system_host_keys()
-    ssh.connect(hostname = hostname, username = username)
-    scpc = scp.SCPClient(ssh.get_transport())
-    scpc.get(path, local_path = target_dir);
+# def downloadSCP(hostname, username, path, target_dir):
+#     ssh = paramiko.SSHClient()
+#     ssh.load_system_host_keys()
+#     ssh.connect(hostname = hostname, username = username)
+#     scpc = scp.SCPClient(ssh.get_transport())
+#     scpc.get(path, local_path = target_dir);
 
 
-def downloadProgress(count, block_size, total_size):
-    global pbar
-    if count == 0:
-        pbar = progressbar.ProgressBar(maxval = total_size / block_size)
-    else:
-        pbar.update(count - 1)
+# def downloadProgress(count, block_size, total_size):
+#     global pbar
+#     if count == 0:
+#         pbar = progressbar.ProgressBar(maxval = total_size / block_size)
+#     else:
+#         pbar.update(count - 1)
 
 
 def downloadAndExtractFile(url, target_dir_name):
@@ -117,10 +117,11 @@ def downloadAndExtractFile(url, target_dir_name):
 
     if not os.path.exists(target_filename):
         print "Downloading " + url + " to " + target_filename
-        if p.scheme == "ssh":
-            downloadSCP(p.hostname, p.username, p.path, ORIG_DIR)
-        else:
-            urllib.urlretrieve(url, target_filename, reporthook = downloadProgress)
+        # if p.scheme == "ssh":
+        #     downloadSCP(p.hostname, p.username, p.path, ORIG_DIR)
+        # else:
+        #     urllib.urlretrieve(url, target_filename, reporthook = downloadProgress)
+        urllib.urlretrieve(url, target_filename)
     else:
         print "Skipping download of " + url + "; already downloaded"
 
