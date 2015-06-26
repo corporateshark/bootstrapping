@@ -6,6 +6,7 @@
 # > pip install scp
 
 import os
+import shutil
 import subprocess
 import urlparse
 import urllib
@@ -24,6 +25,10 @@ def executeCommand(command, verbose = True):
     if verbose:
         print ">>> " + command
     res = subprocess.call(command, shell = True);
+    return res
+
+
+def dieIfNonZero(res):
     if res != 0:
         raise ValueError("Command returned non-zero status.");
 
@@ -34,25 +39,25 @@ def cloneRepository(type, url, target_name, revision = None):
 
     if type == "hg":
         if not os.path.exists(target_dir):
-            executeCommand("hg clone " + url + " " + target_dir)
+            dieIfNonZero(executeCommand("hg clone " + url + " " + target_dir))
         else:
             print "Directory " + target_dir + " already exists; pulling instead of cloning"
-            executeCommand("hg pull -R " + target_dir)
+            dieIfNonZero(executeCommand("hg pull -R " + target_dir))
 
         if revision is not None:
-            executeCommand("hg update -R " + target_dir + " " + revision)
+            dieIfNonZero(executeCommand("hg update -R " + target_dir + " -C " + revision))
     elif type == "git":
         if not os.path.exists(target_dir):
-            executeCommand("git clone " + url + " " + target_dir)
+            dieIfNonZero(executeCommand("git clone " + url + " " + target_dir))
         else:
             print "Directory " + target_dir + " already exists; fetching instead of cloning"
-            executeCommand("git -C " + target_dir + " fetch")
+            dieIfNonZero(executeCommand("git -C " + target_dir + " fetch"))
 
         if revision is not None:
-            executeCommand("git -C " + target_dir + " reset --hard " + revision)
+            dieIfNonZero(executeCommand("git -C " + target_dir + " reset --hard " + revision))
     elif type == "svn":
         if not os.path.exists(target_dir):
-            executeCommand("svn checkout " + url + " " + target_dir)
+            dieIfNonZero(executeCommand("svn checkout " + url + " " + target_dir))
         else:
             print "Directory " + target_dir + " already exists; PERFORMING NO ACTION!"
 
@@ -64,8 +69,8 @@ def cloneRepository(type, url, target_name, revision = None):
 
 def extractFile(filename, target_dir):
     if os.path.exists(target_dir):
-        print "Skipping file extraction of " + filename + "; target directory already exists"
-        return
+        print "Target directory " + filename + " already exists; removing directory..."
+        shutil.rmtree(target_dir)
 
     print "Extracting file " + filename
     stem, extension = os.path.splitext(os.path.basename(filename))
@@ -136,14 +141,19 @@ def applyPatchFile(patch_name, dir_name):
     patch_dir = os.path.join(BASE_DIR, "patches")
     if not os.path.exists(src_dir):
         os.mkdir(src_dir)
-    executeCommand("patch -d " + os.path.join(SRC_DIR, dir_name) + "/ -p3 < " + os.path.join(patch_dir, patch_name) + ".patch")
+    arguments = "-d " + os.path.join(SRC_DIR, dir_name) + "/ -p3 < " + os.path.join(patch_dir, patch_name) + ".patch"
+    res = executeCommand("patch --dry-run " + arguments + " > /dev/null", False)
+    if res != 0:
+        print "ERROR: patch application failure; has this patch already been applied?"
+    else:
+        dieIfNonZero(executeCommand("patch " + arguments))
 
 
 def runScript(script_name):
     print "Running script " + script_name
     patch_dir = os.path.join(BASE_DIR, "patches")
     filename = os.path.join(patch_dir, script_name)
-    executeCommand(filename, False);
+    dieIfNonZero(executeCommand(filename, False));
 
 
 def main():
