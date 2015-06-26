@@ -72,13 +72,21 @@ def extractFile(filename, target_dir):
 
     if extension == ".zip":
         zfile = zipfile.ZipFile(filename)
-        zfile.extractall(SRC_DIR)
         extract_dir = os.path.commonprefix(zfile.namelist())
+        extract_dir_local = ""
+        if extract_dir == "":  # deal with stupid zip files that don't contain a base directory
+            extract_dir, extension2 = os.path.splitext(os.path.basename(filename))
+            extract_dir_local = extract_dir
+        zfile.extractall(os.path.join(SRC_DIR, extract_dir_local))
         zfile.close()
     elif extension == ".gz" or extension == ".bz2":
         tfile = tarfile.open(filename)
-        tfile.extractall(SRC_DIR)
         extract_dir = os.path.commonprefix(tfile.getnames())
+        extract_dir_local = ""
+        if extract_dir == "":  # deal with stupid tar files that don't contain a base directory
+            extract_dir, extension2 = os.path.splitext(os.path.basename(filename))
+            extract_dir_local = extract_dir
+        tfile.extractall(os.path.join(SRC_DIR, extract_dir_local))
         tfile.close()
 
     # rename extracted folder to target_dir
@@ -166,7 +174,6 @@ def main():
     downloadAndExtractFile("http://downloads.sourceforge.net/project/dclib/dlib/v18.16/dlib-18.16.tar.bz2", "dlib")
     downloadAndExtractFile("http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz", "libiconv")
     applyPatchFile("libiconv", "libiconv")
-
     cloneRepository("git", "https://github.com/philsquared/Catch.git", "Catch")
     cloneRepository("svn", "http://googletest.googlecode.com/svn/tags/release-1.7.0", "googletest")
     cloneRepository("hg", "ssh://hg@bitbucket.org/eigen/eigen", "eigen", "b9210aebb4dd4ba8bea7e5ba9dc4242a380be9cc")
@@ -181,6 +188,12 @@ def main():
     cloneRepository("hg", "https://code.google.com/p/poly2tri", "poly2tri")
     applyPatchFile("maxsum", "maxsum")
     applyPatchFile("Windows", "Windows")
+
+    cloneRepository("git", "http://repo.or.cz/openal-soft.git", "openal-soft")
+    downloadAndExtractFile("http://wss.co.uk/pinknoise/tremolo/Tremolo001.zip", "libtremolo")
+    downloadAndExtractFile("http://downloads.xiph.org/releases/ogg/libogg-1.3.2.tar.gz", "libogg")
+    downloadAndExtractFile("http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.5.tar.gz", "libvorbis")
+    downloadAndExtractFile("http://downloads.sourceforge.net/project/modplug-xmms/libmodplug/0.8.8.5/libmodplug-0.8.8.5.tar.gz", "libmodplug")
 
 if __name__ == "__main__":
     main()
