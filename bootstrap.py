@@ -121,9 +121,12 @@ def downloadAndExtractFile(url, target_dir_name):
 
 def applyPatchFile(patch_name, dir_name):
     # we're assuming the patch was applied like in this example:
-    # diff -rupN ./src/AGAST/ ../external/src/AGAST/ > ./patches/agast.patch
+    # diff --exclude=".git" --exclude=".hg" -rupN ./src/AGAST/ ../external/src/AGAST/ > ./patches/agast.patch
     print "Applying patch to " + dir_name
+    src_dir = os.path.join(SRC_DIR, dir_name)
     patch_dir = os.path.join(BASE_DIR, "patches")
+    if not os.path.exists(src_dir):
+        os.mkdir(src_dir)
     executeCommand("patch -d " + os.path.join(SRC_DIR, dir_name) + "/ -p3 < " + os.path.join(patch_dir, patch_name) + ".patch")
 
 
@@ -176,10 +179,8 @@ def main():
     cloneRepository("git", "https://github.com/google/snappy.git", "snappy")
     cloneRepository("git", "https://github.com/vlfeat/vlfeat.git", "vlfeat")
     cloneRepository("hg", "https://code.google.com/p/poly2tri", "poly2tri")
-
-    # TODO: how can we reconstruct the following directories from the old repository?
-    # - maxsum
-    # - Windows
+    applyPatchFile("maxsum", "maxsum")
+    applyPatchFile("Windows", "Windows")
 
 if __name__ == "__main__":
     main()
