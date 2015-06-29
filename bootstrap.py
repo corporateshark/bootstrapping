@@ -5,16 +5,21 @@
 # > pip install paramiko
 # > pip install scp
 
+from __future__ import print_function
+
 import os
 import sys
 import shutil
 import subprocess
-import urlparse
 import urllib
 import zipfile
 import tarfile
 import hashlib
 import json
+try:
+    from urllib.parse import urlparse
+except ImportError:
+    from urlparse import urlparse
 
 #import progressbar
 #import paramiko
@@ -27,7 +32,7 @@ ORIG_DIR = os.path.join(BASE_DIR, "orig")
 BOOTSTRAP_FILENAME = "bootstrap.json"
 
 def log(string):
-    print "--- " + string
+    print("--- " + string)
 
 
 def executeCommand(command, printCommand = False, quiet = False):
@@ -148,7 +153,7 @@ def computeFileHash(filename):
 
 
 def downloadAndExtractFile(url, target_dir_name, sha1_hash = None):
-    p = urlparse.urlparse(url)
+    p = urlparse(url)
     filename_rel = os.path.split(p.path)[1] # get original filename
     target_filename = os.path.join(ORIG_DIR, filename_rel)
 
