@@ -6,12 +6,15 @@
 # > pip install scp
 
 import os
+import sys
 import shutil
 import subprocess
 import urlparse
 import urllib
 import zipfile
 import tarfile
+import hashlib
+import json
 
 #import progressbar
 #import paramiko
@@ -21,9 +24,17 @@ BASE_DIR = os.getcwd()
 SRC_DIR = os.path.join(BASE_DIR, "src")
 ORIG_DIR = os.path.join(BASE_DIR, "orig")
 
-def executeCommand(command, verbose = True):
-    if verbose:
-        print ">>> " + command
+BOOTSTRAP_FILENAME = "bootstrap.json"
+
+def log(string):
+    print "--- " + string
+
+
+def executeCommand(command, printCommand = False, quiet = False):
+    if quiet:
+        command = command + " &> /dev/null"
+    if printCommand:
+        log(">>> " + command)
     res = subprocess.call(command, shell = True);
     return res
 
@@ -35,44 +46,51 @@ def dieIfNonZero(res):
 
 def cloneRepository(type, url, target_name, revision = None):
     target_dir = os.path.join(SRC_DIR, target_name)
-    print "Cloning " + url + " to " + target_dir
+    log("Cloning " + url + " to " + target_dir)
 
     if type == "hg":
-        if not os.path.exists(target_dir):
+        repo_exists = os.path.exists(os.path.join(target_dir, ".hg"))
+
+        if not repo_exists:
             dieIfNonZero(executeCommand("hg clone " + url + " " + target_dir))
         else:
-            print "Directory " + target_dir + " already exists; pulling instead of cloning"
+            log("Repository " + target_dir + " already exists; pulling instead of cloning")
             dieIfNonZero(executeCommand("hg pull -R " + target_dir))
 
-        if revision is not None:
-            dieIfNonZero(executeCommand("hg update -R " + target_dir + " -C " + revision))
+        if revision is None:
+            revision = ""
+        dieIfNonZero(executeCommand("hg update -R " + target_dir + " -C " + revision))
+
     elif type == "git":
-        if not os.path.exists(target_dir):
+        repo_exists = os.path.exists(os.path.join(target_dir, ".git"))
+
+        if not repo_exists:
             dieIfNonZero(executeCommand("git clone " + url + " " + target_dir))
         else:
-            print "Directory " + target_dir + " already exists; fetching instead of cloning"
+            log("Repository " + target_dir + " already exists; fetching instead of cloning")
             dieIfNonZero(executeCommand("git -C " + target_dir + " fetch"))
 
-        if revision is not None:
-            dieIfNonZero(executeCommand("git -C " + target_dir + " reset --hard " + revision))
-    elif type == "svn":
-        if not os.path.exists(target_dir):
-            dieIfNonZero(executeCommand("svn checkout " + url + " " + target_dir))
-        else:
-            print "Directory " + target_dir + " already exists; PERFORMING NO ACTION!"
+        if revision is None:
+            revision = "HEAD"
+        dieIfNonZero(executeCommand("git -C " + target_dir + " reset --hard " + revision))
+        dieIfNonZero(executeCommand("git -C " + target_dir + " clean -fd"))
 
-        if revision is not None:
+    elif type == "svn":
+        dieIfNonZero(executeCommand("svn checkout " + url + " " + target_dir))
+
+        if revision is not None and revision != "":
             raise RuntimeError("Updating to revision not implemented for SVN.")
+
     else:
         raise ValueError("Cloning " + type + " repositories not implemented.")
 
 
 def extractFile(filename, target_dir):
     if os.path.exists(target_dir):
-        print "Target directory " + filename + " already exists; removing directory..."
+        # log("Target directory " + filename + " already exists; removing directory...")
         shutil.rmtree(target_dir)
 
-    print "Extracting file " + filename
+    log("Extracting file " + filename)
     stem, extension = os.path.splitext(os.path.basename(filename))
 
     if extension == ".zip":
@@ -84,7 +102,7 @@ def extractFile(filename, target_dir):
             extract_dir_local = extract_dir
         zfile.extractall(os.path.join(SRC_DIR, extract_dir_local))
         zfile.close()
-    elif extension == ".gz" or extension == ".bz2":
+    elif extension == ".tar" or extension == ".gz" or extension == ".bz2":
         tfile = tarfile.open(filename)
         extract_dir = os.path.commonprefix(tfile.getnames())
         extract_dir_local = ""
@@ -93,6 +111,8 @@ def extractFile(filename, target_dir):
             extract_dir_local = extract_dir
         tfile.extractall(os.path.join(SRC_DIR, extract_dir_local))
         tfile.close()
+    else:
+        raise RuntimeError("Unknown compressed file format " + extension)
 
     # rename extracted folder to target_dir
     extract_dir_abs = os.path.join(SRC_DIR, extract_dir)
@@ -115,20 +135,38 @@ def extractFile(filename, target_dir):
 #         pbar.update(count - 1)
 
 
-def downloadAndExtractFile(url, target_dir_name):
+def computeFileHash(filename):
+    blocksize = 65536
+    hasher = hashlib.sha1()
+    with open(filename, 'rb') as afile:
+        buf = afile.read(blocksize)
+        while len(buf) > 0:
+            hasher.update(buf)
+            buf = afile.read(blocksize)
+    return hasher.hexdigest()
+
+
+def downloadAndExtractFile(url, target_dir_name, sha1_hash = None):
     p = urlparse.urlparse(url)
     filename_rel = os.path.split(p.path)[1] # get original filename
     target_filename = os.path.join(ORIG_DIR, filename_rel)
 
+    # download file
     if not os.path.exists(target_filename):
-        print "Downloading " + url + " to " + target_filename
+        log("Downloading " + url + " to " + target_filename)
         # if p.scheme == "ssh":
         #     downloadSCP(p.hostname, p.username, p.path, ORIG_DIR)
         # else:
         #     urllib.urlretrieve(url, target_filename, reporthook = downloadProgress)
         urllib.urlretrieve(url, target_filename)
     else:
-        print "Skipping download of " + url + "; already downloaded"
+        log("Skipping download of " + url + "; already downloaded")
+
+    # check SHA1 hash
+    if sha1_hash is not None and sha1_hash != "":
+        hash_file = computeFileHash(target_filename)
+        if hash_file != sha1_hash:
+            raise RuntimeError("Hash of " + target_filename + " (" + hash_file + ") differs from expected hash (" + sha1_hash + ")")
 
     extractFile(target_filename, os.path.join(SRC_DIR, target_dir_name))
 
@@ -136,21 +174,19 @@ def downloadAndExtractFile(url, target_dir_name):
 def applyPatchFile(patch_name, dir_name):
     # we're assuming the patch was applied like in this example:
     # diff --exclude=".git" --exclude=".hg" -rupN ./src/AGAST/ ../external/src/AGAST/ > ./patches/agast.patch
-    print "Applying patch to " + dir_name
-    src_dir = os.path.join(SRC_DIR, dir_name)
+    log("Applying patch to " + dir_name)
     patch_dir = os.path.join(BASE_DIR, "patches")
-    if not os.path.exists(src_dir):
-        os.mkdir(src_dir)
-    arguments = "-d " + os.path.join(SRC_DIR, dir_name) + "/ -p3 < " + os.path.join(patch_dir, patch_name) + ".patch"
-    res = executeCommand("patch --dry-run " + arguments + " > /dev/null", False)
+    arguments = "-d " + os.path.join(SRC_DIR, dir_name) + "/ -p3 < " + os.path.join(patch_dir, patch_name)
+    res = executeCommand("patch --dry-run " + arguments, quiet = True)
     if res != 0:
-        print "ERROR: patch application failure; has this patch already been applied?"
+        log("ERROR: patch application failure; has this patch already been applied?")
+        executeCommand("patch --dry-run " + arguments, printCommand = True)
     else:
-        dieIfNonZero(executeCommand("patch " + arguments))
+        dieIfNonZero(executeCommand("patch " + arguments, quiet = True))
 
 
 def runScript(script_name):
-    print "Running script " + script_name
+    log("Running script " + script_name)
     patch_dir = os.path.join(BASE_DIR, "patches")
     filename = os.path.join(patch_dir, script_name)
     dieIfNonZero(executeCommand(filename, False));
@@ -159,52 +195,82 @@ def runScript(script_name):
 def main():
     # create source directory
     if not os.path.isdir(SRC_DIR):
-        print "Creating directory " + SRC_DIR
+        log("Creating directory " + SRC_DIR)
         os.mkdir(SRC_DIR)
 
     # create original files directory
     if not os.path.isdir(ORIG_DIR):
-        print "Creating directory " + ORIG_DIR
+        log("Creating directory " + ORIG_DIR)
         os.mkdir(ORIG_DIR)
 
-    # TODO: use JSON schema to describe repositories instead of hardcoding them here
+    bootstrap_filename_abs = os.path.join(BASE_DIR, BOOTSTRAP_FILENAME)
 
-    downloadAndExtractFile("http://www.edwardrosten.com/work/fast-C-src-2.1.zip", "FAST")
-    applyPatchFile("fast", "FAST")
-    downloadAndExtractFile("http://downloads.sourceforge.net/project/agastpp/v1_1/agast%2B%2B_1_1.tar.gz", "AGAST")
-    applyPatchFile("agast", "AGAST")
-    downloadAndExtractFile("http://downloads.sourceforge.net/project/boost/boost/1.58.0/boost_1_58_0.tar.bz2", "boost")
-    downloadAndExtractFile("http://zlib.net/zlib-1.2.8.tar.gz", "zlib")
-    downloadAndExtractFile("http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz", "bzip2")
-    downloadAndExtractFile("http://www.ijg.org/files/jpegsrc.v9a.tar.gz", "libjpeg")
-    runScript("libjpeg.sh")
-    downloadAndExtractFile("http://downloads.sourceforge.net/libpng/libpng-1.6.17.tar.gz", "libpng")
-    runScript("libpng.sh")
-    downloadAndExtractFile("http://downloads.sourceforge.net/giflib/giflib-5.1.0.tar.gz", "giflib")
-    applyPatchFile("giflib", "giflib")
-    downloadAndExtractFile("http://downloads.sourceforge.net/project/dclib/dlib/v18.16/dlib-18.16.tar.bz2", "dlib")
-    downloadAndExtractFile("http://ftp.gnu.org/pub/gnu/libiconv/libiconv-1.14.tar.gz", "libiconv")
-    applyPatchFile("libiconv", "libiconv")
-    cloneRepository("git", "https://github.com/philsquared/Catch.git", "Catch")
-    cloneRepository("svn", "http://googletest.googlecode.com/svn/tags/release-1.7.0", "googletest")
-    cloneRepository("hg", "ssh://hg@bitbucket.org/eigen/eigen", "eigen", "b9210aebb4dd4ba8bea7e5ba9dc4242a380be9cc")
-    applyPatchFile("eigen", "eigen")
-    cloneRepository("git", "https://github.com/miloyip/rapidjson.git", "rapidjson", "eb53791411a5c6466fd38021ff832f71ac17231f")
-    cloneRepository("git", "https://github.com/lastfm/last.json.git", "lastfm-last.json", "85fd751646b67be81dd3535e164d8faced54f4e0")
-    cloneRepository("git", "https://github.com/zxing/zxing", "zxing", "00f634024ceeee591f54e6984ea7dd666fab22ae")
-    applyPatchFile("zxing", "zxing")
-    cloneRepository("git", "https://github.com/jlblancoc/nanoflann.git", "nanoflann")
-    cloneRepository("git", "https://github.com/google/snappy.git", "snappy")
-    cloneRepository("git", "https://github.com/vlfeat/vlfeat.git", "vlfeat")
-    cloneRepository("hg", "https://code.google.com/p/poly2tri", "poly2tri")
-    applyPatchFile("maxsum", "maxsum")
-    applyPatchFile("Windows", "Windows")
+    try:
+        json_data = open(bootstrap_filename_abs).read()
+    except:
+        log("ERROR: Could not read JSON file " + bootstrap_filename_abs)
+        return -1
 
-    cloneRepository("git", "http://repo.or.cz/openal-soft.git", "openal-soft")
-    downloadAndExtractFile("http://wss.co.uk/pinknoise/tremolo/Tremolo001.zip", "libtremolo")
-    downloadAndExtractFile("http://downloads.xiph.org/releases/ogg/libogg-1.3.2.tar.gz", "libogg")
-    downloadAndExtractFile("http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.5.tar.gz", "libvorbis")
-    downloadAndExtractFile("http://downloads.sourceforge.net/project/modplug-xmms/libmodplug/0.8.8.5/libmodplug-0.8.8.5.tar.gz", "libmodplug")
+    try:
+        data = json.loads(json_data)
+    except:
+        log("ERROR: Could not parse JSON document")
+        return -1
+
+    for library in data:
+        name = library.get('name', None)
+        source = library.get('source', None)
+        post = library.get('postprocess', None)
+
+        if name is None:
+            log("ERROR: Invalid schema: library object does not have a 'name'")
+            return -1
+
+        # create library directory, if necessary
+        lib_dir = os.path.join(SRC_DIR, name)
+        if not os.path.exists(lib_dir):
+            os.mkdir(lib_dir)
+
+        # download source
+        if source is not None:
+            if 'type' not in source:
+                log("ERROR: Invalid schema for " + name + ": 'source' object must have a 'type'")
+                return -1
+            if 'url' not in source:
+                log("ERROR: Invalid schema for " + name + ": 'source' object must have a 'url'")
+                return -1
+            src_type = source['type']
+            src_url = source['url']
+
+            if src_type == "archive":
+                downloadAndExtractFile(src_url, name, source.get('sha1', None))
+            else:
+                cloneRepository(src_type, src_url, name, source.get('revision', None))
+        else:
+            # set up clean directory for potential patch application
+            shutil.rmtree(lib_dir)
+            os.mkdir(lib_dir)
+
+        # post-processing
+        if post is not None:
+            if 'type' not in post:
+                log("ERROR: Invalid schema for " + name + ": 'postprocess' object must have a 'type'")
+                return -1
+            if 'file' not in post:
+                log("ERROR: Invalid schema for " + name + ": 'postprocess' object must have a 'file'")
+                return -1
+            post_type = post['type']
+            post_file = post['file']
+
+            if post_type == "patch":
+                applyPatchFile(post_file, name)
+            elif post_type == "script":
+                runScript(post_file)
+            else:
+                log("ERROR: Unknown post-processing type '" + post_type + "' for " + name)
+                return -1
+
+    return 0
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

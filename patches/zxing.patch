@@ -173,18 +173,6 @@ diff --exclude=.git -rupN ./src/zxing/cpp/core/src/zxing/qrcode/detector/Detecto
  
  using std::ostringstream;
  using std::abs;
-diff --exclude=.git -rupN ./src/zxing/cpp/ios.xcodeproj/project.xcworkspace/contents.xcworkspacedata ../external/src/zxing/cpp/ios.xcodeproj/project.xcworkspace/contents.xcworkspacedata
---- ./src/zxing/cpp/ios.xcodeproj/project.xcworkspace/contents.xcworkspacedata	1970-01-01 01:00:00.000000000 +0100
-+++ ../external/src/zxing/cpp/ios.xcodeproj/project.xcworkspace/contents.xcworkspacedata	2015-06-26 12:02:37.000000000 +0200
-@@ -0,0 +1,7 @@
-+<?xml version="1.0" encoding="UTF-8"?>
-+<Workspace
-+   version = "1.0">
-+   <FileRef
-+      location = "self:ios.xcodeproj">
-+   </FileRef>
-+</Workspace>
-Binary files ./src/zxing/cpp/ios.xcodeproj/project.xcworkspace/xcuserdata/anatols.xcuserdatad/UserInterfaceState.xcuserstate and ../external/src/zxing/cpp/ios.xcodeproj/project.xcworkspace/xcuserdata/anatols.xcuserdatad/UserInterfaceState.xcuserstate differ
 diff --exclude=.git -rupN ./src/zxing/cpp/zxing.xcodeproj/project.pbxproj ../external/src/zxing/cpp/zxing.xcodeproj/project.pbxproj
 --- ./src/zxing/cpp/zxing.xcodeproj/project.pbxproj	1970-01-01 01:00:00.000000000 +0100
 +++ ../external/src/zxing/cpp/zxing.xcodeproj/project.pbxproj	2015-06-26 12:02:37.000000000 +0200
@@ -832,33 +820,6 @@ diff --exclude=.git -rupN ./src/zxing/cpp/zxing.xcodeproj/project.pbxproj ../ext
 +	};
 +	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
 +}
-diff --exclude=.git -rupN ./src/zxing/cpp/zxing.xcodeproj/project.xcworkspace/contents.xcworkspacedata ../external/src/zxing/cpp/zxing.xcodeproj/project.xcworkspace/contents.xcworkspacedata
---- ./src/zxing/cpp/zxing.xcodeproj/project.xcworkspace/contents.xcworkspacedata	1970-01-01 01:00:00.000000000 +0100
-+++ ../external/src/zxing/cpp/zxing.xcodeproj/project.xcworkspace/contents.xcworkspacedata	2015-06-26 12:02:37.000000000 +0200
-@@ -0,0 +1,7 @@
-+<?xml version="1.0" encoding="UTF-8"?>
-+<Workspace
-+   version = "1.0">
-+   <FileRef
-+      location = "self:ios.xcodeproj">
-+   </FileRef>
-+</Workspace>
-Binary files ./src/zxing/cpp/zxing.xcodeproj/project.xcworkspace/xcuserdata/anatols.xcuserdatad/UserInterfaceState.xcuserstate and ../external/src/zxing/cpp/zxing.xcodeproj/project.xcworkspace/xcuserdata/anatols.xcuserdatad/UserInterfaceState.xcuserstate differ
-Binary files ./src/zxing/cpp/zxing.xcodeproj/project.xcworkspace/xcuserdata/lee.xcuserdatad/UserInterfaceState.xcuserstate and ../external/src/zxing/cpp/zxing.xcodeproj/project.xcworkspace/xcuserdata/lee.xcuserdatad/UserInterfaceState.xcuserstate differ
-diff --exclude=.git -rupN ./src/zxing/cpp/zxing.xcodeproj/project.xcworkspace/xcuserdata/lee.xcuserdatad/WorkspaceSettings.xcsettings ../external/src/zxing/cpp/zxing.xcodeproj/project.xcworkspace/xcuserdata/lee.xcuserdatad/WorkspaceSettings.xcsettings
---- ./src/zxing/cpp/zxing.xcodeproj/project.xcworkspace/xcuserdata/lee.xcuserdatad/WorkspaceSettings.xcsettings	1970-01-01 01:00:00.000000000 +0100
-+++ ../external/src/zxing/cpp/zxing.xcodeproj/project.xcworkspace/xcuserdata/lee.xcuserdatad/WorkspaceSettings.xcsettings	2015-06-26 12:02:37.000000000 +0200
-@@ -0,0 +1,10 @@
-+<?xml version="1.0" encoding="UTF-8"?>
-+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-+<plist version="1.0">
-+<dict>
-+	<key>HasAskedToTakeAutomaticSnapshotBeforeSignificantChanges</key>
-+	<true/>
-+	<key>SnapshotAutomaticallyBeforeSignificantChanges</key>
-+	<false/>
-+</dict>
-+</plist>
 diff --exclude=.git -rupN ./src/zxing/cpp/zxingosx.xcodeproj/project.pbxproj ../external/src/zxing/cpp/zxingosx.xcodeproj/project.pbxproj
 --- ./src/zxing/cpp/zxingosx.xcodeproj/project.pbxproj	1970-01-01 01:00:00.000000000 +0100
 +++ ../external/src/zxing/cpp/zxingosx.xcodeproj/project.pbxproj	2015-06-26 12:02:37.000000000 +0200
