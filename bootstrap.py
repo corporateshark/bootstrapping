@@ -36,12 +36,18 @@ def log(string):
 
 
 def executeCommand(command, printCommand = False, quiet = False):
+
+    out = None
+    err = None
+
     if quiet:
-        command = command + " &> /dev/null"
+        out = open(os.devnull, 'w')
+        err = subprocess.STDOUT
+
     if printCommand:
         log(">>> " + command)
-    res = subprocess.call(command, shell = True);
-    return res
+
+    return subprocess.call(command, shell = True, stdout=out, stderr=err);
 
 
 def dieIfNonZero(res):
