@@ -7,6 +7,7 @@
 
 from __future__ import print_function
 
+import platform
 import os
 import sys
 import shutil
@@ -30,6 +31,8 @@ SRC_DIR = os.path.join(BASE_DIR, "src")
 ORIG_DIR = os.path.join(BASE_DIR, "orig")
 
 BOOTSTRAP_FILENAME = "bootstrap.json"
+
+if platform.system() == "Windows": os.environ['CYGWIN'] = "nodosfilewarning"
 
 def log(string):
     print("--- " + string)
@@ -126,6 +129,11 @@ def extractFile(filename, target_dir):
     else:
         raise RuntimeError("Unknown compressed file format " + extension)
 
+    if platform.system() == "Windows":
+        extract_dir = extract_dir.replace( '/', '\\' )
+        target_dir = target_dir.replace( '/', '\\' )
+        if extract_dir[-1::] == '\\' : extract_dir = extract_dir[:-1]
+
     # rename extracted folder to target_dir
     extract_dir_abs = os.path.join(SRC_DIR, extract_dir)
     os.rename(extract_dir_abs, target_dir)
@@ -197,13 +205,16 @@ def applyPatchFile(patch_name, dir_name):
     log("Applying patch to " + dir_name)
     patch_dir = os.path.join(BASE_DIR, "patches")
     arguments = "-d " + os.path.join(SRC_DIR, dir_name) + " -p3 < " + os.path.join(patch_dir, patch_name)
-    res = executeCommand("patch --dry-run " + arguments, quiet = True)
+    # let's make this a global variable
+#    patch_command = "M:\\cygwin\\bin\\patch"
+    patch_command = "patch"
+    res = executeCommand(patch_command + " --dry-run " + arguments, quiet = True)
     if res != 0:
         log("ERROR: patch application failure; has this patch already been applied?")
-        executeCommand("patch --dry-run " + arguments, printCommand = True)
+        executeCommand(patch_command + " --dry-run " + arguments, printCommand = True)
+        exit(255)
     else:
-        dieIfNonZero(executeCommand("patch " + arguments, quiet = True))
-
+        dieIfNonZero(executeCommand(patch_command + " " + arguments, quiet = True))
 
 def runScript(script_name):
     log("Running script " + script_name)
@@ -213,6 +224,7 @@ def runScript(script_name):
 
 
 def checkPrerequisites(*args):
+    if platform.system() == "Windows": return 0
     for arg in args:
         if (executeCommand("which " + arg, quiet = True) != 0):
             log("ERROR: " + arg + " not found")
