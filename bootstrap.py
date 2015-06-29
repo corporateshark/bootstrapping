@@ -60,6 +60,7 @@ def cloneRepository(type, url, target_name, revision = None):
         if revision is None:
             revision = ""
         dieIfNonZero(executeCommand("hg update -R " + target_dir + " -C " + revision))
+        dieIfNonZero(executeCommand("hg purge -R " + target_dir + " --config extensions.purge="))
 
     elif type == "git":
         repo_exists = os.path.exists(os.path.join(target_dir, ".git"))
@@ -151,8 +152,16 @@ def downloadAndExtractFile(url, target_dir_name, sha1_hash = None):
     filename_rel = os.path.split(p.path)[1] # get original filename
     target_filename = os.path.join(ORIG_DIR, filename_rel)
 
+    # check SHA1 hash, if file already exists
+    force_download = False
+    if os.path.exists(target_filename) and sha1_hash is not None and sha1_hash != "":
+        hash_file = computeFileHash(target_filename)
+        if hash_file != sha1_hash:
+            log("Hash of " + target_filename + " (" + hash_file + ") does not match expected hash (" + sha1_hash + "); forcing download")
+            force_download = True
+
     # download file
-    if not os.path.exists(target_filename):
+    if (not os.path.exists(target_filename)) or force_download:
         log("Downloading " + url + " to " + target_filename)
         # if p.scheme == "ssh":
         #     downloadSCP(p.hostname, p.username, p.path, ORIG_DIR)
@@ -192,7 +201,20 @@ def runScript(script_name):
     dieIfNonZero(executeCommand(filename, False));
 
 
+def checkPrerequisites(*args):
+    for arg in args:
+        if (executeCommand("which " + arg, quiet = True) != 0):
+            log("ERROR: " + arg + " not found")
+            return -1
+    return 0
+
+
 def main():
+    required_commands = ["git", "hg", "svn", "patch"]
+    if (checkPrerequisites(*required_commands) != 0):
+        log("The bootstrapping script requires that the following programs are installed: " + ", ".join(required_commands))
+        return -1
+
     # create source directory
     if not os.path.isdir(SRC_DIR):
         log("Creating directory " + SRC_DIR)
