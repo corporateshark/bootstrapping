@@ -190,7 +190,7 @@ def applyPatchFile(patch_name, dir_name):
     # diff --exclude=".git" --exclude=".hg" -rupN ./src/AGAST/ ../external/src/AGAST/ > ./patches/agast.patch
     log("Applying patch to " + dir_name)
     patch_dir = os.path.join(BASE_DIR, "patches")
-    arguments = "-d " + os.path.join(SRC_DIR, dir_name) + "/ -p3 < " + os.path.join(patch_dir, patch_name)
+    arguments = "-d " + os.path.join(SRC_DIR, dir_name) + " -p3 < " + os.path.join(patch_dir, patch_name)
     res = executeCommand("patch --dry-run " + arguments, quiet = True)
     if res != 0:
         log("ERROR: patch application failure; has this patch already been applied?")
