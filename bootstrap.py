@@ -271,7 +271,7 @@ def printOptions():
         print("Downloads external libraries, and applies patches or scripts if necessary.")
         print("If the --name argument is not provided, all available libraries will be downloaded.")
         print("Options:")
-        print("  --list        List all available libraries")
+        print("  --list, -l    List all available libraries")
         print("  --name, -n    Specifies the name of a single library to be downloaded")
         print("  --clean, -C   Remove directory before obtaining library")
 
@@ -336,13 +336,16 @@ def main(argv):
         if opt_name and name != opt_name:
             continue
 
+        lib_dir = os.path.join(SRC_DIR, name)
+
         # compare against cached state
         cached_state_ok = False
-        for slibrary in sdata:
-            sname = slibrary.get('name', None)
-            if sname is not None and sname == name and slibrary == library:
-                cached_state_ok = True
-                break
+        if not opt_clean:
+            for slibrary in sdata:
+                sname = slibrary.get('name', None)
+                if sname is not None and sname == name and slibrary == library and os.path.exists(lib_dir):
+                    cached_state_ok = True
+                    break
 
         if cached_state_ok:
             log("Cached state for " + name + " equals expected state; skipping library")
@@ -352,7 +355,6 @@ def main(argv):
             sdata[:] = [s for s in sdata if not (lambda s, name : s.get('name', None) is not None and s['name'] == name)(s, name)]
 
         # create library directory, if necessary
-        lib_dir = os.path.join(SRC_DIR, name)
         if opt_clean:
             log("Cleaning directory for " + name)
             shutil.rmtree(lib_dir)
