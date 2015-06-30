@@ -16,6 +16,7 @@ import zipfile
 import tarfile
 import hashlib
 import json
+import getopt
 try:
     from urllib.parse import urlparse
 except ImportError:
@@ -236,11 +237,68 @@ def checkPrerequisites(*args):
     return 0
 
 
-def main():
+def readJSONData(filename):
+    try:
+        json_data = open(filename).read()
+    except:
+        log("ERROR: Could not read JSON file " + filename)
+        return None
+
+    try:
+        data = json.loads(json_data)
+    except:
+        log("ERROR: Could not parse JSON document")
+        return None
+
+    return data
+
+
+def listLibraries(data):
+    for library in data:
+        name = library.get('name', None)
+        if name is not None:
+            print(name)
+
+
+def printOptions():
+        print("Downloads external libraries, and applies patches or scripts if necessary.")
+        print("If the --name argument is not provided, all available libraries will be downloaded.")
+        print("Options:")
+        print("  --list        List all available libraries")
+        print("  --name, -n    Specifies the name of a single library to be downloaded")
+        print("  --clean, -C   Remove directory before obtaining library")
+
+
+def main(argv):
     required_commands = ["git", "hg", "svn", "patch"]
     if (checkPrerequisites(*required_commands) != 0):
         log("The bootstrapping script requires that the following programs are installed: " + ", ".join(required_commands))
         return -1
+
+    data = readJSONData(os.path.join(BASE_DIR, BOOTSTRAP_FILENAME))
+    if data is None:
+        return -1;
+
+    opt_name = None
+    opt_clean = False
+
+    try:
+        opts, args = getopt.getopt(argv,"ln:Ch",["list", "name=", "clean", "help"])
+    except getopt.GetoptError:
+        printOptions()
+        return 0
+
+    for opt, arg in opts:
+        if opt in ("-h", "--help"):
+            printOptions()
+            return 0
+        if opt in ("-l", "--list"):
+            listLibraries(data)
+            return 0
+        if opt in ("-n", "--name"):
+            opt_name = arg
+        if opt in ("-C", "--clean"):
+            opt_clean = True
 
     # create source directory
     if not os.path.isdir(SRC_DIR):
@@ -252,20 +310,6 @@ def main():
         log("Creating directory " + ORIG_DIR)
         os.mkdir(ORIG_DIR)
 
-    bootstrap_filename_abs = os.path.join(BASE_DIR, BOOTSTRAP_FILENAME)
-
-    try:
-        json_data = open(bootstrap_filename_abs).read()
-    except:
-        log("ERROR: Could not read JSON file " + bootstrap_filename_abs)
-        return -1
-
-    try:
-        data = json.loads(json_data)
-    except:
-        log("ERROR: Could not parse JSON document")
-        return -1
-
     for library in data:
         name = library.get('name', None)
         source = library.get('source', None)
@@ -275,8 +319,14 @@ def main():
             log("ERROR: Invalid schema: library object does not have a 'name'")
             return -1
 
+        if opt_name and name != opt_name:
+            continue
+
         # create library directory, if necessary
         lib_dir = os.path.join(SRC_DIR, name)
+        if opt_clean:
+            log("Cleaning directory for " + name)
+            shutil.rmtree(lib_dir)
         if not os.path.exists(lib_dir):
             os.mkdir(lib_dir)
 
@@ -322,4 +372,4 @@ def main():
     return 0
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(sys.argv[1:]))

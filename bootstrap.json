@@ -210,8 +210,12 @@
     "name": "libtremolo",
     "source": {
         "type": "archive",
-        "url": "http://wss.co.uk/pinknoise/tremolo/Tremolo001.zip",
-        "sha1": "8f80bc9246b9e5946bef67fb67c713fa21fbd25f"
+        "url": "http://wss.co.uk/pinknoise/tremolo/Tremolo008.zip",
+        "sha1": "b12e3f31153b8ff82fcc8475cc0da9817abb28d6"
+    },
+    "postprocess": {
+        "type": "patch",
+        "file": "libtremolo.patch"
     }
 },
 {

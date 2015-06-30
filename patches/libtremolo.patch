@@ -1,0 +1,137 @@
+diff '--exclude=.git' '--exclude=.hg' -rupN ./src/libtremolo/Android.mk ../external/src/libtremolo/Android.mk
+--- ./src/libtremolo/Android.mk	1970-01-01 01:00:00.000000000 +0100
++++ ../external/src/libtremolo/Android.mk	2015-06-30 10:53:19.931152644 +0200
+@@ -0,0 +1,36 @@
++PATH := BlippEngine/External/libtremolo
++
++include $(call all-subdir-makefiles)
++
++include $(CLEAR_VARS)
++LOCAL_MODULE := libtremolo
++
++LOCAL_C_INCLUDES := jni/BlippEngine/External
++
++LOCAL_SRC_FILES := \
++	$(PATH)/annotate.c \
++	$(PATH)/bitwise.c \
++	$(PATH)/codebook.c \
++	$(PATH)/dsp.c \
++	$(PATH)/floor_lookup.c \
++	$(PATH)/floor0.c \
++	$(PATH)/floor1.c \
++	$(PATH)/framing.c \
++	$(PATH)/info.c \
++	$(PATH)/mapping0.c \
++	$(PATH)/mdct.c \
++	$(PATH)/res012.c \
++	$(PATH)/vorbisfile.c
++
++LOCAL_CFLAGS += -O3
++
++LOCAL_CPPFLAGS += -DONLY_C
++
++LOCAL_ARM_MODE := arm
++LOCAL_SRC_FILES += \
++	$(PATH)/bitwiseARM.s \
++	$(PATH)/dpen.s \
++	$(PATH)/floor1ARM.s \
++	$(PATH)/mdctARM.s
++
++include $(BUILD_STATIC_LIBRARY)
+diff '--exclude=.git' '--exclude=.hg' -rupN ./src/libtremolo/annotate.c ../external/src/libtremolo/annotate.c
+--- ./src/libtremolo/annotate.c	2015-06-30 10:50:25.031318246 +0200
++++ ../external/src/libtremolo/annotate.c	2015-06-30 10:53:19.931152644 +0200
+@@ -1,5 +1,6 @@
+ #include <stdio.h>
+ #include <stdlib.h>
++#include <string.h>
+ 
+ typedef struct
+ {
+diff '--exclude=.git' '--exclude=.hg' -rupN ./src/libtremolo/codebook.c ../external/src/libtremolo/codebook.c
+--- ./src/libtremolo/codebook.c	2015-06-30 10:50:25.035318149 +0200
++++ ../external/src/libtremolo/codebook.c	2015-06-30 10:53:19.931152644 +0200
+@@ -679,7 +679,6 @@ static inline ogg_uint32_t decode_packed
+     }
+     case 4:
+     {
+-      Output("32/32");
+       for(i=0;i<read;i++){
+ 	chase=((ogg_uint32_t *)(book->dec_table))[chase*2+((lok>>i)&1)];
+ 	if(chase&0x80000000UL)break;
+@@ -740,7 +739,7 @@ static int decode_map(codebook *s, oggpa
+   }
+   case 3:{
+     /* offset into array */
+-    void *ptr=s->q_val+entry*s->q_pack;
++    void *ptr=(char*)s->q_val+entry*s->q_pack;
+ 
+     if(s->q_bits<=8){
+       for(i=0;i<s->dim;i++)
+diff '--exclude=.git' '--exclude=.hg' -rupN ./src/libtremolo/floor1.c ../external/src/libtremolo/floor1.c
+--- ./src/libtremolo/floor1.c	2015-06-30 10:50:25.039318054 +0200
++++ ../external/src/libtremolo/floor1.c	2015-06-30 10:53:19.931152644 +0200
+@@ -53,7 +53,7 @@ static int ilog(unsigned int v){
+   return(ret);
+ }
+ 
+-static void mergesort(char *index,ogg_uint16_t *vals,ogg_uint16_t n){
++static void mergesort_tremolo(char *index,ogg_uint16_t *vals,ogg_uint16_t n){
+   ogg_uint16_t i,j;
+   char *temp,*A=index,*B=_ogg_malloc(n*sizeof(*B));
+ 
+@@ -147,7 +147,7 @@ vorbis_info_floor *floor1_info_unpack (v
+ 
+   /* also store a sorted position index */
+   for(j=0;j<info->posts;j++)info->forward_index[j]=j;
+-  mergesort(info->forward_index,info->postlist,info->posts);
++  mergesort_tremolo(info->forward_index,info->postlist,info->posts);
+ 
+   /* discover our neighbors for decode where we don't use fit flags
+      (that would push the neighbors outward) */
+diff '--exclude=.git' '--exclude=.hg' -rupN ./src/libtremolo/misc.c ../external/src/libtremolo/misc.c
+--- ./src/libtremolo/misc.c	2015-06-30 10:50:25.043317960 +0200
++++ ../external/src/libtremolo/misc.c	2015-06-30 10:53:19.931152644 +0200
+@@ -16,7 +16,9 @@
+ #include <stdio.h>
+ #define MISC_C
+ #include "misc.h"
+-#include <sys/time.h>
++#if !defined(_MSC_VER)
++#	include <sys/time.h>
++#endif
+ 
+ static void **pointers=NULL;
+ static long *insertlist=NULL; /* We can't embed this in the pointer list;
+diff '--exclude=.git' '--exclude=.hg' -rupN ./src/libtremolo/misc.h ../external/src/libtremolo/misc.h
+--- ./src/libtremolo/misc.h	2015-06-30 10:50:25.043317960 +0200
++++ ../external/src/libtremolo/misc.h	2015-06-30 10:53:19.931152644 +0200
+@@ -20,6 +20,10 @@
+ #include "ivorbiscodec.h"
+ #include "os_types.h"
+ 
++#if defined(_MSC_VER)
++#	define inline
++#endif
++
+ /*#define _VDBG_GRAPHFILE "_0.m"*/
+ 
+ 
+@@ -48,7 +52,7 @@ extern void _VDBG_free(void *ptr,char *f
+ 
+ #include <sys/types.h>
+ 
+-#if BYTE_ORDER==LITTLE_ENDIAN
++#if BYTE_ORDER==LITTLE_ENDIAN || defined(_WIN32) || defined(ANDROID)
+ union magic {
+   struct {
+     ogg_int32_t lo;
+@@ -58,7 +62,7 @@ union magic {
+ };
+ #endif 
+ 
+-#if BYTE_ORDER==BIG_ENDIAN
++#if BYTE_ORDER==BIG_ENDIAN && !defined(_WIN32) && !defined(ANDROID)
+ union magic {
+   struct {
+     ogg_int32_t hi;
