@@ -60,6 +60,13 @@
     }
 },
 {
+    "name": "libjpeg-turbo",
+    "source": {
+        "type": "svn",
+        "url": "svn://svn.code.sf.net/p/libjpeg-turbo/code/tags/1.4.1"
+    }
+},
+{
     "name": "libpng",
     "source": {
         "type": "archive",

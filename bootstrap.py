@@ -31,6 +31,7 @@ SRC_DIR = os.path.join(BASE_DIR, "src")
 ORIG_DIR = os.path.join(BASE_DIR, "orig")
 
 BOOTSTRAP_FILENAME = "bootstrap.json"
+STATE_FILENAME = "_state.json"
 DEFAULT_PNUM = 3
 
 if platform.system() == "Windows":
@@ -254,6 +255,11 @@ def readJSONData(filename):
     return data
 
 
+def writeJSONData(data, filename):
+    with open(filename, 'w') as outfile:
+        json.dump(data, outfile)
+
+
 def listLibraries(data):
     for library in data:
         name = library.get('name', None)
@@ -276,9 +282,15 @@ def main(argv):
         log("The bootstrapping script requires that the following programs are installed: " + ", ".join(required_commands))
         return -1
 
-    data = readJSONData(os.path.join(BASE_DIR, BOOTSTRAP_FILENAME))
+    bootstrap_filename = os.path.join(BASE_DIR, BOOTSTRAP_FILENAME)
+    data = readJSONData(bootstrap_filename)
     if data is None:
         return -1;
+
+    sdata = []
+    state_filename = os.path.join(BASE_DIR, STATE_FILENAME)
+    if os.path.exists(state_filename):
+        sdata = readJSONData(state_filename)
 
     opt_name = None
     opt_clean = False
@@ -312,16 +324,32 @@ def main(argv):
         os.mkdir(ORIG_DIR)
 
     for library in data:
+        if library.get('name', None) is None:
+            log("ERROR: Invalid schema: library object does not have a 'name'")
+            return -1
+
+    for library in data:
         name = library.get('name', None)
         source = library.get('source', None)
         post = library.get('postprocess', None)
 
-        if name is None:
-            log("ERROR: Invalid schema: library object does not have a 'name'")
-            return -1
-
         if opt_name and name != opt_name:
             continue
+
+        # compare against cached state
+        cached_state_ok = False
+        for slibrary in sdata:
+            sname = slibrary.get('name', None)
+            if sname is not None and sname == name and slibrary == library:
+                cached_state_ok = True
+                break
+
+        if cached_state_ok:
+            log("Cached state for " + name + " equals expected state; skipping library")
+            continue
+        else:
+            # remove cached state for library
+            sdata[:] = [s for s in sdata if not (lambda s, name : s.get('name', None) is not None and s['name'] == name)(s, name)]
 
         # create library directory, if necessary
         lib_dir = os.path.join(SRC_DIR, name)
@@ -369,6 +397,12 @@ def main(argv):
             else:
                 log("ERROR: Unknown post-processing type '" + post_type + "' for " + name)
                 return -1
+
+        # add to cached state
+        sdata.append(library)
+
+    # write out cached state
+    writeJSONData(sdata, state_filename)
 
     return 0
 
