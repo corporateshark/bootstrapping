@@ -6,7 +6,6 @@
 # > pip install scp
 
 from __future__ import print_function
-
 import platform
 import os
 import sys
@@ -32,7 +31,9 @@ ORIG_DIR = os.path.join(BASE_DIR, "orig")
 
 BOOTSTRAP_FILENAME = "bootstrap.json"
 
-if platform.system() == "Windows": os.environ['CYGWIN'] = "nodosfilewarning"
+if platform.system() == "Windows":
+    os.environ['CYGWIN'] = "nodosfilewarning"
+
 
 def log(string):
     print("--- " + string)
@@ -132,7 +133,8 @@ def extractFile(filename, target_dir):
     if platform.system() == "Windows":
         extract_dir = extract_dir.replace( '/', '\\' )
         target_dir = target_dir.replace( '/', '\\' )
-        if extract_dir[-1::] == '\\' : extract_dir = extract_dir[:-1]
+        if extract_dir[-1::] == '\\':
+            extract_dir = extract_dir[:-1]
 
     # rename extracted folder to target_dir
     extract_dir_abs = os.path.join(SRC_DIR, extract_dir)
@@ -224,7 +226,9 @@ def runScript(script_name):
 
 
 def checkPrerequisites(*args):
-    if platform.system() == "Windows": return 0
+    if platform.system() == "Windows":
+        return 0
+
     for arg in args:
         if (executeCommand("which " + arg, quiet = True) != 0):
             log("ERROR: " + arg + " not found")
