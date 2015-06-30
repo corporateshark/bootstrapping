@@ -31,6 +31,7 @@ SRC_DIR = os.path.join(BASE_DIR, "src")
 ORIG_DIR = os.path.join(BASE_DIR, "orig")
 
 BOOTSTRAP_FILENAME = "bootstrap.json"
+DEFAULT_PNUM = 3
 
 if platform.system() == "Windows":
     os.environ['CYGWIN'] = "nodosfilewarning"
@@ -202,12 +203,12 @@ def downloadAndExtractFile(url, target_dir_name, sha1_hash = None):
     extractFile(target_filename, os.path.join(SRC_DIR, target_dir_name))
 
 
-def applyPatchFile(patch_name, dir_name):
+def applyPatchFile(patch_name, dir_name, pnum):
     # we're assuming the patch was applied like in this example:
     # diff --exclude=".git" --exclude=".hg" -rupN ./src/AGAST/ ../external/src/AGAST/ > ./patches/agast.patch
     log("Applying patch to " + dir_name)
     patch_dir = os.path.join(BASE_DIR, "patches")
-    arguments = "-d " + os.path.join(SRC_DIR, dir_name) + " -p3 < " + os.path.join(patch_dir, patch_name)
+    arguments = "-d " + os.path.join(SRC_DIR, dir_name) + " -p" + str(pnum) + " < " + os.path.join(patch_dir, patch_name)
     # let's make this a global variable
 #    patch_command = "M:\\cygwin\\bin\\patch"
     patch_command = "patch"
@@ -362,7 +363,7 @@ def main(argv):
             post_file = post['file']
 
             if post_type == "patch":
-                applyPatchFile(post_file, name)
+                applyPatchFile(post_file, name, post.get('pnum', DEFAULT_PNUM))
             elif post_type == "script":
                 runScript(post_file)
             else:
