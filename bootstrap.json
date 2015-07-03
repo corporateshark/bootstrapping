@@ -168,7 +168,8 @@
     "name": "nanoflann",
     "source": {
         "type": "git",
-        "url": "https://github.com/jlblancoc/nanoflann.git"
+        "url": "https://github.com/jlblancoc/nanoflann.git",
+        "revision": "7138273aa52652da21d780f4359ab3addd4567cc"
     }
 },
 {
