@@ -1,0 +1,170 @@
+This repository holds our external (i.e. third party) libraries. After a fresh
+clone, the repository contains *only* metadata about the libraries, i.e. their
+names, where to retrieve them from, etc. In order to actually obtain or update
+the libraries, the user must run a bootstrapping script, which downloads all
+third-party libraries and places them into a src/ directory.
+
+
+Prerequisites
+-------------
+
+The script itself is written in Python and should "just work" using any standard
+Python 2 or 3 installation. The version control tools Git, Mercurial and
+Subversion must be installed and available on the environment path; in addition,
+the 'patch' program must be present on the user's system. On Windows, the script
+can be run either using Cygwin (just works as-is, as long as the above tools
+were installed using Cygwin's package management), or using natively installed
+tools (possibly with minor modifications to the script).
+
+
+Obtaining the libraries
+-----------------------
+
+Run the bootstrapping script from the repository's top-level directory:
+> python bootstrap.py
+or just:
+> ./bootstrap.py
+
+The script should run without any errors or exceptions raised. Third-party
+library sources are either downloaded as a packaged archive file (e.g. .zip,
+.tar.gz, .tar.bz2) and then uncompressed, or cloned directly from the original
+repository. All source code is obtained from the respective authorative sources,
+i.e. directly from the authors' websites or repositories.
+
+After script execution has finished, the following files and directories should
+have been added to the repository folder:
+    |- external
+       |- _state.json
+       |- orig/
+          |- ...
+       |- src/
+          |- ...
+
+- The file _state.json contains the cached state of the last bootstrapping/
+updating operation. The script always compares against this state, in order to
+decide whether to update a library. For example, if boostrap.py has executed
+successfully and is then immediately re-run, no further action will take place.
+
+- The directory orig/ contains the archive files of all libraries that have been
+downloaded as archives. It serves as a cache to prevent multiple downloads.
+
+- The directory src/ contains all third-party library sources. Libraries that
+were obtained in archive form will have been uncompressed into this directory.
+Libraries that were obtained from a repository (Git, Mercurial or SVN) will have
+been cloned into this directory.
+
+
+Adding or changing the version of a library
+-------------------------------------------
+
+All metadata about the third-party libraries and their versions is contained in
+a single JSON file (bootstrap.json) that is being read by the script.
+
+The file should contain exactly one JSON array of objects, where each object
+contained in this array describes one library. This JSON schema gives an
+overview of the format:
+[
+{
+    "name": "LibraryName",
+    "source": {
+        "type": "archive|git|hg|svn",
+        "url": "http://...",
+        "sha1": "0123456789...0123456789",  # for type == archive
+        "revision": "0123456789"  # for type == git|hg|svn
+    },
+    "postprocess": {
+        "type": "patch|script",
+        "file": "filename"
+    }
+},
+{
+    ...
+},
+...
+]
+
+The library "name" specifies the name of the library, which in turn specifies
+the subdirectory name under the src/ directory. The name should be the common
+name of the library (e.g. "libjpeg") and *not* contain any particular version
+numbers or other information that may change between versions.
+
+For each library, the "source" field contains information about where to obtain
+the library from, in the form of a JSON object.
+
+The source "type" field can be one of the following types: "archive", "git",
+"hg", or "svn". The first type describes an archive file (such as .zip, .tar.gz,
+.tar.bz2 files), while the last three types describe different repository types.
+
+The "url" value contains the URL of the archive to be downloaded in case the
+type is 'archive', and the respository URL otherwise.
+
+If the source type is 'archive', then the optional "sha1" field can (and should)
+be used to add the SHA1 hash of the archive, for verification purposes.
+
+For repositories (i.e. type is 'git|hg|svn'), an optional "revision" field can
+specify the particular revision/commit to be checked out. If the revision field
+is omitted, the default is to check out the HEAD revision of the master branch
+(for Git repositories), or the tip of the default branch (for Mercurial
+repositories).
+
+The "postprocess" field contains an object which describes any optional post-
+processing steps, once the original library sources have been put into the src/
+directory. Post-processing can be of type "patch" or "script"; in both cases,
+the filename has to be given in the "file" field.
+
+For type 'patch', the file field specifies a patch file to be contained in the
+patches/ directory. For type 'file', the file field specified a script that is
+run from the patches/ directory. Patches can be used to make minor modifications
+to a library, such as silencing warning or to fix bugs which have not been
+included in the upstream version of the library. Scripts can embody any more
+complex operations, but should mainly be used for simple library-specific
+prerequisites (such as copying header prototype files).
+
+Patches should be created using the 'diff' program from the external/ directory,
+similar to this example:
+> diff --exclude=".git" --exclude=".hg" -rupN \
+      ./src/AGAST/ ../external/src/AGAST/ > ./patches/agast.patch
+The default -p argument for the patch command is 3, but this can be changed by
+an optional "pnum" field inside the postprocessing JSON object, containing a
+numeric value.
+
+In general, only ever add or modify libraries in a way that is compatible with
+how it's already done. See also the next section.
+
+
+Policies for adding or updating a library
+-----------------------------------------
+
+- IMPORTANT: There shall be NO committed source code of any kind in this
+repository (besides patches). All source code shall be downloaded from the
+respective authorative sources, i.e. the library authors' web sites (zipped or
+tarred packages) or repositories.
+
+- IMPORTANT: There shall be NO committed binary files of any kind in this
+repository. Binary files are to be built using the respective platform-specific
+build system, and are to not be committed anywhere in the first place.
+
+- The bootstrapping script should always run cleanly, with no further action
+required from the user.
+
+- All repositories should be in their final usable state after running the
+bootstrapping script.
+
+- Any patches to a library should be kept minimal. Larger changes to a
+third-party code base are discouraged.
+
+- If we really have to patch a library, e.g. to fix a bug or to silence a
+warning, let's try to get our patch accepted upstream. If we then update to a
+newer version of the library, we won't need a patch file anymore.
+
+- The repository should contain only one version of each library at the same
+time. If a library is updated, it should be updated to the respective latest
+version available.
+
+- We should be keeping the contained library versions reasonably up-to-date.
+
+
+Bug reports, comments
+---------------------
+
+Should go to michael@blippar.com.
