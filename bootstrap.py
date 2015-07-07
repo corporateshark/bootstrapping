@@ -403,8 +403,8 @@ def main(argv):
         # add to cached state
         sdata.append(library)
 
-    # write out cached state
-    writeJSONData(sdata, state_filename)
+        # write out cached state
+        writeJSONData(sdata, state_filename)
 
     return 0
 
