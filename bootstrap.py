@@ -406,6 +406,8 @@ def main(argv):
         # write out cached state
         writeJSONData(sdata, state_filename)
 
+    log("Finished")
+
     return 0
 
 if __name__ == "__main__":
