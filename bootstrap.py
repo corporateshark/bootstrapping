@@ -11,17 +11,17 @@ import os
 import sys
 import shutil
 import subprocess
-import urllib
 import zipfile
 import tarfile
 import hashlib
 import json
 import getopt
 try:
-    from urllib.parse import urlparse
     from urllib.request import urlparse
+    from urllib.request import urlretrieve
 except ImportError:
     from urlparse import urlparse
+    from urllib import urlretrieve
 
 #import progressbar
 #import paramiko
@@ -191,11 +191,8 @@ def downloadAndExtractFile(url, target_dir_name, sha1_hash = None):
         # if p.scheme == "ssh":
         #     downloadSCP(p.hostname, p.username, p.path, ORIG_DIR)
         # else:
-        #     urllib.urlretrieve(url, target_filename, reporthook = downloadProgress)
-        try:
-           urllib.urlretrieve(url, target_filename)
-        except AttributeError:
-           urllib.request.urlretrieve(url, target_filename)
+        #     urlretrieve(url, target_filename, reporthook = downloadProgress)
+        urlretrieve(url, target_filename)
     else:
         log("Skipping download of " + url + "; already downloaded")
 
