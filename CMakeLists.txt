@@ -2,6 +2,11 @@ cmake_minimum_required(VERSION 2.8)
 
 project("External")
 
+if (NOT CMAKE_BUILD_TYPE)
+	message(STATUS "No build type selected, default to Release")
+	set(CMAKE_BUILD_TYPE "Release")
+endif()
+
 add_definitions(
     -DLIBDIR
     )
@@ -237,13 +242,13 @@ add_library(AGAST EXCLUDE_FROM_ALL
     src/AGAST/oast9_16.cc
     src/AGAST/oast9_16_nms.cc
     )
-target_include_directories(AGAST PUBLIC src/AGAST)
+target_include_directories(AGAST PUBLIC src)
 
 add_library(FAST EXCLUDE_FROM_ALL
     src/FAST/fast_9_MH.cpp
     src/FAST/nonmax_MH.cpp
     )
-target_include_directories(FAST PUBLIC src/FAST)
+target_include_directories(FAST PUBLIC src)
 
 add_library(iconv EXCLUDE_FROM_ALL
     src/libiconv/lib/iconv.c
