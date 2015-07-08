@@ -19,6 +19,7 @@ import json
 import getopt
 try:
     from urllib.parse import urlparse
+    from urllib.request import urlparse
 except ImportError:
     from urlparse import urlparse
 
@@ -191,7 +192,10 @@ def downloadAndExtractFile(url, target_dir_name, sha1_hash = None):
         #     downloadSCP(p.hostname, p.username, p.path, ORIG_DIR)
         # else:
         #     urllib.urlretrieve(url, target_filename, reporthook = downloadProgress)
-        urllib.urlretrieve(url, target_filename)
+        try:
+           urllib.urlretrieve(url, target_filename)
+        except AttributeError:
+           urllib.request.urlretrieve(url, target_filename)
     else:
         log("Skipping download of " + url + "; already downloaded")
 
