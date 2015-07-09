@@ -201,6 +201,13 @@
     }
 },
 {
+    "name": "Tokenizer",
+    "postprocess": {
+        "type": "patch",
+        "file": "tokenizer.patch"
+    }
+},
+{
     "name": "Windows",
     "postprocess": {
         "type": "patch",

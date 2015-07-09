@@ -1,0 +1,434 @@
+diff --exclude=.git --exclude=.hg -rupN ./src/Tokenizer/Tokenizer.cpp ../external_OLD/src/Tokenizer/Tokenizer.cpp
+--- ./src/Tokenizer/Tokenizer.cpp	1970-01-01 01:00:00.000000000 +0100
++++ ../external_OLD/src/Tokenizer/Tokenizer.cpp	2015-07-08 16:59:10.000000000 +0200
+@@ -0,0 +1,309 @@
++/*
++ * Copyright (C) 2005-2015 Sergey Kosarevsky (sk@linderdaum.com)
++ * All rights reserved.
++ *
++ * Redistribution and use in source and binary forms, with or without
++ * modification, are permitted provided that the following conditions are met:
++ *
++ * 1. Redistributions of source code must retain the above copyright notice,
++ *    this list of conditions and the following disclaimer.
++ *
++ * 2. Redistributions in binary form must display the name 'Sergey Kosarevsky'
++ *    in the credits of the application, if such credits exist.
++ *    The author of this work must be notified via email (sk@linderdaum.com) in
++ *    this case of redistribution.
++ *
++ * 3. Neither the name of copyright holders nor the names of its contributors
++ *    may be used to endorse or promote products derived from this software
++ *    without specific prior written permission.
++ *
++ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS
++ * IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
++ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
++ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS OR CONTRIBUTORS
++ * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
++ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
++ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
++ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
++ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
++ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
++ * POSSIBILITY OF SUCH DAMAGE.
++ */
++
++#include "Tokenizer.h"
++
++#include <algorithm>
++
++bool IsCharSeparator( const char ch )
++{
++	static const char Separators[] = { ' ', 0x9, 0x0A, 0x0D, '\n', '\t' };
++
++	for ( size_t i = 0; i < sizeof( Separators ); ++i )
++	{
++		if ( Separators[i] == ch ) { return true; }
++	}
++
++	return false;
++}
++
++bool IsDigit( const char Ch )
++{
++	return ( ( Ch >= '0' ) && ( Ch <= '9' ) );
++}
++
++bool IsAlpha( const char Ch )
++{
++	return ( ( Ch >= 'A' ) && ( Ch <= 'Z' ) ) ||
++	       ( ( Ch >= 'a' ) && ( Ch <= 'z' ) ) || ( Ch == '_' );
++}
++
++void clTokenizer::RegisterKeyWord( const string& KeyWord )
++{
++	FKeyWordsList.push_back( KeyWord );
++}
++
++void clTokenizer::RegisterOperator( const clOperator& Operator )
++{
++	FOperatorsList.push_back( Operator );
++}
++
++bool clTokenizer::IsKeyWord( const string& Token ) const
++{
++	clStringsList::const_iterator i = find( FKeyWordsList.begin(),
++	                                        FKeyWordsList.end(),
++	                                        Token );
++
++	return i != FKeyWordsList.end();
++}
++
++bool clTokenizer::IsOperator( const string& Token ) const
++{
++	for ( size_t i = 0; i != FOperatorsList.size(); ++i )
++	{
++		if ( FOperatorsList[i].FOperatorName == Token ) { return true; }
++	}
++
++	return false;
++}
++
++bool clTokenizer::IsNumber( const string& Token ) const
++{
++	if ( Token.length() == 0 ) { return false; }
++
++	bool DecimalDot = false;
++	bool HasSign = false;
++
++	for ( size_t i = 0; i != Token.length(); ++i )
++	{
++		if ( Token.at( i ) == '-' || Token.at( i ) == '+' )
++		{
++			if ( i != 0 ) { return false; }
++
++			if ( Token.length() < 2 ) { return false; }
++
++			HasSign = true;
++			continue;
++		}
++
++		if ( Token.at( i ) == '.' )
++		{
++			if ( DecimalDot ) { return false; }
++			else { DecimalDot = true; }
++
++			if ( Token.length() < 2 ) { return false; }
++
++			continue;
++		}
++
++		if ( Token.at( i ) == 'f' )
++		{
++			if ( i == ( HasSign ? 1 : 0 ) ) { return false; }
++
++			// the last character
++			if ( i + 1 != Token.length() ) { return false; }
++
++			continue;
++		}
++
++		if ( !IsDigit( Token.at( i ) ) ) { return false; }
++	}
++
++	return true;
++}
++
++bool clTokenizer::IsString( const string& Token ) const
++{
++	if ( Token.length() < 2 ) { return false; }
++
++	return ( Token[0] == '"' ) &&
++	       ( Token[ Token.length() - 1 ] == '"' );
++}
++
++bool clTokenizer::IsSeparator( const string& Token ) const
++{
++	if ( Token.length() != 1 ) { return false; }
++
++	return IsCharSeparator( Token[0] );
++}
++
++bool clTokenizer::IsStatementsSeparator( const string& Token ) const
++{
++	const size_t Size = 9;
++
++	static const string StmsSeparators[Size] = { "(", ")", "{", "}", ",", ".", "[", "]" };
++
++	for ( size_t i = 0; i < Size; ++i )
++	{
++		if ( StmsSeparators[i] == Token ) { return true; }
++	}
++
++	return false;
++}
++
++bool clTokenizer::IsStatementEnd( const string& Token ) const
++{
++	return Token == ";";
++}
++
++bool clTokenizer::IsIdentifier( const string& Token ) const
++{
++	if ( Token.length() == 0 ) { return false; }
++
++	if ( IsDigit( Token[0] ) ) { return false; }
++
++	for ( size_t i = 0; i != Token.length(); ++i )
++	{
++		if ( !( IsAlpha( Token[i] ) || IsDigit( Token[i] ) ) ) { return false; }
++	}
++
++	return true;
++}
++
++LTokenType clTokenizer::TokenType( const string& Token ) const
++{
++	if ( Token.length() == 0 ) { return TOKEN_NO_TOKEN; }
++
++	if ( IsKeyWord( Token ) ) { return TOKEN_KEYWORD; }
++
++	if ( IsNumber( Token ) ) { return TOKEN_NUMBER; }
++
++	if ( IsString( Token ) ) { return TOKEN_STRING; }
++
++	if ( IsOperator( Token ) ) { return TOKEN_OPERATOR; }
++
++	if ( IsSeparator( Token ) ) { return TOKEN_SEPARATOR; }
++
++	if ( IsStatementsSeparator( Token ) ) { return TOKEN_STATEMENTS_SEPARATOR; }
++
++	if ( IsStatementEnd( Token ) ) { return TOKEN_STATEMENT_END; }
++
++	if ( IsIdentifier( Token ) ) { return TOKEN_IDENTIFIER; }
++
++	return TOKEN_INVALID_TOKEN;
++}
++
++clTokensList clTokenizer::GetTokensList( ifstream& FStream, const string& FileName )
++{
++	clTokensList TokensList;
++
++	string CurrentToken;
++	string LastToken;
++
++	LTokenType LastTokenType = TOKEN_NO_TOKEN;
++
++	bool Flush = false;
++
++	int LineNumber   = 1;
++	int LinePosition = 1;
++
++	bool SkipTillEol = false;
++
++	while ( !Flush )
++	{
++		char Ch = 0;
++
++		if ( !FStream.eof() && !FStream.fail() )
++		{
++			LinePosition++;
++
++			FStream.get( Ch );
++
++			if ( !SkipTillEol ) { CurrentToken.push_back( Ch ); }
++		}
++		else
++		{
++			Flush = true;
++		}
++
++		// track position in source file
++		if ( Ch == 0xA )
++		{
++			SkipTillEol = false;
++			LinePosition = 1;
++			LineNumber++;
++		}
++
++		if ( SkipTillEol ) { continue; }
++
++		LTokenType CurrentTokenType = TokenType( CurrentToken );
++
++		bool TokenChanged = LastTokenType != TOKEN_NO_TOKEN &&
++		                    CurrentTokenType != LastTokenType;
++
++		if ( TokenChanged || Flush  )
++		{
++			if ( CurrentTokenType == TOKEN_KEYWORD ||
++			     CurrentTokenType == TOKEN_STRING )
++			{
++				LastToken = CurrentToken;
++				LastTokenType = CurrentTokenType;
++			}
++			else
++			{
++				if ( LinePosition == 1 ) { LineNumber--; }
++				else { LinePosition--; }
++
++				FStream.putback( Ch );
++			}
++
++			clToken Token;
++
++			Token.FTokenString  = LastToken;
++			Token.FTokenType    = LastTokenType;
++			Token.FFileName     = FileName;
++			Token.FLineNumber   = LineNumber;
++			Token.FLinePosition = LinePosition - static_cast<int>( LastToken.length() );
++
++			// skip comments till end of line
++			if ( LastToken == "//" )
++			{
++				SkipTillEol = true;
++
++				LastToken.clear();
++				LastTokenType = TOKEN_NO_TOKEN;
++
++				CurrentToken.clear();
++				CurrentTokenType = TOKEN_NO_TOKEN;
++
++				continue;
++			}
++
++			if ( LastTokenType != TOKEN_SEPARATOR &&
++			     LastTokenType != TOKEN_NO_TOKEN ) { TokensList.push_back( Token ); }
++
++			CurrentToken.clear();
++
++			CurrentTokenType = TOKEN_NO_TOKEN;
++		}
++
++		LastToken = CurrentToken;
++		LastTokenType = CurrentTokenType;
++	}
++
++	return TokensList;
++}
++
++/*
++ * 05/12/2005
++     It's here
++*/
+diff --exclude=.git --exclude=.hg -rupN ./src/Tokenizer/Tokenizer.h ../external_OLD/src/Tokenizer/Tokenizer.h
+--- ./src/Tokenizer/Tokenizer.h	1970-01-01 01:00:00.000000000 +0100
++++ ../external_OLD/src/Tokenizer/Tokenizer.h	2015-07-08 16:59:10.000000000 +0200
+@@ -0,0 +1,117 @@
++/*
++ * Copyright (C) 2005-2015 Sergey Kosarevsky (sk@linderdaum.com)
++ * All rights reserved.
++ *
++ * Redistribution and use in source and binary forms, with or without
++ * modification, are permitted provided that the following conditions are met:
++ *
++ * 1. Redistributions of source code must retain the above copyright notice,
++ *    this list of conditions and the following disclaimer.
++ *
++ * 2. Redistributions in binary form must display the names 'Sergey Kosarevsky'
++ *    in the credits of the application, if such credits exist.
++ *    The author of this work must be notified via email (sk@linderdaum.com) in
++ *    this case of redistribution.
++ *
++ * 3. Neither the name of copyright holders nor the names of its contributors
++ *    may be used to endorse or promote products derived from this software
++ *    without specific prior written permission.
++ *
++ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS ``AS
++ * IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
++ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
++ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDERS OR CONTRIBUTORS
++ * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
++ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
++ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
++ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
++ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
++ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
++ * POSSIBILITY OF SUCH DAMAGE.
++ */
++
++#pragma once
++
++#include <iostream>
++#include <fstream>
++
++#include <string>
++#include <vector>
++
++using namespace std;
++
++enum LTokenType
++{
++	TOKEN_NO_TOKEN = 0,
++	TOKEN_INVALID_TOKEN = 1,
++	//
++	TOKEN_KEYWORD = 2,
++	TOKEN_NUMBER = 3,
++	TOKEN_STRING = 4,
++	TOKEN_SEPARATOR = 5,
++	TOKEN_STATEMENTS_SEPARATOR = 6,
++	TOKEN_STATEMENT_END = 7,
++	TOKEN_OPERATOR = 8,
++	TOKEN_IDENTIFIER = 9
++};
++
++class clToken
++{
++public:
++	string        FTokenString;
++	LTokenType    FTokenType;
++	string        FFileName;
++	int           FLineNumber;
++	int           FLinePosition;
++};
++
++class clOperator
++{
++public:
++	clOperator()
++		: FOperatorName()
++		, FOperatorPriority(0)
++		, FUnaryOperator(false)
++	{}
++	clOperator( const char* Name, int Prioroty, bool Unary )
++	 : FOperatorName( Name )
++	 , FOperatorPriority( Prioroty )
++	 , FUnaryOperator( Unary )
++	{}
++	string    FOperatorName;
++	int       FOperatorPriority;
++	bool      FUnaryOperator;
++};
++
++typedef vector<clToken>       clTokensList;
++typedef vector<string>        clStringsList;
++typedef vector<clOperator>    clOperatorsList;
++
++class clTokenizer
++{
++public:
++	void            RegisterKeyWord( const string& KeyWord );
++	void            RegisterOperator( const clOperator& Operator );
++	clTokensList    GetTokensList( ifstream& FStream, const string& FileName );
++private:
++	clStringsList      FKeyWordsList;
++	clOperatorsList    FOperatorsList;
++private:
++	LTokenType    TokenType( const string& Token ) const;
++
++	bool    IsKeyWord( const string& Token ) const;
++	bool    IsNumber( const string& Token ) const;
++	bool    IsString( const string& Token ) const;
++	bool    IsSeparator( const string& Token ) const;
++	bool    IsStatementsSeparator( const string& Token ) const;
++	bool    IsStatementEnd( const string& Token ) const;
++	bool    IsOperator( const string& Token ) const;
++	bool    IsIdentifier( const string& Token ) const;
++
++};
++
++
++/*
++ * 05/12/2005
++     It's here
++*/
