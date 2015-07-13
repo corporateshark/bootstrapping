@@ -215,10 +215,14 @@
     }
 },
 {
-    "name": "openal-soft",
+    "name": "openal-soft-android",
     "source": {
         "type": "git",
-        "url": "http://repo.or.cz/openal-soft.git"
+        "url": "http://repo.or.cz/r/openal-soft/android.git"
+    },
+    "postprocess": {
+        "type": "patch",
+        "file": "openal-soft-android.patch"
     }
 },
 {
