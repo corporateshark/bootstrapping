@@ -211,8 +211,6 @@ def applyPatchFile(patch_name, dir_name, pnum):
     log("Applying patch to " + dir_name)
     patch_dir = os.path.join(BASE_DIR, "patches")
     arguments = "-d " + os.path.join(SRC_DIR, dir_name) + " -p" + str(pnum) + " < " + os.path.join(patch_dir, patch_name)
-    # let's make this a global variable
-#    patch_command = "M:\\cygwin\\bin\\patch"
     patch_command = "patch"
     res = executeCommand(patch_command + " --dry-run " + arguments, quiet = True)
     if res != 0:
@@ -272,9 +270,10 @@ def printOptions():
         print("Downloads external libraries, and applies patches or scripts if necessary.")
         print("If the --name argument is not provided, all available libraries will be downloaded.")
         print("Options:")
-        print("  --list, -l    List all available libraries")
-        print("  --name, -n    Specifies the name of a single library to be downloaded")
-        print("  --clean, -C   Remove directory before obtaining library")
+        print("  --list, -l      List all available libraries")
+        print("  --name, -n      Specifies the name of a single library to be downloaded")
+        print("  --clean, -C     Remove directory before obtaining library")
+#        print("  --fallback, -f  Fallback URL")
 
 
 def main(argv):
@@ -324,10 +323,13 @@ def main(argv):
         log("Creating directory " + ORIG_DIR)
         os.mkdir(ORIG_DIR)
 
+    # some sanity checking
     for library in data:
         if library.get('name', None) is None:
             log("ERROR: Invalid schema: library object does not have a 'name'")
             return -1
+
+    failed_libraries = []
 
     for library in data:
         name = library.get('name', None)
@@ -362,50 +364,60 @@ def main(argv):
         if not os.path.exists(lib_dir):
             os.mkdir(lib_dir)
 
-        # download source
-        if source is not None:
-            if 'type' not in source:
-                log("ERROR: Invalid schema for " + name + ": 'source' object must have a 'type'")
-                return -1
-            if 'url' not in source:
-                log("ERROR: Invalid schema for " + name + ": 'source' object must have a 'url'")
-                return -1
-            src_type = source['type']
-            src_url = source['url']
+        try:
+            # download source
+            if source is not None:
+                if 'type' not in source:
+                    log("ERROR: Invalid schema for " + name + ": 'source' object must have a 'type'")
+                    return -1
+                if 'url' not in source:
+                    log("ERROR: Invalid schema for " + name + ": 'source' object must have a 'url'")
+                    return -1
+                src_type = source['type']
+                src_url = source['url']
 
-            if src_type == "archive":
-                downloadAndExtractFile(src_url, name, source.get('sha1', None))
+                if src_type == "archive":
+                    downloadAndExtractFile(src_url, name, source.get('sha1', None))
+                else:
+                    cloneRepository(src_type, src_url, name, source.get('revision', None))
             else:
-                cloneRepository(src_type, src_url, name, source.get('revision', None))
-        else:
-            # set up clean directory for potential patch application
-            shutil.rmtree(lib_dir)
-            os.mkdir(lib_dir)
+                # set up clean directory for potential patch application
+                shutil.rmtree(lib_dir)
+                os.mkdir(lib_dir)
 
-        # post-processing
-        if post is not None:
-            if 'type' not in post:
-                log("ERROR: Invalid schema for " + name + ": 'postprocess' object must have a 'type'")
-                return -1
-            if 'file' not in post:
-                log("ERROR: Invalid schema for " + name + ": 'postprocess' object must have a 'file'")
-                return -1
-            post_type = post['type']
-            post_file = post['file']
+            # post-processing
+            if post is not None:
+                if 'type' not in post:
+                    log("ERROR: Invalid schema for " + name + ": 'postprocess' object must have a 'type'")
+                    return -1
+                if 'file' not in post:
+                    log("ERROR: Invalid schema for " + name + ": 'postprocess' object must have a 'file'")
+                    return -1
+                post_type = post['type']
+                post_file = post['file']
 
-            if post_type == "patch":
-                applyPatchFile(post_file, name, post.get('pnum', DEFAULT_PNUM))
-            elif post_type == "script":
-                runScript(post_file)
-            else:
-                log("ERROR: Unknown post-processing type '" + post_type + "' for " + name)
-                return -1
+                if post_type == "patch":
+                    applyPatchFile(post_file, name, post.get('pnum', DEFAULT_PNUM))
+                elif post_type == "script":
+                    runScript(post_file)
+                else:
+                    log("ERROR: Unknown post-processing type '" + post_type + "' for " + name)
+                    return -1
 
-        # add to cached state
-        sdata.append(library)
+            # add to cached state
+            sdata.append(library)
 
-        # write out cached state
-        writeJSONData(sdata, state_filename)
+            # write out cached state
+            writeJSONData(sdata, state_filename)
+        except:
+            log("ERROR: Failure to bootstrap library " + name)
+            failed_libraries.append(name)
+
+    if failed_libraries:
+        log("***************************************")
+        log("FAILURE to bootstrap the following libraries:")
+        log(', '.join(failed_libraries))
+        log("***************************************")
 
     log("Finished")
 
