@@ -1,0 +1,898 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		88FEE11029CB4735B845E744 /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 36890B95BCE44B5DA461E909 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				AA906730003048D3B0AFF1EC /* CMake Rules */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+		8AD2A63862104B9B982C3DB0 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 4A75188356E945FBA78833CC /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				9783974687A54FB6B94DDCE7 /* CMake Rules */,
+			);
+			dependencies = (
+				22E3B75FE62341AC8D365D5F /* PBXTargetDependency */,
+				BED126EDF0FD4B459693B9B6 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		5531C10D93DF438E852FF45F /* codebook.c in Sources */ = {isa = PBXBuildFile; fileRef = 0795CE492CC74563AE383C14 /* codebook.c */; settings = {COMPILER_FLAGS = ""; }; };
+		5A4AC672F2CC4C14AB077E87 /* floor0.c in Sources */ = {isa = PBXBuildFile; fileRef = 5948D43B13724693990B540F /* floor0.c */; settings = {COMPILER_FLAGS = ""; }; };
+		746683ACF947496CADB88F0D /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = 29502E7BDDB44822A41D54B0 /* info.c */; settings = {COMPILER_FLAGS = ""; }; };
+		9D66056E0C9C417898A7A462 /* mapping0.c in Sources */ = {isa = PBXBuildFile; fileRef = 43EBA1B73F2F42ACBD03056C /* mapping0.c */; settings = {COMPILER_FLAGS = ""; }; };
+		AE419EF0843C4D38A09B2DE0 /* dsp.c in Sources */ = {isa = PBXBuildFile; fileRef = 097A5DFA8E674ACEAD15E616 /* dsp.c */; settings = {COMPILER_FLAGS = ""; }; };
+		B017D3B6810C487AB19CA5D6 /* floor_lookup.c in Sources */ = {isa = PBXBuildFile; fileRef = 037F8D676BC54F05BAFACABB /* floor_lookup.c */; settings = {COMPILER_FLAGS = ""; }; };
+		BABE3B01855D4A2B8AB8B7CC /* mdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 7ECFA908EC2343FBB2F2AEFB /* mdct.c */; settings = {COMPILER_FLAGS = ""; }; };
+		C1779C3ADCA94F8096FA7314 /* floor1.c in Sources */ = {isa = PBXBuildFile; fileRef = DB93D733E30944AAA06D8E64 /* floor1.c */; settings = {COMPILER_FLAGS = ""; }; };
+		D54443EDE86C48F7B45C77EF /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = 185663A2ED9840ADABE11ACE /* bitwise.c */; settings = {COMPILER_FLAGS = ""; }; };
+		E44B65FA58F24AFDB3FAAC8A /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = 585BC0A36A8741E699931635 /* framing.c */; settings = {COMPILER_FLAGS = ""; }; };
+		E7A172E65B53451CB8745DE6 /* annotate.c in Sources */ = {isa = PBXBuildFile; fileRef = 775561F978194623AB159387 /* annotate.c */; settings = {COMPILER_FLAGS = ""; }; };
+		F215A4C834F24B84A7808DB2 /* vorbisfile.c in Sources */ = {isa = PBXBuildFile; fileRef = F0084E39160348F1AB9AEBF9 /* vorbisfile.c */; settings = {COMPILER_FLAGS = ""; }; };
+		FA60127F36444B5CBE2A7C70 /* res012.c in Sources */ = {isa = PBXBuildFile; fileRef = 959B79F759FD44B4868FCAD9 /* res012.c */; settings = {COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3507BF69B17F47119FC9B075 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1FC85D63761343B2B4B4A2B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88FEE11029CB4735B845E744;
+			remoteInfo = ZERO_CHECK;
+		};
+		374A0515CD3B4A72996C908A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1FC85D63761343B2B4B4A2B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88FEE11029CB4735B845E744;
+			remoteInfo = ZERO_CHECK;
+		};
+		553E2DD07FDF4AAF90F0EEFD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1FC85D63761343B2B4B4A2B3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DADAEBAFB3684B41A34F796E;
+			remoteInfo = libTremolo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		005D3AD55982428AA0707182 /* os.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = os.h; sourceTree = SOURCE_ROOT; };
+		037F8D676BC54F05BAFACABB /* floor_lookup.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; path = floor_lookup.c; sourceTree = SOURCE_ROOT; };
+		0795CE492CC74563AE383C14 /* codebook.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; path = codebook.c; sourceTree = SOURCE_ROOT; };
+		097A5DFA8E674ACEAD15E616 /* dsp.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; path = dsp.c; sourceTree = SOURCE_ROOT; };
+		0C21081FFE674D41A66A7327 /* codec_internal.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = codec_internal.h; sourceTree = SOURCE_ROOT; };
+		12F68328958D4D5A956D7954 /* config_types.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = config_types.h; sourceTree = SOURCE_ROOT; };
+		185663A2ED9840ADABE11ACE /* bitwise.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; path = bitwise.c; sourceTree = SOURCE_ROOT; };
+		29502E7BDDB44822A41D54B0 /* info.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; path = info.c; sourceTree = SOURCE_ROOT; };
+		367A0A5FDEAF46FC953F3FF2 /* liblibTremolo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = liblibTremolo.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		37625FA7B65440019E826BA2 /* mdct_lookup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = mdct_lookup.h; sourceTree = SOURCE_ROOT; };
+		38143A9752D64A88AC5D293A /* window_lookup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = window_lookup.h; sourceTree = SOURCE_ROOT; };
+		3C92B3C2E330497BB2E32102 /* misc.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = misc.h; sourceTree = SOURCE_ROOT; };
+		43EBA1B73F2F42ACBD03056C /* mapping0.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; path = mapping0.c; sourceTree = SOURCE_ROOT; };
+		457D7BB285CB47888CB691F7 /* ivorbisfile.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = ivorbisfile.h; sourceTree = SOURCE_ROOT; };
+		49E2F2A9A9F6438996B4B6FF /* lsp_lookup.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = lsp_lookup.h; sourceTree = SOURCE_ROOT; };
+		585BC0A36A8741E699931635 /* framing.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; path = framing.c; sourceTree = SOURCE_ROOT; };
+		5948D43B13724693990B540F /* floor0.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; path = floor0.c; sourceTree = SOURCE_ROOT; };
+		5E1945EBCC10439B8F57919E /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		6AC7DFE02E4D4A0D860F5ECD /* codebook.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = codebook.h; sourceTree = SOURCE_ROOT; };
+		775561F978194623AB159387 /* annotate.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; path = annotate.c; sourceTree = SOURCE_ROOT; };
+		7ECFA908EC2343FBB2F2AEFB /* mdct.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; path = mdct.c; sourceTree = SOURCE_ROOT; };
+		859977E6FD974CAB9838AE34 /* asm_arm.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = asm_arm.h; sourceTree = SOURCE_ROOT; };
+		959B79F759FD44B4868FCAD9 /* res012.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; path = res012.c; sourceTree = SOURCE_ROOT; };
+		9E154AF8AC644233BE788FE8 /* os_types.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = os_types.h; sourceTree = SOURCE_ROOT; };
+		A26529F9ABBC43B9B27F2E19 /* ivorbiscodec.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = ivorbiscodec.h; sourceTree = SOURCE_ROOT; };
+		AA0471E098F143D4A56FD619 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		C404FA6F9D69413D891870A7 /* mdct.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = mdct.h; sourceTree = SOURCE_ROOT; };
+		C4894433E5DC42B1B3C7AC6D /* ogg.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = ogg.h; sourceTree = SOURCE_ROOT; };
+		DB93D733E30944AAA06D8E64 /* floor1.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; path = floor1.c; sourceTree = SOURCE_ROOT; };
+		F0084E39160348F1AB9AEBF9 /* vorbisfile.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; path = vorbisfile.c; sourceTree = SOURCE_ROOT; };
+		F8748B8245EB4E44A0AD2FC5 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		48AB981934BF45AAA1CEE192 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		6DB8D45A5B3A4000A8E09E58 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		71B404E2B5E74BDCB3B1646E /* ZERO_CHECK */ = {
+			isa = PBXGroup;
+			children = (
+				48AB981934BF45AAA1CEE192 /* CMake Rules */,
+				F8748B8245EB4E44A0AD2FC5 /* CMakeLists.txt */,
+			);
+			name = ZERO_CHECK;
+			sourceTree = "<group>";
+		};
+		812B8A69AE4C4C17B93284CA /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				CE85350C638641538CDC04B9 /* ALL_BUILD */,
+				71B404E2B5E74BDCB3B1646E /* ZERO_CHECK */,
+				8AE21133367E4FC282EE1219 /* libTremolo */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		888D0B342A1244668E6F4426 = {
+			isa = PBXGroup;
+			children = (
+				812B8A69AE4C4C17B93284CA /* Sources */,
+				E05DA2C38C894E6583861EDD /* Resources */,
+				FD4A764608244D11BB6F6121 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		8AE21133367E4FC282EE1219 /* libTremolo */ = {
+			isa = PBXGroup;
+			children = (
+				A2C737DC51984072BF6CEF81 /* Source Files */,
+				BEE7C12F3C7F48EF9FE58D2E /* Header Files */,
+				5E1945EBCC10439B8F57919E /* CMakeLists.txt */,
+			);
+			name = libTremolo;
+			sourceTree = "<group>";
+		};
+		A2C737DC51984072BF6CEF81 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				775561F978194623AB159387 /* annotate.c */,
+				185663A2ED9840ADABE11ACE /* bitwise.c */,
+				0795CE492CC74563AE383C14 /* codebook.c */,
+				097A5DFA8E674ACEAD15E616 /* dsp.c */,
+				5948D43B13724693990B540F /* floor0.c */,
+				DB93D733E30944AAA06D8E64 /* floor1.c */,
+				037F8D676BC54F05BAFACABB /* floor_lookup.c */,
+				585BC0A36A8741E699931635 /* framing.c */,
+				29502E7BDDB44822A41D54B0 /* info.c */,
+				43EBA1B73F2F42ACBD03056C /* mapping0.c */,
+				7ECFA908EC2343FBB2F2AEFB /* mdct.c */,
+				959B79F759FD44B4868FCAD9 /* res012.c */,
+				F0084E39160348F1AB9AEBF9 /* vorbisfile.c */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		BEE7C12F3C7F48EF9FE58D2E /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				859977E6FD974CAB9838AE34 /* asm_arm.h */,
+				6AC7DFE02E4D4A0D860F5ECD /* codebook.h */,
+				0C21081FFE674D41A66A7327 /* codec_internal.h */,
+				12F68328958D4D5A956D7954 /* config_types.h */,
+				A26529F9ABBC43B9B27F2E19 /* ivorbiscodec.h */,
+				457D7BB285CB47888CB691F7 /* ivorbisfile.h */,
+				49E2F2A9A9F6438996B4B6FF /* lsp_lookup.h */,
+				C404FA6F9D69413D891870A7 /* mdct.h */,
+				37625FA7B65440019E826BA2 /* mdct_lookup.h */,
+				3C92B3C2E330497BB2E32102 /* misc.h */,
+				C4894433E5DC42B1B3C7AC6D /* ogg.h */,
+				005D3AD55982428AA0707182 /* os.h */,
+				9E154AF8AC644233BE788FE8 /* os_types.h */,
+				38143A9752D64A88AC5D293A /* window_lookup.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		CE85350C638641538CDC04B9 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				6DB8D45A5B3A4000A8E09E58 /* CMake Rules */,
+				AA0471E098F143D4A56FD619 /* CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		E05DA2C38C894E6583861EDD /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		FD4A764608244D11BB6F6121 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				367A0A5FDEAF46FC953F3FF2 /* liblibTremolo.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DADAEBAFB3684B41A34F796E /* libTremolo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 99BFCFB39AED4FC78DD6516D /* Build configuration list for PBXNativeTarget "libTremolo" */;
+			buildPhases = (
+				85A5013E90A14E0D86ECCE24 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				095B139D53C240B489155B5F /* PBXTargetDependency */,
+			);
+			name = libTremolo;
+			productName = libTremolo;
+			productReference = 367A0A5FDEAF46FC953F3FF2 /* liblibTremolo.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1FC85D63761343B2B4B4A2B3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = FD886896303A4F4988774284 /* Build configuration list for PBXProject "libTremoloiOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 888D0B342A1244668E6F4426;
+			projectDirPath = ../../../../BlippEngine/External/libtremolo;
+			projectRoot = "";
+			targets = (
+				8AD2A63862104B9B982C3DB0 /* ALL_BUILD */,
+				88FEE11029CB4735B845E744 /* ZERO_CHECK */,
+				DADAEBAFB3684B41A34F796E /* libTremolo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		9783974687A54FB6B94DDCE7 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo -f /Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		AA906730003048D3B0AFF1EC /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo -f /Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		85A5013E90A14E0D86ECCE24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7A172E65B53451CB8745DE6 /* annotate.c in Sources */,
+				D54443EDE86C48F7B45C77EF /* bitwise.c in Sources */,
+				5531C10D93DF438E852FF45F /* codebook.c in Sources */,
+				AE419EF0843C4D38A09B2DE0 /* dsp.c in Sources */,
+				5A4AC672F2CC4C14AB077E87 /* floor0.c in Sources */,
+				C1779C3ADCA94F8096FA7314 /* floor1.c in Sources */,
+				B017D3B6810C487AB19CA5D6 /* floor_lookup.c in Sources */,
+				E44B65FA58F24AFDB3FAAC8A /* framing.c in Sources */,
+				746683ACF947496CADB88F0D /* info.c in Sources */,
+				9D66056E0C9C417898A7A462 /* mapping0.c in Sources */,
+				BABE3B01855D4A2B8AB8B7CC /* mdct.c in Sources */,
+				FA60127F36444B5CBE2A7C70 /* res012.c in Sources */,
+				F215A4C834F24B84A7808DB2 /* vorbisfile.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		095B139D53C240B489155B5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 88FEE11029CB4735B845E744 /* ZERO_CHECK */;
+			targetProxy = 374A0515CD3B4A72996C908A /* PBXContainerItemProxy */;
+		};
+		22E3B75FE62341AC8D365D5F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DADAEBAFB3684B41A34F796E /* libTremolo */;
+			targetProxy = 553E2DD07FDF4AAF90F0EEFD /* PBXContainerItemProxy */;
+		};
+		BED126EDF0FD4B459693B9B6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 88FEE11029CB4735B845E744 /* ZERO_CHECK */;
+			targetProxy = 3507BF69B17F47119FC9B075 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1932033F086C45B3884416C2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+					ONLY_C,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libtremolo/.",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		193CC0F22CB84F9FBF821C01 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+					ONLY_C,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libtremolo/.",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		23705D8A10494CE8B94D063A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+					ONLY_C,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libtremolo/.",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = libTremolo;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		3404C41FBADD43EAB63EB7B0 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+					ONLY_C,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libtremolo/.",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		3835EF22463B4E28A9A6FE9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+					ONLY_C,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libtremolo/.",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		4E8FD92043E143DCA782FD83 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo/build";
+			};
+			name = RelWithDebInfo;
+		};
+		4FD14E01048041AC8B3DBD0F /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+					ONLY_C,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libtremolo/.",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		619ED2E872D341FCAF76C13B /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+					ONLY_C,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libtremolo/.",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    -DNDEBUG  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = libTremolo;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		6948B7B2502D4B1AB3B95611 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+					ONLY_C,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libtremolo/.",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    -DNDEBUG  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = libTremolo;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		86F94E3429C342269885B395 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+					ONLY_C,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libtremolo/.",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "       -DNDEBUG  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = libTremolo;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		949583F6B02B4F7D9D9FCED3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo/build";
+			};
+			name = Debug;
+		};
+		B44D9B91E7FF403890E36E14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+					ONLY_C,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libtremolo/.",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		C2F1CA201B8741B9A10F3BF3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo/build";
+			};
+			name = Release;
+		};
+		D4B1E672D93A45C39FAA3BD5 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo/build";
+			};
+			name = MinSizeRel;
+		};
+		F21F857DCF5046B9B74FE210 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+					ONLY_C,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libtremolo/.",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		F60B929856D045E9AFFC8087 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+					ONLY_C,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libtremolo/.",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libtremolo";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		36890B95BCE44B5DA461E909 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B44D9B91E7FF403890E36E14 /* Debug */,
+				1932033F086C45B3884416C2 /* Release */,
+				4FD14E01048041AC8B3DBD0F /* MinSizeRel */,
+				193CC0F22CB84F9FBF821C01 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		4A75188356E945FBA78833CC /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3835EF22463B4E28A9A6FE9C /* Debug */,
+				F60B929856D045E9AFFC8087 /* Release */,
+				3404C41FBADD43EAB63EB7B0 /* MinSizeRel */,
+				F21F857DCF5046B9B74FE210 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		99BFCFB39AED4FC78DD6516D /* Build configuration list for PBXNativeTarget "libTremolo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23705D8A10494CE8B94D063A /* Debug */,
+				6948B7B2502D4B1AB3B95611 /* Release */,
+				619ED2E872D341FCAF76C13B /* MinSizeRel */,
+				86F94E3429C342269885B395 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FD886896303A4F4988774284 /* Build configuration list for PBXProject "libTremoloiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				949583F6B02B4F7D9D9FCED3 /* Debug */,
+				C2F1CA201B8741B9A10F3BF3 /* Release */,
+				D4B1E672D93A45C39FAA3BD5 /* MinSizeRel */,
+				4E8FD92043E143DCA782FD83 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1FC85D63761343B2B4B4A2B3 /* Project object */;
+}

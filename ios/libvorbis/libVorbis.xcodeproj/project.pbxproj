@@ -1,0 +1,894 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		88FEE11029CB4735B845E744 /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 4BDD32D33AA34898A0176BB3 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				A18E241B43504737883ABB63 /* CMake Rules */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+		8AD2A63862104B9B982C3DB0 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 5A90C4ABD9DC4EA7BE239419 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				37FE9969ECCB4DF481C25039 /* CMake Rules */,
+			);
+			dependencies = (
+				A1CDD2D68162464C9FB55C5B /* PBXTargetDependency */,
+				87212066E90241DA8A957212 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		1A9D3CFB4692417DB4BE257A /* codebook.c in Sources */ = {isa = PBXBuildFile; fileRef = 18C273E33D0A43968EB9065D /* codebook.c */; settings = {COMPILER_FLAGS = ""; }; };
+		437CB12F93034E22A06C4169 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E0958E983124998B83DDEAA /* info.c */; settings = {COMPILER_FLAGS = ""; }; };
+		4B08073FADD648F396F6DAD0 /* envelope.c in Sources */ = {isa = PBXBuildFile; fileRef = 56A33FDD9BC242D1B61A8EE1 /* envelope.c */; settings = {COMPILER_FLAGS = ""; }; };
+		4D22CD4012CC41DC8CE26ABA /* bitrate.c in Sources */ = {isa = PBXBuildFile; fileRef = 00C6ABB4FBCB4828BFA508C3 /* bitrate.c */; settings = {COMPILER_FLAGS = ""; }; };
+		51E2DC7341BF4200A7AD2C47 /* lpc.c in Sources */ = {isa = PBXBuildFile; fileRef = E67131B1D5814CD7BDAEEF20 /* lpc.c */; settings = {COMPILER_FLAGS = ""; }; };
+		5441620DDCF748FBABD995CC /* mdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 4D346E08D5B34683BC828689 /* mdct.c */; settings = {COMPILER_FLAGS = ""; }; };
+		5C57105197244DB096659E4C /* lookup.c in Sources */ = {isa = PBXBuildFile; fileRef = A75B1733008241F4BA063897 /* lookup.c */; settings = {COMPILER_FLAGS = ""; }; };
+		66278528E2A54C6AAD549C10 /* sharedbook.c in Sources */ = {isa = PBXBuildFile; fileRef = C42F7B4B3A924BAB80CAD2D8 /* sharedbook.c */; settings = {COMPILER_FLAGS = ""; }; };
+		7E44B54A40AB439B8DC92BF0 /* smallft.c in Sources */ = {isa = PBXBuildFile; fileRef = CC55BBB588164C62A74AFCB8 /* smallft.c */; settings = {COMPILER_FLAGS = ""; }; };
+		85A3BDD21FD047A98C2958F4 /* registry.c in Sources */ = {isa = PBXBuildFile; fileRef = 3F682A4712BD4ACCAB403ABD /* registry.c */; settings = {COMPILER_FLAGS = ""; }; };
+		8E4E2339E9834D618220BD9E /* vorbisfile.c in Sources */ = {isa = PBXBuildFile; fileRef = C4E9E80C7D8D4BDCAC8DEFBB /* vorbisfile.c */; settings = {COMPILER_FLAGS = ""; }; };
+		9A5B19C1C06046889EF30D3F /* block.c in Sources */ = {isa = PBXBuildFile; fileRef = EDE74A6184D1484590A1FA5F /* block.c */; settings = {COMPILER_FLAGS = ""; }; };
+		AB153D6616F747D8B7B7DD3A /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = AF10EDA3EA4A4127AB64D7DE /* window.c */; settings = {COMPILER_FLAGS = ""; }; };
+		C2086E54A5404D1F9966715D /* psy.c in Sources */ = {isa = PBXBuildFile; fileRef = D1FEADE0033F4B05B5E48731 /* psy.c */; settings = {COMPILER_FLAGS = ""; }; };
+		C70ABAF2C08B4D2785EA1E67 /* floor1.c in Sources */ = {isa = PBXBuildFile; fileRef = 5D11A0A60828437F86E29B3C /* floor1.c */; settings = {COMPILER_FLAGS = ""; }; };
+		C928D8CDD60140C3892AB97B /* floor0.c in Sources */ = {isa = PBXBuildFile; fileRef = 028BDBF6FDF047C48D2D06E8 /* floor0.c */; settings = {COMPILER_FLAGS = ""; }; };
+		DD75FDACFA5B422492C35465 /* analysis.c in Sources */ = {isa = PBXBuildFile; fileRef = 84D8515191C646DDA71BF626 /* analysis.c */; settings = {COMPILER_FLAGS = ""; }; };
+		E260E5191C764CE6B1BD7B50 /* lsp.c in Sources */ = {isa = PBXBuildFile; fileRef = ACC286743F8746B5B70AA215 /* lsp.c */; settings = {COMPILER_FLAGS = ""; }; };
+		E8BB3721F6254DC192CCB821 /* res0.c in Sources */ = {isa = PBXBuildFile; fileRef = 7EFB7F27F6D74DC2BF6A51C7 /* res0.c */; settings = {COMPILER_FLAGS = ""; }; };
+		F6CA2BAB97C1418A9DE14DE5 /* synthesis.c in Sources */ = {isa = PBXBuildFile; fileRef = 12CCCD12681144FEA5AFCA3E /* synthesis.c */; settings = {COMPILER_FLAGS = ""; }; };
+		FA595AA3461B499C8F952DC9 /* mapping0.c in Sources */ = {isa = PBXBuildFile; fileRef = 34F95EB4F9C64959A7FEBFD0 /* mapping0.c */; settings = {COMPILER_FLAGS = ""; }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		851AD75E7A8B4947B8D91FAF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7612F6F61D942F989EA9106 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88FEE11029CB4735B845E744;
+			remoteInfo = ZERO_CHECK;
+		};
+		D0EE0257613C4175AFCE1198 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7612F6F61D942F989EA9106 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E33DF9581F2C40E3903C37A0;
+			remoteInfo = libVorbis;
+		};
+		D18FE495312A483AB29AFC3C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F7612F6F61D942F989EA9106 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 88FEE11029CB4735B845E744;
+			remoteInfo = ZERO_CHECK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		00C6ABB4FBCB4828BFA508C3 /* bitrate.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = bitrate.c; path = lib/bitrate.c; sourceTree = SOURCE_ROOT; };
+		028BDBF6FDF047C48D2D06E8 /* floor0.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = floor0.c; path = lib/floor0.c; sourceTree = SOURCE_ROOT; };
+		12CCCD12681144FEA5AFCA3E /* synthesis.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = synthesis.c; path = lib/synthesis.c; sourceTree = SOURCE_ROOT; };
+		18C273E33D0A43968EB9065D /* codebook.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = codebook.c; path = lib/codebook.c; sourceTree = SOURCE_ROOT; };
+		1A1961934A7C4FBBB169DFC4 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		34F95EB4F9C64959A7FEBFD0 /* mapping0.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = mapping0.c; path = lib/mapping0.c; sourceTree = SOURCE_ROOT; };
+		3E0958E983124998B83DDEAA /* info.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = info.c; path = lib/info.c; sourceTree = SOURCE_ROOT; };
+		3F682A4712BD4ACCAB403ABD /* registry.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = registry.c; path = lib/registry.c; sourceTree = SOURCE_ROOT; };
+		48DB5A43198A4FDC9FA9C2CA /* liblibVorbis.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = liblibVorbis.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D346E08D5B34683BC828689 /* mdct.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = mdct.c; path = lib/mdct.c; sourceTree = SOURCE_ROOT; };
+		56A33FDD9BC242D1B61A8EE1 /* envelope.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = envelope.c; path = lib/envelope.c; sourceTree = SOURCE_ROOT; };
+		5D11A0A60828437F86E29B3C /* floor1.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = floor1.c; path = lib/floor1.c; sourceTree = SOURCE_ROOT; };
+		7EFB7F27F6D74DC2BF6A51C7 /* res0.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = res0.c; path = lib/res0.c; sourceTree = SOURCE_ROOT; };
+		84D8515191C646DDA71BF626 /* analysis.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = analysis.c; path = lib/analysis.c; sourceTree = SOURCE_ROOT; };
+		A75B1733008241F4BA063897 /* lookup.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = lookup.c; path = lib/lookup.c; sourceTree = SOURCE_ROOT; };
+		ACC286743F8746B5B70AA215 /* lsp.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = lsp.c; path = lib/lsp.c; sourceTree = SOURCE_ROOT; };
+		AF10EDA3EA4A4127AB64D7DE /* window.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = window.c; path = lib/window.c; sourceTree = SOURCE_ROOT; };
+		C42F7B4B3A924BAB80CAD2D8 /* sharedbook.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = sharedbook.c; path = lib/sharedbook.c; sourceTree = SOURCE_ROOT; };
+		C4E9E80C7D8D4BDCAC8DEFBB /* vorbisfile.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = vorbisfile.c; path = lib/vorbisfile.c; sourceTree = SOURCE_ROOT; };
+		CC55BBB588164C62A74AFCB8 /* smallft.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = smallft.c; path = lib/smallft.c; sourceTree = SOURCE_ROOT; };
+		D1FEADE0033F4B05B5E48731 /* psy.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = psy.c; path = lib/psy.c; sourceTree = SOURCE_ROOT; };
+		E67131B1D5814CD7BDAEEF20 /* lpc.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = lpc.c; path = lib/lpc.c; sourceTree = SOURCE_ROOT; };
+		E98E9C0D2A474255936768FB /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		EDE74A6184D1484590A1FA5F /* block.c */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.c; fileEncoding = 4; name = block.c; path = lib/block.c; sourceTree = SOURCE_ROOT; };
+		FA5726A73460442DB5C2F435 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		1DB448F4636D4550B6D3B599 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				D15EC895AB524B45B8AAC33E /* ALL_BUILD */,
+				1E419F05144A4F34B4609F66 /* ZERO_CHECK */,
+				4E9C9BF03AA147BE8FE7009D /* libVorbis */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		1E419F05144A4F34B4609F66 /* ZERO_CHECK */ = {
+			isa = PBXGroup;
+			children = (
+				38221280B23943BDA384732D /* CMake Rules */,
+				1A1961934A7C4FBBB169DFC4 /* CMakeLists.txt */,
+			);
+			name = ZERO_CHECK;
+			sourceTree = "<group>";
+		};
+		2D63EC2F7CB84CDE816725E1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		38221280B23943BDA384732D /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		3FA8D72407154373A826FDE6 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		4E9C9BF03AA147BE8FE7009D /* libVorbis */ = {
+			isa = PBXGroup;
+			children = (
+				7C7F8C5EA00C446BA88F3D92 /* Source Files */,
+				FA5726A73460442DB5C2F435 /* CMakeLists.txt */,
+			);
+			name = libVorbis;
+			sourceTree = "<group>";
+		};
+		7C7F8C5EA00C446BA88F3D92 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				84D8515191C646DDA71BF626 /* analysis.c */,
+				00C6ABB4FBCB4828BFA508C3 /* bitrate.c */,
+				EDE74A6184D1484590A1FA5F /* block.c */,
+				18C273E33D0A43968EB9065D /* codebook.c */,
+				56A33FDD9BC242D1B61A8EE1 /* envelope.c */,
+				028BDBF6FDF047C48D2D06E8 /* floor0.c */,
+				5D11A0A60828437F86E29B3C /* floor1.c */,
+				3E0958E983124998B83DDEAA /* info.c */,
+				A75B1733008241F4BA063897 /* lookup.c */,
+				E67131B1D5814CD7BDAEEF20 /* lpc.c */,
+				ACC286743F8746B5B70AA215 /* lsp.c */,
+				34F95EB4F9C64959A7FEBFD0 /* mapping0.c */,
+				4D346E08D5B34683BC828689 /* mdct.c */,
+				D1FEADE0033F4B05B5E48731 /* psy.c */,
+				3F682A4712BD4ACCAB403ABD /* registry.c */,
+				7EFB7F27F6D74DC2BF6A51C7 /* res0.c */,
+				C42F7B4B3A924BAB80CAD2D8 /* sharedbook.c */,
+				CC55BBB588164C62A74AFCB8 /* smallft.c */,
+				12CCCD12681144FEA5AFCA3E /* synthesis.c */,
+				C4E9E80C7D8D4BDCAC8DEFBB /* vorbisfile.c */,
+				AF10EDA3EA4A4127AB64D7DE /* window.c */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		7F8205AE4A38457587DCC492 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				48DB5A43198A4FDC9FA9C2CA /* liblibVorbis.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8491F1113EB843499A059B85 = {
+			isa = PBXGroup;
+			children = (
+				1DB448F4636D4550B6D3B599 /* Sources */,
+				2D63EC2F7CB84CDE816725E1 /* Resources */,
+				7F8205AE4A38457587DCC492 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D15EC895AB524B45B8AAC33E /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				3FA8D72407154373A826FDE6 /* CMake Rules */,
+				E98E9C0D2A474255936768FB /* CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E33DF9581F2C40E3903C37A0 /* libVorbis */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D75214066EF64A5CABC2E253 /* Build configuration list for PBXNativeTarget "libVorbis" */;
+			buildPhases = (
+				1ACF444E28DA4997B109293C /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3C09A67FF79F47C1A831F48A /* PBXTargetDependency */,
+			);
+			name = libVorbis;
+			productName = libVorbis;
+			productReference = 48DB5A43198A4FDC9FA9C2CA /* liblibVorbis.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F7612F6F61D942F989EA9106 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = 99E564A9D79E4AE7A70D165F /* Build configuration list for PBXProject "libVorbisiOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 8491F1113EB843499A059B85;
+			projectDirPath = "../../../../BlippEngine/External/libvorbis-1.3.5";
+			projectRoot = "";
+			targets = (
+				8AD2A63862104B9B982C3DB0 /* ALL_BUILD */,
+				88FEE11029CB4735B845E744 /* ZERO_CHECK */,
+				E33DF9581F2C40E3903C37A0 /* libVorbis */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		37FE9969ECCB4DF481C25039 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5 -f /Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+		A18E241B43504737883ABB63 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5 -f /Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1ACF444E28DA4997B109293C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD75FDACFA5B422492C35465 /* analysis.c in Sources */,
+				4D22CD4012CC41DC8CE26ABA /* bitrate.c in Sources */,
+				9A5B19C1C06046889EF30D3F /* block.c in Sources */,
+				1A9D3CFB4692417DB4BE257A /* codebook.c in Sources */,
+				4B08073FADD648F396F6DAD0 /* envelope.c in Sources */,
+				C928D8CDD60140C3892AB97B /* floor0.c in Sources */,
+				C70ABAF2C08B4D2785EA1E67 /* floor1.c in Sources */,
+				437CB12F93034E22A06C4169 /* info.c in Sources */,
+				5C57105197244DB096659E4C /* lookup.c in Sources */,
+				51E2DC7341BF4200A7AD2C47 /* lpc.c in Sources */,
+				E260E5191C764CE6B1BD7B50 /* lsp.c in Sources */,
+				FA595AA3461B499C8F952DC9 /* mapping0.c in Sources */,
+				5441620DDCF748FBABD995CC /* mdct.c in Sources */,
+				C2086E54A5404D1F9966715D /* psy.c in Sources */,
+				85A3BDD21FD047A98C2958F4 /* registry.c in Sources */,
+				E8BB3721F6254DC192CCB821 /* res0.c in Sources */,
+				66278528E2A54C6AAD549C10 /* sharedbook.c in Sources */,
+				7E44B54A40AB439B8DC92BF0 /* smallft.c in Sources */,
+				F6CA2BAB97C1418A9DE14DE5 /* synthesis.c in Sources */,
+				8E4E2339E9834D618220BD9E /* vorbisfile.c in Sources */,
+				AB153D6616F747D8B7B7DD3A /* window.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3C09A67FF79F47C1A831F48A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 88FEE11029CB4735B845E744 /* ZERO_CHECK */;
+			targetProxy = 851AD75E7A8B4947B8D91FAF /* PBXContainerItemProxy */;
+		};
+		87212066E90241DA8A957212 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 88FEE11029CB4735B845E744 /* ZERO_CHECK */;
+			targetProxy = D18FE495312A483AB29AFC3C /* PBXContainerItemProxy */;
+		};
+		A1CDD2D68162464C9FB55C5B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E33DF9581F2C40E3903C37A0 /* libVorbis */;
+			targetProxy = D0EE0257613C4175AFCE1198 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		166BD60B5F4A4B3E9B07579A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5/build";
+			};
+			name = Debug;
+		};
+		1BEF8EC93B924B6F9057708E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/src",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		24F06A695D5B4F5DA57D82C0 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/src",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "       -DNDEBUG  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = libVorbis;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		3B2A973C5B5B41228F294502 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/src",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		59E6C047670E4D1E90B90CB3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/src",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    -DNDEBUG  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = libVorbis;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		6041A448917C4EDCA5F07A8F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/src",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = libVorbis;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		6702DCBEF6554B818E96163F /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5/build";
+			};
+			name = MinSizeRel;
+		};
+		681DA94378B7454A99B7B811 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/src",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Debug;
+		};
+		69A2DDA264B841CEA46E6129 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/src",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		7AA54B3F4FB54870A7C0BF31 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/src",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+		7C04C2410B5D4F79ACDD30CC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/src",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		AFC8B2F09B8A4C64AA05E76E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5/build";
+			};
+			name = Release;
+		};
+		CD485A99E272446DA631F635 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/src",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = Release;
+		};
+		CE7F764A8E794124BA5E5571 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/src",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CFLAGS = "    -DNDEBUG  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = libVorbis;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = MinSizeRel;
+		};
+		D1161F7D100F4016A31DEC42 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5/build";
+			};
+			name = RelWithDebInfo;
+		};
+		F895B4E47EB84558BE5FB958 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					MODPLUG_STATIC,
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/.",
+					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libvorbis-1.3.5/src",
+				);
+				INSTALL_PATH = "";
+				OTHER_CFLAGS = "  ";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libvorbis-1.3.5";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = (
+					"-Wmost",
+					"-Wno-four-char-constants",
+					"-Wno-unknown-pragmas",
+				);
+			};
+			name = RelWithDebInfo;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4BDD32D33AA34898A0176BB3 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				681DA94378B7454A99B7B811 /* Debug */,
+				7C04C2410B5D4F79ACDD30CC /* Release */,
+				69A2DDA264B841CEA46E6129 /* MinSizeRel */,
+				7AA54B3F4FB54870A7C0BF31 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		5A90C4ABD9DC4EA7BE239419 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1BEF8EC93B924B6F9057708E /* Debug */,
+				CD485A99E272446DA631F635 /* Release */,
+				3B2A973C5B5B41228F294502 /* MinSizeRel */,
+				F895B4E47EB84558BE5FB958 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		99E564A9D79E4AE7A70D165F /* Build configuration list for PBXProject "libVorbisiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				166BD60B5F4A4B3E9B07579A /* Debug */,
+				AFC8B2F09B8A4C64AA05E76E /* Release */,
+				6702DCBEF6554B818E96163F /* MinSizeRel */,
+				D1161F7D100F4016A31DEC42 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D75214066EF64A5CABC2E253 /* Build configuration list for PBXNativeTarget "libVorbis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6041A448917C4EDCA5F07A8F /* Debug */,
+				59E6C047670E4D1E90B90CB3 /* Release */,
+				CE7F764A8E794124BA5E5571 /* MinSizeRel */,
+				24F06A695D5B4F5DA57D82C0 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F7612F6F61D942F989EA9106 /* Project object */;
+}
