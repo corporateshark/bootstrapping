@@ -153,15 +153,11 @@
     }
 },
 {
-    "name": "zxing",
+    "name": "zxing-cpp",
     "source": {
         "type": "git",
-        "url": "https://github.com/zxing/zxing",
-        "revision": "00f634024ceeee591f54e6984ea7dd666fab22ae"
-    },
-    "postprocess": {
-        "type": "patch",
-        "file": "zxing.patch"
+        "url": "https://github.com/glassechidna/zxing-cpp.git",
+        "revision": "e7594421d240d8a79633a83c7ad3d26b670e038f"
     }
 },
 {
