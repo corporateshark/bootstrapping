@@ -55,7 +55,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2D0B4CFE1B690301000C42F3 /* liblibmodplug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibmodplug.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D0B4CFE1B690301000C42F3 /* libModPlug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libModPlug.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D0B4D611B6903CF000C42F3 /* fastmix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fastmix.cpp; path = ../../../src/libmodplug/src/fastmix.cpp; sourceTree = "<group>"; };
 		2D0B4D691B6903CF000C42F3 /* load_669.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_669.cpp; path = ../../../src/libmodplug/src/load_669.cpp; sourceTree = "<group>"; };
 		2D0B4D6B1B6903CF000C42F3 /* load_amf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_amf.cpp; path = ../../../src/libmodplug/src/load_amf.cpp; sourceTree = "<group>"; };
@@ -119,7 +119,7 @@
 		2D0B4CFF1B690301000C42F3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2D0B4CFE1B690301000C42F3 /* liblibmodplug.a */,
+				2D0B4CFE1B690301000C42F3 /* libModPlug.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -189,9 +189,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2D0B4CFD1B690301000C42F3 /* libmodplug */ = {
+		2D0B4CFD1B690301000C42F3 /* ModPlug */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D0B4D121B690301000C42F3 /* Build configuration list for PBXNativeTarget "libmodplug" */;
+			buildConfigurationList = 2D0B4D121B690301000C42F3 /* Build configuration list for PBXNativeTarget "ModPlug" */;
 			buildPhases = (
 				2D0B4CFA1B690301000C42F3 /* Sources */,
 				2D0B4CFB1B690301000C42F3 /* Frameworks */,
@@ -201,9 +201,9 @@
 			);
 			dependencies = (
 			);
-			name = libmodplug;
+			name = ModPlug;
 			productName = libmodplug;
-			productReference = 2D0B4CFE1B690301000C42F3 /* liblibmodplug.a */;
+			productReference = 2D0B4CFE1B690301000C42F3 /* libModPlug.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -220,7 +220,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2D0B4CF91B690301000C42F3 /* Build configuration list for PBXProject "libmodplug" */;
+			buildConfigurationList = 2D0B4CF91B690301000C42F3 /* Build configuration list for PBXProject "libModPlug" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -232,7 +232,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2D0B4CFD1B690301000C42F3 /* libmodplug */,
+				2D0B4CFD1B690301000C42F3 /* ModPlug */,
 			);
 		};
 /* End PBXProject section */
@@ -390,7 +390,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2D0B4CF91B690301000C42F3 /* Build configuration list for PBXProject "libmodplug" */ = {
+		2D0B4CF91B690301000C42F3 /* Build configuration list for PBXProject "libModPlug" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D0B4D101B690301000C42F3 /* Debug */,
@@ -399,13 +399,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D0B4D121B690301000C42F3 /* Build configuration list for PBXNativeTarget "libmodplug" */ = {
+		2D0B4D121B690301000C42F3 /* Build configuration list for PBXNativeTarget "ModPlug" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D0B4D131B690301000C42F3 /* Debug */,
 				2D0B4D141B690301000C42F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
