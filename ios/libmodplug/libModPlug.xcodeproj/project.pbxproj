@@ -6,980 +6,408 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		88FEE11029CB4735B845E744 /* ZERO_CHECK */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 21FA2C0E4AB649B08525C07D /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
-			buildPhases = (
-				B8D6985501664D62A8A96028 /* CMake Rules */,
-			);
-			dependencies = (
-			);
-			name = ZERO_CHECK;
-			productName = ZERO_CHECK;
-		};
-		8AD2A63862104B9B982C3DB0 /* ALL_BUILD */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = 4D3568C01E9E4C3EA9C5A28D /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
-			buildPhases = (
-				E62885DA960F4A9196647972 /* CMake Rules */,
-			);
-			dependencies = (
-				A69327F0A74347BD81D1496A /* PBXTargetDependency */,
-				7612B2D844A04F92AD919EF4 /* PBXTargetDependency */,
-			);
-			name = ALL_BUILD;
-			productName = ALL_BUILD;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
-		0625E83C67C64BC79A6A182B /* load_dbm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 37DB850D4EC84B5AB90A56BE /* load_dbm.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		0E7BE5AA4FF8442AA4AEEA4D /* load_mid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 087B9DD600B64963859ADE69 /* load_mid.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		23D1B192BFFD4D898ECCE7DC /* snd_fx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3569DA5DF08646ECB83883A2 /* snd_fx.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		29C4BF39B2C84DC18194A42B /* fastmix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 205397879A55498EB767F2DC /* fastmix.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		3BDB134E3FB94F4292E6DE96 /* load_amf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98E01F98E8D347179E4AB977 /* load_amf.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		3D08B9FE26094B5D8125078E /* load_ptm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C6645FD1C3F04793A96B18BE /* load_ptm.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		3D998D6636E942309BA88FCD /* sndfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B750C3BEB63E487796D037BE /* sndfile.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		4758626FB0514AA6B7747A4B /* load_umx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8E0B23E941D34CA4A13EDE9B /* load_umx.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		57F929C015134F60A725936E /* load_xm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A9D54BD898D420F85370B7B /* load_xm.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		5DD1D9567E9C4EB0A3623810 /* load_ams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB1674C9C7134F828FEBFDC6 /* load_ams.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		5F9C05B4D8254157B4C3C014 /* load_s3m.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5F958C5847004D819AA052C9 /* load_s3m.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		6B67A3BE12934E01BA66C7C7 /* load_mt2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3CC3E0719E884723A5986119 /* load_mt2.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		70B23698D0384F0C9F9E13BD /* load_mtm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CDBC638019E541A09FA36784 /* load_mtm.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		81235FF02E3042B7A5FF4A51 /* load_stm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03FA0D1AFFC9470EB6B14829 /* load_stm.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		836A54BCF0C64796BE34BF71 /* load_far.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F4F5B4D501364A469FC04234 /* load_far.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		896F0BFC01684A79921F51F5 /* snd_flt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 29328AB598B445958A334E91 /* snd_flt.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		919714CB15F3478F981EE3CF /* load_dsm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 306985E8395649F3B386ACEB /* load_dsm.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		9A7DF325BCF440EE9C00E7BE /* sndmix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A6F7F576BAEA451AAA0E28B7 /* sndmix.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		AABF0E32B7684650AED4D5CC /* load_wav.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EADE9F269A284A88837E178A /* load_wav.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		AF218D5A281C43FC82E2DA88 /* load_med.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0DA30C5AE027495F96B94CFD /* load_med.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		B6CF565468584A66B1F032D8 /* modplug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 38A348D4E110471A98033536 /* modplug.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		C6AF77C95EBC4B6DB7C6A975 /* load_ult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 24C9923649E141A1933CBE7F /* load_ult.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		CFB310C3D11540B2ABBA1CD2 /* load_669.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8031C53302B941669EC309CD /* load_669.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		D72EB75E08604FF48D71F099 /* load_it.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1F867DE735114EE991DAF9D2 /* load_it.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		DB828CA6B13E4E92B71A03B3 /* load_okt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D25899A214C34F26822E9AC9 /* load_okt.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		DBDE4DBBCC944165AD64C8BC /* load_mdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 838CC46F1B2A485DA6BBCD9F /* load_mdl.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		DBE0C294FA214BEEB5534A7D /* load_pat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 03EF14E430FF4FCFB0083153 /* load_pat.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		ECD7CD1F353342BC9B652634 /* load_psm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E6F8157813F645A5AB14D587 /* load_psm.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		F0983BFBCAA4437485BAA977 /* mmcmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0241D5FC415E43CA8086D6FE /* mmcmp.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		F319AE50658F4CCBA3620F1A /* load_mod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B47EEB9819DF449DAD0C99CF /* load_mod.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		FAEB6662B2814484B904441A /* load_dmf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 68B95272CF4D4D60AD336C60 /* load_dmf.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		FE27505884594A7E8ED03FFD /* load_j2b.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A9A8DA5B76C34FA49D1D9977 /* load_j2b.cpp */; settings = {COMPILER_FLAGS = ""; }; };
-		FF2FA6363FE5496DBD87884A /* snd_dsp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 52FD2225C524400F949E3E08 /* snd_dsp.cpp */; settings = {COMPILER_FLAGS = ""; }; };
+		2D0B4D8F1B6903CF000C42F3 /* fastmix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D611B6903CF000C42F3 /* fastmix.cpp */; };
+		2D0B4D901B6903CF000C42F3 /* load_669.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D691B6903CF000C42F3 /* load_669.cpp */; };
+		2D0B4D921B6903CF000C42F3 /* load_amf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D6B1B6903CF000C42F3 /* load_amf.cpp */; };
+		2D0B4D931B6903CF000C42F3 /* load_ams.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D6C1B6903CF000C42F3 /* load_ams.cpp */; };
+		2D0B4D941B6903CF000C42F3 /* load_dbm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D6D1B6903CF000C42F3 /* load_dbm.cpp */; };
+		2D0B4D951B6903CF000C42F3 /* load_dmf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D6E1B6903CF000C42F3 /* load_dmf.cpp */; };
+		2D0B4D961B6903CF000C42F3 /* load_dsm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D6F1B6903CF000C42F3 /* load_dsm.cpp */; };
+		2D0B4D971B6903CF000C42F3 /* load_far.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D701B6903CF000C42F3 /* load_far.cpp */; };
+		2D0B4D981B6903CF000C42F3 /* load_it.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D711B6903CF000C42F3 /* load_it.cpp */; };
+		2D0B4D991B6903CF000C42F3 /* load_j2b.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D721B6903CF000C42F3 /* load_j2b.cpp */; };
+		2D0B4D9A1B6903CF000C42F3 /* load_mdl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D731B6903CF000C42F3 /* load_mdl.cpp */; };
+		2D0B4D9B1B6903CF000C42F3 /* load_med.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D741B6903CF000C42F3 /* load_med.cpp */; };
+		2D0B4D9C1B6903CF000C42F3 /* load_mid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D751B6903CF000C42F3 /* load_mid.cpp */; };
+		2D0B4D9D1B6903CF000C42F3 /* load_mod.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D761B6903CF000C42F3 /* load_mod.cpp */; };
+		2D0B4D9E1B6903CF000C42F3 /* load_mt2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D771B6903CF000C42F3 /* load_mt2.cpp */; };
+		2D0B4D9F1B6903CF000C42F3 /* load_mtm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D781B6903CF000C42F3 /* load_mtm.cpp */; };
+		2D0B4DA01B6903CF000C42F3 /* load_okt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D791B6903CF000C42F3 /* load_okt.cpp */; };
+		2D0B4DA11B6903CF000C42F3 /* load_pat.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D7A1B6903CF000C42F3 /* load_pat.cpp */; };
+		2D0B4DA21B6903CF000C42F3 /* load_psm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D7C1B6903CF000C42F3 /* load_psm.cpp */; };
+		2D0B4DA31B6903CF000C42F3 /* load_ptm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D7D1B6903CF000C42F3 /* load_ptm.cpp */; };
+		2D0B4DA41B6903CF000C42F3 /* load_s3m.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D7E1B6903CF000C42F3 /* load_s3m.cpp */; };
+		2D0B4DA51B6903CF000C42F3 /* load_stm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D7F1B6903CF000C42F3 /* load_stm.cpp */; };
+		2D0B4DA61B6903CF000C42F3 /* load_ult.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D801B6903CF000C42F3 /* load_ult.cpp */; };
+		2D0B4DA71B6903CF000C42F3 /* load_umx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D811B6903CF000C42F3 /* load_umx.cpp */; };
+		2D0B4DA81B6903CF000C42F3 /* load_wav.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D821B6903CF000C42F3 /* load_wav.cpp */; };
+		2D0B4DA91B6903CF000C42F3 /* load_xm.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D831B6903CF000C42F3 /* load_xm.cpp */; };
+		2D0B4DAA1B6903CF000C42F3 /* mmcmp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D861B6903CF000C42F3 /* mmcmp.cpp */; };
+		2D0B4DAB1B6903CF000C42F3 /* modplug.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D871B6903CF000C42F3 /* modplug.cpp */; };
+		2D0B4DAC1B6903CF000C42F3 /* snd_dsp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D891B6903CF000C42F3 /* snd_dsp.cpp */; };
+		2D0B4DAD1B6903CF000C42F3 /* snd_flt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D8A1B6903CF000C42F3 /* snd_flt.cpp */; };
+		2D0B4DAE1B6903CF000C42F3 /* snd_fx.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D8B1B6903CF000C42F3 /* snd_fx.cpp */; };
+		2D0B4DAF1B6903CF000C42F3 /* sndfile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D8C1B6903CF000C42F3 /* sndfile.cpp */; };
+		2D0B4DB01B6903CF000C42F3 /* sndmix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4D8D1B6903CF000C42F3 /* sndmix.cpp */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		59C2D438A476470A8B80109E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4AAC8B973B5E496F95DACB8E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 88FEE11029CB4735B845E744;
-			remoteInfo = ZERO_CHECK;
+/* Begin PBXCopyFilesBuildPhase section */
+		2D0B4CFC1B690301000C42F3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B322AEEE863F404FA0A500B3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4AAC8B973B5E496F95DACB8E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 88FEE11029CB4735B845E744;
-			remoteInfo = ZERO_CHECK;
-		};
-		B7F71C58DC58435392852DB3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4AAC8B973B5E496F95DACB8E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 32413E645CF14BB8A32D3320;
-			remoteInfo = libModPlug;
-		};
-/* End PBXContainerItemProxy section */
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0241D5FC415E43CA8086D6FE /* mmcmp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = mmcmp.cpp; path = src/mmcmp.cpp; sourceTree = SOURCE_ROOT; };
-		03EF14E430FF4FCFB0083153 /* load_pat.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_pat.cpp; path = src/load_pat.cpp; sourceTree = SOURCE_ROOT; };
-		03FA0D1AFFC9470EB6B14829 /* load_stm.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_stm.cpp; path = src/load_stm.cpp; sourceTree = SOURCE_ROOT; };
-		087B9DD600B64963859ADE69 /* load_mid.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_mid.cpp; path = src/load_mid.cpp; sourceTree = SOURCE_ROOT; };
-		0DA30C5AE027495F96B94CFD /* load_med.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_med.cpp; path = src/load_med.cpp; sourceTree = SOURCE_ROOT; };
-		0F2371D77CFD41AB88682574 /* liblibModPlug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = liblibModPlug.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A9D54BD898D420F85370B7B /* load_xm.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_xm.cpp; path = src/load_xm.cpp; sourceTree = SOURCE_ROOT; };
-		1F867DE735114EE991DAF9D2 /* load_it.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_it.cpp; path = src/load_it.cpp; sourceTree = SOURCE_ROOT; };
-		205397879A55498EB767F2DC /* fastmix.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = fastmix.cpp; path = src/fastmix.cpp; sourceTree = SOURCE_ROOT; };
-		248E1F1BE29A4D10AC8AAA02 /* modplug.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = modplug.h; path = src/modplug.h; sourceTree = SOURCE_ROOT; };
-		24C9923649E141A1933CBE7F /* load_ult.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_ult.cpp; path = src/load_ult.cpp; sourceTree = SOURCE_ROOT; };
-		29328AB598B445958A334E91 /* snd_flt.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = snd_flt.cpp; path = src/snd_flt.cpp; sourceTree = SOURCE_ROOT; };
-		306985E8395649F3B386ACEB /* load_dsm.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_dsm.cpp; path = src/load_dsm.cpp; sourceTree = SOURCE_ROOT; };
-		3569DA5DF08646ECB83883A2 /* snd_fx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = snd_fx.cpp; path = src/snd_fx.cpp; sourceTree = SOURCE_ROOT; };
-		37DB850D4EC84B5AB90A56BE /* load_dbm.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_dbm.cpp; path = src/load_dbm.cpp; sourceTree = SOURCE_ROOT; };
-		38A348D4E110471A98033536 /* modplug.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = modplug.cpp; path = src/modplug.cpp; sourceTree = SOURCE_ROOT; };
-		3CC3E0719E884723A5986119 /* load_mt2.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_mt2.cpp; path = src/load_mt2.cpp; sourceTree = SOURCE_ROOT; };
-		52FD2225C524400F949E3E08 /* snd_dsp.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = snd_dsp.cpp; path = src/snd_dsp.cpp; sourceTree = SOURCE_ROOT; };
-		5F958C5847004D819AA052C9 /* load_s3m.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_s3m.cpp; path = src/load_s3m.cpp; sourceTree = SOURCE_ROOT; };
-		68B95272CF4D4D60AD336C60 /* load_dmf.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_dmf.cpp; path = src/load_dmf.cpp; sourceTree = SOURCE_ROOT; };
-		74F1C9B0CF6A425EAD8F542E /* tables.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = tables.h; path = src/tables.h; sourceTree = SOURCE_ROOT; };
-		8031C53302B941669EC309CD /* load_669.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_669.cpp; path = src/load_669.cpp; sourceTree = SOURCE_ROOT; };
-		838CC46F1B2A485DA6BBCD9F /* load_mdl.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_mdl.cpp; path = src/load_mdl.cpp; sourceTree = SOURCE_ROOT; };
-		8E0B23E941D34CA4A13EDE9B /* load_umx.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_umx.cpp; path = src/load_umx.cpp; sourceTree = SOURCE_ROOT; };
-		93FF19AC70B4430B8F9BA4AB /* load_pat.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = load_pat.h; path = src/load_pat.h; sourceTree = SOURCE_ROOT; };
-		98E01F98E8D347179E4AB977 /* load_amf.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_amf.cpp; path = src/load_amf.cpp; sourceTree = SOURCE_ROOT; };
-		A6F7F576BAEA451AAA0E28B7 /* sndmix.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = sndmix.cpp; path = src/sndmix.cpp; sourceTree = SOURCE_ROOT; };
-		A9A8DA5B76C34FA49D1D9977 /* load_j2b.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_j2b.cpp; path = src/load_j2b.cpp; sourceTree = SOURCE_ROOT; };
-		B47EEB9819DF449DAD0C99CF /* load_mod.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_mod.cpp; path = src/load_mod.cpp; sourceTree = SOURCE_ROOT; };
-		B750C3BEB63E487796D037BE /* sndfile.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = sndfile.cpp; path = src/sndfile.cpp; sourceTree = SOURCE_ROOT; };
-		C6645FD1C3F04793A96B18BE /* load_ptm.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_ptm.cpp; path = src/load_ptm.cpp; sourceTree = SOURCE_ROOT; };
-		CC7765DC95E34B4DBE388363 /* config.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; path = config.h; sourceTree = SOURCE_ROOT; };
-		CDBC638019E541A09FA36784 /* load_mtm.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_mtm.cpp; path = src/load_mtm.cpp; sourceTree = SOURCE_ROOT; };
-		D25899A214C34F26822E9AC9 /* load_okt.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_okt.cpp; path = src/load_okt.cpp; sourceTree = SOURCE_ROOT; };
-		DB1674C9C7134F828FEBFDC6 /* load_ams.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_ams.cpp; path = src/load_ams.cpp; sourceTree = SOURCE_ROOT; };
-		E6F8157813F645A5AB14D587 /* load_psm.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_psm.cpp; path = src/load_psm.cpp; sourceTree = SOURCE_ROOT; };
-		EADE9F269A284A88837E178A /* load_wav.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_wav.cpp; path = src/load_wav.cpp; sourceTree = SOURCE_ROOT; };
-		F4F5B4D501364A469FC04234 /* load_far.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = load_far.cpp; path = src/load_far.cpp; sourceTree = SOURCE_ROOT; };
+		2D0B4CFE1B690301000C42F3 /* liblibmodplug.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibmodplug.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D0B4D611B6903CF000C42F3 /* fastmix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = fastmix.cpp; path = ../../../src/libmodplug/src/fastmix.cpp; sourceTree = "<group>"; };
+		2D0B4D691B6903CF000C42F3 /* load_669.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_669.cpp; path = ../../../src/libmodplug/src/load_669.cpp; sourceTree = "<group>"; };
+		2D0B4D6B1B6903CF000C42F3 /* load_amf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_amf.cpp; path = ../../../src/libmodplug/src/load_amf.cpp; sourceTree = "<group>"; };
+		2D0B4D6C1B6903CF000C42F3 /* load_ams.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_ams.cpp; path = ../../../src/libmodplug/src/load_ams.cpp; sourceTree = "<group>"; };
+		2D0B4D6D1B6903CF000C42F3 /* load_dbm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_dbm.cpp; path = ../../../src/libmodplug/src/load_dbm.cpp; sourceTree = "<group>"; };
+		2D0B4D6E1B6903CF000C42F3 /* load_dmf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_dmf.cpp; path = ../../../src/libmodplug/src/load_dmf.cpp; sourceTree = "<group>"; };
+		2D0B4D6F1B6903CF000C42F3 /* load_dsm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_dsm.cpp; path = ../../../src/libmodplug/src/load_dsm.cpp; sourceTree = "<group>"; };
+		2D0B4D701B6903CF000C42F3 /* load_far.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_far.cpp; path = ../../../src/libmodplug/src/load_far.cpp; sourceTree = "<group>"; };
+		2D0B4D711B6903CF000C42F3 /* load_it.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_it.cpp; path = ../../../src/libmodplug/src/load_it.cpp; sourceTree = "<group>"; };
+		2D0B4D721B6903CF000C42F3 /* load_j2b.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_j2b.cpp; path = ../../../src/libmodplug/src/load_j2b.cpp; sourceTree = "<group>"; };
+		2D0B4D731B6903CF000C42F3 /* load_mdl.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_mdl.cpp; path = ../../../src/libmodplug/src/load_mdl.cpp; sourceTree = "<group>"; };
+		2D0B4D741B6903CF000C42F3 /* load_med.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_med.cpp; path = ../../../src/libmodplug/src/load_med.cpp; sourceTree = "<group>"; };
+		2D0B4D751B6903CF000C42F3 /* load_mid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_mid.cpp; path = ../../../src/libmodplug/src/load_mid.cpp; sourceTree = "<group>"; };
+		2D0B4D761B6903CF000C42F3 /* load_mod.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_mod.cpp; path = ../../../src/libmodplug/src/load_mod.cpp; sourceTree = "<group>"; };
+		2D0B4D771B6903CF000C42F3 /* load_mt2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_mt2.cpp; path = ../../../src/libmodplug/src/load_mt2.cpp; sourceTree = "<group>"; };
+		2D0B4D781B6903CF000C42F3 /* load_mtm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_mtm.cpp; path = ../../../src/libmodplug/src/load_mtm.cpp; sourceTree = "<group>"; };
+		2D0B4D791B6903CF000C42F3 /* load_okt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_okt.cpp; path = ../../../src/libmodplug/src/load_okt.cpp; sourceTree = "<group>"; };
+		2D0B4D7A1B6903CF000C42F3 /* load_pat.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_pat.cpp; path = ../../../src/libmodplug/src/load_pat.cpp; sourceTree = "<group>"; };
+		2D0B4D7B1B6903CF000C42F3 /* load_pat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = load_pat.h; path = ../../../src/libmodplug/src/load_pat.h; sourceTree = "<group>"; };
+		2D0B4D7C1B6903CF000C42F3 /* load_psm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_psm.cpp; path = ../../../src/libmodplug/src/load_psm.cpp; sourceTree = "<group>"; };
+		2D0B4D7D1B6903CF000C42F3 /* load_ptm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_ptm.cpp; path = ../../../src/libmodplug/src/load_ptm.cpp; sourceTree = "<group>"; };
+		2D0B4D7E1B6903CF000C42F3 /* load_s3m.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_s3m.cpp; path = ../../../src/libmodplug/src/load_s3m.cpp; sourceTree = "<group>"; };
+		2D0B4D7F1B6903CF000C42F3 /* load_stm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_stm.cpp; path = ../../../src/libmodplug/src/load_stm.cpp; sourceTree = "<group>"; };
+		2D0B4D801B6903CF000C42F3 /* load_ult.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_ult.cpp; path = ../../../src/libmodplug/src/load_ult.cpp; sourceTree = "<group>"; };
+		2D0B4D811B6903CF000C42F3 /* load_umx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_umx.cpp; path = ../../../src/libmodplug/src/load_umx.cpp; sourceTree = "<group>"; };
+		2D0B4D821B6903CF000C42F3 /* load_wav.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_wav.cpp; path = ../../../src/libmodplug/src/load_wav.cpp; sourceTree = "<group>"; };
+		2D0B4D831B6903CF000C42F3 /* load_xm.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = load_xm.cpp; path = ../../../src/libmodplug/src/load_xm.cpp; sourceTree = "<group>"; };
+		2D0B4D861B6903CF000C42F3 /* mmcmp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = mmcmp.cpp; path = ../../../src/libmodplug/src/mmcmp.cpp; sourceTree = "<group>"; };
+		2D0B4D871B6903CF000C42F3 /* modplug.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = modplug.cpp; path = ../../../src/libmodplug/src/modplug.cpp; sourceTree = "<group>"; };
+		2D0B4D881B6903CF000C42F3 /* modplug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = modplug.h; path = ../../../src/libmodplug/src/modplug.h; sourceTree = "<group>"; };
+		2D0B4D891B6903CF000C42F3 /* snd_dsp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = snd_dsp.cpp; path = ../../../src/libmodplug/src/snd_dsp.cpp; sourceTree = "<group>"; };
+		2D0B4D8A1B6903CF000C42F3 /* snd_flt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = snd_flt.cpp; path = ../../../src/libmodplug/src/snd_flt.cpp; sourceTree = "<group>"; };
+		2D0B4D8B1B6903CF000C42F3 /* snd_fx.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = snd_fx.cpp; path = ../../../src/libmodplug/src/snd_fx.cpp; sourceTree = "<group>"; };
+		2D0B4D8C1B6903CF000C42F3 /* sndfile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sndfile.cpp; path = ../../../src/libmodplug/src/sndfile.cpp; sourceTree = "<group>"; };
+		2D0B4D8D1B6903CF000C42F3 /* sndmix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = sndmix.cpp; path = ../../../src/libmodplug/src/sndmix.cpp; sourceTree = "<group>"; };
+		2D0B4D8E1B6903CF000C42F3 /* tables.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tables.h; path = ../../../src/libmodplug/src/tables.h; sourceTree = "<group>"; };
+		2D0B4DB11B690611000C42F3 /* stdafx.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = stdafx.h; path = ../../../src/libmodplug/src/libmodplug/stdafx.h; sourceTree = "<group>"; };
+		2D0B4DB21B690624000C42F3 /* it_defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = it_defs.h; path = ../../../src/libmodplug/src/libmodplug/it_defs.h; sourceTree = "<group>"; };
+		2D0B4DB31B690624000C42F3 /* sndfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = sndfile.h; path = ../../../src/libmodplug/src/libmodplug/sndfile.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFrameworksBuildPhase section */
+		2D0B4CFB1B690301000C42F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
 /* Begin PBXGroup section */
-		15873B109D5C4CEB81B6C332 /* Products */ = {
+		2D0B4CF51B690301000C42F3 = {
 			isa = PBXGroup;
 			children = (
-				0F2371D77CFD41AB88682574 /* liblibModPlug.a */,
+				2D0B4D001B690301000C42F3 /* libmodplug */,
+				2D0B4CFF1B690301000C42F3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2D0B4CFF1B690301000C42F3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2D0B4CFE1B690301000C42F3 /* liblibmodplug.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		444208D57D4746FEAD49BDA5 /* Header Files */ = {
+		2D0B4D001B690301000C42F3 /* libmodplug */ = {
 			isa = PBXGroup;
 			children = (
-				CC7765DC95E34B4DBE388363 /* config.h */,
-				93FF19AC70B4430B8F9BA4AB /* load_pat.h */,
-				248E1F1BE29A4D10AC8AAA02 /* modplug.h */,
-				74F1C9B0CF6A425EAD8F542E /* tables.h */,
+				2D0B4D181B690310000C42F3 /* Source */,
+				2D0B4D5B1B69033C000C42F3 /* Headers */,
 			);
-			name = "Header Files";
+			path = libmodplug;
 			sourceTree = "<group>";
 		};
-		5542DCEF4D9D464DA8882A39 /* Source Files */ = {
+		2D0B4D181B690310000C42F3 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				205397879A55498EB767F2DC /* fastmix.cpp */,
-				8031C53302B941669EC309CD /* load_669.cpp */,
-				98E01F98E8D347179E4AB977 /* load_amf.cpp */,
-				DB1674C9C7134F828FEBFDC6 /* load_ams.cpp */,
-				37DB850D4EC84B5AB90A56BE /* load_dbm.cpp */,
-				68B95272CF4D4D60AD336C60 /* load_dmf.cpp */,
-				306985E8395649F3B386ACEB /* load_dsm.cpp */,
-				F4F5B4D501364A469FC04234 /* load_far.cpp */,
-				1F867DE735114EE991DAF9D2 /* load_it.cpp */,
-				A9A8DA5B76C34FA49D1D9977 /* load_j2b.cpp */,
-				838CC46F1B2A485DA6BBCD9F /* load_mdl.cpp */,
-				0DA30C5AE027495F96B94CFD /* load_med.cpp */,
-				087B9DD600B64963859ADE69 /* load_mid.cpp */,
-				B47EEB9819DF449DAD0C99CF /* load_mod.cpp */,
-				3CC3E0719E884723A5986119 /* load_mt2.cpp */,
-				CDBC638019E541A09FA36784 /* load_mtm.cpp */,
-				D25899A214C34F26822E9AC9 /* load_okt.cpp */,
-				03EF14E430FF4FCFB0083153 /* load_pat.cpp */,
-				E6F8157813F645A5AB14D587 /* load_psm.cpp */,
-				C6645FD1C3F04793A96B18BE /* load_ptm.cpp */,
-				5F958C5847004D819AA052C9 /* load_s3m.cpp */,
-				03FA0D1AFFC9470EB6B14829 /* load_stm.cpp */,
-				24C9923649E141A1933CBE7F /* load_ult.cpp */,
-				8E0B23E941D34CA4A13EDE9B /* load_umx.cpp */,
-				EADE9F269A284A88837E178A /* load_wav.cpp */,
-				1A9D54BD898D420F85370B7B /* load_xm.cpp */,
-				0241D5FC415E43CA8086D6FE /* mmcmp.cpp */,
-				38A348D4E110471A98033536 /* modplug.cpp */,
-				52FD2225C524400F949E3E08 /* snd_dsp.cpp */,
-				29328AB598B445958A334E91 /* snd_flt.cpp */,
-				3569DA5DF08646ECB83883A2 /* snd_fx.cpp */,
-				B750C3BEB63E487796D037BE /* sndfile.cpp */,
-				A6F7F576BAEA451AAA0E28B7 /* sndmix.cpp */,
+				2D0B4D611B6903CF000C42F3 /* fastmix.cpp */,
+				2D0B4D691B6903CF000C42F3 /* load_669.cpp */,
+				2D0B4D6B1B6903CF000C42F3 /* load_amf.cpp */,
+				2D0B4D6C1B6903CF000C42F3 /* load_ams.cpp */,
+				2D0B4D6D1B6903CF000C42F3 /* load_dbm.cpp */,
+				2D0B4D6E1B6903CF000C42F3 /* load_dmf.cpp */,
+				2D0B4D6F1B6903CF000C42F3 /* load_dsm.cpp */,
+				2D0B4D701B6903CF000C42F3 /* load_far.cpp */,
+				2D0B4D711B6903CF000C42F3 /* load_it.cpp */,
+				2D0B4D721B6903CF000C42F3 /* load_j2b.cpp */,
+				2D0B4D731B6903CF000C42F3 /* load_mdl.cpp */,
+				2D0B4D741B6903CF000C42F3 /* load_med.cpp */,
+				2D0B4D751B6903CF000C42F3 /* load_mid.cpp */,
+				2D0B4D761B6903CF000C42F3 /* load_mod.cpp */,
+				2D0B4D771B6903CF000C42F3 /* load_mt2.cpp */,
+				2D0B4D781B6903CF000C42F3 /* load_mtm.cpp */,
+				2D0B4D791B6903CF000C42F3 /* load_okt.cpp */,
+				2D0B4D7A1B6903CF000C42F3 /* load_pat.cpp */,
+				2D0B4D7C1B6903CF000C42F3 /* load_psm.cpp */,
+				2D0B4D7D1B6903CF000C42F3 /* load_ptm.cpp */,
+				2D0B4D7E1B6903CF000C42F3 /* load_s3m.cpp */,
+				2D0B4D7F1B6903CF000C42F3 /* load_stm.cpp */,
+				2D0B4D801B6903CF000C42F3 /* load_ult.cpp */,
+				2D0B4D811B6903CF000C42F3 /* load_umx.cpp */,
+				2D0B4D821B6903CF000C42F3 /* load_wav.cpp */,
+				2D0B4D831B6903CF000C42F3 /* load_xm.cpp */,
+				2D0B4D861B6903CF000C42F3 /* mmcmp.cpp */,
+				2D0B4D871B6903CF000C42F3 /* modplug.cpp */,
+				2D0B4D891B6903CF000C42F3 /* snd_dsp.cpp */,
+				2D0B4D8A1B6903CF000C42F3 /* snd_flt.cpp */,
+				2D0B4D8B1B6903CF000C42F3 /* snd_fx.cpp */,
+				2D0B4D8C1B6903CF000C42F3 /* sndfile.cpp */,
+				2D0B4D8D1B6903CF000C42F3 /* sndmix.cpp */,
 			);
-			name = "Source Files";
+			name = Source;
 			sourceTree = "<group>";
 		};
-		67F801869DC644A49971E6B2 /* libModPlug */ = {
+		2D0B4D5B1B69033C000C42F3 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				5542DCEF4D9D464DA8882A39 /* Source Files */,
-				444208D57D4746FEAD49BDA5 /* Header Files */,
+				2D0B4DB21B690624000C42F3 /* it_defs.h */,
+				2D0B4DB31B690624000C42F3 /* sndfile.h */,
+				2D0B4DB11B690611000C42F3 /* stdafx.h */,
+				2D0B4D7B1B6903CF000C42F3 /* load_pat.h */,
+				2D0B4D881B6903CF000C42F3 /* modplug.h */,
+				2D0B4D8E1B6903CF000C42F3 /* tables.h */,
 			);
-			name = libModPlug;
-			sourceTree = "<group>";
-		};
-		76DD3A3DD9C44E069588E4B8 /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				67F801869DC644A49971E6B2 /* libModPlug */,
-			);
-			name = Sources;
-			sourceTree = "<group>";
-		};
-		8B2975CB851F4152A25F5419 = {
-			isa = PBXGroup;
-			children = (
-				76DD3A3DD9C44E069588E4B8 /* Sources */,
-				15873B109D5C4CEB81B6C332 /* Products */,
-			);
+			name = Headers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		32413E645CF14BB8A32D3320 /* libModPlug */ = {
+		2D0B4CFD1B690301000C42F3 /* libmodplug */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 08811592BD82408087CACFD7 /* Build configuration list for PBXNativeTarget "libModPlug" */;
+			buildConfigurationList = 2D0B4D121B690301000C42F3 /* Build configuration list for PBXNativeTarget "libmodplug" */;
 			buildPhases = (
-				E3E9548BF3204B61A7D64042 /* Sources */,
+				2D0B4CFA1B690301000C42F3 /* Sources */,
+				2D0B4CFB1B690301000C42F3 /* Frameworks */,
+				2D0B4CFC1B690301000C42F3 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				C91B03B8CB71406DA3BC1E51 /* PBXTargetDependency */,
 			);
-			name = libModPlug;
-			productName = libModPlug;
-			productReference = 0F2371D77CFD41AB88682574 /* liblibModPlug.a */;
+			name = libmodplug;
+			productName = libmodplug;
+			productReference = 2D0B4CFE1B690301000C42F3 /* liblibmodplug.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		4AAC8B973B5E496F95DACB8E /* Project object */ = {
+		2D0B4CF61B690301000C42F3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = Blippar;
+				TargetAttributes = {
+					2D0B4CFD1B690301000C42F3 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
 			};
-			buildConfigurationList = B3B35EBA4E88491D9FBE3FDC /* Build configuration list for PBXProject "libModPlug" */;
+			buildConfigurationList = 2D0B4CF91B690301000C42F3 /* Build configuration list for PBXProject "libmodplug" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 8B2975CB851F4152A25F5419;
-			projectDirPath = "../../../../BlippEngine/External/libmodplug-0.8.8.5";
+			mainGroup = 2D0B4CF51B690301000C42F3;
+			productRefGroup = 2D0B4CFF1B690301000C42F3 /* Products */;
+			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8AD2A63862104B9B982C3DB0 /* ALL_BUILD */,
-				88FEE11029CB4735B845E744 /* ZERO_CHECK */,
-				32413E645CF14BB8A32D3320 /* libModPlug */,
+				2D0B4CFD1B690301000C42F3 /* libmodplug */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		B8D6985501664D62A8A96028 /* CMake Rules */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			name = "CMake Rules";
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "make -C /Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5 -f /Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION all";
-			showEnvVarsInLog = 0;
-		};
-		E62885DA960F4A9196647972 /* CMake Rules */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			name = "CMake Rules";
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "make -C /Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5 -f /Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION all";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		E3E9548BF3204B61A7D64042 /* Sources */ = {
+		2D0B4CFA1B690301000C42F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29C4BF39B2C84DC18194A42B /* fastmix.cpp in Sources */,
-				CFB310C3D11540B2ABBA1CD2 /* load_669.cpp in Sources */,
-				3BDB134E3FB94F4292E6DE96 /* load_amf.cpp in Sources */,
-				5DD1D9567E9C4EB0A3623810 /* load_ams.cpp in Sources */,
-				0625E83C67C64BC79A6A182B /* load_dbm.cpp in Sources */,
-				FAEB6662B2814484B904441A /* load_dmf.cpp in Sources */,
-				919714CB15F3478F981EE3CF /* load_dsm.cpp in Sources */,
-				836A54BCF0C64796BE34BF71 /* load_far.cpp in Sources */,
-				D72EB75E08604FF48D71F099 /* load_it.cpp in Sources */,
-				FE27505884594A7E8ED03FFD /* load_j2b.cpp in Sources */,
-				DBDE4DBBCC944165AD64C8BC /* load_mdl.cpp in Sources */,
-				AF218D5A281C43FC82E2DA88 /* load_med.cpp in Sources */,
-				0E7BE5AA4FF8442AA4AEEA4D /* load_mid.cpp in Sources */,
-				F319AE50658F4CCBA3620F1A /* load_mod.cpp in Sources */,
-				6B67A3BE12934E01BA66C7C7 /* load_mt2.cpp in Sources */,
-				70B23698D0384F0C9F9E13BD /* load_mtm.cpp in Sources */,
-				DB828CA6B13E4E92B71A03B3 /* load_okt.cpp in Sources */,
-				DBE0C294FA214BEEB5534A7D /* load_pat.cpp in Sources */,
-				ECD7CD1F353342BC9B652634 /* load_psm.cpp in Sources */,
-				3D08B9FE26094B5D8125078E /* load_ptm.cpp in Sources */,
-				5F9C05B4D8254157B4C3C014 /* load_s3m.cpp in Sources */,
-				81235FF02E3042B7A5FF4A51 /* load_stm.cpp in Sources */,
-				C6AF77C95EBC4B6DB7C6A975 /* load_ult.cpp in Sources */,
-				4758626FB0514AA6B7747A4B /* load_umx.cpp in Sources */,
-				AABF0E32B7684650AED4D5CC /* load_wav.cpp in Sources */,
-				57F929C015134F60A725936E /* load_xm.cpp in Sources */,
-				F0983BFBCAA4437485BAA977 /* mmcmp.cpp in Sources */,
-				B6CF565468584A66B1F032D8 /* modplug.cpp in Sources */,
-				FF2FA6363FE5496DBD87884A /* snd_dsp.cpp in Sources */,
-				896F0BFC01684A79921F51F5 /* snd_flt.cpp in Sources */,
-				23D1B192BFFD4D898ECCE7DC /* snd_fx.cpp in Sources */,
-				3D998D6636E942309BA88FCD /* sndfile.cpp in Sources */,
-				9A7DF325BCF440EE9C00E7BE /* sndmix.cpp in Sources */,
+				2D0B4DA51B6903CF000C42F3 /* load_stm.cpp in Sources */,
+				2D0B4DAA1B6903CF000C42F3 /* mmcmp.cpp in Sources */,
+				2D0B4D9A1B6903CF000C42F3 /* load_mdl.cpp in Sources */,
+				2D0B4D961B6903CF000C42F3 /* load_dsm.cpp in Sources */,
+				2D0B4DA21B6903CF000C42F3 /* load_psm.cpp in Sources */,
+				2D0B4D901B6903CF000C42F3 /* load_669.cpp in Sources */,
+				2D0B4DA61B6903CF000C42F3 /* load_ult.cpp in Sources */,
+				2D0B4DA41B6903CF000C42F3 /* load_s3m.cpp in Sources */,
+				2D0B4DA11B6903CF000C42F3 /* load_pat.cpp in Sources */,
+				2D0B4D931B6903CF000C42F3 /* load_ams.cpp in Sources */,
+				2D0B4DA71B6903CF000C42F3 /* load_umx.cpp in Sources */,
+				2D0B4D981B6903CF000C42F3 /* load_it.cpp in Sources */,
+				2D0B4DAC1B6903CF000C42F3 /* snd_dsp.cpp in Sources */,
+				2D0B4DAE1B6903CF000C42F3 /* snd_fx.cpp in Sources */,
+				2D0B4DA81B6903CF000C42F3 /* load_wav.cpp in Sources */,
+				2D0B4DB01B6903CF000C42F3 /* sndmix.cpp in Sources */,
+				2D0B4DAF1B6903CF000C42F3 /* sndfile.cpp in Sources */,
+				2D0B4D9F1B6903CF000C42F3 /* load_mtm.cpp in Sources */,
+				2D0B4D8F1B6903CF000C42F3 /* fastmix.cpp in Sources */,
+				2D0B4D9B1B6903CF000C42F3 /* load_med.cpp in Sources */,
+				2D0B4DA31B6903CF000C42F3 /* load_ptm.cpp in Sources */,
+				2D0B4DAD1B6903CF000C42F3 /* snd_flt.cpp in Sources */,
+				2D0B4D991B6903CF000C42F3 /* load_j2b.cpp in Sources */,
+				2D0B4D9E1B6903CF000C42F3 /* load_mt2.cpp in Sources */,
+				2D0B4D951B6903CF000C42F3 /* load_dmf.cpp in Sources */,
+				2D0B4D9C1B6903CF000C42F3 /* load_mid.cpp in Sources */,
+				2D0B4D971B6903CF000C42F3 /* load_far.cpp in Sources */,
+				2D0B4DA91B6903CF000C42F3 /* load_xm.cpp in Sources */,
+				2D0B4DA01B6903CF000C42F3 /* load_okt.cpp in Sources */,
+				2D0B4D921B6903CF000C42F3 /* load_amf.cpp in Sources */,
+				2D0B4D9D1B6903CF000C42F3 /* load_mod.cpp in Sources */,
+				2D0B4DAB1B6903CF000C42F3 /* modplug.cpp in Sources */,
+				2D0B4D941B6903CF000C42F3 /* load_dbm.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		7612B2D844A04F92AD919EF4 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 88FEE11029CB4735B845E744 /* ZERO_CHECK */;
-			targetProxy = B322AEEE863F404FA0A500B3 /* PBXContainerItemProxy */;
-		};
-		A69327F0A74347BD81D1496A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 32413E645CF14BB8A32D3320 /* libModPlug */;
-			targetProxy = B7F71C58DC58435392852DB3 /* PBXContainerItemProxy */;
-		};
-		C91B03B8CB71406DA3BC1E51 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 88FEE11029CB4735B845E744 /* ZERO_CHECK */;
-			targetProxy = 59C2D438A476470A8B80109E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		08FBC20281D44D42A325805B /* Debug */ = {
+		2D0B4D101B690301000C42F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					MODPLUG_STATIC,
-					HAVE_CONFIG_H,
-					MODPLUG_BUILD,
-					MODPLUG_NO_FILESAVE,
-					MODPLUG_BASIC_SUPPORT,
+					"DEBUG=1",
+					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src/libmodplug",
-				);
-				INSTALL_PATH = "";
-				OTHER_CFLAGS = "  ";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
-		0BA982EA86C54515B2833362 /* Release */ = {
+		2D0B4D111B690301000C42F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					MODPLUG_STATIC,
-					HAVE_CONFIG_H,
-					MODPLUG_BUILD,
-					MODPLUG_NO_FILESAVE,
-					MODPLUG_BASIC_SUPPORT,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src/libmodplug",
-				);
-				INSTALL_PATH = "";
-				OTHER_CFLAGS = "  ";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		1B9EAEF5763B405E8E714EAA /* RelWithDebInfo */ = {
+		2D0B4D131B690301000C42F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5/build";
-			};
-			name = RelWithDebInfo;
-		};
-		3AA8E3D670C44F89A9477ADF /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					MODPLUG_STATIC,
-					HAVE_CONFIG_H,
-					MODPLUG_BUILD,
-					MODPLUG_NO_FILESAVE,
-					MODPLUG_BASIC_SUPPORT,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src/libmodplug",
+					"\"$SRCROOT/../../src/libmodplug/src\"",
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INSTALL_PATH = "";
-				OTHER_CFLAGS = "  ";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = MinSizeRel;
-		};
-		46F7E247BE164491A4831FAE /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5/build";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
-		52C582E006224995B5A974F9 /* Debug */ = {
+		2D0B4D141B690301000C42F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = lib;
-				EXECUTABLE_SUFFIX = .a;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					MODPLUG_STATIC,
-					HAVE_CONFIG_H,
-					MODPLUG_BUILD,
-					MODPLUG_NO_FILESAVE,
-					MODPLUG_BASIC_SUPPORT,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src/libmodplug",
+					"\"$SRCROOT/../../src/libmodplug/src\"",
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 				);
-				INSTALL_PATH = "";
-				LIBRARY_STYLE = STATIC;
-				OTHER_CFLAGS = "    ";
-				OTHER_CPLUSPLUSFLAGS = "-std=c++1y     ";
-				OTHER_LIBTOOLFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = libModPlug;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = Debug;
-		};
-		699B57290BB3409CAF3B610D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					MODPLUG_STATIC,
-					HAVE_CONFIG_H,
-					MODPLUG_BUILD,
-					MODPLUG_NO_FILESAVE,
-					MODPLUG_BASIC_SUPPORT,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src/libmodplug",
-				);
-				INSTALL_PATH = "";
-				OTHER_CFLAGS = "  ";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
-		};
-		A8CC59C825A24F6E92A6FD45 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5/build";
-			};
-			name = Release;
-		};
-		B5A6B1F67FAB414985ABA63C /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = lib;
-				EXECUTABLE_SUFFIX = .a;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					MODPLUG_STATIC,
-					HAVE_CONFIG_H,
-					MODPLUG_BUILD,
-					MODPLUG_NO_FILESAVE,
-					MODPLUG_BASIC_SUPPORT,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src/libmodplug",
-				);
-				INSTALL_PATH = "";
-				LIBRARY_STYLE = STATIC;
-				OTHER_CFLAGS = "    -DNDEBUG  ";
-				OTHER_CPLUSPLUSFLAGS = (
-					"-std=c++1y",
-					"-DNDEBUG",
-				);
-				OTHER_LIBTOOLFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = libModPlug;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = Release;
-		};
-		C3113A4B483A4A15A95BD7A2 /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					MODPLUG_STATIC,
-					HAVE_CONFIG_H,
-					MODPLUG_BUILD,
-					MODPLUG_NO_FILESAVE,
-					MODPLUG_BASIC_SUPPORT,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src/libmodplug",
-				);
-				INSTALL_PATH = "";
-				OTHER_CFLAGS = "  ";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = MinSizeRel;
-		};
-		E1E9D952FB4C4CEF9E59CF32 /* RelWithDebInfo */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = lib;
-				EXECUTABLE_SUFFIX = .a;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 2;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					MODPLUG_STATIC,
-					HAVE_CONFIG_H,
-					MODPLUG_BUILD,
-					MODPLUG_NO_FILESAVE,
-					MODPLUG_BASIC_SUPPORT,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src/libmodplug",
-				);
-				INSTALL_PATH = "";
-				LIBRARY_STYLE = STATIC;
-				OTHER_CFLAGS = "       -DNDEBUG  ";
-				OTHER_CPLUSPLUSFLAGS = (
-					"-std=c++1y",
-					"-DNDEBUG",
-				);
-				OTHER_LIBTOOLFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = libModPlug;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = RelWithDebInfo;
-		};
-		EEA612853FC943BC99625CAD /* RelWithDebInfo */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					MODPLUG_STATIC,
-					HAVE_CONFIG_H,
-					MODPLUG_BUILD,
-					MODPLUG_NO_FILESAVE,
-					MODPLUG_BASIC_SUPPORT,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src/libmodplug",
-				);
-				INSTALL_PATH = "";
-				OTHER_CFLAGS = "  ";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ALL_BUILD;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = RelWithDebInfo;
-		};
-		EF849EC496CD408E87260641 /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5/build";
-			};
-			name = MinSizeRel;
-		};
-		F72A55D54F2449EBB4F72057 /* MinSizeRel */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				EXECUTABLE_PREFIX = lib;
-				EXECUTABLE_SUFFIX = .a;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = s;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					MODPLUG_STATIC,
-					HAVE_CONFIG_H,
-					MODPLUG_BUILD,
-					MODPLUG_NO_FILESAVE,
-					MODPLUG_BASIC_SUPPORT,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src/libmodplug",
-				);
-				INSTALL_PATH = "";
-				LIBRARY_STYLE = STATIC;
-				OTHER_CFLAGS = "    -DNDEBUG  ";
-				OTHER_CPLUSPLUSFLAGS = (
-					"-std=c++1y",
-					"-DNDEBUG",
-				);
-				OTHER_LIBTOOLFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = libModPlug;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = MinSizeRel;
-		};
-		F86ECE183A0742DFA788BB37 /* RelWithDebInfo */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					MODPLUG_STATIC,
-					HAVE_CONFIG_H,
-					MODPLUG_BUILD,
-					MODPLUG_NO_FILESAVE,
-					MODPLUG_BASIC_SUPPORT,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src/libmodplug",
-				);
-				INSTALL_PATH = "";
-				OTHER_CFLAGS = "  ";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = RelWithDebInfo;
-		};
-		FBAA6846D6C840679616BCC2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				COMBINE_HIDPI_IMAGES = YES;
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
-					MODPLUG_STATIC,
-					HAVE_CONFIG_H,
-					MODPLUG_BUILD,
-					MODPLUG_NO_FILESAVE,
-					MODPLUG_BASIC_SUPPORT,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				HEADER_SEARCH_PATHS = (
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/Tests/Windows",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/AppSupport/Utils",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/.",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src",
-					"/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/BlippEngine/External/libmodplug-0.8.8.5/src/libmodplug",
-				);
-				INSTALL_PATH = "";
-				OTHER_CFLAGS = "  ";
-				OTHER_LDFLAGS = " ";
-				OTHER_REZFLAGS = "";
-				PRODUCT_NAME = ZERO_CHECK;
-				SECTORDER_FLAGS = "";
-				SYMROOT = "/Users/sumeruchatterjee/Desktop/Work_Directory/blippar-windowsdesktop/build/BlippEngine/External/libmodplug-0.8.8.5";
-				USE_HEADERMAP = NO;
-				WARNING_CFLAGS = (
-					"-Wmost",
-					"-Wno-four-char-constants",
-					"-Wno-unknown-pragmas",
-				);
-			};
-			name = Debug;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		08811592BD82408087CACFD7 /* Build configuration list for PBXNativeTarget "libModPlug" */ = {
+		2D0B4CF91B690301000C42F3 /* Build configuration list for PBXProject "libmodplug" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				52C582E006224995B5A974F9 /* Debug */,
-				B5A6B1F67FAB414985ABA63C /* Release */,
-				F72A55D54F2449EBB4F72057 /* MinSizeRel */,
-				E1E9D952FB4C4CEF9E59CF32 /* RelWithDebInfo */,
+				2D0B4D101B690301000C42F3 /* Debug */,
+				2D0B4D111B690301000C42F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
-		21FA2C0E4AB649B08525C07D /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+		2D0B4D121B690301000C42F3 /* Build configuration list for PBXNativeTarget "libmodplug" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FBAA6846D6C840679616BCC2 /* Debug */,
-				699B57290BB3409CAF3B610D /* Release */,
-				C3113A4B483A4A15A95BD7A2 /* MinSizeRel */,
-				F86ECE183A0742DFA788BB37 /* RelWithDebInfo */,
+				2D0B4D131B690301000C42F3 /* Debug */,
+				2D0B4D141B690301000C42F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		4D3568C01E9E4C3EA9C5A28D /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				08FBC20281D44D42A325805B /* Debug */,
-				0BA982EA86C54515B2833362 /* Release */,
-				3AA8E3D670C44F89A9477ADF /* MinSizeRel */,
-				EEA612853FC943BC99625CAD /* RelWithDebInfo */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		B3B35EBA4E88491D9FBE3FDC /* Build configuration list for PBXProject "libModPlug" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				46F7E247BE164491A4831FAE /* Debug */,
-				A8CC59C825A24F6E92A6FD45 /* Release */,
-				EF849EC496CD408E87260641 /* MinSizeRel */,
-				1B9EAEF5763B405E8E714EAA /* RelWithDebInfo */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 4AAC8B973B5E496F95DACB8E /* Project object */;
+	rootObject = 2D0B4CF61B690301000C42F3 /* Project object */;
 }
