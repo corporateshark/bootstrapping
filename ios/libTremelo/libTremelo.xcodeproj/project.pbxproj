@@ -7,215 +7,213 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D0B4F2D1B6917BF000C42F3 /* libTremelo.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2D0B4F2C1B6917BF000C42F3 /* libTremelo.h */; };
-		2D0B4F2F1B6917BF000C42F3 /* libTremelo.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4F2E1B6917BF000C42F3 /* libTremelo.m */; };
-		2D0B4F351B6917C0000C42F3 /* liblibTremelo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D0B4F291B6917BF000C42F3 /* liblibTremelo.a */; };
+		2D0B4FA31B691956000C42F3 /* annotate.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4F941B691956000C42F3 /* annotate.c */; };
+		2D0B4FA41B691956000C42F3 /* bitwise.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4F951B691956000C42F3 /* bitwise.c */; };
+		2D0B4FA51B691956000C42F3 /* codebook.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4F961B691956000C42F3 /* codebook.c */; };
+		2D0B4FA61B691956000C42F3 /* dsp.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4F971B691956000C42F3 /* dsp.c */; };
+		2D0B4FA71B691956000C42F3 /* floor_lookup.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4F981B691956000C42F3 /* floor_lookup.c */; };
+		2D0B4FA81B691956000C42F3 /* floor0.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4F991B691956000C42F3 /* floor0.c */; };
+		2D0B4FA91B691956000C42F3 /* floor1.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4F9A1B691956000C42F3 /* floor1.c */; };
+		2D0B4FAA1B691956000C42F3 /* framing.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4F9B1B691956000C42F3 /* framing.c */; };
+		2D0B4FAB1B691956000C42F3 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4F9C1B691956000C42F3 /* info.c */; };
+		2D0B4FAD1B691956000C42F3 /* mapping0.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4F9E1B691956000C42F3 /* mapping0.c */; };
+		2D0B4FAF1B691956000C42F3 /* res012.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4FA01B691956000C42F3 /* res012.c */; };
+		2D0B4FB11B691956000C42F3 /* vorbisfile.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4FA21B691956000C42F3 /* vorbisfile.c */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		2D0B4F361B6917C0000C42F3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2D0B4F211B6917BF000C42F3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2D0B4F281B6917BF000C42F3;
-			remoteInfo = libTremelo;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
-		2D0B4F271B6917BF000C42F3 /* CopyFiles */ = {
+		2D0B4F681B6918C3000C42F3 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				2D0B4F2D1B6917BF000C42F3 /* libTremelo.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2D0B4F291B6917BF000C42F3 /* liblibTremelo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibTremelo.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D0B4F2C1B6917BF000C42F3 /* libTremelo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = libTremelo.h; sourceTree = "<group>"; };
-		2D0B4F2E1B6917BF000C42F3 /* libTremelo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = libTremelo.m; sourceTree = "<group>"; };
-		2D0B4F341B6917C0000C42F3 /* libTremeloTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = libTremeloTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2D0B4F3A1B6917C0000C42F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2D0B4F6A1B6918C3000C42F3 /* libTremelo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTremelo.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D0B4F841B6918DE000C42F3 /* codebook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = codebook.h; path = ../../../src/libtremolo/codebook.h; sourceTree = "<group>"; };
+		2D0B4F851B691904000C42F3 /* asm_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = asm_arm.h; path = ../../../src/libtremolo/asm_arm.h; sourceTree = "<group>"; };
+		2D0B4F861B691904000C42F3 /* codec_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = codec_internal.h; path = ../../../src/libtremolo/codec_internal.h; sourceTree = "<group>"; };
+		2D0B4F871B691904000C42F3 /* config_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = config_types.h; path = ../../../src/libtremolo/config_types.h; sourceTree = "<group>"; };
+		2D0B4F881B691904000C42F3 /* ivorbiscodec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ivorbiscodec.h; path = ../../../src/libtremolo/ivorbiscodec.h; sourceTree = "<group>"; };
+		2D0B4F891B691904000C42F3 /* ivorbisfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ivorbisfile.h; path = ../../../src/libtremolo/ivorbisfile.h; sourceTree = "<group>"; };
+		2D0B4F8A1B691904000C42F3 /* lsp_lookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lsp_lookup.h; path = ../../../src/libtremolo/lsp_lookup.h; sourceTree = "<group>"; };
+		2D0B4F8B1B691904000C42F3 /* mdct_lookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mdct_lookup.h; path = ../../../src/libtremolo/mdct_lookup.h; sourceTree = "<group>"; };
+		2D0B4F8C1B691904000C42F3 /* mdct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mdct.h; path = ../../../src/libtremolo/mdct.h; sourceTree = "<group>"; };
+		2D0B4F8D1B691904000C42F3 /* misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = misc.h; path = ../../../src/libtremolo/misc.h; sourceTree = "<group>"; };
+		2D0B4F8E1B691904000C42F3 /* ogg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ogg.h; path = ../../../src/libtremolo/ogg.h; sourceTree = "<group>"; };
+		2D0B4F8F1B691904000C42F3 /* os_types.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = os_types.h; path = ../../../src/libtremolo/os_types.h; sourceTree = "<group>"; };
+		2D0B4F901B691904000C42F3 /* os.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = os.h; path = ../../../src/libtremolo/os.h; sourceTree = "<group>"; };
+		2D0B4F911B691904000C42F3 /* window_lookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = window_lookup.h; path = ../../../src/libtremolo/window_lookup.h; sourceTree = "<group>"; };
+		2D0B4F941B691956000C42F3 /* annotate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = annotate.c; path = ../../../src/libtremolo/annotate.c; sourceTree = "<group>"; };
+		2D0B4F951B691956000C42F3 /* bitwise.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bitwise.c; path = ../../../src/libtremolo/bitwise.c; sourceTree = "<group>"; };
+		2D0B4F961B691956000C42F3 /* codebook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = codebook.c; path = ../../../src/libtremolo/codebook.c; sourceTree = "<group>"; };
+		2D0B4F971B691956000C42F3 /* dsp.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dsp.c; path = ../../../src/libtremolo/dsp.c; sourceTree = "<group>"; };
+		2D0B4F981B691956000C42F3 /* floor_lookup.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = floor_lookup.c; path = ../../../src/libtremolo/floor_lookup.c; sourceTree = "<group>"; };
+		2D0B4F991B691956000C42F3 /* floor0.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = floor0.c; path = ../../../src/libtremolo/floor0.c; sourceTree = "<group>"; };
+		2D0B4F9A1B691956000C42F3 /* floor1.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = floor1.c; path = ../../../src/libtremolo/floor1.c; sourceTree = "<group>"; };
+		2D0B4F9B1B691956000C42F3 /* framing.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = framing.c; path = ../../../src/libtremolo/framing.c; sourceTree = "<group>"; };
+		2D0B4F9C1B691956000C42F3 /* info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = info.c; path = ../../../src/libtremolo/info.c; sourceTree = "<group>"; };
+		2D0B4F9E1B691956000C42F3 /* mapping0.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mapping0.c; path = ../../../src/libtremolo/mapping0.c; sourceTree = "<group>"; };
+		2D0B4FA01B691956000C42F3 /* res012.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = res012.c; path = ../../../src/libtremolo/res012.c; sourceTree = "<group>"; };
+		2D0B4FA21B691956000C42F3 /* vorbisfile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vorbisfile.c; path = ../../../src/libtremolo/vorbisfile.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2D0B4F261B6917BF000C42F3 /* Frameworks */ = {
+		2D0B4F671B6918C3000C42F3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D0B4F311B6917BF000C42F3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				2D0B4F351B6917C0000C42F3 /* liblibTremelo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2D0B4F201B6917BF000C42F3 = {
+		2D0B4F611B6918C3000C42F3 = {
 			isa = PBXGroup;
 			children = (
-				2D0B4F2B1B6917BF000C42F3 /* libTremelo */,
-				2D0B4F381B6917C0000C42F3 /* libTremeloTests */,
-				2D0B4F2A1B6917BF000C42F3 /* Products */,
+				2D0B4F6C1B6918C3000C42F3 /* libTremelo */,
+				2D0B4F6B1B6918C3000C42F3 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		2D0B4F2A1B6917BF000C42F3 /* Products */ = {
+		2D0B4F6B1B6918C3000C42F3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2D0B4F291B6917BF000C42F3 /* liblibTremelo.a */,
-				2D0B4F341B6917C0000C42F3 /* libTremeloTests.xctest */,
+				2D0B4F6A1B6918C3000C42F3 /* libTremelo.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2D0B4F2B1B6917BF000C42F3 /* libTremelo */ = {
+		2D0B4F6C1B6918C3000C42F3 /* libTremelo */ = {
 			isa = PBXGroup;
 			children = (
-				2D0B4F2C1B6917BF000C42F3 /* libTremelo.h */,
-				2D0B4F2E1B6917BF000C42F3 /* libTremelo.m */,
+				2D0B4F931B691917000C42F3 /* Source */,
+				2D0B4F921B691908000C42F3 /* Headers */,
 			);
 			path = libTremelo;
 			sourceTree = "<group>";
 		};
-		2D0B4F381B6917C0000C42F3 /* libTremeloTests */ = {
+		2D0B4F921B691908000C42F3 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
-				2D0B4F391B6917C0000C42F3 /* Supporting Files */,
+				2D0B4F851B691904000C42F3 /* asm_arm.h */,
+				2D0B4F861B691904000C42F3 /* codec_internal.h */,
+				2D0B4F871B691904000C42F3 /* config_types.h */,
+				2D0B4F881B691904000C42F3 /* ivorbiscodec.h */,
+				2D0B4F891B691904000C42F3 /* ivorbisfile.h */,
+				2D0B4F8A1B691904000C42F3 /* lsp_lookup.h */,
+				2D0B4F8B1B691904000C42F3 /* mdct_lookup.h */,
+				2D0B4F8C1B691904000C42F3 /* mdct.h */,
+				2D0B4F8D1B691904000C42F3 /* misc.h */,
+				2D0B4F8E1B691904000C42F3 /* ogg.h */,
+				2D0B4F8F1B691904000C42F3 /* os_types.h */,
+				2D0B4F901B691904000C42F3 /* os.h */,
+				2D0B4F911B691904000C42F3 /* window_lookup.h */,
+				2D0B4F841B6918DE000C42F3 /* codebook.h */,
 			);
-			path = libTremeloTests;
+			name = Headers;
 			sourceTree = "<group>";
 		};
-		2D0B4F391B6917C0000C42F3 /* Supporting Files */ = {
+		2D0B4F931B691917000C42F3 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				2D0B4F3A1B6917C0000C42F3 /* Info.plist */,
+				2D0B4F941B691956000C42F3 /* annotate.c */,
+				2D0B4F951B691956000C42F3 /* bitwise.c */,
+				2D0B4F961B691956000C42F3 /* codebook.c */,
+				2D0B4F971B691956000C42F3 /* dsp.c */,
+				2D0B4F981B691956000C42F3 /* floor_lookup.c */,
+				2D0B4F991B691956000C42F3 /* floor0.c */,
+				2D0B4F9A1B691956000C42F3 /* floor1.c */,
+				2D0B4F9B1B691956000C42F3 /* framing.c */,
+				2D0B4F9C1B691956000C42F3 /* info.c */,
+				2D0B4F9E1B691956000C42F3 /* mapping0.c */,
+				2D0B4FA01B691956000C42F3 /* res012.c */,
+				2D0B4FA21B691956000C42F3 /* vorbisfile.c */,
 			);
-			name = "Supporting Files";
+			name = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2D0B4F281B6917BF000C42F3 /* libTremelo */ = {
+		2D0B4F691B6918C3000C42F3 /* Tremelo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D0B4F3D1B6917C0000C42F3 /* Build configuration list for PBXNativeTarget "libTremelo" */;
+			buildConfigurationList = 2D0B4F7E1B6918C3000C42F3 /* Build configuration list for PBXNativeTarget "Tremelo" */;
 			buildPhases = (
-				2D0B4F251B6917BF000C42F3 /* Sources */,
-				2D0B4F261B6917BF000C42F3 /* Frameworks */,
-				2D0B4F271B6917BF000C42F3 /* CopyFiles */,
+				2D0B4F661B6918C3000C42F3 /* Sources */,
+				2D0B4F671B6918C3000C42F3 /* Frameworks */,
+				2D0B4F681B6918C3000C42F3 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = libTremelo;
+			name = Tremelo;
 			productName = libTremelo;
-			productReference = 2D0B4F291B6917BF000C42F3 /* liblibTremelo.a */;
+			productReference = 2D0B4F6A1B6918C3000C42F3 /* libTremelo.a */;
 			productType = "com.apple.product-type.library.static";
-		};
-		2D0B4F331B6917BF000C42F3 /* libTremeloTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2D0B4F401B6917C0000C42F3 /* Build configuration list for PBXNativeTarget "libTremeloTests" */;
-			buildPhases = (
-				2D0B4F301B6917BF000C42F3 /* Sources */,
-				2D0B4F311B6917BF000C42F3 /* Frameworks */,
-				2D0B4F321B6917BF000C42F3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				2D0B4F371B6917C0000C42F3 /* PBXTargetDependency */,
-			);
-			name = libTremeloTests;
-			productName = libTremeloTests;
-			productReference = 2D0B4F341B6917C0000C42F3 /* libTremeloTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		2D0B4F211B6917BF000C42F3 /* Project object */ = {
+		2D0B4F621B6918C3000C42F3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = Blippar;
 				TargetAttributes = {
-					2D0B4F281B6917BF000C42F3 = {
-						CreatedOnToolsVersion = 6.4;
-					};
-					2D0B4F331B6917BF000C42F3 = {
+					2D0B4F691B6918C3000C42F3 = {
 						CreatedOnToolsVersion = 6.4;
 					};
 				};
 			};
-			buildConfigurationList = 2D0B4F241B6917BF000C42F3 /* Build configuration list for PBXProject "libTremelo" */;
+			buildConfigurationList = 2D0B4F651B6918C3000C42F3 /* Build configuration list for PBXProject "libTremelo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 2D0B4F201B6917BF000C42F3;
-			productRefGroup = 2D0B4F2A1B6917BF000C42F3 /* Products */;
+			mainGroup = 2D0B4F611B6918C3000C42F3;
+			productRefGroup = 2D0B4F6B1B6918C3000C42F3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2D0B4F281B6917BF000C42F3 /* libTremelo */,
-				2D0B4F331B6917BF000C42F3 /* libTremeloTests */,
+				2D0B4F691B6918C3000C42F3 /* Tremelo */,
 			);
 		};
 /* End PBXProject section */
 
-/* Begin PBXResourcesBuildPhase section */
-		2D0B4F321B6917BF000C42F3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		2D0B4F251B6917BF000C42F3 /* Sources */ = {
+		2D0B4F661B6918C3000C42F3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D0B4F2F1B6917BF000C42F3 /* libTremelo.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		2D0B4F301B6917BF000C42F3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				2D0B4FA91B691956000C42F3 /* floor1.c in Sources */,
+				2D0B4FAF1B691956000C42F3 /* res012.c in Sources */,
+				2D0B4FA31B691956000C42F3 /* annotate.c in Sources */,
+				2D0B4FA61B691956000C42F3 /* dsp.c in Sources */,
+				2D0B4FB11B691956000C42F3 /* vorbisfile.c in Sources */,
+				2D0B4FA51B691956000C42F3 /* codebook.c in Sources */,
+				2D0B4FA41B691956000C42F3 /* bitwise.c in Sources */,
+				2D0B4FAD1B691956000C42F3 /* mapping0.c in Sources */,
+				2D0B4FAB1B691956000C42F3 /* info.c in Sources */,
+				2D0B4FA71B691956000C42F3 /* floor_lookup.c in Sources */,
+				2D0B4FAA1B691956000C42F3 /* framing.c in Sources */,
+				2D0B4FA81B691956000C42F3 /* floor0.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		2D0B4F371B6917C0000C42F3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 2D0B4F281B6917BF000C42F3 /* libTremelo */;
-			targetProxy = 2D0B4F361B6917C0000C42F3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		2D0B4F3B1B6917C0000C42F3 /* Debug */ = {
+		2D0B4F7C1B6918C3000C42F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -242,6 +240,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					ONLY_C,
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -257,7 +256,7 @@
 			};
 			name = Debug;
 		};
-		2D0B4F3C1B6917C0000C42F3 /* Release */ = {
+		2D0B4F7D1B6918C3000C42F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -293,7 +292,7 @@
 			};
 			name = Release;
 		};
-		2D0B4F3E1B6917C0000C42F3 /* Debug */ = {
+		2D0B4F7F1B6918C3000C42F3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				OTHER_LDFLAGS = "-ObjC";
@@ -302,76 +301,37 @@
 			};
 			name = Debug;
 		};
-		2D0B4F3F1B6917C0000C42F3 /* Release */ = {
+		2D0B4F801B6918C3000C42F3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		2D0B4F411B6917C0000C42F3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = libTremeloTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		2D0B4F421B6917C0000C42F3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = libTremeloTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2D0B4F241B6917BF000C42F3 /* Build configuration list for PBXProject "libTremelo" */ = {
+		2D0B4F651B6918C3000C42F3 /* Build configuration list for PBXProject "libTremelo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2D0B4F3B1B6917C0000C42F3 /* Debug */,
-				2D0B4F3C1B6917C0000C42F3 /* Release */,
+				2D0B4F7C1B6918C3000C42F3 /* Debug */,
+				2D0B4F7D1B6918C3000C42F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D0B4F3D1B6917C0000C42F3 /* Build configuration list for PBXNativeTarget "libTremelo" */ = {
+		2D0B4F7E1B6918C3000C42F3 /* Build configuration list for PBXNativeTarget "Tremelo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2D0B4F3E1B6917C0000C42F3 /* Debug */,
-				2D0B4F3F1B6917C0000C42F3 /* Release */,
+				2D0B4F7F1B6918C3000C42F3 /* Debug */,
+				2D0B4F801B6918C3000C42F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		2D0B4F401B6917C0000C42F3 /* Build configuration list for PBXNativeTarget "libTremeloTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				2D0B4F411B6917C0000C42F3 /* Debug */,
-				2D0B4F421B6917C0000C42F3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 2D0B4F211B6917BF000C42F3 /* Project object */;
+	rootObject = 2D0B4F621B6918C3000C42F3 /* Project object */;
 }
