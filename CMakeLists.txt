@@ -78,7 +78,7 @@ add_library(png EXCLUDE_FROM_ALL
     src/libpng/pngwtran.c
     src/libpng/pngwutil.c
     )
-target_include_directories(png PUBLIC src/libpng)
+target_include_directories(png PUBLIC src/zlib src/libpng)
 
 add_library(jpeg EXCLUDE_FROM_ALL
     src/libjpeg/jaricom.c
