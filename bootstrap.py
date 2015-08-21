@@ -270,48 +270,59 @@ def printOptions():
         print("Downloads external libraries, and applies patches or scripts if necessary.")
         print("If the --name argument is not provided, all available libraries will be downloaded.")
         print("Options:")
-        print("  --list, -l      List all available libraries")
-        print("  --name, -n      Specifies the name of a single library to be downloaded")
-        print("  --clean, -C     Remove directory before obtaining library")
-#        print("  --fallback, -f  Fallback URL")
+        print("  --list, -l       List all available libraries")
+        print("  --name, -n       Specifies the name of a single library to be downloaded")
+        print("  --clean, -C      Remove directory before obtaining library")
+        print("  --base-dir, -b   Base directory, if script is called from outside of its directory")
 
 
 def main(argv):
+    global BASE_DIR, SRC_DIR, ORIG_DIR, LOG_STREAM
+
     required_commands = ["git", "hg", "svn", "patch"]
     if (checkPrerequisites(*required_commands) != 0):
         log("The bootstrapping script requires that the following programs are installed: " + ", ".join(required_commands))
         return -1
 
-    bootstrap_filename = os.path.join(BASE_DIR, BOOTSTRAP_FILENAME)
-    data = readJSONData(bootstrap_filename)
-    if data is None:
-        return -1;
-
-    sdata = []
-    state_filename = os.path.join(BASE_DIR, STATE_FILENAME)
-    if os.path.exists(state_filename):
-        sdata = readJSONData(state_filename)
-
-    opt_name = None
-    opt_clean = False
-
     try:
-        opts, args = getopt.getopt(argv,"ln:Ch",["list", "name=", "clean", "help"])
+        opts, args = getopt.getopt(argv,"ln:Cb:h",["list", "name=", "clean", "base-dir", "help"])
     except getopt.GetoptError:
         printOptions()
         return 0
+
+    opt_name = None
+    opt_clean = False
+    list_libraries = False
 
     for opt, arg in opts:
         if opt in ("-h", "--help"):
             printOptions()
             return 0
         if opt in ("-l", "--list"):
-            listLibraries(data)
-            return 0
+            list_libraries = True
         if opt in ("-n", "--name"):
             opt_name = arg
         if opt in ("-C", "--clean"):
             opt_clean = True
+        if opt in ("-b", "--base-dir"):
+            BASE_DIR = arg
+            SRC_DIR = os.path.join(BASE_DIR, "src")
+            ORIG_DIR = os.path.join(BASE_DIR, "orig")
+            log("Using " + BASE_DIR + " as base directory")
+
+    bootstrap_filename = os.path.join(BASE_DIR, BOOTSTRAP_FILENAME)
+    data = readJSONData(bootstrap_filename)
+    if data is None:
+        return -1;
+
+    if list_libraries:
+        listLibraries(data)
+        return 0
+
+    sdata = []
+    state_filename = os.path.join(BASE_DIR, STATE_FILENAME)
+    if os.path.exists(state_filename):
+        sdata = readJSONData(state_filename)
 
     # create source directory
     if not os.path.isdir(SRC_DIR):
