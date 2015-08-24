@@ -56,7 +56,7 @@
     },
     "postprocess": {
         "type": "script",
-        "file": "libjpeg.sh"
+        "file": "libjpeg.py"
     }
 },
 {
@@ -75,7 +75,7 @@
     },
     "postprocess": {
         "type": "script",
-        "file": "libpng.sh"
+        "file": "libpng.py"
     }
 },
 {

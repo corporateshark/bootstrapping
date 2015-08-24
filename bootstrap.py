@@ -224,7 +224,10 @@ def runScript(script_name):
     log("Running script " + script_name)
     patch_dir = os.path.join(BASE_DIR, "patches")
     filename = os.path.join(patch_dir, script_name)
-    dieIfNonZero(executeCommand(filename, False));
+    if platform.system() == "Windows":
+       dieIfNonZero(executeCommand("python "+filename, False));
+    else:
+       dieIfNonZero(executeCommand(filename, False));
 
 
 def checkPrerequisites(*args):
