@@ -225,7 +225,7 @@ def runScript(script_name):
     patch_dir = os.path.join(BASE_DIR, "patches")
     filename = os.path.join(patch_dir, script_name)
     if platform.system() == "Windows":
-       dieIfNonZero(executeCommand("python "+filename, False));
+       dieIfNonZero(executeCommand("python " + filename, False));
     else:
        dieIfNonZero(executeCommand(filename, False));
 
