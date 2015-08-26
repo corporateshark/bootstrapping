@@ -1,9 +1,11 @@
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
-LOCAL_MODULE := libvorbis
+LOCAL_MODULE := vorbis
 
 LOCAL_C_INCLUDES := \
-	external/src
+	external/src \
+	jni/external/src/libogg/include \
+	jni/external/src/libvorbis/include
 
 LOCAL_SRC_FILES := \
 	../src/libvorbis/lib/analysis.c \
