@@ -556,7 +556,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "echo \"[Xcode]: Updating External Repositories\"\n\ncd $PROJECT_DIR\n\n./bootstrap.py";
+			shellScript = "echo \"[Xcode]: Updating External Repositories\"\n\nexport PATH=\"/usr/local/bin:$PATH\"\n\n./bootstrap.py";
 		};
 /* End PBXShellScriptBuildPhase section */
 
