@@ -225,7 +225,7 @@ def runLocalScript(script_name, lib_dir):
 
     @param: script_name     e.g. "configure"
     @param: lib_dir     Working folder where to execute script_name
-    
+
     @author steve.madsen@blippar.com, 26 Aug 2015
     '''
     log("Running configure " + script_name)
@@ -233,7 +233,8 @@ def runLocalScript(script_name, lib_dir):
     saved_cwd = os.getcwd()
     os.chdir(lib_dir)
     if platform.system() == "Windows":
-       dieIfNonZero(executeCommand("python " + filename, False));
+       #dieIfNonZero(executeCommand("python " + filename, False));
+       print 'On windows, skipping likely "configure" script'
     else:
        dieIfNonZero(executeCommand(filename, False));
     os.chdir(saved_cwd)
