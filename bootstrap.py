@@ -207,7 +207,7 @@ def downloadAndExtractFile(url, target_dir_name, sha1_hash = None):
 
 def applyPatchFile(patch_name, dir_name, pnum):
     # we're assuming the patch was applied like in this example:
-    # diff --exclude=".git" --exclude=".hg" -rupN ./src/AGAST/ ../external/src/AGAST/ > ./patches/agast.patch
+    # diff --exclude=".git" --exclude=".hg" -rupN ./src/AGAST/ ./src/AGAST_patched/ > ./patches/agast.patch
     # where the first given location is the unpatched directory, and the second location is the patched directory.
     log("Applying patch to " + dir_name)
     patch_dir = os.path.join(BASE_DIR, "patches")
@@ -377,7 +377,8 @@ def main(argv):
         # create library directory, if necessary
         if opt_clean:
             log("Cleaning directory for " + name)
-            shutil.rmtree(lib_dir)
+            if os.path.exists(lib_dir):
+                shutil.rmtree(lib_dir)
         if not os.path.exists(lib_dir):
             os.mkdir(lib_dir)
 
