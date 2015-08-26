@@ -21,18 +21,28 @@ LOCAL_SRC_FILES := \
 
 LOCAL_CFLAGS += -O3 -Wno-implicit-function-declaration
 
-#LOCAL_CPPFLAGS += -DONLY_C
-
-ifeq ($(TARGET_ARCH_ABI),armeabi-v7a-hard)
-	LOCAL_ARM_NEON := true
-	LOCAL_CFLAGS += -mfloat-abi=hard -mfpu=neon -march=armv7-a
+ifeq ($(TARGET_ARCH_ABI),x86)
+    LOCAL_CPPFLAGS += -DONLY_C
 endif
 
-LOCAL_ARM_MODE := arm
-LOCAL_SRC_FILES += \
-	../src/libtremolo/bitwiseARM.s \
-	../src/libtremolo/dpen.s \
-	../src/libtremolo/floor1ARM.s \
-	../src/libtremolo/mdctARM.s
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
+	LOCAL_CFLAGS += -mfpu=neon -march=armv7-a
+
+	LOCAL_SRC_FILES += \
+		../src/libtremolo/bitwiseARM.s \
+		../src/libtremolo/dpen.s \
+		../src/libtremolo/floor1ARM.s \
+		../src/libtremolo/mdctARM.s
+endif
+
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a-hard)
+	LOCAL_CFLAGS += -mfloat-abi=hard -mfpu=neon -march=armv7-a
+
+	LOCAL_SRC_FILES += \
+		../src/libtremolo/bitwiseARM.s \
+		../src/libtremolo/dpen.s \
+		../src/libtremolo/floor1ARM.s \
+		../src/libtremolo/mdctARM.s
+endif
 
 include $(BUILD_STATIC_LIBRARY)

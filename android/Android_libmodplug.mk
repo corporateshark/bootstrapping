@@ -2,8 +2,6 @@ LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 LOCAL_MODULE := libmodplug
 
-res := ($shell echo XXXXXXXXXXXXXXXX $(LOCAL_PATH) 1>&2)
-
 LOCAL_C_INCLUDES += \
 	external/src/libmodplug \
 	external/src/libmodplug/src \
