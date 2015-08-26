@@ -3,9 +3,9 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := libmodplug
 
 LOCAL_C_INCLUDES += \
-	external/src/libmodplug \
-	external/src/libmodplug/src \
-	external/src/libmodplug/src/libmodplug \
+	$(LOCAL_PATH)/../src/libmodplug \
+	$(LOCAL_PATH)/../src/libmodplug/src \
+	$(LOCAL_PATH)/../src/libmodplug/src/libmodplug \
 
 LOCAL_SRC_FILES := \
 	../src/libmodplug/src/fastmix.cpp \

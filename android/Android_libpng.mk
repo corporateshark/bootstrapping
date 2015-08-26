@@ -3,8 +3,8 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := libpng
 
 LOCAL_C_INCLUDES := \
-    external/src/zlib \
-    external/src/libpng \
+    $(LOCAL_PATH)/../src/zlib \
+    $(LOCAL_PATH)/../src/libpng \
 
 LOCAL_SRC_FILES := \
     ../src/libpng/png.c \

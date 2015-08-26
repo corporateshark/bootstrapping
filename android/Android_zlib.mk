@@ -3,7 +3,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := zlib
 
 LOCAL_C_INCLUDES := \
-    external/src/zlib \
+    $(LOCAL_PATH)/../src/zlib \
 
 LOCAL_SRC_FILES := \
     ../src/zlib/adler32.c \

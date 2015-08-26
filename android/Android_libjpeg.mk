@@ -3,7 +3,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := libjpeg
 
 LOCAL_C_INCLUDES := \
-    external/src/libjpeg \
+    $(LOCAL_PATH)/../src/libjpeg \
 
 LOCAL_SRC_FILES := \
     ../src/libjpeg/jaricom.c \

@@ -241,8 +241,8 @@
         "sha1": "df7f3977bbeda67306bc2a427257dd7375319d7d"
     },
     "postprocess": {
-        "type": "local_script",
-        "file": "configure"
+        "type": "patch",
+        "file": "libogg.patch"
     }
 },
 {

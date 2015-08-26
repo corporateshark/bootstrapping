@@ -208,6 +208,7 @@ def downloadAndExtractFile(url, target_dir_name, sha1_hash = None):
 def applyPatchFile(patch_name, dir_name, pnum):
     # we're assuming the patch was applied like in this example:
     # diff --exclude=".git" --exclude=".hg" -rupN ./src/AGAST/ ../external/src/AGAST/ > ./patches/agast.patch
+    # where the first given location is the unpatched directory, and the second location is the patched directory.
     log("Applying patch to " + dir_name)
     patch_dir = os.path.join(BASE_DIR, "patches")
     arguments = "-d " + os.path.join(SRC_DIR, dir_name) + " -p" + str(pnum) + " < " + os.path.join(patch_dir, patch_name)
@@ -219,25 +220,6 @@ def applyPatchFile(patch_name, dir_name, pnum):
         exit(255)
     else:
         dieIfNonZero(executeCommand(patch_command + " " + arguments, quiet = True))
-
-def runLocalScript(script_name, lib_dir):
-    '''Execute script which is in on-the-fly extracted archive, e.g. "configure"
-
-    @param: script_name     e.g. "configure"
-    @param: lib_dir     Working folder where to execute script_name
-
-    @author steve.madsen@blippar.com, 26 Aug 2015
-    '''
-    log("Running configure " + script_name)
-    filename = os.path.join(lib_dir, script_name)
-    saved_cwd = os.getcwd()
-    os.chdir(lib_dir)
-    if platform.system() == "Windows":
-       #dieIfNonZero(executeCommand("python " + filename, False));
-       print('On windows, skipping likely "configure" script')
-    else:
-       dieIfNonZero(executeCommand(filename, False));
-    os.chdir(saved_cwd)
 
 def runScript(script_name):
     log("Running script " + script_name)
@@ -435,8 +417,6 @@ def main(argv):
                     applyPatchFile(post_file, name, post.get('pnum', DEFAULT_PNUM))
                 elif post_type == "script":
                     runScript(post_file)
-                elif post_type == "local_script":
-                    runLocalScript(post_file, lib_dir)
                 else:
                     log("ERROR: Unknown post-processing type '" + post_type + "' for " + name)
                     return -1
@@ -455,6 +435,7 @@ def main(argv):
         log("FAILURE to bootstrap the following libraries:")
         log(', '.join(failed_libraries))
         log("***************************************")
+        return -1
 
     log("Finished")
 
