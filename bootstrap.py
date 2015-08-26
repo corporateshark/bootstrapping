@@ -308,10 +308,12 @@ def main(argv):
         if opt in ("-C", "--clean"):
             opt_clean = True
         if opt in ("-b", "--base-dir"):
-            BASE_DIR = arg
+            ABS_PATH = os.path.abspath(arg)
+            os.chdir(ABS_PATH)
+            BASE_DIR = ABS_PATH
             SRC_DIR = os.path.join(BASE_DIR, "src")
             ORIG_DIR = os.path.join(BASE_DIR, "orig")
-            log("Using " + BASE_DIR + " as base directory")
+            log("Using " + arg + " as base directory")
 
     bootstrap_filename = os.path.join(BASE_DIR, BOOTSTRAP_FILENAME)
     data = readJSONData(bootstrap_filename)
