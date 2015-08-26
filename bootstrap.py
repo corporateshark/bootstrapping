@@ -31,8 +31,6 @@ BASE_DIR = os.getcwd()
 SRC_DIR = os.path.join(BASE_DIR, "src")
 ORIG_DIR = os.path.join(BASE_DIR, "orig")
 
-BOOTSTRAP_FILENAME = "bootstrap.json"
-STATE_FILENAME = "_state.json"
 DEFAULT_PNUM = 3
 
 if platform.system() == "Windows":
@@ -274,10 +272,13 @@ def printOptions():
         print("Downloads external libraries, and applies patches or scripts if necessary.")
         print("If the --name argument is not provided, all available libraries will be downloaded.")
         print("Options:")
-        print("  --list, -l       List all available libraries")
-        print("  --name, -n       Specifies the name of a single library to be downloaded")
-        print("  --clean, -C      Remove directory before obtaining library")
-        print("  --base-dir, -b   Base directory, if script is called from outside of its directory")
+        print("  --list, -l        List all available libraries")
+        print("  --name, -n        Specifies the name of a single library to be downloaded")
+        print("  --clean, -C       Remove directory before obtaining library")
+        print("  --base-dir, -b    Base directory, if script is called from outside of its directory")
+        print("")
+        print("  --bootstrap-file  Specify the file containing the bootstrap JSON data")
+        print("                    (default: bootstrap.json)")
 
 
 def main(argv):
@@ -289,7 +290,7 @@ def main(argv):
         return -1
 
     try:
-        opts, args = getopt.getopt(argv,"ln:Cb:h",["list", "name=", "clean", "base-dir", "help"])
+        opts, args = getopt.getopt(argv,"ln:Cb:h",["list", "name=", "clean", "base-dir", "bootstrap-file=", "help"])
     except getopt.GetoptError:
         printOptions()
         return 0
@@ -297,6 +298,8 @@ def main(argv):
     opt_name = None
     opt_clean = False
     list_libraries = False
+
+    bootstrap_filename = os.path.abspath(os.path.join(BASE_DIR, "bootstrap.json"))
 
     for opt, arg in opts:
         if opt in ("-h", "--help"):
@@ -315,8 +318,13 @@ def main(argv):
             SRC_DIR = os.path.join(BASE_DIR, "src")
             ORIG_DIR = os.path.join(BASE_DIR, "orig")
             log("Using " + arg + " as base directory")
+        if opt in ("--bootstrap-file"):
+            bootstrap_filename = os.path.abspath(arg)
 
-    bootstrap_filename = os.path.join(BASE_DIR, BOOTSTRAP_FILENAME)
+    state_filename = os.path.join(os.path.dirname(os.path.splitext(bootstrap_filename)[0]), \
+                                  "_state_" + os.path.basename(os.path.splitext(bootstrap_filename)[0])) \
+                     + os.path.splitext(bootstrap_filename)[1]
+
     data = readJSONData(bootstrap_filename)
     if data is None:
         return -1;
@@ -326,7 +334,6 @@ def main(argv):
         return 0
 
     sdata = []
-    state_filename = os.path.join(BASE_DIR, STATE_FILENAME)
     if os.path.exists(state_filename):
         sdata = readJSONData(state_filename)
 
