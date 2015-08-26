@@ -17,7 +17,7 @@
 		2D60DBA01B86235E001C431F /* libzxing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB771B861F07001C431F /* libzxing.a */; };
 		2D60DBA71B862384001C431F /* libModPlug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB681B861F07001C431F /* libModPlug.a */; };
 		2D60DBA81B862384001C431F /* libOGG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB6B1B861F07001C431F /* libOGG.a */; };
-		2D60DBA91B862384001C431F /* libTremelo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB6E1B861F07001C431F /* libTremelo.a */; };
+		2D60DCFE1B8DC7D8001C431F /* libVorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB711B861F07001C431F /* libVorbis.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,12 +147,12 @@
 			remoteGlobalIDString = 2D0B4DE31B690EB0000C42F3;
 			remoteInfo = OGG;
 		};
-		2D60DBAA1B86238D001C431F /* PBXContainerItemProxy */ = {
+		2D60DCFC1B8DC7C0001C431F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2D60DB511B861F07001C431F /* libTremelo.xcodeproj */;
+			containerPortal = 2D60DB541B861F07001C431F /* libVorbis.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 2D0B4F691B6918C3000C42F3;
-			remoteInfo = Tremelo;
+			remoteGlobalIDString = 2D3710381B692F7D0009B3E5;
+			remoteInfo = Vorbis;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -213,9 +213,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D60DCFE1B8DC7D8001C431F /* libVorbis.a in Frameworks */,
 				2D60DBA71B862384001C431F /* libModPlug.a in Frameworks */,
 				2D60DBA81B862384001C431F /* libOGG.a in Frameworks */,
-				2D60DBA91B862384001C431F /* libTremelo.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,7 +386,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				2D60DBAB1B86238D001C431F /* PBXTargetDependency */,
+				2D60DCFD1B8DC7C0001C431F /* PBXTargetDependency */,
 				2D60DBA21B86236F001C431F /* PBXTargetDependency */,
 				2D60DBA41B86236F001C431F /* PBXTargetDependency */,
 			);
@@ -602,10 +602,10 @@
 			name = OGG;
 			targetProxy = 2D60DBA31B86236F001C431F /* PBXContainerItemProxy */;
 		};
-		2D60DBAB1B86238D001C431F /* PBXTargetDependency */ = {
+		2D60DCFD1B8DC7C0001C431F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = Tremelo;
-			targetProxy = 2D60DBAA1B86238D001C431F /* PBXContainerItemProxy */;
+			name = Vorbis;
+			targetProxy = 2D60DCFC1B8DC7C0001C431F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
