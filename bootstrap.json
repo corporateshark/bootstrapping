@@ -259,6 +259,10 @@
         "type": "archive",
         "url": "http://downloads.sourceforge.net/project/modplug-xmms/libmodplug/0.8.8.5/libmodplug-0.8.8.5.tar.gz",
         "sha1": "771ee75bb8bfcfe95eae434ed1f3b2c5b63b2cb3"
+    },
+    "postprocess": {
+        "type": "patch",
+        "file": "libmodplug.patch"
     }
 }
 ]
