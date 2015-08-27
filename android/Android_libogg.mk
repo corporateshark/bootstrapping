@@ -5,6 +5,7 @@ LOCAL_MODULE := libogg
 LOCAL_C_INCLUDES := \
 	$(LOCAL_PATH)/../src/libogg \
 	$(LOCAL_PATH)/../src/libogg/include \
+	$(LOCAL_PATH)/../../BlippEngine/Audio \
 
 LOCAL_SRC_FILES := \
 	../src/libogg/src/bitwise.c \
