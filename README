@@ -34,16 +34,17 @@ i.e. directly from the authors' websites or repositories.
 After script execution has finished, the following files and directories should
 have been added to the repository folder:
     |- external
-       |- _state.json
+       |- _state_bootstrap.json
        |- orig/
           |- ...
        |- src/
           |- ...
 
-- The file _state.json contains the cached state of the last bootstrapping/
-updating operation. The script always compares against this state, in order to
-decide whether to update a library. For example, if boostrap.py has executed
-successfully and is then immediately re-run, no further action will take place.
+- The file _state_bootstrap.json contains the cached state of the last
+bootstrapping/updating operation. The script always compares against this state,
+in order to decide whether to update a library. For example, if boostrap.py has
+executed successfully and is then immediately re-run, no further action will
+take place.
 
 - The directory orig/ contains the archive files of all libraries that have been
 downloaded as archives. It serves as a cache to prevent multiple downloads.
@@ -118,12 +119,14 @@ run from the patches/ directory. Patches can be used to make minor modifications
 to a library, such as silencing warning or to fix bugs which have not been
 included in the upstream version of the library. Scripts can embody any more
 complex operations, but should mainly be used for simple library-specific
-prerequisites (such as copying header prototype files).
+prerequisites (such as copying header prototype files). Scripts should be
+written in Python, in order to be compatible with all platforms, including
+Windows.
 
 Patches should be created using the 'diff' program from the external/ directory,
 similar to this example:
 > diff --exclude=".git" --exclude=".hg" -rupN \
-      ./src/AGAST/ ../external/src/AGAST/ > ./patches/agast.patch
+      ./src/AGAST/ ./src/AGAST_patched/ > ./patches/agast.patch
 The default -p argument for the patch command is 3, but this can be changed by
 an optional "pnum" field inside the postprocessing JSON object, containing a
 numeric value.

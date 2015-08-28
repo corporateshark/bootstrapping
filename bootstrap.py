@@ -32,6 +32,7 @@ SRC_DIR = os.path.join(BASE_DIR, "src")
 ORIG_DIR = os.path.join(BASE_DIR, "orig")
 
 DEFAULT_PNUM = 3
+DEBUG_OUTPUT = False
 
 if platform.system() == "Windows":
     os.environ['CYGWIN'] = "nodosfilewarning"
@@ -40,9 +41,13 @@ if platform.system() == "Windows":
 def log(string):
     print("--- " + string)
 
+def dlog(string):
+    if DEBUG_OUTPUT:
+        print("*** " + string)
 
 def executeCommand(command, printCommand = False, quiet = False):
 
+    printCommand = printCommand or DEBUG_OUTPUT
     out = None
     err = None
 
@@ -51,7 +56,10 @@ def executeCommand(command, printCommand = False, quiet = False):
         err = subprocess.STDOUT
 
     if printCommand:
-        log(">>> " + command)
+        if DEBUG_OUTPUT:
+            dlog(">>> " + command)
+        else:
+            log(">>> " + command)
 
     return subprocess.call(command, shell = True, stdout=out, stderr=err);
 
@@ -274,15 +282,16 @@ def printOptions():
         print("Options:")
         print("  --list, -l        List all available libraries")
         print("  --name, -n        Specifies the name of a single library to be downloaded")
-        print("  --clean, -C       Remove directory before obtaining library")
+        print("  --clean, -c       Remove directory before obtaining library")
         print("  --base-dir, -b    Base directory, if script is called from outside of its directory")
-        print("")
         print("  --bootstrap-file  Specify the file containing the bootstrap JSON data")
         print("                    (default: bootstrap.json)")
+        print("  --debug-output    Enables extra debugging output")
+#        print("  --fallback-url    Fallback URL that points to an existing and bootstrapped External repository")
 
 
 def main(argv):
-    global BASE_DIR, SRC_DIR, ORIG_DIR, LOG_STREAM
+    global BASE_DIR, SRC_DIR, ORIG_DIR, DEBUG_OUTPUT
 
     required_commands = ["git", "hg", "svn", "patch"]
     if (checkPrerequisites(*required_commands) != 0):
@@ -290,7 +299,7 @@ def main(argv):
         return -1
 
     try:
-        opts, args = getopt.getopt(argv,"ln:Cb:h",["list", "name=", "clean", "base-dir", "bootstrap-file=", "help"])
+        opts, args = getopt.getopt(argv,"ln:cb:h",["list", "name=", "clean", "base-dir", "bootstrap-file=", "debug-output", "help"])
     except getopt.GetoptError:
         printOptions()
         return 0
@@ -320,10 +329,15 @@ def main(argv):
             log("Using " + arg + " as base directory")
         if opt in ("--bootstrap-file"):
             bootstrap_filename = os.path.abspath(arg)
+        if opt in ("--debug-output"):
+            DEBUG_OUTPUT = True
 
     state_filename = os.path.join(os.path.dirname(os.path.splitext(bootstrap_filename)[0]), \
                                   "_state_" + os.path.basename(os.path.splitext(bootstrap_filename)[0])) \
                      + os.path.splitext(bootstrap_filename)[1]
+
+    dlog("bootstrap_filename = " + bootstrap_filename)
+    dlog("state_filename     = " + state_filename)
 
     data = readJSONData(bootstrap_filename)
     if data is None:
@@ -364,6 +378,9 @@ def main(argv):
             continue
 
         lib_dir = os.path.join(SRC_DIR, name)
+
+        dlog("********** LIBRARY " + name + " **********")
+        dlog("lib_dir = " + lib_dir + ")")
 
         # compare against cached state
         cached_state_ok = False
