@@ -356,7 +356,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D09002B1B6A6DEB00E89463 /* Build configuration list for PBXNativeTarget "external-layar" */;
 			buildPhases = (
-				2D60DD4A1B8DF629001C431F /* Update External Repos */,
 				2D0900261B6A6DEB00E89463 /* Sources */,
 				2D0900281B6A6DEB00E89463 /* Frameworks */,
 				2D0900291B6A6DEB00E89463 /* CopyFiles */,
@@ -380,7 +379,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D0900051B6A6D1100E89463 /* Build configuration list for PBXNativeTarget "external-blippar" */;
 			buildPhases = (
-				2D60DD3D1B8DE4A2001C431F /* Update External Repos */,
 				2D09FFED1B6A6D1100E89463 /* Sources */,
 				2D09FFEE1B6A6D1100E89463 /* Frameworks */,
 				2D09FFEF1B6A6D1100E89463 /* CopyFiles */,
@@ -543,37 +541,6 @@
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2D60DD3D1B8DE4A2001C431F /* Update External Repos */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update External Repos";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "echo \"[Xcode]:Booststrapping External Repositories\"\nts=$(python -c'import time; print repr(time.time())')\nexport PATH=\"/usr/local/bin:$PATH\"\n./bootstrap.py\ntf=$(python -c'import time; print repr(time.time())')\ntt=$(echo \"$tf - $ts\"| bc -l)\necho \"Bootstrapping took $tt seconds\"";
-		};
-		2D60DD4A1B8DF629001C431F /* Update External Repos */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Update External Repos";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "echo \"[Xcode]:Booststrapping External Repositories\"\nts=$(python -c'import time; print repr(time.time())')\nexport PATH=\"/usr/local/bin:$PATH\"\n./bootstrap.py\ntf=$(python -c'import time; print repr(time.time())')\ntt=$(echo \"$tf - $ts\"| bc -l)\necho \"Bootstrapping took $tt seconds\"";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2D0900261B6A6DEB00E89463 /* Sources */ = {
