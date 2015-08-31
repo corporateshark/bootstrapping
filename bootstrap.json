@@ -211,17 +211,6 @@
     }
 },
 {
-    "name": "openal-soft-android",
-    "source": {
-        "type": "git",
-        "url": "http://repo.or.cz/r/openal-soft/android.git"
-    },
-    "postprocess": {
-        "type": "patch",
-        "file": "openal-soft-android.patch"
-    }
-},
-{
     "name": "libtremolo",
     "source": {
         "type": "archive",
@@ -263,6 +252,13 @@
     "postprocess": {
         "type": "patch",
         "file": "libmodplug.patch"
+    }
+},
+{
+    "name": "openal",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/corporateshark/Android-NDK-Game-Development-Cookbook"
     }
 }
 ]

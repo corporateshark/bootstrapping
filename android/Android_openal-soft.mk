@@ -4,34 +4,34 @@ LOCAL_MODULE := libopenal-soft
 
 LOCAL_ARM_MODE := arm
 LOCAL_C_INCLUDES := \
-    external/src/openal-soft-android \
-    external/src/openal-soft-android/include \
-    external/src/openal-soft-android/OpenAL32/Include \
-    external/src/openal-soft-android/Alc \
+    $(LOCAL_PATH)/../src/openal/Chapter5/OpenAL \
+    $(LOCAL_PATH)/../src/openal/Chapter5/OpenAL/include \
+    $(LOCAL_PATH)/../src/openal/Chapter5/OpenAL/OpenAL32/Include \
+    $(LOCAL_PATH)/../src/openal/Chapter5/OpenAL/Alc
 
 LOCAL_SRC_FILES  := \
-    ../src/openal-soft-android/OpenAL32/alAuxEffectSlot.c \
-    ../src/openal-soft-android/OpenAL32/alBuffer.c        \
-    ../src/openal-soft-android/OpenAL32/alEffect.c        \
-    ../src/openal-soft-android/OpenAL32/alError.c         \
-    ../src/openal-soft-android/OpenAL32/alExtension.c     \
-    ../src/openal-soft-android/OpenAL32/alFilter.c        \
-    ../src/openal-soft-android/OpenAL32/alListener.c      \
-    ../src/openal-soft-android/OpenAL32/alSource.c        \
-    ../src/openal-soft-android/OpenAL32/alState.c         \
-    ../src/openal-soft-android/OpenAL32/alThunk.c         \
-    ../src/openal-soft-android/Alc/ALc.c                  \
-    ../src/openal-soft-android/Alc/alcConfig.c            \
-    ../src/openal-soft-android/Alc/alcEcho.c              \
-    ../src/openal-soft-android/Alc/alcModulator.c         \
-    ../src/openal-soft-android/Alc/alcReverb.c            \
-    ../src/openal-soft-android/Alc/alcRing.c              \
-    ../src/openal-soft-android/Alc/alcThread.c            \
-    ../src/openal-soft-android/Alc/ALu.c                  \
-    ../src/openal-soft-android/Alc/backends/android.c     \
-    ../src/openal-soft-android/Alc/bs2b.c                 \
-    ../src/openal-soft-android/Alc/null.c                 \
-
+    ../src/openal/Chapter5/OpenAL/OpenAL32/alAuxEffectSlot.c \
+    ../src/openal/Chapter5/OpenAL/OpenAL32/alBuffer.c        \
+    ../src/openal/Chapter5/OpenAL/OpenAL32/alDatabuffer.c    \
+    ../src/openal/Chapter5/OpenAL/OpenAL32/alEffect.c        \
+    ../src/openal/Chapter5/OpenAL/OpenAL32/alError.c         \
+    ../src/openal/Chapter5/OpenAL/OpenAL32/alExtension.c     \
+    ../src/openal/Chapter5/OpenAL/OpenAL32/alFilter.c        \
+    ../src/openal/Chapter5/OpenAL/OpenAL32/alListener.c      \
+    ../src/openal/Chapter5/OpenAL/OpenAL32/alSource.c        \
+    ../src/openal/Chapter5/OpenAL/OpenAL32/alState.c         \
+    ../src/openal/Chapter5/OpenAL/OpenAL32/alThunk.c         \
+    ../src/openal/Chapter5/OpenAL/Alc/ALc.c                  \
+    ../src/openal/Chapter5/OpenAL/Alc/alcConfig.c            \
+    ../src/openal/Chapter5/OpenAL/Alc/alcEcho.c              \
+    ../src/openal/Chapter5/OpenAL/Alc/alcModulator.c         \
+    ../src/openal/Chapter5/OpenAL/Alc/alcReverb.c            \
+    ../src/openal/Chapter5/OpenAL/Alc/alcRing.c              \
+    ../src/openal/Chapter5/OpenAL/Alc/alcThread.c            \
+    ../src/openal/Chapter5/OpenAL/Alc/ALu.c                  \
+    ../src/openal/Chapter5/OpenAL/Alc/android.c              \
+    ../src/openal/Chapter5/OpenAL/Alc/bs2b.c                 \
+    ../src/openal/Chapter5/OpenAL/Alc/null.c                 \
 
 LOCAL_CFLAGS     := -ffast-math -DAL_BUILD_LIBRARY -DAL_ALEXT_PROTOTYPES -Wno-incompatible-pointer-types -Wno-enum-conversion -DHAVE_ANDROID=1
 
