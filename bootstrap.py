@@ -308,7 +308,8 @@ def main(argv):
     opt_clean = False
     list_libraries = False
 
-    bootstrap_filename = os.path.abspath(os.path.join(BASE_DIR, "bootstrap.json"))
+    default_bootstrap_filename = "bootstrap.json"
+    bootstrap_filename = os.path.abspath(os.path.join(BASE_DIR, default_bootstrap_filename))
 
     for opt, arg in opts:
         if opt in ("-h", "--help"):
@@ -318,7 +319,7 @@ def main(argv):
             list_libraries = True
         if opt in ("-n", "--name"):
             opt_name = arg
-        if opt in ("-C", "--clean"):
+        if opt in ("-c", "--clean"):
             opt_clean = True
         if opt in ("-b", "--base-dir"):
             ABS_PATH = os.path.abspath(arg)
@@ -326,10 +327,11 @@ def main(argv):
             BASE_DIR = ABS_PATH
             SRC_DIR = os.path.join(BASE_DIR, "src")
             ORIG_DIR = os.path.join(BASE_DIR, "orig")
+            bootstrap_filename = os.path.join(BASE_DIR, default_bootstrap_filename)
             log("Using " + arg + " as base directory")
-        if opt in ("--bootstrap-file"):
+        if opt in ("--bootstrap-file",):
             bootstrap_filename = os.path.abspath(arg)
-        if opt in ("--debug-output"):
+        if opt in ("--debug-output",):
             DEBUG_OUTPUT = True
 
     state_filename = os.path.join(os.path.dirname(os.path.splitext(bootstrap_filename)[0]), \
