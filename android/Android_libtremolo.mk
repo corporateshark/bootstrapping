@@ -27,6 +27,7 @@ ifeq ($(TARGET_ARCH_ABI),x86)
 endif
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
+	LOCAL_ARM_NEON := true
 	LOCAL_CFLAGS += -mfpu=neon -march=armv7-a
 
 	LOCAL_SRC_FILES += \
@@ -37,6 +38,7 @@ ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 endif
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a-hard)
+	LOCAL_ARM_NEON := true
 	LOCAL_CFLAGS += -mfloat-abi=hard -mfpu=neon -march=armv7-a
 
 	LOCAL_SRC_FILES += \

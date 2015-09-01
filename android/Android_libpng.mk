@@ -33,10 +33,12 @@ ifeq (,$(findstring debug, $(CONFIG)))
 endif
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
+    LOCAL_ARM_NEON := true
     LOCAL_CPPFLAGS += -mfpu=neon -march=armv7-a
 endif
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a-hard)
+    LOCAL_ARM_NEON := true
     LOCAL_CPPFLAGS += -mfloat-abi=hard -mfpu=neon -march=armv7-a
 endif
 

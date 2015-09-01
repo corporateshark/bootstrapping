@@ -46,9 +46,18 @@ LOCAL_CFLAGS += -O3
 
 LOCAL_CPPFLAGS += -DHAVE_CONFIG_H -DMODPLUG_BUILD -DMODPLUG_STATIC -DMODPLUG_NO_FILESAVE -DMODPLUG_BASIC_SUPPORT -Wno-enum-conversion -Wno-deprecated-register
 
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
+    LOCAL_ARM_NEON := true
+    LOCAL_CFLAGS += -mfpu=neon -march=armv7-a
+endif
+
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a-hard)
-	LOCAL_ARM_NEON := true
-	LOCAL_CFLAGS += -mfloat-abi=hard -mfpu=neon -march=armv7-a
+    LOCAL_ARM_NEON := true
+    LOCAL_CFLAGS += -mfloat-abi=hard -mfpu=neon -march=armv7-a
+endif
+
+ifeq ($(TARGET_ARCH_ABI),x86)
+	LOCAL_CFLAGS += -m32 -march=i686 -mtune=atom -mssse3 -mfpmath=sse
 endif
 
 include $(BUILD_STATIC_LIBRARY)

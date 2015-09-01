@@ -255,10 +255,11 @@
     }
 },
 {
-    "name": "openal",
+    "name": "openal-android",
     "source": {
         "type": "git",
-        "url": "https://github.com/corporateshark/Android-NDK-Game-Development-Cookbook"
+        "url": "https://github.com/corporateshark/Android-NDK-Game-Development-Cookbook",
+        "sha1": "8f36c2121b89424007f93d23f7e7bb0fea30e3e2"
     }
 },
 {
