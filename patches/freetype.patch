@@ -1,0 +1,46 @@
+diff --git a/include/freetype/config/ftmodule.h b/include/freetype/config/ftmodule.h
+index 76d271a..174f6fc 100644
+--- a/include/freetype/config/ftmodule.h
++++ b/include/freetype/config/ftmodule.h
+@@ -12,14 +12,18 @@
+ 
+ FT_USE_MODULE( FT_Module_Class, autofit_module_class )
+ FT_USE_MODULE( FT_Driver_ClassRec, tt_driver_class )
++#ifndef __APPLE__
+ FT_USE_MODULE( FT_Driver_ClassRec, t1_driver_class )
++#endif
+ FT_USE_MODULE( FT_Driver_ClassRec, cff_driver_class )
++#ifndef __APPLE__
+ FT_USE_MODULE( FT_Driver_ClassRec, t1cid_driver_class )
+ FT_USE_MODULE( FT_Driver_ClassRec, pfr_driver_class )
+ FT_USE_MODULE( FT_Driver_ClassRec, t42_driver_class )
+ FT_USE_MODULE( FT_Driver_ClassRec, winfnt_driver_class )
+ FT_USE_MODULE( FT_Driver_ClassRec, pcf_driver_class )
+ FT_USE_MODULE( FT_Module_Class, psaux_module_class )
++#endif
+ FT_USE_MODULE( FT_Module_Class, psnames_module_class )
+ FT_USE_MODULE( FT_Module_Class, pshinter_module_class )
+ FT_USE_MODULE( FT_Renderer_Class, ft_raster1_renderer_class )
+@@ -27,6 +31,8 @@ FT_USE_MODULE( FT_Module_Class, sfnt_module_class )
+ FT_USE_MODULE( FT_Renderer_Class, ft_smooth_renderer_class )
+ FT_USE_MODULE( FT_Renderer_Class, ft_smooth_lcd_renderer_class )
+ FT_USE_MODULE( FT_Renderer_Class, ft_smooth_lcdv_renderer_class )
++#ifndef __APPLE__
+ FT_USE_MODULE( FT_Driver_ClassRec, bdf_driver_class )
++#endif
+ 
+ /* EOF */
+diff --git a/include/freetype/config/ftoption.h b/include/freetype/config/ftoption.h
+index 4970945..440baff 100644
+--- a/include/freetype/config/ftoption.h
++++ b/include/freetype/config/ftoption.h
+@@ -163,7 +163,9 @@ FT_BEGIN_HEADER
+   /*   Define this macro if you want to enable this `feature'.  See also   */
+   /*   the macro FT_CONFIG_OPTION_SYSTEM_ZLIB below.                       */
+   /*                                                                       */
++#ifndef __APPLE__
+ #define FT_CONFIG_OPTION_USE_ZLIB
++#endif
+ 
+ 
+   /*************************************************************************/

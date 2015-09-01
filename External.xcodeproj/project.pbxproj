@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D5CFD581B95CF2D00303A20 /* libFreetype2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5CFD441B95CF1000303A20 /* libFreetype2.a */; };
 		2D60DB3B1B861EDF001C431F /* External.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D60DB3A1B861EDF001C431F /* External.m */; };
 		2D60DB9A1B862344001C431F /* External.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D60DB3A1B861EDF001C431F /* External.m */; };
 		2D60DB9B1B862350001C431F /* libAGAST.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB5C1B861F07001C431F /* libAGAST.a */; };
@@ -21,6 +22,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2D5CFD431B95CF1000303A20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D5CFD3F1B95CF1000303A20 /* freetype2.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6382B1B10FB0FC5100ECAC02;
+			remoteInfo = Freetype2;
+		};
+		2D5CFD541B95CF2300303A20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D5CFD3F1B95CF1000303A20 /* freetype2.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6382B1B00FB0FC5100ECAC02;
+			remoteInfo = Freetype2;
+		};
 		2D60DB5B1B861F07001C431F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2D60DB3C1B861F07001C431F /* AGAST.xcodeproj */;
@@ -181,6 +196,7 @@
 		2D0900021B6A6D1100E89463 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D09002E1B6A6DEB00E89463 /* libexternal-layar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libexternal-layar.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D09FFF11B6A6D1100E89463 /* libexternal-blippar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libexternal-blippar.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D5CFD3F1B95CF1000303A20 /* freetype2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = freetype2.xcodeproj; path = ios/freetype/freetype2.xcodeproj; sourceTree = SOURCE_ROOT; };
 		2D60DB391B861EDF001C431F /* External.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = External.h; path = ios/External/External.h; sourceTree = "<group>"; };
 		2D60DB3A1B861EDF001C431F /* External.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = External.m; path = ios/External/External.m; sourceTree = "<group>"; };
 		2D60DB3C1B861F07001C431F /* AGAST.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = AGAST.xcodeproj; path = ios/AGAST/AGAST.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -213,6 +229,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D5CFD581B95CF2D00303A20 /* libFreetype2.a in Frameworks */,
 				2D60DCFE1B8DC7D8001C431F /* libVorbis.a in Frameworks */,
 				2D60DBA71B862384001C431F /* libModPlug.a in Frameworks */,
 				2D60DBA81B862384001C431F /* libOGG.a in Frameworks */,
@@ -225,6 +242,7 @@
 		2D0900001B6A6D1100E89463 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				2D5CFD3F1B95CF1000303A20 /* freetype2.xcodeproj */,
 				2D60DB3C1B861F07001C431F /* AGAST.xcodeproj */,
 				2D60DB3F1B861F07001C431F /* FAST.xcodeproj */,
 				2D60DB421B861F07001C431F /* giflib.xcodeproj */,
@@ -265,6 +283,14 @@
 			children = (
 				2D09FFF11B6A6D1100E89463 /* libexternal-blippar.a */,
 				2D09002E1B6A6DEB00E89463 /* libexternal-layar.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2D5CFD401B95CF1000303A20 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2D5CFD441B95CF1000303A20 /* libFreetype2.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -386,6 +412,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				2D5CFD551B95CF2300303A20 /* PBXTargetDependency */,
 				2D60DCFD1B8DC7C0001C431F /* PBXTargetDependency */,
 				2D60DBA21B86236F001C431F /* PBXTargetDependency */,
 				2D60DBA41B86236F001C431F /* PBXTargetDependency */,
@@ -429,6 +456,10 @@
 					ProjectRef = 2D60DB3F1B861F07001C431F /* FAST.xcodeproj */;
 				},
 				{
+					ProductGroup = 2D5CFD401B95CF1000303A20 /* Products */;
+					ProjectRef = 2D5CFD3F1B95CF1000303A20 /* freetype2.xcodeproj */;
+				},
+				{
 					ProductGroup = 2D60DB431B861F07001C431F /* Products */;
 					ProjectRef = 2D60DB421B861F07001C431F /* giflib.xcodeproj */;
 				},
@@ -470,6 +501,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		2D5CFD441B95CF1000303A20 /* libFreetype2.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libFreetype2.a;
+			remoteRef = 2D5CFD431B95CF1000303A20 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		2D60DB5C1B861F07001C431F /* libAGAST.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -562,6 +600,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2D5CFD551B95CF2300303A20 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Freetype2;
+			targetProxy = 2D5CFD541B95CF2300303A20 /* PBXContainerItemProxy */;
+		};
 		2D60DB791B861F47001C431F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = AGAST;

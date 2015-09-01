@@ -268,6 +268,11 @@
         "type": "git",
         "url": "http://git.savannah.gnu.org/cgit/freetype/freetype2.git",
         "sha1": "0c818d8f04ef035c0fc175e8b3926bffec56b216"
+    },
+    "postprocess": {
+        "type": "patch",
+        "file": "freetype.patch",
+        "pnum": "1"
     }
 }
 ]
