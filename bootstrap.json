@@ -267,7 +267,7 @@
     "source": {
         "type": "git",
         "url": "http://git.savannah.gnu.org/cgit/freetype/freetype2.git",
-        "revision": "0c818d8f04ef035c0fc175e8b3926bffec56b216"
+        "revision": "0963526435b39080e7fc45610aee3b3e2e2383b0"
     },
     "postprocess": {
         "type": "patch",
