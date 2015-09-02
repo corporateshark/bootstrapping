@@ -218,8 +218,12 @@ def applyPatchFile(patch_name, dir_name, pnum):
     log("Applying patch to " + dir_name)
     patch_dir = os.path.join(BASE_DIR, "patches")
     arguments = "-d " + os.path.join(SRC_DIR, dir_name) + " -p" + str(pnum) + " < " + os.path.join(patch_dir, patch_name)
+    argumentsBinary = "-d " + os.path.join(SRC_DIR, dir_name) + " -p" + str(pnum) + " --binary < " + os.path.join(patch_dir, patch_name)
     patch_command = "patch"
     res = executeCommand(patch_command + " --dry-run " + arguments, quiet = True)
+    if res != 0:
+        arguments = argumentsBinary
+        res = executeCommand(patch_command + " --dry-run " + arguments, quiet = True)
     if res != 0:
         log("ERROR: patch application failure; has this patch already been applied?")
         executeCommand(patch_command + " --dry-run " + arguments, printCommand = True)
