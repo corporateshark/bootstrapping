@@ -258,8 +258,8 @@
     "name": "openal-android",
     "source": {
         "type": "git",
-        "url": "https://github.com/corporateshark/Android-NDK-Game-Development-Cookbook",
-        "sha1": "8f36c2121b89424007f93d23f7e7bb0fea30e3e2"
+        "url": "git://repo.or.cz/openal-soft.git",
+        "revision": "openal-soft-1.15.1"
     }
 },
 {
@@ -267,7 +267,7 @@
     "source": {
         "type": "git",
         "url": "http://git.savannah.gnu.org/cgit/freetype/freetype2.git",
-        "sha1": "0c818d8f04ef035c0fc175e8b3926bffec56b216"
+        "revision": "0c818d8f04ef035c0fc175e8b3926bffec56b216"
     },
     "postprocess": {
         "type": "patch",
