@@ -99,7 +99,7 @@ def cloneRepository(type, url, target_name, revision = None):
         if revision is None:
             revision = "HEAD"
         dieIfNonZero(executeCommand("git -C " + target_dir + " reset --hard " + revision))
-        dieIfNonZero(executeCommand("git -C " + target_dir + " clean -fd"))
+        dieIfNonZero(executeCommand("git -C " + target_dir + " clean -fxd"))
 
     elif type == "svn":
         dieIfNonZero(executeCommand("svn checkout " + url + " " + target_dir))
