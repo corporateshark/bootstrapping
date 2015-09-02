@@ -64,6 +64,10 @@
     "source": {
         "type": "svn",
         "url": "svn://svn.code.sf.net/p/libjpeg-turbo/code/tags/1.4.1"
+    },
+    "postprocess": {
+        "type": "patch",
+        "file": "libjpeg-turbo.patch"
     }
 },
 {
