@@ -255,11 +255,15 @@
     }
 },
 {
-    "name": "openal-android",
+    "name": "openal-soft",
     "source": {
         "type": "git",
         "url": "git://repo.or.cz/openal-soft.git",
         "revision": "openal-soft-1.15.1"
+    },
+    "postprocess": {
+        "type": "script",
+        "file": "libopenal-soft.py"
     }
 },
 {
