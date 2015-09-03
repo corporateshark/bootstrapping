@@ -60,7 +60,7 @@ LOCAL_SRC_FILES += \
 	$(SOURCE_PATH)/jdatasrc-tj.c \
 
 LOCAL_C_INCLUDES += \
-	$(LOCAL_PATH)/../src/libjpeg-turbo/include \
+	$(LOCAL_PATH)/../src/libjpeg-turbo/include_android \
 	$(LOCAL_PATH)/../src/libjpeg-turbo/simd \
 	$(LOCAL_PATH)/../src/libjpeg-turbo \
 
