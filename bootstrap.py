@@ -380,7 +380,7 @@ def main(argv):
         source = library.get('source', None)
         post = library.get('postprocess', None)
 
-        if not name in opt_names:
+        if (opt_names) and (not name in opt_names):
             continue
 
         lib_dir = os.path.join(SRC_DIR, name)
