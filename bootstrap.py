@@ -308,7 +308,7 @@ def main(argv):
         printOptions()
         return 0
 
-    opt_name = None
+    opt_names = []
     opt_clean = False
     list_libraries = False
 
@@ -322,7 +322,7 @@ def main(argv):
         if opt in ("-l", "--list"):
             list_libraries = True
         if opt in ("-n", "--name"):
-            opt_name = arg
+            opt_names.append(arg)
         if opt in ("-c", "--clean"):
             opt_clean = True
         if opt in ("-b", "--base-dir"):
@@ -380,7 +380,7 @@ def main(argv):
         source = library.get('source', None)
         post = library.get('postprocess', None)
 
-        if opt_name and name != opt_name:
+        if not name in opt_names:
             continue
 
         lib_dir = os.path.join(SRC_DIR, name)
