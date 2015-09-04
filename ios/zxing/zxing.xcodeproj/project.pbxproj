@@ -479,7 +479,7 @@
 					../../src/boost,
 					"../../src/zxing-cpp/core/src/",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -500,7 +500,7 @@
 					../../src/boost,
 					"../../src/zxing-cpp/core/src/",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 			};
 			name = Release;
@@ -520,7 +520,7 @@
 					../../src/boost,
 					"../../src/zxing-cpp/core/src/",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 			};
 			name = AdHoc;
@@ -554,7 +554,7 @@
 					../../src/boost,
 					"../../src/zxing-cpp/core/src/",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				SDKROOT = iphoneos;
 			};
 			name = Distribution;
@@ -590,7 +590,7 @@
 					../../src/boost,
 					"../../src/zxing-cpp/core/src/",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};

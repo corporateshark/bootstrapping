@@ -115,7 +115,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2D0B4DDF1B690EB0000C42F3 /* Build configuration list for PBXProject "libOGG" */;
+			buildConfigurationList = 2D0B4DDF1B690EB0000C42F3 /* Build configuration list for PBXProject "libogg" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -180,7 +180,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -216,7 +216,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -254,7 +254,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2D0B4DDF1B690EB0000C42F3 /* Build configuration list for PBXProject "libOGG" */ = {
+		2D0B4DDF1B690EB0000C42F3 /* Build configuration list for PBXProject "libogg" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D0B4DF61B690EB0000C42F3 /* Debug */,
