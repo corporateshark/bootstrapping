@@ -2,4 +2,5 @@ build
 src
 orig
 *_state_*.json
+_state.json
 .idea
