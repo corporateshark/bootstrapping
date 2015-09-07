@@ -6,8 +6,8 @@ if(MSVC)
 	add_definitions(
 		-D_CRT_SECURE_NO_WARNINGS
 	)
-	set(CMAKE_C_FLAGS "/EHsc /RTCc /RTC1 /MTd /Zp16 /GS /Qpar /MP /wd4244")
-	set(CMAKE_CXX_FLAGS "/EHsc /RTCc /RTC1 /MTd /Zp16 /GS /Qpar /MP /wd4244")
+	set(CMAKE_C_FLAGS "/EHsc /RTC1 /MTd /Zp16 /GS /Qpar /MP /wd4244")
+	set(CMAKE_CXX_FLAGS "/EHsc /RTC1 /MTd /Zp16 /GS /Qpar /MP /wd4244")
 endif(MSVC)
 
 include_directories(
@@ -37,6 +37,7 @@ set(SRC_FILES
 	../../src/libvorbis/lib/sharedbook.c
 	../../src/libvorbis/lib/smallft.c
 	../../src/libvorbis/lib/synthesis.c
+	../../src/libvorbis/lib/vorbisenc.c
 	../../src/libvorbis/lib/vorbisfile.c
 	../../src/libvorbis/lib/window.c
 )

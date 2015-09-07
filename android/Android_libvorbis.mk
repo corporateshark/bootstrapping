@@ -27,6 +27,7 @@ LOCAL_SRC_FILES := \
 	../src/libvorbis/lib/sharedbook.c \
 	../src/libvorbis/lib/smallft.c \
 	../src/libvorbis/lib/synthesis.c \
+	../src/libvorbis/lib/vorbisenc.c \
 	../src/libvorbis/lib/vorbisfile.c \
 	../src/libvorbis/lib/window.c \
 
