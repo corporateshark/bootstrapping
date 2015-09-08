@@ -3,6 +3,7 @@ include $(CLEAR_VARS)
 LOCAL_MODULE := libvorbis
 
 LOCAL_C_INCLUDES := \
+	$(LOCAL_PATH)/../src/libvorbis/lib \
 	$(LOCAL_PATH)/../src/libvorbis/include \
 	$(LOCAL_PATH)/../src/libogg/include \
 	$(LOCAL_PATH)/../../BlippEngine/Audio \
