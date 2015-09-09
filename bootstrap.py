@@ -34,6 +34,9 @@ ORIG_DIR = os.path.join(BASE_DIR, "orig")
 DEFAULT_PNUM = 3
 DEBUG_OUTPUT = False
 
+USE_TAR = False
+USE_UNZIP = False
+
 if platform.system() == "Windows":
     os.environ['CYGWIN'] = "nodosfilewarning"
 
@@ -126,8 +129,20 @@ def extractFile(filename, target_dir):
         if extract_dir == "":  # deal with stupid zip files that don't contain a base directory
             extract_dir, extension2 = os.path.splitext(os.path.basename(filename))
             extract_dir_local = extract_dir
-        zfile.extractall(os.path.join(SRC_DIR, extract_dir_local))
-        zfile.close()
+        extract_dir_abs = os.path.join(SRC_DIR, extract_dir_local)
+
+        try:
+            os.mkdirs(extract_dir_abs)
+        except:
+            pass
+
+        if not USE_UNZIP:
+            zfile.extractall(extract_dir_abs)
+            zfile.close()
+        else:
+            zfile.close()
+            dieIfNonZero(executeCommand("unzip " + filename + " -d " + extract_dir_abs))
+
     elif extension == ".tar" or extension == ".gz" or extension == ".bz2":
         tfile = tarfile.open(filename)
         extract_dir = os.path.commonprefix(tfile.getnames())
@@ -135,8 +150,20 @@ def extractFile(filename, target_dir):
         if extract_dir == "":  # deal with stupid tar files that don't contain a base directory
             extract_dir, extension2 = os.path.splitext(os.path.basename(filename))
             extract_dir_local = extract_dir
-        tfile.extractall(os.path.join(SRC_DIR, extract_dir_local))
-        tfile.close()
+        extract_dir_abs = os.path.join(SRC_DIR, extract_dir_local)
+
+        try:
+            os.mkdirs(extract_dir_abs)
+        except:
+            pass
+
+        if not USE_TAR:
+            tfile.extractall(extract_dir_abs)
+            tfile.close()
+        else:
+            tfile.close()
+            dieIfNonZero(executeCommand("tar -x -f " + filename + " -C " + extract_dir_abs))
+
     else:
         raise RuntimeError("Unknown compressed file format " + extension)
 
@@ -290,12 +317,16 @@ def printOptions():
         print("  --base-dir, -b    Base directory, if script is called from outside of its directory")
         print("  --bootstrap-file  Specify the file containing the bootstrap JSON data")
         print("                    (default: bootstrap.json)")
+        print("  --use-tar         Use 'tar' command instead of Python standard library to extract")
+        print("                    tar archives")
+        print("  --use-unzip       Use 'unzip' command instead of Python standard library to extract")
+        print("                    zip archives")
         print("  --debug-output    Enables extra debugging output")
 #        print("  --fallback-url    Fallback URL that points to an existing and bootstrapped External repository")
 
 
 def main(argv):
-    global BASE_DIR, SRC_DIR, ORIG_DIR, DEBUG_OUTPUT
+    global BASE_DIR, SRC_DIR, ORIG_DIR, DEBUG_OUTPUT, USE_TAR, USE_UNZIP
 
     required_commands = ["git", "hg", "svn", "patch"]
     if (checkPrerequisites(*required_commands) != 0):
@@ -303,7 +334,7 @@ def main(argv):
         return -1
 
     try:
-        opts, args = getopt.getopt(argv,"ln:cb:h",["list", "name=", "clean", "base-dir", "bootstrap-file=", "debug-output", "help"])
+        opts, args = getopt.getopt(argv,"ln:cb:h",["list", "name=", "clean", "base-dir", "bootstrap-file=", "use-tar", "use-unzip", "debug-output", "help"])
     except getopt.GetoptError:
         printOptions()
         return 0
@@ -335,6 +366,10 @@ def main(argv):
             log("Using " + arg + " as base directory")
         if opt in ("--bootstrap-file",):
             bootstrap_filename = os.path.abspath(arg)
+        if opt in ("--use-tar",):
+            USE_TAR = True
+        if opt in ("--use-unzip",):
+            USE_UNZIP = True
         if opt in ("--debug-output",):
             DEBUG_OUTPUT = True
 
