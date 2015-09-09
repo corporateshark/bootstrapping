@@ -28,6 +28,7 @@
 		2D3710981B6930070009B3E5 /* synthesis.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D37107E1B6930070009B3E5 /* synthesis.c */; };
 		2D37109B1B6930070009B3E5 /* vorbisfile.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D3710811B6930070009B3E5 /* vorbisfile.c */; };
 		2D37109C1B6930070009B3E5 /* window.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D3710821B6930070009B3E5 /* window.c */; };
+		D7DEDA681B9F863600B639A4 /* vorbisenc.c in Sources */ = {isa = PBXBuildFile; fileRef = D7DEDA671B9F863600B639A4 /* vorbisenc.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -84,6 +85,7 @@
 		2D3710811B6930070009B3E5 /* vorbisfile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vorbisfile.c; path = ../../../src/libvorbis/lib/vorbisfile.c; sourceTree = "<group>"; };
 		2D3710821B6930070009B3E5 /* window.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = window.c; path = ../../../src/libvorbis/lib/window.c; sourceTree = "<group>"; };
 		2D3710831B6930070009B3E5 /* window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = window.h; path = ../../../src/libvorbis/lib/window.h; sourceTree = "<group>"; };
+		D7DEDA671B9F863600B639A4 /* vorbisenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vorbisenc.c; path = ../../../src/libvorbis/lib/vorbisenc.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +127,7 @@
 		2D3710531B692F950009B3E5 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				D7DEDA671B9F863600B639A4 /* vorbisenc.c */,
 				2D3710551B6930070009B3E5 /* analysis.c */,
 				2D3710581B6930070009B3E5 /* bitrate.c */,
 				2D37105A1B6930070009B3E5 /* block.c */,
@@ -239,6 +242,7 @@
 				2D37108A1B6930070009B3E5 /* floor0.c in Sources */,
 				2D37108D1B6930070009B3E5 /* lookup.c in Sources */,
 				2D3710961B6930070009B3E5 /* sharedbook.c in Sources */,
+				D7DEDA681B9F863600B639A4 /* vorbisenc.c in Sources */,
 				2D37109B1B6930070009B3E5 /* vorbisfile.c in Sources */,
 				2D3710971B6930070009B3E5 /* smallft.c in Sources */,
 				2D37109C1B6930070009B3E5 /* window.c in Sources */,
@@ -345,6 +349,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					../../src/libvorbis/include,
 					../../src/libogg/include,
+					../../src/libvorbis/lib,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -360,6 +365,7 @@
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					../../src/libvorbis/include,
 					../../src/libogg/include,
+					../../src/libvorbis/lib,
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
