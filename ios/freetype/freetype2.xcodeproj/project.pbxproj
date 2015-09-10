@@ -1208,6 +1208,7 @@
 				MACH_O_TYPE = staticlib;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -1230,6 +1231,7 @@
 				MACH_O_TYPE = staticlib;
 				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
