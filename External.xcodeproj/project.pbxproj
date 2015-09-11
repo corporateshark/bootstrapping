@@ -19,6 +19,7 @@
 		2D60DBA71B862384001C431F /* libModPlug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB681B861F07001C431F /* libModPlug.a */; };
 		2D60DBA81B862384001C431F /* libOGG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB6B1B861F07001C431F /* libOGG.a */; };
 		2D60DCFE1B8DC7D8001C431F /* libVorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB711B861F07001C431F /* libVorbis.a */; };
+		4C3AE57F1BA31A0F00502BDD /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB651B861F07001C431F /* libjpeg.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -169,6 +170,13 @@
 			remoteGlobalIDString = 2D3710381B692F7D0009B3E5;
 			remoteInfo = Vorbis;
 		};
+		4C3AE57C1BA31A0900502BDD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D60DB451B861F07001C431F /* jpeg.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 4C6F9AC615DA68AE00D599B4;
+			remoteInfo = jpeg;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -229,6 +237,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C3AE57F1BA31A0F00502BDD /* libjpeg.a in Frameworks */,
 				2D5CFD581B95CF2D00303A20 /* libFreetype2.a in Frameworks */,
 				2D60DCFE1B8DC7D8001C431F /* libVorbis.a in Frameworks */,
 				2D60DBA71B862384001C431F /* libModPlug.a in Frameworks */,
@@ -412,6 +421,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4C3AE57D1BA31A0900502BDD /* PBXTargetDependency */,
 				2D5CFD551B95CF2300303A20 /* PBXTargetDependency */,
 				2D60DCFD1B8DC7C0001C431F /* PBXTargetDependency */,
 				2D60DBA21B86236F001C431F /* PBXTargetDependency */,
@@ -649,6 +659,11 @@
 			isa = PBXTargetDependency;
 			name = Vorbis;
 			targetProxy = 2D60DCFC1B8DC7C0001C431F /* PBXContainerItemProxy */;
+		};
+		4C3AE57D1BA31A0900502BDD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = jpeg;
+			targetProxy = 4C3AE57C1BA31A0900502BDD /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
