@@ -7,6 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D8348E51BA3184D00921495 /* ftcache.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D8348D21BA3184D00921495 /* ftcache.c */; };
+		2D8348E61BA3184D00921495 /* ftcbasic.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D8348D31BA3184D00921495 /* ftcbasic.c */; };
+		2D8348E71BA3184D00921495 /* ftccache.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D8348D41BA3184D00921495 /* ftccache.c */; };
+		2D8348E81BA3184D00921495 /* ftccache.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D8348D51BA3184D00921495 /* ftccache.h */; };
+		2D8348E91BA3184D00921495 /* ftccback.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D8348D61BA3184D00921495 /* ftccback.h */; };
+		2D8348EA1BA3184D00921495 /* ftccmap.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D8348D71BA3184D00921495 /* ftccmap.c */; };
+		2D8348EB1BA3184D00921495 /* ftcerror.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D8348D81BA3184D00921495 /* ftcerror.h */; };
+		2D8348EC1BA3184D00921495 /* ftcglyph.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D8348D91BA3184D00921495 /* ftcglyph.c */; };
+		2D8348ED1BA3184D00921495 /* ftcglyph.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D8348DA1BA3184D00921495 /* ftcglyph.h */; };
+		2D8348EE1BA3184D00921495 /* ftcimage.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D8348DB1BA3184D00921495 /* ftcimage.c */; };
+		2D8348EF1BA3184D00921495 /* ftcimage.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D8348DC1BA3184D00921495 /* ftcimage.h */; };
+		2D8348F01BA3184D00921495 /* ftcmanag.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D8348DD1BA3184D00921495 /* ftcmanag.c */; };
+		2D8348F11BA3184D00921495 /* ftcmanag.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D8348DE1BA3184D00921495 /* ftcmanag.h */; };
+		2D8348F21BA3184D00921495 /* ftcmru.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D8348DF1BA3184D00921495 /* ftcmru.c */; };
+		2D8348F31BA3184D00921495 /* ftcmru.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D8348E01BA3184D00921495 /* ftcmru.h */; };
+		2D8348F41BA3184D00921495 /* ftcsbits.c in Sources */ = {isa = PBXBuildFile; fileRef = 2D8348E11BA3184D00921495 /* ftcsbits.c */; };
+		2D8348F51BA3184D00921495 /* ftcsbits.h in Headers */ = {isa = PBXBuildFile; fileRef = 2D8348E21BA3184D00921495 /* ftcsbits.h */; };
 		6382B98A0FB12EFC00ECAC02 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		63C2D982134D74FF008ACEBC /* psnames.c in Sources */ = {isa = PBXBuildFile; fileRef = 63E2A930134D63990044A25D /* psnames.c */; };
 		63E2A9BB134D639A0044A25D /* ftconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 63E2A7B1134D63990044A25D /* ftconfig.h */; };
@@ -241,6 +258,23 @@
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2D8348D21BA3184D00921495 /* ftcache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftcache.c; path = ../../src/freetype/src/cache/ftcache.c; sourceTree = SOURCE_ROOT; };
+		2D8348D31BA3184D00921495 /* ftcbasic.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftcbasic.c; path = ../../src/freetype/src/cache/ftcbasic.c; sourceTree = SOURCE_ROOT; };
+		2D8348D41BA3184D00921495 /* ftccache.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftccache.c; path = ../../src/freetype/src/cache/ftccache.c; sourceTree = SOURCE_ROOT; };
+		2D8348D51BA3184D00921495 /* ftccache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftccache.h; path = ../../src/freetype/src/cache/ftccache.h; sourceTree = SOURCE_ROOT; };
+		2D8348D61BA3184D00921495 /* ftccback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftccback.h; path = ../../src/freetype/src/cache/ftccback.h; sourceTree = SOURCE_ROOT; };
+		2D8348D71BA3184D00921495 /* ftccmap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftccmap.c; path = ../../src/freetype/src/cache/ftccmap.c; sourceTree = SOURCE_ROOT; };
+		2D8348D81BA3184D00921495 /* ftcerror.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftcerror.h; path = ../../src/freetype/src/cache/ftcerror.h; sourceTree = SOURCE_ROOT; };
+		2D8348D91BA3184D00921495 /* ftcglyph.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftcglyph.c; path = ../../src/freetype/src/cache/ftcglyph.c; sourceTree = SOURCE_ROOT; };
+		2D8348DA1BA3184D00921495 /* ftcglyph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftcglyph.h; path = ../../src/freetype/src/cache/ftcglyph.h; sourceTree = SOURCE_ROOT; };
+		2D8348DB1BA3184D00921495 /* ftcimage.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftcimage.c; path = ../../src/freetype/src/cache/ftcimage.c; sourceTree = SOURCE_ROOT; };
+		2D8348DC1BA3184D00921495 /* ftcimage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftcimage.h; path = ../../src/freetype/src/cache/ftcimage.h; sourceTree = SOURCE_ROOT; };
+		2D8348DD1BA3184D00921495 /* ftcmanag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftcmanag.c; path = ../../src/freetype/src/cache/ftcmanag.c; sourceTree = SOURCE_ROOT; };
+		2D8348DE1BA3184D00921495 /* ftcmanag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftcmanag.h; path = ../../src/freetype/src/cache/ftcmanag.h; sourceTree = SOURCE_ROOT; };
+		2D8348DF1BA3184D00921495 /* ftcmru.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftcmru.c; path = ../../src/freetype/src/cache/ftcmru.c; sourceTree = SOURCE_ROOT; };
+		2D8348E01BA3184D00921495 /* ftcmru.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftcmru.h; path = ../../src/freetype/src/cache/ftcmru.h; sourceTree = SOURCE_ROOT; };
+		2D8348E11BA3184D00921495 /* ftcsbits.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ftcsbits.c; path = ../../src/freetype/src/cache/ftcsbits.c; sourceTree = SOURCE_ROOT; };
+		2D8348E21BA3184D00921495 /* ftcsbits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ftcsbits.h; path = ../../src/freetype/src/cache/ftcsbits.h; sourceTree = SOURCE_ROOT; };
 		6382B1B10FB0FC5100ECAC02 /* libFreetype2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFreetype2.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		63E2A7B1134D63990044A25D /* ftconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftconfig.h; sourceTree = "<group>"; };
 		63E2A7B2134D63990044A25D /* ftheader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ftheader.h; sourceTree = "<group>"; };
@@ -511,6 +545,31 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2D8348D11BA3184D00921495 /* cache */ = {
+			isa = PBXGroup;
+			children = (
+				2D8348D21BA3184D00921495 /* ftcache.c */,
+				2D8348D31BA3184D00921495 /* ftcbasic.c */,
+				2D8348D41BA3184D00921495 /* ftccache.c */,
+				2D8348D51BA3184D00921495 /* ftccache.h */,
+				2D8348D61BA3184D00921495 /* ftccback.h */,
+				2D8348D71BA3184D00921495 /* ftccmap.c */,
+				2D8348D81BA3184D00921495 /* ftcerror.h */,
+				2D8348D91BA3184D00921495 /* ftcglyph.c */,
+				2D8348DA1BA3184D00921495 /* ftcglyph.h */,
+				2D8348DB1BA3184D00921495 /* ftcimage.c */,
+				2D8348DC1BA3184D00921495 /* ftcimage.h */,
+				2D8348DD1BA3184D00921495 /* ftcmanag.c */,
+				2D8348DE1BA3184D00921495 /* ftcmanag.h */,
+				2D8348DF1BA3184D00921495 /* ftcmru.c */,
+				2D8348E01BA3184D00921495 /* ftcmru.h */,
+				2D8348E11BA3184D00921495 /* ftcsbits.c */,
+				2D8348E21BA3184D00921495 /* ftcsbits.h */,
+			);
+			name = cache;
+			path = ../../../src/freetype/src/cache;
+			sourceTree = "<group>";
+		};
 		63E2A7AE134D63990044A25D /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -637,6 +696,7 @@
 		63E2A807134D63990044A25D /* src */ = {
 			isa = PBXGroup;
 			children = (
+				2D8348D11BA3184D00921495 /* cache */,
 				63E2A808134D63990044A25D /* autofit */,
 				63E2A827134D63990044A25D /* base */,
 				63E2A870134D63990044A25D /* cff */,
@@ -868,6 +928,7 @@
 				63E2AA48134D639C0044A25D /* ftsnames.c in Headers */,
 				63E2AA0F134D639B0044A25D /* afangles.c in Headers */,
 				63E2AA11134D639B0044A25D /* afcjk.c in Headers */,
+				2D8348EB1BA3184D00921495 /* ftcerror.h in Headers */,
 				63E2AA13134D639B0044A25D /* afdummy.c in Headers */,
 				63E2AA16134D639B0044A25D /* afglobal.c in Headers */,
 				63E2AA18134D639B0044A25D /* afhints.c in Headers */,
@@ -875,12 +936,14 @@
 				63E2AA1C134D639B0044A25D /* aflatin.c in Headers */,
 				63E2AA1E134D639B0044A25D /* aflatin2.c in Headers */,
 				63E2AA20134D639B0044A25D /* afloader.c in Headers */,
+				2D8348E81BA3184D00921495 /* ftccache.h in Headers */,
 				63E2AA22134D639B0044A25D /* afmodule.c in Headers */,
 				63E2AA24134D639B0044A25D /* afpic.c in Headers */,
 				63E2AA27134D639B0044A25D /* afwarp.c in Headers */,
 				63E2AA6D134D639C0044A25D /* cffcmap.c in Headers */,
 				63E2AA6F134D639D0044A25D /* cffdrivr.c in Headers */,
 				63E2AA72134D639D0044A25D /* cffgload.c in Headers */,
+				2D8348F51BA3184D00921495 /* ftcsbits.h in Headers */,
 				63E2AA74134D639D0044A25D /* cffload.c in Headers */,
 				63E2AA76134D639D0044A25D /* cffobjs.c in Headers */,
 				63E2AA78134D639D0044A25D /* cffparse.c in Headers */,
@@ -1022,6 +1085,7 @@
 				63E2AA73134D639D0044A25D /* cffgload.h in Headers */,
 				63E2AA75134D639D0044A25D /* cffload.h in Headers */,
 				63E2AA77134D639D0044A25D /* cffobjs.h in Headers */,
+				2D8348F11BA3184D00921495 /* ftcmanag.h in Headers */,
 				63E2AA79134D639D0044A25D /* cffparse.h in Headers */,
 				63E2AA7B134D639D0044A25D /* cffpic.h in Headers */,
 				63E2AA7C134D639D0044A25D /* cfftoken.h in Headers */,
@@ -1042,6 +1106,7 @@
 				63E2AB17134D63A70044A25D /* rasterrs.h in Headers */,
 				63E2AB19134D63A70044A25D /* rastpic.h in Headers */,
 				63E2AB1C134D63A70044A25D /* sfdriver.h in Headers */,
+				2D8348F31BA3184D00921495 /* ftcmru.h in Headers */,
 				63E2AB1D134D63A70044A25D /* sferrors.h in Headers */,
 				63E2AB20134D63A80044A25D /* sfntpic.h in Headers */,
 				63E2AB22134D63A80044A25D /* sfobjs.h in Headers */,
@@ -1061,12 +1126,15 @@
 				63E2AB47134D63AC0044A25D /* tterrors.h in Headers */,
 				63E2AB49134D63AC0044A25D /* ttgload.h in Headers */,
 				63E2AB4B134D63AD0044A25D /* ttgxvar.h in Headers */,
+				2D8348E91BA3184D00921495 /* ftccback.h in Headers */,
 				63E2AB4D134D63AD0044A25D /* ttinterp.h in Headers */,
+				2D8348EF1BA3184D00921495 /* ftcimage.h in Headers */,
 				63E2AB4F134D63AD0044A25D /* ttobjs.h in Headers */,
 				63E2AB51134D63AD0044A25D /* ttpic.h in Headers */,
 				63E2AA2D134D639B0044A25D /* ftadvanc.c in Headers */,
 				63E2AA3A134D639C0044A25D /* ftgloadr.c in Headers */,
 				63E2AA41134D639C0044A25D /* ftobjs.c in Headers */,
+				2D8348ED1BA3184D00921495 /* ftcglyph.h in Headers */,
 				63E2AA43134D639C0044A25D /* ftoutln.c in Headers */,
 				63E2AA47134D639C0044A25D /* ftrfork.c in Headers */,
 				63E2AA49134D639C0044A25D /* ftstream.c in Headers */,
@@ -1132,18 +1200,27 @@
 				63E2AA2B134D639B0044A25D /* basepic.c in Sources */,
 				63E2AA2E134D639B0044A25D /* ftapi.c in Sources */,
 				63E2AA2F134D639B0044A25D /* ftbase.c in Sources */,
+				2D8348F01BA3184D00921495 /* ftcmanag.c in Sources */,
 				63E2AA31134D639B0044A25D /* ftbbox.c in Sources */,
+				2D8348EA1BA3184D00921495 /* ftccmap.c in Sources */,
 				63E2AA33134D639B0044A25D /* ftbitmap.c in Sources */,
 				63E2AA36134D639C0044A25D /* ftdbgmem.c in Sources */,
 				63E2AA37134D639C0044A25D /* ftdebug.c in Sources */,
 				63E2AA3B134D639C0044A25D /* ftglyph.c in Sources */,
+				2D8348EC1BA3184D00921495 /* ftcglyph.c in Sources */,
 				63E2AA3D134D639C0044A25D /* ftinit.c in Sources */,
 				63E2AA46134D639C0044A25D /* ftpic.c in Sources */,
 				63E2AA4A134D639C0044A25D /* ftstroke.c in Sources */,
+				2D8348E71BA3184D00921495 /* ftccache.c in Sources */,
 				63E2AA4B134D639C0044A25D /* ftsynth.c in Sources */,
+				2D8348F41BA3184D00921495 /* ftcsbits.c in Sources */,
+				2D8348F21BA3184D00921495 /* ftcmru.c in Sources */,
 				63E2AA4C134D639C0044A25D /* ftsystem.c in Sources */,
+				2D8348E61BA3184D00921495 /* ftcbasic.c in Sources */,
 				63C2D982134D74FF008ACEBC /* psnames.c in Sources */,
+				2D8348EE1BA3184D00921495 /* ftcimage.c in Sources */,
 				63E2AA6C134D639C0044A25D /* cff.c in Sources */,
+				2D8348E51BA3184D00921495 /* ftcache.c in Sources */,
 				63E2AB00134D63A50044A25D /* pshinter.c in Sources */,
 				63E2AB16134D63A70044A25D /* raster.c in Sources */,
 				63E2AB1E134D63A70044A25D /* sfnt.c in Sources */,
