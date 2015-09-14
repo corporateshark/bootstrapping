@@ -374,7 +374,7 @@ def main(argv):
             DEBUG_OUTPUT = True
 
     state_filename = os.path.join(os.path.dirname(os.path.splitext(bootstrap_filename)[0]), \
-                                  "_state_" + os.path.basename(os.path.splitext(bootstrap_filename)[0])) \
+                                  "." + os.path.basename(os.path.splitext(bootstrap_filename)[0])) \
                      + os.path.splitext(bootstrap_filename)[1]
 
     dlog("bootstrap_filename = " + bootstrap_filename)
