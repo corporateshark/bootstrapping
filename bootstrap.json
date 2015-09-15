@@ -62,8 +62,9 @@
 {
     "name": "libjpeg-turbo",
     "source": {
-        "type": "svn",
-        "url": "svn://svn.code.sf.net/p/libjpeg-turbo/code/tags/1.4.1"
+        "type": "git",
+        "url": "https://github.com/libjpeg-turbo/libjpeg-turbo.git",
+        "revision": "a8af72437ea12ec541af0f62fae20c9f8d381723"
     },
     "postprocess": {
         "type": "patch",
