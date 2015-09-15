@@ -2,4 +2,5 @@ build
 src
 orig
 .*.json
+*.json
 .idea
