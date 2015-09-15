@@ -16,23 +16,36 @@ import tarfile
 import hashlib
 import json
 import getopt
+#import progressbar
+
 try:
     from urllib.request import urlparse
+    from urllib.request import urlunparse
     from urllib.request import urlretrieve
+    from urllib.request import quote
 except ImportError:
     from urlparse import urlparse
+    from urlparse import urlunparse
     from urllib import urlretrieve
+    from urllib import quote
 
-#import progressbar
-#import paramiko
-#import scp
+try:
+    import paramiko
+    import scp
+    scp_available = True
+except:
+    scp_available = False
+
+SRC_DIR_BASE = "src"
+ORIG_DIR_BASE = "orig"
 
 BASE_DIR = os.getcwd()
-SRC_DIR = os.path.join(BASE_DIR, "src")
-ORIG_DIR = os.path.join(BASE_DIR, "orig")
+SRC_DIR = os.path.join(BASE_DIR, SRC_DIR_BASE)
+ORIG_DIR = os.path.join(BASE_DIR, ORIG_DIR_BASE)
 
 DEFAULT_PNUM = 3
 DEBUG_OUTPUT = False
+FALLBACK_URL = ""
 
 USE_TAR = False
 USE_UNZIP = False
@@ -72,7 +85,7 @@ def dieIfNonZero(res):
         raise ValueError("Command returned non-zero status.");
 
 
-def cloneRepository(type, url, target_name, revision = None):
+def cloneRepository(type, url, target_name, revision = None, try_only_local_operations = False):
     target_dir = os.path.join(SRC_DIR, target_name)
     target_dir_exists = os.path.exists(target_dir)
     log("Cloning " + url + " to " + target_dir)
@@ -81,11 +94,13 @@ def cloneRepository(type, url, target_name, revision = None):
         repo_exists = os.path.exists(os.path.join(target_dir, ".hg"))
 
         if not repo_exists:
+            if try_only_local_operations:
+                raise RuntimeError("Repository for " + target_name + " not found; cannot execute local operations only")
             if target_dir_exists:
                 dlog("Removing directory " + target_dir + " before cloning")
                 shutil.rmtree(target_dir)
             dieIfNonZero(executeCommand("hg clone " + url + " " + target_dir))
-        else:
+        elif not try_only_local_operations:
             log("Repository " + target_dir + " already exists; pulling instead of cloning")
             dieIfNonZero(executeCommand("hg pull -R " + target_dir))
 
@@ -98,11 +113,13 @@ def cloneRepository(type, url, target_name, revision = None):
         repo_exists = os.path.exists(os.path.join(target_dir, ".git"))
 
         if not repo_exists:
+            if try_only_local_operations:
+                raise RuntimeError("Repository for " + target_name + " not found; cannot execute local operations only")
             if target_dir_exists:
                 dlog("Removing directory " + target_dir + " before cloning")
                 shutil.rmtree(target_dir)
             dieIfNonZero(executeCommand("git clone " + url + " " + target_dir))
-        else:
+        elif not try_only_local_operations:
             log("Repository " + target_dir + " already exists; fetching instead of cloning")
             dieIfNonZero(executeCommand("git -C " + target_dir + " fetch"))
 
@@ -112,10 +129,11 @@ def cloneRepository(type, url, target_name, revision = None):
         dieIfNonZero(executeCommand("git -C " + target_dir + " clean -fxd"))
 
     elif type == "svn":
-        if target_dir_exists:
-            dlog("Removing directory " + target_dir + " before cloning")
-            shutil.rmtree(target_dir)
-        dieIfNonZero(executeCommand("svn checkout " + url + " " + target_dir))
+        if not try_only_local_operations: # we can't do much without a server connection when dealing with SVN
+            if target_dir_exists:
+                dlog("Removing directory " + target_dir + " before cloning")
+                shutil.rmtree(target_dir)
+            dieIfNonZero(executeCommand("svn checkout " + url + " " + target_dir))
 
         if revision is not None and revision != "":
             raise RuntimeError("Updating to revision not implemented for SVN.")
@@ -188,12 +206,12 @@ def extractFile(filename, target_dir):
     os.rename(extract_dir_abs, target_dir)
 
 
-# def downloadSCP(hostname, username, path, target_dir):
-#     ssh = paramiko.SSHClient()
-#     ssh.load_system_host_keys()
-#     ssh.connect(hostname = hostname, username = username)
-#     scpc = scp.SCPClient(ssh.get_transport())
-#     scpc.get(path, local_path = target_dir);
+def downloadSCP(hostname, username, path, target_dir):
+    ssh = paramiko.SSHClient()
+    ssh.load_system_host_keys()
+    ssh.connect(hostname = hostname, username = username)
+    scpc = scp.SCPClient(ssh.get_transport())
+    scpc.get(path, local_path = target_dir);
 
 
 # def downloadProgress(count, block_size, total_size):
@@ -217,6 +235,8 @@ def computeFileHash(filename):
 
 def downloadAndExtractFile(url, target_dir_name, sha1_hash = None):
     p = urlparse(url)
+    url = urlunparse([p[0], p[1], quote(p[2]), p[3], p[4], p[5]]) # replace special characters in the URL path
+
     filename_rel = os.path.split(p.path)[1] # get original filename
     target_filename = os.path.join(ORIG_DIR, filename_rel)
 
@@ -246,6 +266,23 @@ def downloadAndExtractFile(url, target_dir_name, sha1_hash = None):
             raise RuntimeError("Hash of " + target_filename + " (" + hash_file + ") differs from expected hash (" + sha1_hash + ")")
 
     extractFile(target_filename, os.path.join(SRC_DIR, target_dir_name))
+
+
+def downloadDirectory(url, target_dir_name):
+    p = urlparse(url)
+
+    # TODO: write a robust function that actually works :)
+
+    if p.scheme == "http" or p.scheme == "https" or p.scheme == "ftp":
+        # The following doesn't work on some directories; reason unknown
+        #command = "wget -r -nH --no-parent --reject \"index.html*\" -P " + target_dir_name + " --cut-dirs=2 " + url + "/"
+        #executeCommand(command)
+        raise RuntimeError("not implemented")
+    elif p.scheme == "file":
+        raise RuntimeError("not implemented")
+    elif p.scheme == "ssh":
+        # completely untested
+        downloadSCP(p.hostname, p.username, p.path, target_dir_name);
 
 
 def applyPatchFile(patch_name, dir_name, pnum):
@@ -332,11 +369,13 @@ def printOptions():
         print("  --use-unzip       Use 'unzip' command instead of Python standard library to extract")
         print("                    zip archives")
         print("  --debug-output    Enables extra debugging output")
-#        print("  --fallback-url    Fallback URL that points to an existing and bootstrapped External repository")
+        print("  --fallback-url    Fallback URL that points to an existing and bootstrapped `external`")
+        print("                    repository that may be used to retrieve otherwise unobtainable")
+        print("                    archives or repositories.")
 
 
 def main(argv):
-    global BASE_DIR, SRC_DIR, ORIG_DIR, DEBUG_OUTPUT, USE_TAR, USE_UNZIP
+    global BASE_DIR, SRC_DIR, ORIG_DIR, DEBUG_OUTPUT, FALLBACK_URL, USE_TAR, USE_UNZIP
 
     required_commands = ["git", "hg", "svn", "patch"]
     if (checkPrerequisites(*required_commands) != 0):
@@ -344,7 +383,7 @@ def main(argv):
         return -1
 
     try:
-        opts, args = getopt.getopt(argv,"ln:cb:h",["list", "name=", "clean", "base-dir", "bootstrap-file=", "use-tar", "use-unzip", "debug-output", "help"])
+        opts, args = getopt.getopt(argv,"ln:cb:h",["list", "name=", "clean", "base-dir", "bootstrap-file=", "use-tar", "use-unzip", "debug-output", "fallback-url=", "help"])
     except getopt.GetoptError:
         printOptions()
         return 0
@@ -370,8 +409,8 @@ def main(argv):
             ABS_PATH = os.path.abspath(arg)
             os.chdir(ABS_PATH)
             BASE_DIR = ABS_PATH
-            SRC_DIR = os.path.join(BASE_DIR, "src")
-            ORIG_DIR = os.path.join(BASE_DIR, "orig")
+            SRC_DIR = os.path.join(BASE_DIR, SRC_DIR_BASE)
+            ORIG_DIR = os.path.join(BASE_DIR, ORIG_DIR_BASE)
             bootstrap_filename = os.path.join(BASE_DIR, default_bootstrap_filename)
             log("Using " + arg + " as base directory")
         if opt in ("--bootstrap-file",):
@@ -382,6 +421,8 @@ def main(argv):
             USE_UNZIP = True
         if opt in ("--debug-output",):
             DEBUG_OUTPUT = True
+        if opt in ("--fallback-url",):
+            FALLBACK_URL = arg
 
     state_filename = os.path.join(os.path.dirname(os.path.splitext(bootstrap_filename)[0]), \
                                   "." + os.path.basename(os.path.splitext(bootstrap_filename)[0])) \
@@ -470,9 +511,34 @@ def main(argv):
                 src_url = source['url']
 
                 if src_type == "archive":
-                    downloadAndExtractFile(src_url, name, source.get('sha1', None))
+                    try:
+                        downloadAndExtractFile(src_url, name, source.get('sha1', None))
+                    except:
+                        if FALLBACK_URL:
+                            log("Downloading of file " + src_url + " failed; trying fallback")
+                            p = urlparse(src_url)
+                            filename_rel = os.path.split(p.path)[1] # get original filename
+                            p = urlparse(FALLBACK_URL)
+                            fallback_src_url = urlunparse([p[0], p[1], p[2] + "/" + ORIG_DIR_BASE + "/" + filename_rel, p[3], p[4], p[5]])
+                            downloadAndExtractFile(fallback_src_url, name, source.get('sha1', None))
+                        else:
+                            raise
+
                 else:
-                    cloneRepository(src_type, src_url, name, source.get('revision', None))
+                    try:
+                        cloneRepository(src_type, src_url, name, source.get('revision', None))
+                        #raise RuntimeError("...")
+                    except:
+                        if FALLBACK_URL:
+                            log("Cloning of repository " + src_url + " failed; trying fallback")
+                            # copy directory from fallback location
+                            p = urlparse(FALLBACK_URL)
+                            fallback_src_url = urlunparse([p[0], p[1], p[2] + "/" + SRC_DIR_BASE + "/" + name, p[3], p[4], p[5]])
+                            downloadDirectory(fallback_src_url, os.path.join(SRC_DIR, name))
+                            # reset repository state to particular revision (only using local operations inside the function)
+                            cloneRepository(src_type, src_url, name, source.get('revision', None), True)
+                        else:
+                            raise
             else:
                 # set up clean directory for potential patch application
                 shutil.rmtree(lib_dir)
