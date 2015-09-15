@@ -74,12 +74,16 @@ def dieIfNonZero(res):
 
 def cloneRepository(type, url, target_name, revision = None):
     target_dir = os.path.join(SRC_DIR, target_name)
+    target_dir_exists = os.path.exists(target_dir)
     log("Cloning " + url + " to " + target_dir)
 
     if type == "hg":
         repo_exists = os.path.exists(os.path.join(target_dir, ".hg"))
 
         if not repo_exists:
+            if target_dir_exists:
+                dlog("Removing directory " + target_dir + " before cloning")
+                shutil.rmtree(target_dir)
             dieIfNonZero(executeCommand("hg clone " + url + " " + target_dir))
         else:
             log("Repository " + target_dir + " already exists; pulling instead of cloning")
@@ -94,6 +98,9 @@ def cloneRepository(type, url, target_name, revision = None):
         repo_exists = os.path.exists(os.path.join(target_dir, ".git"))
 
         if not repo_exists:
+            if target_dir_exists:
+                dlog("Removing directory " + target_dir + " before cloning")
+                shutil.rmtree(target_dir)
             dieIfNonZero(executeCommand("git clone " + url + " " + target_dir))
         else:
             log("Repository " + target_dir + " already exists; fetching instead of cloning")
@@ -105,6 +112,9 @@ def cloneRepository(type, url, target_name, revision = None):
         dieIfNonZero(executeCommand("git -C " + target_dir + " clean -fxd"))
 
     elif type == "svn":
+        if target_dir_exists:
+            dlog("Removing directory " + target_dir + " before cloning")
+            shutil.rmtree(target_dir)
         dieIfNonZero(executeCommand("svn checkout " + url + " " + target_dir))
 
         if revision is not None and revision != "":
