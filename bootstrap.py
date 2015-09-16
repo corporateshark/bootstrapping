@@ -35,13 +35,16 @@ try:
     scp_available = True
 except:
     scp_available = False
+    print("WARNING: Please install the Python packages [paramiko, scp] for full script operation.")
 
 SRC_DIR_BASE = "src"
-ORIG_DIR_BASE = "orig"
+ARCHIVE_DIR_BASE = "archives"
+SNAPSHOT_DIR_BASE = "snapshots"
 
 BASE_DIR = os.getcwd()
 SRC_DIR = os.path.join(BASE_DIR, SRC_DIR_BASE)
-ORIG_DIR = os.path.join(BASE_DIR, ORIG_DIR_BASE)
+ARCHIVE_DIR = os.path.join(BASE_DIR, ARCHIVE_DIR_BASE)
+SNAPSHOT_DIR = os.path.join(BASE_DIR, SNAPSHOT_DIR_BASE)
 
 DEFAULT_PNUM = 3
 DEBUG_OUTPUT = False
@@ -52,7 +55,6 @@ USE_UNZIP = False
 
 if platform.system() == "Windows":
     os.environ['CYGWIN'] = "nodosfilewarning"
-
 
 def log(string):
     print("--- " + string)
@@ -206,7 +208,23 @@ def extractFile(filename, target_dir):
     os.rename(extract_dir_abs, target_dir)
 
 
+def createArchiveFromDirectory(src_dir_name, archive_name, delete_existing_archive = False):
+    if delete_existing_archive and os.path.exists(archive_name):
+        dlog("Removing snapshot file " + archive_name + " before creating new one")
+        os.remove(archive_name)
+
+    archive_dir = os.path.dirname(archive_name)
+    if not os.path.isdir(archive_dir):
+        os.mkdir(archive_dir)
+
+    with tarfile.open(archive_name, "w:gz") as tar:
+        tar.add(src_dir_name, arcname = os.path.basename(src_dir_name))
+
+
 def downloadSCP(hostname, username, path, target_dir):
+    if not scp_available:
+        log("ERROR: missing Python packages [paramiko, scp]; cannot continue.")
+        raise RuntimeError("Missing Python packages [paramiko, scp]; cannot continue.")
     ssh = paramiko.SSHClient()
     ssh.load_system_host_keys()
     ssh.connect(hostname = hostname, username = username)
@@ -233,15 +251,17 @@ def computeFileHash(filename):
     return hasher.hexdigest()
 
 
-def downloadAndExtractFile(url, target_dir_name, sha1_hash = None):
+def downloadAndExtractFile(url, download_dir, target_dir_name, sha1_hash = None, force_download = False):
+    if not os.path.isdir(download_dir):
+        os.mkdir(download_dir)
+
     p = urlparse(url)
     url = urlunparse([p[0], p[1], quote(p[2]), p[3], p[4], p[5]]) # replace special characters in the URL path
 
     filename_rel = os.path.split(p.path)[1] # get original filename
-    target_filename = os.path.join(ORIG_DIR, filename_rel)
+    target_filename = os.path.join(download_dir, filename_rel)
 
     # check SHA1 hash, if file already exists
-    force_download = False
     if os.path.exists(target_filename) and sha1_hash is not None and sha1_hash != "":
         hash_file = computeFileHash(target_filename)
         if hash_file != sha1_hash:
@@ -251,11 +271,10 @@ def downloadAndExtractFile(url, target_dir_name, sha1_hash = None):
     # download file
     if (not os.path.exists(target_filename)) or force_download:
         log("Downloading " + url + " to " + target_filename)
-        # if p.scheme == "ssh":
-        #     downloadSCP(p.hostname, p.username, p.path, ORIG_DIR)
-        # else:
-        #     urlretrieve(url, target_filename, reporthook = downloadProgress)
-        urlretrieve(url, target_filename)
+        if p.scheme == "ssh":
+            downloadSCP(p.hostname, p.username, p.path, download_dir)
+        else:
+            urlretrieve(url, target_filename)
     else:
         log("Skipping download of " + url + "; already downloaded")
 
@@ -266,23 +285,6 @@ def downloadAndExtractFile(url, target_dir_name, sha1_hash = None):
             raise RuntimeError("Hash of " + target_filename + " (" + hash_file + ") differs from expected hash (" + sha1_hash + ")")
 
     extractFile(target_filename, os.path.join(SRC_DIR, target_dir_name))
-
-
-def downloadDirectory(url, target_dir_name):
-    p = urlparse(url)
-
-    # TODO: write a robust function that actually works :)
-
-    if p.scheme == "http" or p.scheme == "https" or p.scheme == "ftp":
-        # The following doesn't work on some directories; reason unknown
-        #command = "wget -r -nH --no-parent --reject \"index.html*\" -P " + target_dir_name + " --cut-dirs=2 " + url + "/"
-        #executeCommand(command)
-        raise RuntimeError("not implemented")
-    elif p.scheme == "file":
-        raise RuntimeError("not implemented")
-    elif p.scheme == "ssh":
-        # completely untested
-        downloadSCP(p.hostname, p.username, p.path, target_dir_name);
 
 
 def applyPatchFile(patch_name, dir_name, pnum):
@@ -368,14 +370,17 @@ def printOptions():
         print("                    tar archives")
         print("  --use-unzip       Use 'unzip' command instead of Python standard library to extract")
         print("                    zip archives")
-        print("  --debug-output    Enables extra debugging output")
+        print("  --repo-snapshots  Create a snapshot archive of a repository when its state changes,")
+        print("                    e.g. on a fallback location")
         print("  --fallback-url    Fallback URL that points to an existing and bootstrapped `external`")
         print("                    repository that may be used to retrieve otherwise unobtainable")
-        print("                    archives or repositories.")
-
+        print("                    archives or repositories. The --repo-snapshots option must be active")
+        print("                    on the fallback server. Allowed URL schemes are file://, ssh://,")
+        print("                    http://, https://, ftp://.")
+        print("  --debug-output    Enables extra debugging output")
 
 def main(argv):
-    global BASE_DIR, SRC_DIR, ORIG_DIR, DEBUG_OUTPUT, FALLBACK_URL, USE_TAR, USE_UNZIP
+    global BASE_DIR, SRC_DIR, ARCHIVE_DIR, DEBUG_OUTPUT, FALLBACK_URL, USE_TAR, USE_UNZIP
 
     required_commands = ["git", "hg", "svn", "patch"]
     if (checkPrerequisites(*required_commands) != 0):
@@ -383,7 +388,7 @@ def main(argv):
         return -1
 
     try:
-        opts, args = getopt.getopt(argv,"ln:cb:h",["list", "name=", "clean", "base-dir", "bootstrap-file=", "use-tar", "use-unzip", "debug-output", "fallback-url=", "help"])
+        opts, args = getopt.getopt(argv,"ln:cb:h",["list", "name=", "clean", "base-dir", "bootstrap-file=", "use-tar", "use-unzip", "repo-snapshots", "fallback-url=", "debug-output", "help"])
     except getopt.GetoptError:
         printOptions()
         return 0
@@ -394,6 +399,7 @@ def main(argv):
 
     default_bootstrap_filename = "bootstrap.json"
     bootstrap_filename = os.path.abspath(os.path.join(BASE_DIR, default_bootstrap_filename))
+    create_repo_snapshots = False
 
     for opt, arg in opts:
         if opt in ("-h", "--help"):
@@ -410,7 +416,7 @@ def main(argv):
             os.chdir(ABS_PATH)
             BASE_DIR = ABS_PATH
             SRC_DIR = os.path.join(BASE_DIR, SRC_DIR_BASE)
-            ORIG_DIR = os.path.join(BASE_DIR, ORIG_DIR_BASE)
+            ARCHIVE_DIR = os.path.join(BASE_DIR, ARCHIVE_DIR_BASE)
             bootstrap_filename = os.path.join(BASE_DIR, default_bootstrap_filename)
             log("Using " + arg + " as base directory")
         if opt in ("--bootstrap-file",):
@@ -419,10 +425,13 @@ def main(argv):
             USE_TAR = True
         if opt in ("--use-unzip",):
             USE_UNZIP = True
-        if opt in ("--debug-output",):
-            DEBUG_OUTPUT = True
+        if opt in ("--repo-snapshots",):
+            create_repo_snapshots = True
+            log("Will create repository snapshots")
         if opt in ("--fallback-url",):
             FALLBACK_URL = arg
+        if opt in ("--debug-output",):
+            DEBUG_OUTPUT = True
 
     state_filename = os.path.join(os.path.dirname(os.path.splitext(bootstrap_filename)[0]), \
                                   "." + os.path.basename(os.path.splitext(bootstrap_filename)[0])) \
@@ -448,10 +457,10 @@ def main(argv):
         log("Creating directory " + SRC_DIR)
         os.mkdir(SRC_DIR)
 
-    # create original files directory
-    if not os.path.isdir(ORIG_DIR):
-        log("Creating directory " + ORIG_DIR)
-        os.mkdir(ORIG_DIR)
+    # create archive files directory
+    if not os.path.isdir(ARCHIVE_DIR):
+        log("Creating directory " + ARCHIVE_DIR)
+        os.mkdir(ARCHIVE_DIR)
 
     # some sanity checking
     for library in data:
@@ -511,32 +520,52 @@ def main(argv):
                 src_url = source['url']
 
                 if src_type == "archive":
+                    sha1 = source.get('sha1', None)
                     try:
-                        downloadAndExtractFile(src_url, name, source.get('sha1', None))
+                        downloadAndExtractFile(src_url, ARCHIVE_DIR, name, sha1)
                     except:
                         if FALLBACK_URL:
-                            log("Downloading of file " + src_url + " failed; trying fallback")
+                            log("WARNING: Downloading of file " + src_url + " failed; trying fallback")
                             p = urlparse(src_url)
                             filename_rel = os.path.split(p.path)[1] # get original filename
                             p = urlparse(FALLBACK_URL)
-                            fallback_src_url = urlunparse([p[0], p[1], p[2] + "/" + ORIG_DIR_BASE + "/" + filename_rel, p[3], p[4], p[5]])
-                            downloadAndExtractFile(fallback_src_url, name, source.get('sha1', None))
+                            fallback_src_url = urlunparse([p[0], p[1], p[2] + "/" + ARCHIVE_DIR_BASE + "/" + filename_rel, p[3], p[4], p[5]])
+                            downloadAndExtractFile(fallback_src_url, ARCHIVE_DIR, name, sha1)
                         else:
                             raise
 
                 else:
+                    revision = source.get('revision', None)
+
+                    archive_name = name + ".tar.gz" # for reading or writing of snapshot archives
+                    if revision is not None:
+                        archive_name = name + "_" + revision + ".tar.gz"
+
                     try:
-                        cloneRepository(src_type, src_url, name, source.get('revision', None))
-                        #raise RuntimeError("...")
+                        cloneRepository(src_type, src_url, name, revision)
+
+                        if create_repo_snapshots:
+                            log("Creating snapshot of library repository " + name)
+                            repo_dir = os.path.join(SRC_DIR, name)
+                            archive_filename = os.path.join(SNAPSHOT_DIR, archive_name)
+
+                            dlog("Snapshot will be saved as " + archive_filename)
+                            createArchiveFromDirectory(repo_dir, archive_filename, revision is None)
+
                     except:
                         if FALLBACK_URL:
-                            log("Cloning of repository " + src_url + " failed; trying fallback")
-                            # copy directory from fallback location
+                            log("WARNING: Cloning of repository " + src_url + " failed; trying fallback")
+
+                            # copy archived snapshot from fallback location
                             p = urlparse(FALLBACK_URL)
-                            fallback_src_url = urlunparse([p[0], p[1], p[2] + "/" + SRC_DIR_BASE + "/" + name, p[3], p[4], p[5]])
-                            downloadDirectory(fallback_src_url, os.path.join(SRC_DIR, name))
+                            fallback_src_url = urlunparse([p[0], p[1], p[2] + "/" + SNAPSHOT_DIR_BASE + "/" + archive_name, p[3], p[4], p[5]])
+                            dlog("Looking for snapshot " + fallback_src_url + " of library repository " + name)
+
+                            # create snapshots files directory
+                            downloadAndExtractFile(fallback_src_url, SNAPSHOT_DIR, name, force_download = True)
+
                             # reset repository state to particular revision (only using local operations inside the function)
-                            cloneRepository(src_type, src_url, name, source.get('revision', None), True)
+                            cloneRepository(src_type, src_url, name, revision, True)
                         else:
                             raise
             else:

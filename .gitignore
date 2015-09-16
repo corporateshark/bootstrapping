@@ -1,5 +1,6 @@
 build
 src
-orig
+archives
+snapshots
 .*.json
 .idea
