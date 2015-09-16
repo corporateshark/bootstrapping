@@ -362,7 +362,8 @@ def printOptions():
         print("Options:")
         print("  --list, -l        List all available libraries")
         print("  --name, -n        Specifies the name of a single library to be downloaded")
-        print("  --clean, -c       Remove directory before obtaining library")
+        print("  --clean, -c       Remove library directory before obtaining library")
+        print("  --clean-all, -C   Implies --clean, and also forces re-download of cached archive files")
         print("  --base-dir, -b    Base directory, if script is called from outside of its directory")
         print("  --bootstrap-file  Specify the file containing the bootstrap JSON data")
         print("                    (default: bootstrap.json)")
@@ -377,6 +378,7 @@ def printOptions():
         print("                    archives or repositories. The --repo-snapshots option must be active")
         print("                    on the fallback server. Allowed URL schemes are file://, ssh://,")
         print("                    http://, https://, ftp://.")
+        print("  --force-fallback  Force using the fallback URL instead of the original sources")
         print("  --debug-output    Enables extra debugging output")
 
 def main(argv):
@@ -388,18 +390,20 @@ def main(argv):
         return -1
 
     try:
-        opts, args = getopt.getopt(argv,"ln:cb:h",["list", "name=", "clean", "base-dir", "bootstrap-file=", "use-tar", "use-unzip", "repo-snapshots", "fallback-url=", "debug-output", "help"])
+        opts, args = getopt.getopt(argv,"ln:cCb:h",["list", "name=", "clean", "clean-all", "base-dir", "bootstrap-file=", "use-tar", "use-unzip", "repo-snapshots", "fallback-url=", "force-fallback", "debug-output", "help"])
     except getopt.GetoptError:
         printOptions()
         return 0
 
     opt_names = []
     opt_clean = False
+    opt_clean_archives = False
     list_libraries = False
 
     default_bootstrap_filename = "bootstrap.json"
     bootstrap_filename = os.path.abspath(os.path.join(BASE_DIR, default_bootstrap_filename))
     create_repo_snapshots = False
+    force_fallback = False
 
     for opt, arg in opts:
         if opt in ("-h", "--help"):
@@ -411,6 +415,9 @@ def main(argv):
             opt_names.append(arg)
         if opt in ("-c", "--clean"):
             opt_clean = True
+        if opt in ("-C", "--clean-all"):
+            opt_clean = True
+            opt_clean_archives = True
         if opt in ("-b", "--base-dir"):
             ABS_PATH = os.path.abspath(arg)
             os.chdir(ABS_PATH)
@@ -430,8 +437,15 @@ def main(argv):
             log("Will create repository snapshots")
         if opt in ("--fallback-url",):
             FALLBACK_URL = arg
+        if opt in ("--force-fallback",):
+            force_fallback = True
+            log("Using fallback URL to fetch all libraries")
         if opt in ("--debug-output",):
             DEBUG_OUTPUT = True
+
+    if force_fallback and not FALLBACK_URL:
+        log("Error: cannot force usage of the fallback location without specifying a fallback URL")
+        return -1;
 
     state_filename = os.path.join(os.path.dirname(os.path.splitext(bootstrap_filename)[0]), \
                                   "." + os.path.basename(os.path.splitext(bootstrap_filename)[0])) \
@@ -522,15 +536,19 @@ def main(argv):
                 if src_type == "archive":
                     sha1 = source.get('sha1', None)
                     try:
-                        downloadAndExtractFile(src_url, ARCHIVE_DIR, name, sha1)
+                        if force_fallback:
+                            raise RuntimeError
+                        downloadAndExtractFile(src_url, ARCHIVE_DIR, name, sha1, force_download = opt_clean_archives)
                     except:
                         if FALLBACK_URL:
-                            log("WARNING: Downloading of file " + src_url + " failed; trying fallback")
+                            if not force_fallback:
+                                log("WARNING: Downloading of file " + src_url + " failed; trying fallback")
+
                             p = urlparse(src_url)
                             filename_rel = os.path.split(p.path)[1] # get original filename
                             p = urlparse(FALLBACK_URL)
                             fallback_src_url = urlunparse([p[0], p[1], p[2] + "/" + ARCHIVE_DIR_BASE + "/" + filename_rel, p[3], p[4], p[5]])
-                            downloadAndExtractFile(fallback_src_url, ARCHIVE_DIR, name, sha1)
+                            downloadAndExtractFile(fallback_src_url, ARCHIVE_DIR, name, sha1, force_download = True)
                         else:
                             raise
 
@@ -542,6 +560,8 @@ def main(argv):
                         archive_name = name + "_" + revision + ".tar.gz"
 
                     try:
+                        if force_fallback:
+                            raise RuntimeError
                         cloneRepository(src_type, src_url, name, revision)
 
                         if create_repo_snapshots:
@@ -554,7 +574,8 @@ def main(argv):
 
                     except:
                         if FALLBACK_URL:
-                            log("WARNING: Cloning of repository " + src_url + " failed; trying fallback")
+                            if not force_fallback:
+                                log("WARNING: Cloning of repository " + src_url + " failed; trying fallback")
 
                             # copy archived snapshot from fallback location
                             p = urlparse(FALLBACK_URL)
