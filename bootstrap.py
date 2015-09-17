@@ -362,6 +362,9 @@ def printOptions():
         print("Options:")
         print("  --list, -l        List all available libraries")
         print("  --name, -n        Specifies the name of a single library to be downloaded")
+        print("  --name-file, -N   Specifies a file that contains a (sub)set of libraries to be")
+        print("                    downloaded. One library name per line; lines starting with '#'")
+        print("                    are considered comments.")
         print("  --clean, -c       Remove library directory before obtaining library")
         print("  --clean-all, -C   Implies --clean, and also forces re-download of cached archive files")
         print("  --base-dir, -b    Base directory, if script is called from outside of its directory")
@@ -390,12 +393,13 @@ def main(argv):
         return -1
 
     try:
-        opts, args = getopt.getopt(argv,"ln:cCb:h",["list", "name=", "clean", "clean-all", "base-dir", "bootstrap-file=", "use-tar", "use-unzip", "repo-snapshots", "fallback-url=", "force-fallback", "debug-output", "help"])
+        opts, args = getopt.getopt(argv,"ln:N:cCb:h",["list", "name=", "name-file=", "clean", "clean-all", "base-dir", "bootstrap-file=", "use-tar", "use-unzip", "repo-snapshots", "fallback-url=", "force-fallback", "debug-output", "help"])
     except getopt.GetoptError:
         printOptions()
         return 0
 
     opt_names = []
+    name_file = ""
     opt_clean = False
     opt_clean_archives = False
     list_libraries = False
@@ -413,6 +417,8 @@ def main(argv):
             list_libraries = True
         if opt in ("-n", "--name"):
             opt_names.append(arg)
+        if opt in ("-N", "--name-file"):
+            name_file = arg
         if opt in ("-c", "--clean"):
             opt_clean = True
         if opt in ("-C", "--clean-all"):
@@ -442,6 +448,15 @@ def main(argv):
             log("Using fallback URL to fetch all libraries")
         if opt in ("--debug-output",):
             DEBUG_OUTPUT = True
+
+    if name_file:
+        try:
+            with open(name_file) as f:
+                opt_names = [l for l in (line.strip() for line in f) if l]
+                opt_names = [l for l in opt_names if l[0] is not '#']
+        except:
+            log("ERROR: cannot parse name file " + name_file)
+            return -1
 
     if force_fallback and not FALLBACK_URL:
         log("Error: cannot force usage of the fallback location without specifying a fallback URL")
