@@ -1,10 +1,5 @@
 #!/usr/bin/env python
 
-# Dependencies (not needed at the moment; commented out below)
-# > pip install progressbar
-# > pip install paramiko
-# > pip install scp
-
 from __future__ import print_function
 import platform
 import os
@@ -53,15 +48,26 @@ FALLBACK_URL = ""
 USE_TAR = False
 USE_UNZIP = False
 
+TOOL_COMMAND_PYTHON = "python"
+TOOL_COMMAND_GIT = "git"
+TOOL_COMMAND_HG = "hg"
+TOOL_COMMAND_SVN = "svn"
+TOOL_COMMAND_PATCH = "patch"
+TOOL_COMMAND_TAR = "tar"
+TOOL_COMMAND_UNZIP = "unzip"
+
 if platform.system() == "Windows":
     os.environ['CYGWIN'] = "nodosfilewarning"
+
 
 def log(string):
     print("--- " + string)
 
+
 def dlog(string):
     if DEBUG_OUTPUT:
         print("*** " + string)
+
 
 def executeCommand(command, printCommand = False, quiet = False):
 
@@ -101,15 +107,15 @@ def cloneRepository(type, url, target_name, revision = None, try_only_local_oper
             if target_dir_exists:
                 dlog("Removing directory " + target_dir + " before cloning")
                 shutil.rmtree(target_dir)
-            dieIfNonZero(executeCommand("hg clone " + url + " " + target_dir))
+            dieIfNonZero(executeCommand(TOOL_COMMAND_HG + " clone " + url + " " + target_dir))
         elif not try_only_local_operations:
             log("Repository " + target_dir + " already exists; pulling instead of cloning")
-            dieIfNonZero(executeCommand("hg pull -R " + target_dir))
+            dieIfNonZero(executeCommand(TOOL_COMMAND_HG + " pull -R " + target_dir))
 
         if revision is None:
             revision = ""
-        dieIfNonZero(executeCommand("hg update -R " + target_dir + " -C " + revision))
-        dieIfNonZero(executeCommand("hg purge -R " + target_dir + " --config extensions.purge="))
+        dieIfNonZero(executeCommand(TOOL_COMMAND_HG + " update -R " + target_dir + " -C " + revision))
+        dieIfNonZero(executeCommand(TOOL_COMMAND_HG + " purge -R " + target_dir + " --config extensions.purge="))
 
     elif type == "git":
         repo_exists = os.path.exists(os.path.join(target_dir, ".git"))
@@ -120,22 +126,22 @@ def cloneRepository(type, url, target_name, revision = None, try_only_local_oper
             if target_dir_exists:
                 dlog("Removing directory " + target_dir + " before cloning")
                 shutil.rmtree(target_dir)
-            dieIfNonZero(executeCommand("git clone " + url + " " + target_dir))
+            dieIfNonZero(executeCommand(TOOL_COMMAND_GIT + " clone " + url + " " + target_dir))
         elif not try_only_local_operations:
             log("Repository " + target_dir + " already exists; fetching instead of cloning")
-            dieIfNonZero(executeCommand("git -C " + target_dir + " fetch"))
+            dieIfNonZero(executeCommand(TOOL_COMMAND_GIT + " -C " + target_dir + " fetch"))
 
         if revision is None:
             revision = "HEAD"
-        dieIfNonZero(executeCommand("git -C " + target_dir + " reset --hard " + revision))
-        dieIfNonZero(executeCommand("git -C " + target_dir + " clean -fxd"))
+        dieIfNonZero(executeCommand(TOOL_COMMAND_GIT + " -C " + target_dir + " reset --hard " + revision))
+        dieIfNonZero(executeCommand(TOOL_COMMAND_GIT + " -C " + target_dir + " clean -fxd"))
 
     elif type == "svn":
         if not try_only_local_operations: # we can't do much without a server connection when dealing with SVN
             if target_dir_exists:
                 dlog("Removing directory " + target_dir + " before cloning")
                 shutil.rmtree(target_dir)
-            dieIfNonZero(executeCommand("svn checkout " + url + " " + target_dir))
+            dieIfNonZero(executeCommand(TOOL_COMMAND_SVN + " checkout " + url + " " + target_dir))
 
         if revision is not None and revision != "":
             raise RuntimeError("Updating to revision not implemented for SVN.")
@@ -146,7 +152,6 @@ def cloneRepository(type, url, target_name, revision = None, try_only_local_oper
 
 def extractFile(filename, target_dir):
     if os.path.exists(target_dir):
-        # log("Target directory " + filename + " already exists; removing directory...")
         shutil.rmtree(target_dir)
 
     log("Extracting file " + filename)
@@ -171,7 +176,7 @@ def extractFile(filename, target_dir):
             zfile.close()
         else:
             zfile.close()
-            dieIfNonZero(executeCommand("unzip " + filename + " -d " + extract_dir_abs))
+            dieIfNonZero(executeCommand(TOOL_COMMAND_UNZIP + " " + filename + " -d " + extract_dir_abs))
 
     elif extension == ".tar" or extension == ".gz" or extension == ".bz2":
         tfile = tarfile.open(filename)
@@ -192,7 +197,7 @@ def extractFile(filename, target_dir):
             tfile.close()
         else:
             tfile.close()
-            dieIfNonZero(executeCommand("tar -x -f " + filename + " -C " + extract_dir_abs))
+            dieIfNonZero(executeCommand(TOOL_COMMAND_TAR + " -x -f " + filename + " -C " + extract_dir_abs))
 
     else:
         raise RuntimeError("Unknown compressed file format " + extension)
@@ -295,37 +300,43 @@ def applyPatchFile(patch_name, dir_name, pnum):
     patch_dir = os.path.join(BASE_DIR, "patches")
     arguments = "-d " + os.path.join(SRC_DIR, dir_name) + " -p" + str(pnum) + " < " + os.path.join(patch_dir, patch_name)
     argumentsBinary = "-d " + os.path.join(SRC_DIR, dir_name) + " -p" + str(pnum) + " --binary < " + os.path.join(patch_dir, patch_name)
-    patch_command = "patch"
-    res = executeCommand(patch_command + " --dry-run " + arguments, quiet = True)
+    res = executeCommand(TOOL_COMMAND_PATCH + " --dry-run " + arguments, quiet = True)
     if res != 0:
         arguments = argumentsBinary
-        res = executeCommand(patch_command + " --dry-run " + arguments, quiet = True)
+        res = executeCommand(TOOL_COMMAND_PATCH + " --dry-run " + arguments, quiet = True)
     if res != 0:
         log("ERROR: patch application failure; has this patch already been applied?")
-        executeCommand(patch_command + " --dry-run " + arguments, printCommand = True)
+        executeCommand(TOOL_COMMAND_PATCH + " --dry-run " + arguments, printCommand = True)
         exit(255)
     else:
-        dieIfNonZero(executeCommand(patch_command + " " + arguments, quiet = True))
+        dieIfNonZero(executeCommand(TOOL_COMMAND_PATCH + " " + arguments, quiet = True))
 
-def runScript(script_name):
-    log("Running script " + script_name)
+
+def runPythonScript(script_name):
+    log("Running Python script " + script_name)
     patch_dir = os.path.join(BASE_DIR, "patches")
     filename = os.path.join(patch_dir, script_name)
-    if platform.system() == "Windows":
-       dieIfNonZero(executeCommand("python " + filename, False));
+    dieIfNonZero(executeCommand(TOOL_COMMAND_PYTHON + " " + filename, False));
+
+
+def findToolCommand(command, paths_to_search, required = False):
+    command_res = command
+    found = False
+
+    if (executeCommand("which " + command, quiet = True) != 0):
+        for path in paths_to_search:
+            command_abs = os.path.join(path, command)
+            if os.path.exists(command_abs):
+                command_res = command_abs
+                found = True
+                break;
     else:
-       dieIfNonZero(executeCommand(filename, False));
+        found = True
 
+    if required and not found:
+        log("WARNING: command " + command + " not found, but required by script")
 
-def checkPrerequisites(*args):
-    if platform.system() == "Windows":
-        return 0
-
-    for arg in args:
-        if (executeCommand("which " + arg, quiet = True) != 0):
-            log("ERROR: " + arg + " not found")
-            return -1
-    return 0
+    return command_res
 
 
 def readJSONData(filename):
@@ -384,13 +395,22 @@ def printOptions():
         print("  --force-fallback  Force using the fallback URL instead of the original sources")
         print("  --debug-output    Enables extra debugging output")
 
+
 def main(argv):
     global BASE_DIR, SRC_DIR, ARCHIVE_DIR, DEBUG_OUTPUT, FALLBACK_URL, USE_TAR, USE_UNZIP
+    global TOOL_COMMAND_PYTHON, TOOL_COMMAND_GIT, TOOL_COMMAND_HG, TOOL_COMMAND_SVN, TOOL_COMMAND_PATCH, TOOL_COMMAND_TAR, TOOL_COMMAND_UNZIP
 
-    required_commands = ["git", "hg", "svn", "patch"]
-    if (checkPrerequisites(*required_commands) != 0):
-        log("The bootstrapping script requires that the following programs are installed: " + ", ".join(required_commands))
-        return -1
+    if platform.system() is not "Windows":
+        # Unfortunately some IDEs do not have a proper PATH environment variable set,
+        # so we search manually for the required tools in some obvious locations.
+        paths_to_search = ["/usr/local/bin", "/opt/local/bin", "/usr/bin"]
+        TOOL_COMMAND_PYTHON = findToolCommand(TOOL_COMMAND_PYTHON, paths_to_search, required = True)
+        TOOL_COMMAND_GIT = findToolCommand(TOOL_COMMAND_GIT, paths_to_search, required = True)
+        TOOL_COMMAND_HG = findToolCommand(TOOL_COMMAND_HG, paths_to_search, required = True)
+        TOOL_COMMAND_SVN = findToolCommand(TOOL_COMMAND_SVN, paths_to_search, required = True)
+        TOOL_COMMAND_PATCH = findToolCommand(TOOL_COMMAND_PATCH, paths_to_search, required = True)
+        TOOL_COMMAND_TAR = findToolCommand(TOOL_COMMAND_TAR, paths_to_search)
+        TOOL_COMMAND_UNZIP = findToolCommand(TOOL_COMMAND_UNZIP, paths_to_search)
 
     try:
         opts, args = getopt.getopt(argv,"ln:N:cCb:h",["list", "name=", "name-file=", "clean", "clean-all", "base-dir", "bootstrap-file=", "use-tar", "use-unzip", "repo-snapshots", "fallback-url=", "force-fallback", "debug-output", "help"])
@@ -623,7 +643,7 @@ def main(argv):
                 if post_type == "patch":
                     applyPatchFile(post_file, name, post.get('pnum', DEFAULT_PNUM))
                 elif post_type == "script":
-                    runScript(post_file)
+                    runPythonScript(post_file)
                 else:
                     log("ERROR: Unknown post-processing type '" + post_type + "' for " + name)
                     return -1
