@@ -34,20 +34,26 @@ i.e. directly from the authors' websites or repositories.
 After script execution has finished, the following files and directories should
 have been added to the repository folder:
     |- external
-       |- _state_bootstrap.json
-       |- orig/
+       |- .bootstrap.json
+       |- archives/
+          |- ...
+       |- snapshots/
           |- ...
        |- src/
           |- ...
 
-- The file _state_bootstrap.json contains the cached state of the last
-bootstrapping/updating operation. The script always compares against this state,
-in order to decide whether to update a library. For example, if boostrap.py has
-executed successfully and is then immediately re-run, no further action will
-take place.
+- The file .bootstrap.json contains the cached state of the last bootstrapping/
+pdating operation. The script always compares against this state, in order to
+decide whether to update a library. For example, if boostrap.py has executed
+successfully and is then immediately re-run, no further action will take place.
 
-- The directory orig/ contains the archive files of all libraries that have been
-downloaded as archives. It serves as a cache to prevent multiple downloads.
+- The directory archives/ contains the archive files of all libraries that have
+been downloaded as archives. It serves as a cache to prevent multiple downloads.
+
+- The directory snapshots/ serves as a cache for snapshots of a complete
+repository. It will only be created if the --repo-snapshots option was specified
+on the command line. This will enable the respective copy of the 'external'
+repository to serve as a fallback location.
 
 - The directory src/ contains all third-party library sources. Libraries that
 were obtained in archive form will have been uncompressed into this directory.
@@ -119,8 +125,8 @@ run from the patches/ directory. Patches can be used to make minor modifications
 to a library, such as silencing warning or to fix bugs which have not been
 included in the upstream version of the library. Scripts can embody any more
 complex operations, but should mainly be used for simple library-specific
-prerequisites (such as copying header prototype files). Scripts should be
-written in Python, in order to be compatible with all platforms, including
+prerequisites (such as copying header prototype files). All scripts have to
+be written in Python, in order to be compatible with all platforms, including
 Windows.
 
 Patches should be created using the 'diff' program from the external/ directory,
@@ -130,6 +136,10 @@ similar to this example:
 The default -p argument for the patch command is 3, but this can be changed by
 an optional "pnum" field inside the postprocessing JSON object, containing a
 numeric value.
+For example, for patches created using 'git diff' or 'hg diff', a "pnum"
+argument of "1" is likely needed. This method of creating a patch is
+discouraged, however, in favor of the cleaner method using the plain 'diff'
+command described above.
 
 In general, only ever add or modify libraries in a way that is compatible with
 how it's already done. See also the next section.
@@ -151,7 +161,7 @@ build system, and are to not be committed anywhere in the first place.
 required from the user.
 
 - All repositories should be in their final usable state after running the
-bootstrapping script.
+bootstrapping script, i.e. the committed makefiles should be usable.
 
 - Any patches to a library should be kept minimal. Larger changes to a
 third-party code base are discouraged.
@@ -160,9 +170,16 @@ third-party code base are discouraged.
 warning, let's try to get our patch accepted upstream. If we then update to a
 newer version of the library, we won't need a patch file anymore.
 
-- The repository should contain only one version of each library at the same
-time. If a library is updated, it should be updated to the respective latest
-version available.
+- All patch files should adhere to the naming
+  <library_name>_<sha1_hash>.patch
+where <sha1_hash> is the hash of either the archive file or the repository.
+This enables to keep multiple patches for the same library, in case different
+project need different versions of a library (via using local bootstrapping
+files).
+
+- The canonical bootstrapping JSON file should always contain the respective
+latest version of each library that is used across our codebase. If a library
+is updated, it should be updated to the respective latest version available.
 
 - We should be keeping the contained library versions reasonably up-to-date.
 
