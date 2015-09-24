@@ -1,5 +1,13 @@
 [
 {
+    "name": "GSL",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/Microsoft/GSL.git",
+        "revision": "186001611a22f5a56d9320c36ed33b90bd5b5791"
+    }
+},
+{
     "name": "FAST",
     "source": {
         "type": "archive",
@@ -282,6 +290,14 @@
         "type": "patch",
         "file": "freetype.patch",
         "pnum": "1"
+    }
+},
+{
+    "name": "brotli",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/google/brotli.git",
+        "revision": "b3905e807506bd12fab15957d0906963bc25ca01"
     }
 }
 ]
