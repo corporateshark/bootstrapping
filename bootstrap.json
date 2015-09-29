@@ -182,13 +182,6 @@
     }
 },
 {
-    "name": "snappy",
-    "source": {
-        "type": "git",
-        "url": "https://github.com/google/snappy.git"
-    }
-},
-{
     "name": "vlfeat",
     "source": {
         "type": "git",
@@ -290,6 +283,22 @@
         "type": "patch",
         "file": "freetype_0963526435b39080e7fc45610aee3b3e2e2383b0.patch",
         "pnum": "1"
+    }
+},
+{
+    "name": "snappy",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/google/snappy.git",
+        "revision": "0852af76065ba0f35944527e14787f7ae5e0b3ac"
+    }
+},
+{
+    "name": "zopfli",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/google/zopfli.git",
+        "revision": "89cf773beef75d7f4d6d378debdf299378c3314e"
     }
 },
 {

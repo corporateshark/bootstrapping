@@ -33,6 +33,8 @@ add_library(brotli STATIC
 
 target_include_directories(brotli
     PUBLIC
+    ${SRCDIR}
+    PRIVATE
     ./dec
     ./enc
 )

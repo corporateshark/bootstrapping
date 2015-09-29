@@ -13,6 +13,7 @@ add_subdirectory(./cmake/AGAST EXCLUDE_FROM_ALL)
 add_subdirectory(./cmake/FAST EXCLUDE_FROM_ALL)
 add_subdirectory(./cmake/iconv EXCLUDE_FROM_ALL)
 add_subdirectory(./cmake/brotli EXCLUDE_FROM_ALL)
+add_subdirectory(./cmake/zopfli EXCLUDE_FROM_ALL)
 
 if (ANDROID_MK)
     android_mk_create()
