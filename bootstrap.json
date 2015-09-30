@@ -124,20 +124,6 @@
     }
 },
 {
-    "name": "catch",
-    "source": {
-        "type": "git",
-        "url": "https://github.com/philsquared/Catch.git"
-    }
-},
-{
-    "name": "googletest",
-    "source": {
-        "type": "svn",
-        "url": "http://googletest.googlecode.com/svn/tags/release-1.7.0"
-    }
-},
-{
     "name": "eigen",
     "source": {
         "type": "hg",
@@ -307,6 +293,27 @@
         "type": "git",
         "url": "https://github.com/google/brotli.git",
         "revision": "933bb9bd800c8f5f7f6a02382d33c902a98ef73a"
+    }
+},
+{
+    "name": "catch",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/philsquared/Catch.git"
+    }
+},
+{
+    "name": "googletest",
+    "source": {
+        "type": "svn",
+        "url": "http://googletest.googlecode.com/svn/tags/release-1.7.0"
+    }
+},
+{
+    "name": "googlebenchmark",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/google/benchmark.git"
     }
 }
 ]
