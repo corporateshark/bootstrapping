@@ -446,6 +446,8 @@ def main(argv):
     create_repo_snapshots = False
     force_fallback = False
 
+    base_dir_path = ""
+
     for opt, arg in opts:
         if opt in ("-h", "--help"):
             printOptions()
@@ -455,16 +457,15 @@ def main(argv):
         if opt in ("-n", "--name"):
             opt_names.append(arg)
         if opt in ("-N", "--name-file"):
-            name_file = arg
+            name_file = os.path.abspath(arg)
         if opt in ("-c", "--clean"):
             opt_clean = True
         if opt in ("-C", "--clean-all"):
             opt_clean = True
             opt_clean_archives = True
         if opt in ("-b", "--base-dir"):
-            ABS_PATH = os.path.abspath(arg)
-            os.chdir(ABS_PATH)
-            BASE_DIR = ABS_PATH
+            base_dir_path = os.path.abspath(arg)
+            BASE_DIR = base_dir_path
             SRC_DIR = os.path.join(BASE_DIR, SRC_DIR_BASE)
             ARCHIVE_DIR = os.path.join(BASE_DIR, ARCHIVE_DIR_BASE)
             bootstrap_filename = os.path.join(BASE_DIR, default_bootstrap_filename)
@@ -487,6 +488,9 @@ def main(argv):
             log("Using fallback URL to fetch all libraries")
         if opt in ("--debug-output",):
             DEBUG_OUTPUT = True
+
+    if base_dir_path:
+        os.chdir(base_dir_path)
 
     if name_file:
         try:
