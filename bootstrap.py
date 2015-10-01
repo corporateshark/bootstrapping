@@ -126,10 +126,10 @@ def cloneRepository(type, url, target_name, revision = None, try_only_local_oper
             if target_dir_exists:
                 dlog("Removing directory " + target_dir + " before cloning")
                 shutil.rmtree(target_dir)
-            dieIfNonZero(executeCommand(TOOL_COMMAND_GIT + " clone " + url + " " + target_dir))
+            dieIfNonZero(executeCommand(TOOL_COMMAND_GIT + " clone --recursive " + url + " " + target_dir))
         elif not try_only_local_operations:
             log("Repository " + target_dir + " already exists; fetching instead of cloning")
-            dieIfNonZero(executeCommand(TOOL_COMMAND_GIT + " -C " + target_dir + " fetch"))
+            dieIfNonZero(executeCommand(TOOL_COMMAND_GIT + " -C " + target_dir + " fetch --recurse-submodules"))
 
         if revision is None:
             revision = "HEAD"
