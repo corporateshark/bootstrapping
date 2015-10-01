@@ -296,6 +296,22 @@
     }
 },
 {
+    "name": "glm",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/g-truc/glm.git",
+        "revision": "8f39bb8730d45570384f3156eb0126b835024d69"
+    }
+},
+{
+    "name": "mathfu",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/google/mathfu.git",
+        "revision": "11ee78ab19b796481270393907e23d4df5aa4afb"
+    }
+},
+{
     "name": "catch",
     "source": {
         "type": "git",
