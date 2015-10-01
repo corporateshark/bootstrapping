@@ -368,32 +368,45 @@ def listLibraries(data):
 
 
 def printOptions():
+        print("--------------------------------------------------------------------------------")
         print("Downloads external libraries, and applies patches or scripts if necessary.")
-        print("If the --name argument is not provided, all available libraries will be downloaded.")
+        print("If the --name argument is not provided, all available libraries will be")
+        print("downloaded.")
+        print("")
         print("Options:")
-        print("  --list, -l        List all available libraries")
-        print("  --name, -n        Specifies the name of a single library to be downloaded")
-        print("  --name-file, -N   Specifies a file that contains a (sub)set of libraries to be")
-        print("                    downloaded. One library name per line; lines starting with '#'")
-        print("                    are considered comments.")
-        print("  --clean, -c       Remove library directory before obtaining library")
-        print("  --clean-all, -C   Implies --clean, and also forces re-download of cached archive files")
-        print("  --base-dir, -b    Base directory, if script is called from outside of its directory")
-        print("  --bootstrap-file  Specify the file containing the bootstrap JSON data")
-        print("                    (default: bootstrap.json)")
-        print("  --use-tar         Use 'tar' command instead of Python standard library to extract")
-        print("                    tar archives")
-        print("  --use-unzip       Use 'unzip' command instead of Python standard library to extract")
-        print("                    zip archives")
-        print("  --repo-snapshots  Create a snapshot archive of a repository when its state changes,")
-        print("                    e.g. on a fallback location")
-        print("  --fallback-url    Fallback URL that points to an existing and bootstrapped `external`")
-        print("                    repository that may be used to retrieve otherwise unobtainable")
-        print("                    archives or repositories. The --repo-snapshots option must be active")
-        print("                    on the fallback server. Allowed URL schemes are file://, ssh://,")
-        print("                    http://, https://, ftp://.")
-        print("  --force-fallback  Force using the fallback URL instead of the original sources")
-        print("  --debug-output    Enables extra debugging output")
+        print("  --list, -l              List all available libraries")
+        print("  --name, -n              Specifies the name of a single library to be")
+        print("                          downloaded")
+        print("  --name-file, -N         Specifies a file that contains a (sub)set of libraries")
+        print("                          to be downloaded. One library name per line; lines")
+        print("                          starting with '#' are considered comments.")
+        print("  --clean, -c             Remove library directory before obtaining library")
+        print("  --clean-all, -C         Implies --clean, and also forces re-download of cached")
+        print("                          archive files")
+        print("  --base-dir, -b          Base directory, if script is called from outside of")
+        print("                          its directory")
+        print("  --bootstrap-file        Specifies the file containing the canonical bootstrap")
+        print("                          JSON data (default: bootstrap.json)")
+        print("  --local-bootstrap-file  Specifies the file containing local bootstrap JSON")
+        print("                          data (e.g. for a particular project). The data in this")
+        print("                          file will have higher precedence than the data from")
+        print("                          the canonical bootstrap file.")
+        print("  --use-tar               Use 'tar' command instead of Python standard library")
+        print("                          to extract tar archives")
+        print("  --use-unzip             Use 'unzip' command instead of Python standard library")
+        print("                          to extract zip archives")
+        print("  --repo-snapshots        Create a snapshot archive of a repository when its")
+        print("                          state changes, e.g. on a fallback location")
+        print("  --fallback-url          Fallback URL that points to an existing and already")
+        print("                          bootstrapped `external` repository that may be used to")
+        print("                          retrieve otherwise unobtainable archives or")
+        print("                          repositories. The --repo-snapshots option must be")
+        print("                          active on the fallback server. Allowed URL schemes are")
+        print("                          file://, ssh://, http://, https://, ftp://.")
+        print("  --force-fallback        Force using the fallback URL instead of the original")
+        print("                          sources")
+        print("  --debug-output          Enables extra debugging output")
+        print("--------------------------------------------------------------------------------")
 
 
 def main(argv):
@@ -413,7 +426,10 @@ def main(argv):
         TOOL_COMMAND_UNZIP = findToolCommand(TOOL_COMMAND_UNZIP, paths_to_search)
 
     try:
-        opts, args = getopt.getopt(argv,"ln:N:cCb:h",["list", "name=", "name-file=", "clean", "clean-all", "base-dir", "bootstrap-file=", "use-tar", "use-unzip", "repo-snapshots", "fallback-url=", "force-fallback", "debug-output", "help"])
+        opts, args = getopt.getopt(
+            argv,
+            "ln:N:cCb:h",
+            ["list", "name=", "name-file=", "clean", "clean-all", "base-dir", "bootstrap-file=", "local-bootstrap-file=", "use-tar", "use-unzip", "repo-snapshots", "fallback-url=", "force-fallback", "debug-output", "help"])
     except getopt.GetoptError:
         printOptions()
         return 0
@@ -426,6 +442,7 @@ def main(argv):
 
     default_bootstrap_filename = "bootstrap.json"
     bootstrap_filename = os.path.abspath(os.path.join(BASE_DIR, default_bootstrap_filename))
+    local_bootstrap_filename = ""
     create_repo_snapshots = False
     force_fallback = False
 
@@ -454,6 +471,8 @@ def main(argv):
             log("Using " + arg + " as base directory")
         if opt in ("--bootstrap-file",):
             bootstrap_filename = os.path.abspath(arg)
+        if opt in ("--local-bootstrap-file",):
+            local_bootstrap_filename = os.path.abspath(arg)
         if opt in ("--use-tar",):
             USE_TAR = True
         if opt in ("--use-unzip",):
@@ -489,9 +508,43 @@ def main(argv):
     dlog("bootstrap_filename = " + bootstrap_filename)
     dlog("state_filename     = " + state_filename)
 
+    # read canonical libraries data
     data = readJSONData(bootstrap_filename)
     if data is None:
         return -1;
+
+    # some sanity checking
+    for library in data:
+        if library.get('name', None) is None:
+            log("ERROR: Invalid schema: library object does not have a 'name'")
+            return -1
+
+    # read local libraries data, if available
+    local_data = None
+    if local_bootstrap_filename:
+        local_data = readJSONData(local_bootstrap_filename)
+
+        if local_data is None:
+            return -1;
+
+        # some sanity checking
+        for local_library in local_data:
+            if local_library.get('name', None) is None:
+                log("ERROR: Invalid schema: local library object does not have a 'name'")
+                return -1
+
+    # merge canonical and local library data, if applicable; local libraries take precedence
+    if local_data is not None:
+        for local_library in local_data:
+            local_name = local_library.get('name', None)
+            found_canonical_library = False
+            for n, library in enumerate(data):
+                name = library.get('name', None)
+                if local_name == name:
+                    data[n] = local_library # overwrite library
+                    found_canonical_library = True
+            if not found_canonical_library:
+                data.append(local_library)
 
     if list_libraries:
         listLibraries(data)
@@ -510,12 +563,6 @@ def main(argv):
     if not os.path.isdir(ARCHIVE_DIR):
         log("Creating directory " + ARCHIVE_DIR)
         os.mkdir(ARCHIVE_DIR)
-
-    # some sanity checking
-    for library in data:
-        if library.get('name', None) is None:
-            log("ERROR: Invalid schema: library object does not have a 'name'")
-            return -1
 
     failed_libraries = []
 
