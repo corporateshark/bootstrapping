@@ -331,5 +331,12 @@
         "type": "git",
         "url": "https://github.com/google/benchmark.git"
     }
+},
+{
+    "name": "id3v2lib",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/larsbs/id3v2lib.git"
+    }
 }
 ]
