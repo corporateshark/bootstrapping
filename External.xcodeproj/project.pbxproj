@@ -19,6 +19,7 @@
 		2D60DBA71B862384001C431F /* libModPlug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB681B861F07001C431F /* libModPlug.a */; };
 		2D60DBA81B862384001C431F /* libOGG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB6B1B861F07001C431F /* libOGG.a */; };
 		2D60DCFE1B8DC7D8001C431F /* libVorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB711B861F07001C431F /* libVorbis.a */; };
+		2DF399B91BC69E240086A34D /* libid3v2lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF399A51BC69C890086A34D /* libid3v2lib.a */; };
 		4C3AE57F1BA31A0F00502BDD /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB651B861F07001C431F /* libjpeg.a */; };
 /* End PBXBuildFile section */
 
@@ -170,6 +171,20 @@
 			remoteGlobalIDString = 2D3710381B692F7D0009B3E5;
 			remoteInfo = Vorbis;
 		};
+		2DF399A41BC69C890086A34D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2DF399A01BC69C890086A34D /* id3v2lib.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2DF399941BC69C670086A34D;
+			remoteInfo = id3v2lib;
+		};
+		2DF399B71BC69CEC0086A34D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2DF399A01BC69C890086A34D /* id3v2lib.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2DF399931BC69C670086A34D;
+			remoteInfo = id3v2lib;
+		};
 		4C3AE57C1BA31A0900502BDD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2D60DB451B861F07001C431F /* jpeg.xcodeproj */;
@@ -217,6 +232,7 @@
 		2D60DB511B861F07001C431F /* libTremelo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libTremelo.xcodeproj; path = ios/libTremelo/libTremelo.xcodeproj; sourceTree = SOURCE_ROOT; };
 		2D60DB541B861F07001C431F /* libVorbis.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libVorbis.xcodeproj; path = ios/libVorbis/libVorbis.xcodeproj; sourceTree = SOURCE_ROOT; };
 		2D60DB571B861F07001C431F /* zxing.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = zxing.xcodeproj; path = ios/zxing/zxing.xcodeproj; sourceTree = SOURCE_ROOT; };
+		2DF399A01BC69C890086A34D /* id3v2lib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = id3v2lib.xcodeproj; path = ios/id3v2lib/id3v2lib.xcodeproj; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -237,6 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DF399B91BC69E240086A34D /* libid3v2lib.a in Frameworks */,
 				4C3AE57F1BA31A0F00502BDD /* libjpeg.a in Frameworks */,
 				2D5CFD581B95CF2D00303A20 /* libFreetype2.a in Frameworks */,
 				2D60DCFE1B8DC7D8001C431F /* libVorbis.a in Frameworks */,
@@ -251,6 +268,7 @@
 		2D0900001B6A6D1100E89463 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				2DF399A01BC69C890086A34D /* id3v2lib.xcodeproj */,
 				2D5CFD3F1B95CF1000303A20 /* freetype2.xcodeproj */,
 				2D60DB3C1B861F07001C431F /* AGAST.xcodeproj */,
 				2D60DB3F1B861F07001C431F /* FAST.xcodeproj */,
@@ -384,6 +402,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		2DF399A11BC69C890086A34D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2DF399A51BC69C890086A34D /* libid3v2lib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -421,6 +447,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				2DF399B81BC69CEC0086A34D /* PBXTargetDependency */,
 				4C3AE57D1BA31A0900502BDD /* PBXTargetDependency */,
 				2D5CFD551B95CF2300303A20 /* PBXTargetDependency */,
 				2D60DCFD1B8DC7C0001C431F /* PBXTargetDependency */,
@@ -472,6 +499,10 @@
 				{
 					ProductGroup = 2D60DB431B861F07001C431F /* Products */;
 					ProjectRef = 2D60DB421B861F07001C431F /* giflib.xcodeproj */;
+				},
+				{
+					ProductGroup = 2DF399A11BC69C890086A34D /* Products */;
+					ProjectRef = 2DF399A01BC69C890086A34D /* id3v2lib.xcodeproj */;
 				},
 				{
 					ProductGroup = 2D60DB461B861F07001C431F /* Products */;
@@ -588,6 +619,13 @@
 			remoteRef = 2D60DB761B861F07001C431F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		2DF399A51BC69C890086A34D /* libid3v2lib.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libid3v2lib.a;
+			remoteRef = 2DF399A41BC69C890086A34D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -659,6 +697,11 @@
 			isa = PBXTargetDependency;
 			name = Vorbis;
 			targetProxy = 2D60DCFC1B8DC7C0001C431F /* PBXContainerItemProxy */;
+		};
+		2DF399B81BC69CEC0086A34D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = id3v2lib;
+			targetProxy = 2DF399B71BC69CEC0086A34D /* PBXContainerItemProxy */;
 		};
 		4C3AE57D1BA31A0900502BDD /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
