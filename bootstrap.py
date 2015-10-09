@@ -323,19 +323,17 @@ def findToolCommand(command, paths_to_search, required = False):
     command_res = command
     found = False
 
-    if (executeCommand("which " + command, quiet = True) != 0):
-        for path in paths_to_search:
-            command_abs = os.path.join(path, command)
-            if os.path.exists(command_abs):
-                command_res = command_abs
-                found = True
-                break;
-    else:
-        found = True
+    for path in paths_to_search:
+        command_abs = os.path.join(path, command)
+        if os.path.exists(command_abs):
+            command_res = command_abs
+            found = True
+            break;
 
     if required and not found:
         log("WARNING: command " + command + " not found, but required by script")
 
+    dlog("Found '" + command + "' as " + command_res)
     return command_res
 
 
@@ -413,18 +411,6 @@ def main(argv):
     global BASE_DIR, SRC_DIR, ARCHIVE_DIR, DEBUG_OUTPUT, FALLBACK_URL, USE_TAR, USE_UNZIP
     global TOOL_COMMAND_PYTHON, TOOL_COMMAND_GIT, TOOL_COMMAND_HG, TOOL_COMMAND_SVN, TOOL_COMMAND_PATCH, TOOL_COMMAND_TAR, TOOL_COMMAND_UNZIP
 
-    if platform.system() is not "Windows":
-        # Unfortunately some IDEs do not have a proper PATH environment variable set,
-        # so we search manually for the required tools in some obvious locations.
-        paths_to_search = ["/usr/local/bin", "/opt/local/bin", "/usr/bin"]
-        TOOL_COMMAND_PYTHON = findToolCommand(TOOL_COMMAND_PYTHON, paths_to_search, required = True)
-        TOOL_COMMAND_GIT = findToolCommand(TOOL_COMMAND_GIT, paths_to_search, required = True)
-        TOOL_COMMAND_HG = findToolCommand(TOOL_COMMAND_HG, paths_to_search, required = True)
-        TOOL_COMMAND_SVN = findToolCommand(TOOL_COMMAND_SVN, paths_to_search, required = True)
-        TOOL_COMMAND_PATCH = findToolCommand(TOOL_COMMAND_PATCH, paths_to_search, required = True)
-        TOOL_COMMAND_TAR = findToolCommand(TOOL_COMMAND_TAR, paths_to_search)
-        TOOL_COMMAND_UNZIP = findToolCommand(TOOL_COMMAND_UNZIP, paths_to_search)
-
     try:
         opts, args = getopt.getopt(
             argv,
@@ -488,6 +474,18 @@ def main(argv):
             log("Using fallback URL to fetch all libraries")
         if opt in ("--debug-output",):
             DEBUG_OUTPUT = True
+
+    if platform.system() is not "Windows":
+        # Unfortunately some IDEs do not have a proper PATH environment variable set,
+        # so we search manually for the required tools in some obvious locations.
+        paths_to_search = os.environ["PATH"].split(":") + ["/usr/local/bin", "/opt/local/bin", "/usr/bin"]
+        TOOL_COMMAND_PYTHON = findToolCommand(TOOL_COMMAND_PYTHON, paths_to_search, required = True)
+        TOOL_COMMAND_GIT = findToolCommand(TOOL_COMMAND_GIT, paths_to_search, required = True)
+        TOOL_COMMAND_HG = findToolCommand(TOOL_COMMAND_HG, paths_to_search, required = True)
+        TOOL_COMMAND_SVN = findToolCommand(TOOL_COMMAND_SVN, paths_to_search, required = True)
+        TOOL_COMMAND_PATCH = findToolCommand(TOOL_COMMAND_PATCH, paths_to_search, required = True)
+        TOOL_COMMAND_TAR = findToolCommand(TOOL_COMMAND_TAR, paths_to_search, required = USE_TAR)
+        TOOL_COMMAND_UNZIP = findToolCommand(TOOL_COMMAND_UNZIP, paths_to_search, required = USE_UNZIP)
 
     if base_dir_path:
         os.chdir(base_dir_path)
