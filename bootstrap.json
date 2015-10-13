@@ -4,7 +4,7 @@
     "source": {
         "type": "git",
         "url": "https://github.com/Microsoft/GSL.git",
-        "revision": "3571792058598bca7f74fdc08782b4cf7dcd9ccc"
+        "revision": "e0d10d1d1c3ebb3a140ece626caa228f6095a37d"
     }
 },
 {
@@ -72,11 +72,11 @@
     "source": {
         "type": "git",
         "url": "https://github.com/libjpeg-turbo/libjpeg-turbo.git",
-        "revision": "a8af72437ea12ec541af0f62fae20c9f8d381723"
+        "revision": "d8da49effe6460d55239c4c009c57f42d8e4a494"
     },
     "postprocess": {
         "type": "patch",
-        "file": "libjpeg-turbo_a8af72437ea12ec541af0f62fae20c9f8d381723.patch"
+        "file": "libjpeg-turbo_d8da49effe6460d55239c4c009c57f42d8e4a494.patch"
     }
 },
 {
