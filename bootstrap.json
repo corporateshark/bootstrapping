@@ -80,6 +80,14 @@
     }
 },
 {
+    "name": "gas-preprocessor",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/libjpeg-turbo/gas-preprocessor",
+        "revision": "4338df436a20ad4d28c7cd37852323e902f1144c"
+    }
+},
+{
     "name": "libpng",
     "source": {
         "type": "archive",
