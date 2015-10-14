@@ -1,0 +1,124 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXGroup section */
+		2DF39C461BCE749F0086A34D = {
+			isa = PBXGroup;
+			children = (
+				2DF39C511BCE749F0086A34D /* libjpeg-turbo */,
+				2DF39C501BCE749F0086A34D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2DF39C501BCE749F0086A34D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2DF39C511BCE749F0086A34D /* libjpeg-turbo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "libjpeg-turbo";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXLegacyTarget section */
+		2DE34ECD1BCEB24900FF178A /* libjpeg-turbo */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 2DE34ED01BCEB24900FF178A /* Build configuration list for PBXLegacyTarget "libjpeg-turbo" */;
+			buildPhases = (
+			);
+			buildToolPath = "$(PROJECT_DIR)/xcodebuild.sh";
+			buildWorkingDirectory = "";
+			dependencies = (
+			);
+			name = "libjpeg-turbo";
+			passBuildSettingsInEnvironment = 1;
+			productName = "libjpeg-turbo";
+		};
+/* End PBXLegacyTarget section */
+
+/* Begin PBXProject section */
+		2DF39C471BCE749F0086A34D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = Blippar;
+				TargetAttributes = {
+					2DE34ECD1BCEB24900FF178A = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = 2DF39C4A1BCE749F0086A34D /* Build configuration list for PBXProject "libjpeg-turbo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 2DF39C461BCE749F0086A34D;
+			productRefGroup = 2DF39C501BCE749F0086A34D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2DE34ECD1BCEB24900FF178A /* libjpeg-turbo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin XCBuildConfiguration section */
+		2DE34ECF1BCEB24900FF178A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		2DF39C571BCE749F0086A34D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2DE34ED01BCEB24900FF178A /* Build configuration list for PBXLegacyTarget "libjpeg-turbo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2DE34ECF1BCEB24900FF178A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2DF39C4A1BCE749F0086A34D /* Build configuration list for PBXProject "libjpeg-turbo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2DF39C571BCE749F0086A34D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2DF39C471BCE749F0086A34D /* Project object */;
+}
