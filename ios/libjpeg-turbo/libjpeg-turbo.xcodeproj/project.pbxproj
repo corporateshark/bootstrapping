@@ -83,6 +83,7 @@
 			buildSettings = {
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
@@ -109,6 +110,7 @@
 				2DE34ECF1BCEB24900FF178A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2DF39C4A1BCE749F0086A34D /* Build configuration list for PBXProject "libjpeg-turbo" */ = {
 			isa = XCConfigurationList;
