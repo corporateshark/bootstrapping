@@ -1,6 +1,6 @@
-if ! [ $# -eq 3 ]
+if ! [ $# -eq 5 ]
   then
-    echo "Usage: build.sh <build_directory> <install_directory> <action>"
+    echo "Usage: build.sh <build_directory> <install_directory> <action> <product_name> <debug/release>"
     exit 1
 fi
 
@@ -19,6 +19,7 @@ fi
 
 #Create install directory if not exists
 [ -d "$2" ] || mkdir -p "$2"
+
 
 function clean(){
   echo "Cleaning.."
@@ -82,11 +83,25 @@ INSTALLDIR="$( cd "$2" && pwd )"
 EXTSRCDIR=$DIR/../../src
 SRCDIR=$EXTSRCDIR/libjpeg-turbo
 ACTION="$3"
+PRODUCT_NAME="$4"
+CONFIGURATION="$5"
 
 echo "BUILDDIR=$BUILDDIR"
 echo "INSTALLDIR=$INSTALLDIR"
 echo "SRCDIR=$SRCDIR"
 echo "ACTION=$ACTION"
+echo "PRODUCT_NAME=$PRODUCT_NAME"
+echo "CONFIGURATION=$CONFIGURATION"
+
+
+if [ "$ACTION" == "build" ];
+then
+  if [ -f $INSTALLDIR/$PRODUCT_NAME.a ];
+  then
+    echo "Not building since file already exists at $INSTALLDIR/$PRODUCT_NAME.a. Please clean to rebuild"
+    exit 0
+  fi
+fi
 
 # add gas-preprocessor to PATH
 PATH=$EXTSRCDIR/gas-preprocessor:$PATH
@@ -97,6 +112,15 @@ IOS_SYSROOT=$IOS_PLATFORMDIR/Developer/SDKs/iPhoneOS.sdk
 IOS_GCC=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
 IPHONEOSVERSION="-miphoneos-version-min=5.1"
 CPUS=$(sysctl -n hw.logicalcpu_max)
+
+if [ "$CONFIGURATION" == "Debug" ];
+then
+    OPTIMIZATION_LEVEL="-O1"
+else
+    OPTIMIZATION_LEVEL="-O3"
+fi
+
+echo "OPTIMIZATION_LEVEL=$OPTIMIZATION_LEVEL"
 
 if [ "$ACTION" == "build" ];
 then
@@ -112,7 +136,7 @@ BUILDDIRECTORY=$BUILDDIR/$arch
 INSTALLDIRECTORY=$INSTALLDIR/$arch
 IOS_CFLAGS="-arch $arch $IPHONEOSVERSION"
 HOST="arm-apple-darwin10"
-CFLAGS="-mfloat-abi=softfp -isysroot $IOS_SYSROOT -O3 $IOS_CFLAGS"
+CFLAGS="-mfloat-abi=softfp -isysroot $IOS_SYSROOT $OPTIMIZATION_LEVEL $IOS_CFLAGS"
 LDFLAGS="-mfloat-abi=softfp -isysroot $IOS_SYSROOT $IOS_CFLAGS"
 CCASFLAGS="-no-integrated-as $IOS_CFLAGS"
 
@@ -135,7 +159,7 @@ BUILDDIRECTORY=$BUILDDIR/$arch
 INSTALLDIRECTORY=$INSTALLDIR/$arch
 IOS_CFLAGS="-arch $arch $IPHONEOSVERSION"
 HOST="arm-apple-darwin10"
-CFLAGS="-mfloat-abi=softfp -isysroot $IOS_SYSROOT -O3 $IOS_CFLAGS"
+CFLAGS="-mfloat-abi=softfp -isysroot $IOS_SYSROOT $OPTIMIZATION_LEVEL $IOS_CFLAGS"
 LDFLAGS="-mfloat-abi=softfp -isysroot $IOS_SYSROOT $IOS_CFLAGS"
 CCASFLAGS="-no-integrated-as $IOS_CFLAGS"
 
@@ -158,7 +182,7 @@ BUILDDIRECTORY=$BUILDDIR/$arch
 INSTALLDIRECTORY=$INSTALLDIR/$arch
 IOS_CFLAGS="-arch $arch $IPHONEOSVERSION"
 HOST="aarch64-apple-darwin"
-CFLAGS="-isysroot $IOS_SYSROOT -O3 $IOS_CFLAGS" 
+CFLAGS="-isysroot $IOS_SYSROOT $OPTIMIZATION_LEVEL $IOS_CFLAGS" 
 LDFLAGS="-isysroot $IOS_SYSROOT $IOS_CFLAGS"
 CCASFLAGS=""
 
@@ -183,8 +207,8 @@ then
 elif [ "$ACTION" == "build" ]
 then
   echo "Creating Universal Binary"
-  (cd $INSTALLDIR && lipo -create arm64/lib/libturbojpeg.a armv7/lib/libturbojpeg.a armv7s/lib/libturbojpeg.a -o libjpegturbo.a)
-  echo "BUILT PRODUCT: $INSTALLDIR/libturbojpeg.a"
+  (cd $INSTALLDIR && lipo -create arm64/lib/libturbojpeg.a armv7/lib/libturbojpeg.a armv7s/lib/libturbojpeg.a -o "$PRODUCT_NAME".a)
+  echo "BUILT PRODUCT: $INSTALLDIR/$PRODUCT_NAME.a"
 else
   echo "Unrecognized Action: $ACTION"
 fi
