@@ -25,7 +25,12 @@ function clean(){
   echo "Cleaning.."
   if [ -d "$BUILDDIRECTORY" ]; then
     cd $BUILDDIRECTORY
+
+    set -x
+
     make distclean
+
+    set +x
   fi
   if [ -d "$INSTALLDIRECTORY" ]; then
     rm -rf "$INSTALLDIRECTORY"
@@ -34,7 +39,13 @@ function clean(){
 
 function autoreconfigure(){
   echo "AutoReconfiguring..."
+
+  set -x
+
   autoreconf -fiv configure.ac 2> /dev/null
+
+  set +x
+
   if [[ $? -ne 0 ]] ; then
     echo "Errors while running autoreconf. Exiting.."
     exit 1
@@ -48,6 +59,8 @@ function configure(){
   SDKROOT=""
   echo "Temporaily unsetting SDKROOT"
 
+  set -x
+
   $SRCDIR/configure \
     --prefix=$INSTALLDIRECTORY \
     --host "$HOST" \
@@ -56,6 +69,9 @@ function configure(){
     CFLAGS="$CFLAGS" \
     LDFLAGS="$LDFLAGS" \
     CCASFLAGS="$CCASFLAGS"
+
+  set +x
+
   if [[ $? -ne 0 ]] ; then
     echo "Errors while running configure. Exiting.."
     exit 1
@@ -67,8 +83,14 @@ function configure(){
 
 function build(){
   echo "Building.."
+
+  set -x
+
   make -j$CPUS
   make install
+
+  set +x
+
   if [[ $? -ne 0 ]] ; then
       echo "Errors while running make. Exiting.."
       exit 1
