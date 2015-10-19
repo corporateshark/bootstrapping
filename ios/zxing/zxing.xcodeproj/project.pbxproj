@@ -77,6 +77,20 @@
 		2D0B4BA81B668ED5000C42F3 /* Str.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4BA61B668ED5000C42F3 /* Str.cpp */; };
 		2D0B4BA91B668ED5000C42F3 /* StringUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B4BA71B668ED5000C42F3 /* StringUtils.cpp */; };
 		2D0B4BAB1B668F9B000C42F3 /* ios_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 2D0B4BAA1B668F9B000C42F3 /* ios_Prefix.pch */; };
+		67FC4C8D1BD4E805007ACE67 /* CodaBarReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67FC4C7F1BD4E804007ACE67 /* CodaBarReader.cpp */; };
+		67FC4C8E1BD4E805007ACE67 /* Code39Reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67FC4C801BD4E804007ACE67 /* Code39Reader.cpp */; };
+		67FC4C8F1BD4E805007ACE67 /* Code93Reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67FC4C811BD4E804007ACE67 /* Code93Reader.cpp */; };
+		67FC4C901BD4E805007ACE67 /* Code128Reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67FC4C821BD4E804007ACE67 /* Code128Reader.cpp */; };
+		67FC4C911BD4E805007ACE67 /* EAN8Reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67FC4C831BD4E805007ACE67 /* EAN8Reader.cpp */; };
+		67FC4C921BD4E805007ACE67 /* EAN13Reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67FC4C841BD4E805007ACE67 /* EAN13Reader.cpp */; };
+		67FC4C931BD4E805007ACE67 /* ITFReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67FC4C851BD4E805007ACE67 /* ITFReader.cpp */; };
+		67FC4C941BD4E805007ACE67 /* MultiFormatOneDReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67FC4C861BD4E805007ACE67 /* MultiFormatOneDReader.cpp */; };
+		67FC4C951BD4E805007ACE67 /* MultiFormatUPCEANReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67FC4C871BD4E805007ACE67 /* MultiFormatUPCEANReader.cpp */; };
+		67FC4C961BD4E805007ACE67 /* OneDReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67FC4C881BD4E805007ACE67 /* OneDReader.cpp */; };
+		67FC4C971BD4E805007ACE67 /* OneDResultPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67FC4C891BD4E805007ACE67 /* OneDResultPoint.cpp */; };
+		67FC4C981BD4E805007ACE67 /* UPCAReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67FC4C8A1BD4E805007ACE67 /* UPCAReader.cpp */; };
+		67FC4C991BD4E805007ACE67 /* UPCEANReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67FC4C8B1BD4E805007ACE67 /* UPCEANReader.cpp */; };
+		67FC4C9A1BD4E805007ACE67 /* UPCEReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67FC4C8C1BD4E805007ACE67 /* UPCEReader.cpp */; };
 		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -151,6 +165,20 @@
 		2D0B4BA61B668ED5000C42F3 /* Str.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Str.cpp; path = "../../src/zxing-cpp/core/src/zxing/common/Str.cpp"; sourceTree = "<group>"; };
 		2D0B4BA71B668ED5000C42F3 /* StringUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StringUtils.cpp; path = "../../src/zxing-cpp/core/src/zxing/common/StringUtils.cpp"; sourceTree = "<group>"; };
 		2D0B4BAA1B668F9B000C42F3 /* ios_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ios_Prefix.pch; sourceTree = "<group>"; };
+		67FC4C7F1BD4E804007ACE67 /* CodaBarReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = CodaBarReader.cpp; path = "../../src/zxing-cpp/core/src/zxing/oned/CodaBarReader.cpp"; sourceTree = "<group>"; };
+		67FC4C801BD4E804007ACE67 /* Code39Reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Code39Reader.cpp; path = "../../src/zxing-cpp/core/src/zxing/oned/Code39Reader.cpp"; sourceTree = "<group>"; };
+		67FC4C811BD4E804007ACE67 /* Code93Reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Code93Reader.cpp; path = "../../src/zxing-cpp/core/src/zxing/oned/Code93Reader.cpp"; sourceTree = "<group>"; };
+		67FC4C821BD4E804007ACE67 /* Code128Reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Code128Reader.cpp; path = "../../src/zxing-cpp/core/src/zxing/oned/Code128Reader.cpp"; sourceTree = "<group>"; };
+		67FC4C831BD4E805007ACE67 /* EAN8Reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = EAN8Reader.cpp; path = "../../src/zxing-cpp/core/src/zxing/oned/EAN8Reader.cpp"; sourceTree = "<group>"; };
+		67FC4C841BD4E805007ACE67 /* EAN13Reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = EAN13Reader.cpp; path = "../../src/zxing-cpp/core/src/zxing/oned/EAN13Reader.cpp"; sourceTree = "<group>"; };
+		67FC4C851BD4E805007ACE67 /* ITFReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ITFReader.cpp; path = "../../src/zxing-cpp/core/src/zxing/oned/ITFReader.cpp"; sourceTree = "<group>"; };
+		67FC4C861BD4E805007ACE67 /* MultiFormatOneDReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MultiFormatOneDReader.cpp; path = "../../src/zxing-cpp/core/src/zxing/oned/MultiFormatOneDReader.cpp"; sourceTree = "<group>"; };
+		67FC4C871BD4E805007ACE67 /* MultiFormatUPCEANReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = MultiFormatUPCEANReader.cpp; path = "../../src/zxing-cpp/core/src/zxing/oned/MultiFormatUPCEANReader.cpp"; sourceTree = "<group>"; };
+		67FC4C881BD4E805007ACE67 /* OneDReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = OneDReader.cpp; path = "../../src/zxing-cpp/core/src/zxing/oned/OneDReader.cpp"; sourceTree = "<group>"; };
+		67FC4C891BD4E805007ACE67 /* OneDResultPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = OneDResultPoint.cpp; path = "../../src/zxing-cpp/core/src/zxing/oned/OneDResultPoint.cpp"; sourceTree = "<group>"; };
+		67FC4C8A1BD4E805007ACE67 /* UPCAReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = UPCAReader.cpp; path = "../../src/zxing-cpp/core/src/zxing/oned/UPCAReader.cpp"; sourceTree = "<group>"; };
+		67FC4C8B1BD4E805007ACE67 /* UPCEANReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = UPCEANReader.cpp; path = "../../src/zxing-cpp/core/src/zxing/oned/UPCEANReader.cpp"; sourceTree = "<group>"; };
+		67FC4C8C1BD4E805007ACE67 /* UPCEReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = UPCEReader.cpp; path = "../../src/zxing-cpp/core/src/zxing/oned/UPCEReader.cpp"; sourceTree = "<group>"; };
 		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D2AAC07E0554694100DB518D /* libzxing.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libzxing.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -178,6 +206,20 @@
 		0867D691FE84028FC02AAC07 /* zxing */ = {
 			isa = PBXGroup;
 			children = (
+				67FC4C7F1BD4E804007ACE67 /* CodaBarReader.cpp */,
+				67FC4C801BD4E804007ACE67 /* Code39Reader.cpp */,
+				67FC4C811BD4E804007ACE67 /* Code93Reader.cpp */,
+				67FC4C821BD4E804007ACE67 /* Code128Reader.cpp */,
+				67FC4C831BD4E805007ACE67 /* EAN8Reader.cpp */,
+				67FC4C841BD4E805007ACE67 /* EAN13Reader.cpp */,
+				67FC4C851BD4E805007ACE67 /* ITFReader.cpp */,
+				67FC4C861BD4E805007ACE67 /* MultiFormatOneDReader.cpp */,
+				67FC4C871BD4E805007ACE67 /* MultiFormatUPCEANReader.cpp */,
+				67FC4C881BD4E805007ACE67 /* OneDReader.cpp */,
+				67FC4C891BD4E805007ACE67 /* OneDResultPoint.cpp */,
+				67FC4C8A1BD4E805007ACE67 /* UPCAReader.cpp */,
+				67FC4C8B1BD4E805007ACE67 /* UPCEANReader.cpp */,
+				67FC4C8C1BD4E805007ACE67 /* UPCEReader.cpp */,
 				08FB77AEFE84172EC02AAC07 /* Classes */,
 				32C88DFF0371C24200C91783 /* Other Sources */,
 				0867D69AFE84028FC02AAC07 /* Frameworks */,
@@ -376,6 +418,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67FC4C8D1BD4E805007ACE67 /* CodaBarReader.cpp in Sources */,
+				67FC4C8E1BD4E805007ACE67 /* Code39Reader.cpp in Sources */,
+				67FC4C8F1BD4E805007ACE67 /* Code93Reader.cpp in Sources */,
+				67FC4C901BD4E805007ACE67 /* Code128Reader.cpp in Sources */,
+				67FC4C911BD4E805007ACE67 /* EAN8Reader.cpp in Sources */,
+				67FC4C921BD4E805007ACE67 /* EAN13Reader.cpp in Sources */,
+				67FC4C931BD4E805007ACE67 /* ITFReader.cpp in Sources */,
+				67FC4C941BD4E805007ACE67 /* MultiFormatOneDReader.cpp in Sources */,
+				67FC4C951BD4E805007ACE67 /* MultiFormatUPCEANReader.cpp in Sources */,
+				67FC4C961BD4E805007ACE67 /* OneDReader.cpp in Sources */,
+				67FC4C971BD4E805007ACE67 /* OneDResultPoint.cpp in Sources */,
+				67FC4C981BD4E805007ACE67 /* UPCAReader.cpp in Sources */,
+				67FC4C991BD4E805007ACE67 /* UPCEANReader.cpp in Sources */,
+				67FC4C9A1BD4E805007ACE67 /* UPCEReader.cpp in Sources */,
 				2D0B4B921B668D0A000C42F3 /* GridSampler.cpp in Sources */,
 				2D0B4B431B668CCA000C42F3 /* BinaryBitmap.cpp in Sources */,
 				2D0B4B8C1B668D0A000C42F3 /* GlobalHistogramBinarizer.cpp in Sources */,
@@ -439,6 +495,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				DSTROOT = /tmp/zxing.dst;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = ios_Prefix.pch;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
