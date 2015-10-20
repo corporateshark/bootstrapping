@@ -821,7 +821,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				OTHER_LDFLAGS = "-ObjC";
-				OTHER_LIBTOOLFLAGS = "$(CONFIGURATION_BUILD_DIR)/libjpeg-turbo.a";
 				PRODUCT_NAME = "external-blippar";
 				SKIP_INSTALL = YES;
 			};
@@ -831,7 +830,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				OTHER_LDFLAGS = "-ObjC";
-				OTHER_LIBTOOLFLAGS = "$(CONFIGURATION_BUILD_DIR)/libjpeg-turbo.a";
 				PRODUCT_NAME = "external-blippar";
 				SKIP_INSTALL = YES;
 			};
@@ -895,7 +893,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				OTHER_LDFLAGS = "-ObjC";
-				OTHER_LIBTOOLFLAGS = "$(CONFIGURATION_BUILD_DIR)/libjpeg-turbo.a";
 				PRODUCT_NAME = "external-blippar";
 				SKIP_INSTALL = YES;
 			};
