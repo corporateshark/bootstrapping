@@ -5,3 +5,4 @@ snapshots
 .*.json
 .idea
 orig
+xcuserdata
