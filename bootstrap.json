@@ -346,5 +346,12 @@
         "type": "git",
         "url": "https://github.com/larsbs/id3v2lib.git"
     }
+},
+{
+    "name": "openh264",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/cisco/openh264.git"
+    }
 }
 ]
