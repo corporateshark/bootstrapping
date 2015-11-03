@@ -458,8 +458,10 @@ def main(argv):
             log("Using " + arg + " as base directory")
         if opt in ("--bootstrap-file",):
             bootstrap_filename = os.path.abspath(arg)
+            log("Using main bootstrap file " + bootstrap_filename)
         if opt in ("--local-bootstrap-file",):
             local_bootstrap_filename = os.path.abspath(arg)
+            log("Using local bootstrap file " + local_bootstrap_filename)
         if opt in ("--use-tar",):
             USE_TAR = True
         if opt in ("--use-unzip",):
