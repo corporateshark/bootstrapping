@@ -353,5 +353,12 @@
         "type": "git",
         "url": "https://github.com/cisco/openh264.git"
     }
+},
+{
+    "name": "libcurl",
+    "source": {
+        "type": "archive",
+        "url": "http://curl.haxx.se/download/curl-7.45.0.zip"
+    }
 }
 ]
