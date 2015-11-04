@@ -357,8 +357,9 @@
 {
     "name": "libcurl",
     "source": {
-        "type": "archive",
-        "url": "http://curl.haxx.se/download/curl-7.45.0.zip"
+        "type": "git",
+        "url": "https://github.com/bagder/curl.git",
+        "revision": "curl-7_45_0"
     }
 }
 ]
