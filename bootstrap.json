@@ -355,6 +355,14 @@
     }
 },
 {
+    "name": "mp4v2",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/TechSmith/mp4v2.git",
+        "revision": "ca75f763c91687590570a8f646a5cd7e54ff39f8"
+    }
+},
+{
     "name": "libcurl",
     "source": {
         "type": "git",
