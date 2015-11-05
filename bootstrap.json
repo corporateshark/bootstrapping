@@ -377,5 +377,13 @@
         "url": "https://github.com/Itseez/opencv.git",
         "revision": "3.0.0"
     }
+},
+{
+    "name": "opencv_contrib",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/Itseez/opencv_contrib.git",
+        "revision": "3.0.0"
+    }
 }
 ]
