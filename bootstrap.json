@@ -369,5 +369,13 @@
         "url": "https://github.com/bagder/curl.git",
         "revision": "curl-7_45_0"
     }
+},
+{
+    "name": "opencv",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/Itseez/opencv.git",
+        "revision": "3.0.0"
+    }
 }
 ]
