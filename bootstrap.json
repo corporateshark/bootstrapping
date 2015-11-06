@@ -384,6 +384,14 @@
         "type": "git",
         "url": "https://github.com/Itseez/opencv_contrib.git",
         "revision": "3.0.0"
+	}
+},
+{
+    "name": "libvpx",
+    "source": {
+        "type": "git",
+        "url": "https://chromium.googlesource.com/webm/libvpx",
+        "revision": "d7bbe1a210a54d94ab9121eac69705aa79d9127e"
     }
 }
 ]
