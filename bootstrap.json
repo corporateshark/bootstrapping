@@ -391,7 +391,11 @@
     "source": {
         "type": "git",
         "url": "https://chromium.googlesource.com/webm/libvpx",
-        "revision": "d7bbe1a210a54d94ab9121eac69705aa79d9127e"
+        "revision": "v1.4.0"
+    },
+    "postprocess": {
+        "type": "script",
+        "file": "libvpx.py"
     }
 }
 ]
