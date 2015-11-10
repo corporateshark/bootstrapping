@@ -397,5 +397,13 @@
         "type": "script",
         "file": "libvpx.py"
     }
+},
+{
+    "name": "fdk-aac",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/mstorsjo/fdk-aac",
+        "revision": "v0.1.4"
+	}
 }
 ]
