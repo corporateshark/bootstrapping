@@ -7,6 +7,10 @@ if(MSVC)
 	set(CMAKE_CXX_FLAGS "/EHsc /RTC1 /MTd /Zp16 /GS /Qpar /MP /wd4244")
 endif(MSVC)
 
+add_definitions(
+	-DCODEC_FOR_TESTBED
+)
+
 include_directories(
 	.
 	../../src/openh264/codec/common/inc
