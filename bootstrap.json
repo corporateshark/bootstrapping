@@ -405,5 +405,29 @@
         "url": "https://github.com/mstorsjo/fdk-aac",
         "revision": "v0.1.4"
 	}
+},
+{
+    "name": "cereal",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/USCiLab/cereal.git",
+        "revision": "v1.1.2"
+	}
+},
+{
+    "name": "liblinear",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/cjlin1/liblinear.git",
+        "revision": "v210"
+	}
+},
+{
+    "name": "libsvm",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/cjlin1/libsvm.git",
+        "revision": "v320"
+	}
 }
 ]
