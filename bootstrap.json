@@ -429,5 +429,12 @@
         "url": "https://github.com/cjlin1/libsvm.git",
         "revision": "v320"
 	}
+},
+{
+    "name": "faad2",
+    "source": {
+        "type": "archive",
+        "url": "http://downloads.sourceforge.net/faac/faad2-2.7.zip"
+	}
 }
 ]
