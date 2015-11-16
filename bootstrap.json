@@ -4,7 +4,7 @@
     "source": {
         "type": "git",
         "url": "https://github.com/Microsoft/GSL.git",
-        "revision": "2f25ace31fe7bff78386aa55fd18371cf0d113d8"
+        "revision": "252671257f4aefa7e9ff64fc784a84b42eb5c40d"
     }
 },
 {
@@ -103,20 +103,20 @@
     "name": "giflib",
     "source": {
         "type": "archive",
-        "url": "http://downloads.sourceforge.net/giflib/giflib-5.1.0.tar.gz",
-        "sha1": "22399534abac5bd69b9bc8fd3eb9ec850c1c9b3b"
+        "url": "http://downloads.sourceforge.net/giflib/giflib-5.1.1.tar.gz",
+        "sha1": "3edc29a737898d9f59190d8ae306f4e57b7cc063"
     },
     "postprocess": {
         "type": "patch",
-        "file": "giflib_22399534abac5bd69b9bc8fd3eb9ec850c1c9b3b.patch"
+        "file": "giflib_3edc29a737898d9f59190d8ae306f4e57b7cc063.patch"
     }
 },
 {
     "name": "dlib",
     "source": {
-        "type": "archive",
-        "url": "http://downloads.sourceforge.net/project/dclib/dlib/v18.16/dlib-18.16.tar.bz2",
-        "sha1": "6b4944ea3638e896016f3cbb286da9c1faa4d588"
+        "type": "git",
+        "url": "https://github.com/davisking/dlib.git",
+        "revision": "6124442f86cbb0850c33608983561a9dd97d4528"
     }
 },
 {
@@ -344,14 +344,16 @@
     "name": "id3v2lib",
     "source": {
         "type": "git",
-        "url": "https://github.com/larsbs/id3v2lib.git"
+        "url": "https://github.com/larsbs/id3v2lib.git",
+        "revision": "3a3600722a6ff5a7f5cc1662a5a55c0ac22f4f64"
     }
 },
 {
     "name": "openh264",
     "source": {
         "type": "git",
-        "url": "https://github.com/cisco/openh264.git"
+        "url": "https://github.com/cisco/openh264.git",
+        "revision": "v1.5.0"
     }
 },
 {
