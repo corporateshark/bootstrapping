@@ -91,8 +91,8 @@
     "name": "libpng",
     "source": {
         "type": "archive",
-        "url": "http://downloads.sourceforge.net/libpng/libpng-1.6.17.tar.gz",
-        "sha1": "e0ad47628fb9b709425adf9324daad94dc721e1a"
+        "url": "http://downloads.sourceforge.net/libpng/libpng-1.6.19.tar.gz",
+        "sha1": "f74869b483e49b1710acb7a79a7f3e722738ef9c"
     },
     "postprocess": {
         "type": "script",
