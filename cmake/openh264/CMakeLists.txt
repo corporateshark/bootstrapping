@@ -5,6 +5,8 @@ project("openh264")
 if(MSVC)
 	set(CMAKE_C_FLAGS "/Ox /EHsc /MT /Zp16 /GS /Qpar /MP /wd4244")
 	set(CMAKE_CXX_FLAGS "/Ox /EHsc /MT /Zp16 /GS /Qpar /MP /wd4244")
+	set(CMAKE_C_FLAGS_DEBUG "/Ox /EHsc /MT /Zp16 /GS /Qpar /MP /wd4244")
+	set(CMAKE_CXX_FLAGS_DEBUG "/Ox /EHsc /MT /Zp16 /GS /Qpar /MP /wd4244")
 endif(MSVC)
 
 add_definitions(
