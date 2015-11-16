@@ -39,7 +39,7 @@ LOCAL_SRC_FILES  := \
     ../src/openal-soft/Alc/backends/null.c \
     ../src/openal-soft/Alc/backends/opensl.c
 
-LOCAL_CFLAGS := -ffast-math -DAL_BUILD_LIBRARY -DAL_ALEXT_PROTOTYPES -Wno-incompatible-pointer-types -Wno-enum-conversion
+LOCAL_CFLAGS := -O2 -ffast-math -DAL_BUILD_LIBRARY -DAL_ALEXT_PROTOTYPES -Wno-incompatible-pointer-types -Wno-enum-conversion
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
     LOCAL_ARM_NEON := true
