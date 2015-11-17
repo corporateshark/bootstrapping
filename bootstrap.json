@@ -438,5 +438,29 @@
         "type": "archive",
         "url": "http://downloads.sourceforge.net/faac/faad2-2.7.zip"
 	}
+},
+{
+    "name": "ceres",
+    "source": {
+        "type": "git",
+        "url": "https://ceres-solver.googlesource.com/ceres-solver",
+        "revision": "1.11.0"
+	}
+},
+{
+    "name": "libmv",
+    "source": {
+        "type": "git",
+        "url": "git://git.blender.org/libmv.git",
+        "revision": "2b4aa0b7720cae9a408284834559bea9960157ee"
+	}
+},
+{
+    "name": "theia",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/sweeneychris/TheiaSfM.git",
+        "revision": "v0.5"
+	}
 }
 ]
