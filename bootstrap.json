@@ -360,8 +360,11 @@
     "name": "mp4v2",
     "source": {
         "type": "git",
-        "url": "https://github.com/TechSmith/mp4v2.git",
-        "revision": "ca75f763c91687590570a8f646a5cd7e54ff39f8"
+        "url": "https://github.com/blippar/mp4v2.git"
+    },
+    "postprocess": {
+        "type": "script",
+        "file": "libmp4v2.py"
     }
 },
 {
