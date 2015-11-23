@@ -13,7 +13,8 @@ LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/../src/openh264/codec/console/dec/inc \
     $(LOCAL_PATH)/../src/openh264/codec/encoder/plus/inc \
     $(LOCAL_PATH)/../src/openh264/codec/encoder/core/inc \
-    $(LOCAL_PATH)/../src/openh264/codec/processing/interface
+    $(LOCAL_PATH)/../src/openh264/codec/processing/interface \
+    $(LOCAL_PATH)/../src/openh264/codec/common/arm
 
 LOCAL_SRC_FILES  := \
 	../src/openh264/codec/decoder/core/src/au_parser.cpp \
@@ -60,14 +61,26 @@ LOCAL_CFLAGS += -DCODEC_FOR_TESTBED -DANDROID_NDK
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
    LOCAL_ARM_NEON := true
-   LOCAL_CFLAGS += -mfpu=neon -march=armv7-a -DUSE_ASM
-	LOCAL_SRC_FILES += ../src/openh264/codec/decoder/core/arm/block_add_neon.S ../src/openh264/codec/decoder/core/arm/intra_pred_neon.S
+   LOCAL_CFLAGS += -mfpu=neon -march=armv7-a -DUSE_ASM -DHAVE_NEON
+	LOCAL_SRC_FILES += ../src/openh264/codec/decoder/core/arm/block_add_neon.S
+	LOCAL_SRC_FILES += ../src/openh264/codec/decoder/core/arm/intra_pred_neon.S
+	LOCAL_SRC_FILES += ../src/openh264/codec/common/arm/copy_mb_neon.S
+	LOCAL_SRC_FILES += ../src/openh264/codec/common/arm/deblocking_neon.S
+	LOCAL_SRC_FILES += ../src/openh264/codec/common/arm/expand_picture_neon.S
+	LOCAL_SRC_FILES += ../src/openh264/codec/common/arm/intra_pred_common_neon.S
+	LOCAL_SRC_FILES += ../src/openh264/codec/common/arm/mc_neon.S
 endif
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a-hard)
 	LOCAL_ARM_NEON := true
-	LOCAL_CFLAGS += -mfloat-abi=hard -mfpu=neon -march=armv7-a -DUSE_ASM
-	LOCAL_SRC_FILES += ../src/openh264/codec/decoder/core/arm/block_add_neon.S ../src/openh264/codec/decoder/core/arm/intra_pred_neon.S
+	LOCAL_CFLAGS += -mfloat-abi=hard -mfpu=neon -march=armv7-a -DUSE_ASM -DHAVE_NEON
+	LOCAL_SRC_FILES += ../src/openh264/codec/decoder/core/arm/block_add_neon.S
+	LOCAL_SRC_FILES += ../src/openh264/codec/decoder/core/arm/intra_pred_neon.S
+	LOCAL_SRC_FILES += ../src/openh264/codec/common/arm/copy_mb_neon.S
+	LOCAL_SRC_FILES += ../src/openh264/codec/common/arm/deblocking_neon.S
+	LOCAL_SRC_FILES += ../src/openh264/codec/common/arm/expand_picture_neon.S
+	LOCAL_SRC_FILES += ../src/openh264/codec/common/arm/intra_pred_common_neon.S
+	LOCAL_SRC_FILES += ../src/openh264/codec/common/arm/mc_neon.S
 endif
 
 ifeq ($(TARGET_ARCH_ABI),x86)
