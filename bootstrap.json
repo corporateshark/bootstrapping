@@ -465,5 +465,21 @@
         "url": "https://github.com/sweeneychris/TheiaSfM.git",
         "revision": "v0.5"
 	}
+},
+{
+    "name": "libtheora",
+    "source": {
+        "type": "archive",
+        "url": "http://downloads.xiph.org/releases/theora/libtheora-1.1.1.zip"
+	}
+},
+{
+    "name": "theoraplay",
+    "source": {
+        "type": "hg",
+        "url": "http://hg.icculus.org/icculus/theoraplay",
+        "revision": "058686dc593f"
+	}
 }
+
 ]
