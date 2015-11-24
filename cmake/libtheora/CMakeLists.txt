@@ -11,8 +11,10 @@ if(MSVC)
 		-DHAVE_UNISTD_H=1
 		-DHAVE_STDINT_H=1
 	)
-	set(CMAKE_C_FLAGS "/EHsc /RTC1 /MTd /Zp16 /GS /Qpar /MP /wd4244 /wd4700")
-	set(CMAKE_CXX_FLAGS "/EHsc /RTC1 /MTd /Zp16 /GS /Qpar /MP /wd4244 /wd4700")
+	set(CMAKE_C_FLAGS "/Ox /EHsc /MT /Zp16 /GS /Qpar /MP /wd4244")
+	set(CMAKE_CXX_FLAGS "/Ox /EHsc /MT /Zp16 /GS /Qpar /MP /wd4244")
+	set(CMAKE_C_FLAGS_DEBUG "/Ox /EHsc /MT /Zp16 /GS /Qpar /MP /wd4244")
+	set(CMAKE_CXX_FLAGS_DEBUG "/Ox /EHsc /MT /Zp16 /GS /Qpar /MP /wd4244")
 endif(MSVC)
 
 include_directories(
