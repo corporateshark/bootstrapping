@@ -480,6 +480,19 @@
         "url": "http://hg.icculus.org/icculus/theoraplay",
         "revision": "058686dc593f"
 	}
+},
+{
+    "name": "liboggz",
+    "source": {
+        "type": "archive",
+        "url": "http://downloads.xiph.org/releases/liboggz/liboggz-1.1.1.tar.gz"
+	}
+},
+{
+    "name": "theoraplayer",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/AprilAndFriends/theoraplayer.git"
+	}
 }
-
 ]
