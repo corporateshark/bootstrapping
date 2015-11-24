@@ -479,5 +479,13 @@
         "type": "git",
         "url": "https://github.com/AprilAndFriends/theoraplayer.git"
 	}
+},
+{
+    "name": "redsvd-h",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/ntessore/redsvd-h.git",
+        "revision": "81a2da8222375fefaef6f2150e076bc0538d6c13"
+    }
 }
 ]
