@@ -421,7 +421,7 @@ def main(argv):
         return 0
 
     opt_names = []
-    name_file = ""
+    name_files = []
     opt_clean = False
     opt_clean_archives = False
     list_libraries = False
@@ -443,7 +443,7 @@ def main(argv):
         if opt in ("-n", "--name"):
             opt_names.append(arg)
         if opt in ("-N", "--name-file"):
-            name_file = os.path.abspath(arg)
+            name_files.append(os.path.abspath(arg))
         if opt in ("-c", "--clean"):
             opt_clean = True
         if opt in ("-C", "--clean-all"):
@@ -492,14 +492,17 @@ def main(argv):
     if base_dir_path:
         os.chdir(base_dir_path)
 
-    if name_file:
-        try:
-            with open(name_file) as f:
-                opt_names = [l for l in (line.strip() for line in f) if l]
-                opt_names = [l for l in opt_names if l[0] is not '#']
-        except:
-            log("ERROR: cannot parse name file " + name_file)
-            return -1
+    if name_files:
+        for name_file in name_files:
+            try:
+                with open(name_file) as f:
+                    opt_names_local = [l for l in (line.strip() for line in f) if l]
+                    opt_names_local = [l for l in opt_names_local if l[0] is not '#']
+                    opt_names += opt_names_local
+                    dlog("Name file contains: " + ", ".join(opt_names_local))
+            except:
+                log("ERROR: cannot parse name file " + name_file)
+                return -1
 
     if force_fallback and not FALLBACK_URL:
         log("Error: cannot force usage of the fallback location without specifying a fallback URL")
