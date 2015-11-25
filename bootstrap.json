@@ -474,13 +474,6 @@
 	}
 },
 {
-    "name": "theoraplayer",
-    "source": {
-        "type": "git",
-        "url": "https://github.com/AprilAndFriends/theoraplayer.git"
-	}
-},
-{
     "name": "redsvd-h",
     "source": {
         "type": "git",
