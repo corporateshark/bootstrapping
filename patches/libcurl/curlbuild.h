@@ -7,7 +7,7 @@
  *                            | (__| |_| |  _ <| |___
  *                             \___|\___/|_| \_\_____|
  *
- * Copyright (C) 1998 - 2010, Daniel Stenberg, <daniel@haxx.se>, et al.
+ * Copyright (C) 1998 - 2013, Daniel Stenberg, <daniel@haxx.se>, et al.
  *
  * This software is licensed as described in the file COPYING, which
  * you should have received as part of this distribution. The terms
@@ -522,46 +522,13 @@
 #  define CURL_TYPEOF_CURL_SOCKLEN_T int
 #  define CURL_SIZEOF_CURL_SOCKLEN_T 4
 
-/* SK: Android 64 */
-
-#elif ( defined(__linux__) && defined(ANDROID) ) && (defined(_LP64) || defined(__x86_64__) || defined(__LP64__) || defined(_WIN64) || defined(_M_X64) || defined(__ppc64__))
-
-#    define CURL_SIZEOF_LONG           8
-#    define CURL_TYPEOF_CURL_OFF_T     long long
-#    define CURL_FORMAT_CURL_OFF_T     "I64d"
-#    define CURL_FORMAT_CURL_OFF_TU    "I64u"
-#    define CURL_FORMAT_OFF_T          "%I64d"
-#    define CURL_SIZEOF_CURL_OFF_T     8
-#    define CURL_SUFFIX_CURL_OFF_T     LL
-#    define CURL_SUFFIX_CURL_OFF_TU    ULL
-#  define CURL_TYPEOF_CURL_SOCKLEN_T socklen_t
-#  define CURL_SIZEOF_CURL_SOCKLEN_T 4
-#  define CURL_PULL_SYS_TYPES_H      1
-#  define CURL_PULL_SYS_SOCKET_H     1
-
-/* LV: Android arm and x86, GCC */
-
-#elif ( defined(__linux__) && defined(ANDROID) ) || defined(BLACKBERRY) || defined(IOS_BUILD)
-
-#    define CURL_SIZEOF_LONG           4
-#    define CURL_TYPEOF_CURL_OFF_T     long long
-#    define CURL_FORMAT_CURL_OFF_T     "lld"
-#    define CURL_FORMAT_CURL_OFF_TU    "llu"
-#    define CURL_FORMAT_OFF_T          "%lld"
-#    define CURL_SIZEOF_CURL_OFF_T     8
-#    define CURL_SUFFIX_CURL_OFF_T     LL
-#    define CURL_SUFFIX_CURL_OFF_TU    ULL
-#  define CURL_TYPEOF_CURL_SOCKLEN_T socklen_t
-#  define CURL_SIZEOF_CURL_SOCKLEN_T 4
-#  define CURL_PULL_SYS_TYPES_H      1
-#  define CURL_PULL_SYS_SOCKET_H     1
-
 /* ===================================== */
 /*    KEEP GENERIC GCC THE LAST ENTRY    */
 /* ===================================== */
 
 #elif defined(__GNUC__)
-#  if defined(__i386__) || defined(__ppc__)
+#  if defined(__ILP32__) || \
+      defined(__i386__) || defined(__ppc__) || defined(__arm__) || defined(__sparc__)
 #    define CURL_SIZEOF_LONG           4
 #    define CURL_TYPEOF_CURL_OFF_T     long long
 #    define CURL_FORMAT_CURL_OFF_T     "lld"
@@ -570,7 +537,8 @@
 #    define CURL_SIZEOF_CURL_OFF_T     8
 #    define CURL_SUFFIX_CURL_OFF_T     LL
 #    define CURL_SUFFIX_CURL_OFF_TU    ULL
-#  elif defined(__x86_64__) || defined(__ppc64__)
+#  elif defined(__LP64__) || \
+        defined(__x86_64__) || defined(__ppc64__) || defined(__sparc64__)
 #    define CURL_SIZEOF_LONG           8
 #    define CURL_TYPEOF_CURL_OFF_T     long
 #    define CURL_FORMAT_CURL_OFF_T     "ld"

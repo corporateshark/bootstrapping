@@ -380,6 +380,17 @@
     }
 },
 {
+    "name": "libressl",
+    "source": {
+        "type": "archive",
+        "url": "http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-2.3.1.tar.gz"
+    },
+    "postprocess": {
+        "type": "script",
+        "file": "libressl/libressl.py"
+    }
+},
+{
     "name": "opencv",
     "source": {
         "type": "git",
