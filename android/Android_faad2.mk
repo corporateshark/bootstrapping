@@ -66,6 +66,8 @@ LOCAL_CFLAGS += \
 	-DHAVE_STRING_H \
 	-DHAVE_STDINT_H
 
+LOCAL_CFLAGS += -Wno-tautological-constant-out-of-range-compare
+
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
     LOCAL_ARM_NEON := true
     LOCAL_CFLAGS += -mfpu=neon -march=armv7-a
