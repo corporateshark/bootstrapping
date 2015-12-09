@@ -38,7 +38,7 @@ LOCAL_SRC_FILES := \
 
 LOCAL_CFLAGS += -O3
 
-LOCAL_CFLAGS += -DTHEORA_DISABLE_ENCODE -DSTDC_HEADERS=1 -DHAVE_UNISTD_H=1 -DHAVE_STDINT_H=1 -Wno-tautological-compare -Wno-shift-op-parentheses
+LOCAL_CFLAGS += -DTHEORA_DISABLE_ENCODE -DSTDC_HEADERS=1 -DHAVE_UNISTD_H=1 -DHAVE_STDINT_H=1 -Wno-tautological-compare -Wno-shift-op-parentheses -Wno-logical-op-parentheses
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
     LOCAL_ARM_NEON := true
