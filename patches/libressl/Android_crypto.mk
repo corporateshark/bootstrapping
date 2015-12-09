@@ -162,8 +162,9 @@ local_src_files := \
 	comp/comp_err.c \
 	comp/comp_lib.c \
 	compat/explicit_bzero.c \
-	compat/getentropy_linux.c \
+	compat/getentropy_android.c \
 	compat/reallocarray.c \
+	compat/timegm.c \
 	compat/timingsafe_bcmp.c \
 	compat/timingsafe_memcmp.c \
 	conf/conf_api.c \
