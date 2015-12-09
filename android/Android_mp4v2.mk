@@ -111,7 +111,7 @@ LOCAL_SRC_FILES  := \
 	../src/mp4v2/libplatform/process/process_posix.cpp \
 	../src/mp4v2/libplatform/time/time_posix.cpp
 
-LOCAL_CFLAGS := -O3 -ffast-math -Wno-incompatible-pointer-types -Wno-enum-conversion -Wno-reserved-user-defined-literal -Wno-c++11-narrowing
+LOCAL_CFLAGS := -O3 -ffast-math -Wno-incompatible-pointer-types -Wno-enum-conversion -Wno-reserved-user-defined-literal -Wno-c++11-narrowing -Wno-invalid-source-encoding
 
 LOCAL_CFLAGS += -DMP4V2_USE_STATIC_LIB
 
