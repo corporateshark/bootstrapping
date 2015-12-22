@@ -35,8 +35,8 @@
     "name": "boost",
     "source": {
         "type": "archive",
-        "url": "http://downloads.sourceforge.net/project/boost/boost/1.59.0/boost_1_59_0.tar.bz2",
-        "sha1": "b94de47108b2cdb0f931833a7a9834c2dd3ca46e"
+        "url": "http://downloads.sourceforge.net/project/boost/boost/1.60.0/boost_1_60_0.tar.bz2",
+        "sha1": "7f56ab507d3258610391b47fef6b11635861175a"
     }
 },
 {
