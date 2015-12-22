@@ -136,11 +136,11 @@
     "source": {
         "type": "hg",
         "url": "https://bitbucket.org/eigen/eigen/",
-        "revision": "36ef6f7518d1f993b7e833ff76ce1830c5fd9093"
+        "revision": "ce5a455b34c0a0ac3545a1497cb4a16c38ed90e8"
     },
     "postprocess": {
         "type": "patch",
-        "file": "eigen_36ef6f7518d1f993b7e833ff76ce1830c5fd9093.patch"
+        "file": "eigen_ce5a455b34c0a0ac3545a1497cb4a16c38ed90e8.patch"
     }
 },
 {
