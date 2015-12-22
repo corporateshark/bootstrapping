@@ -4,7 +4,7 @@
     "source": {
         "type": "git",
         "url": "https://github.com/Microsoft/GSL.git",
-        "revision": "252671257f4aefa7e9ff64fc784a84b42eb5c40d"
+        "revision": "85ffc8d222957ca7d6d30fb75fa61fe1e01fa1d4"
     }
 },
 {
@@ -395,7 +395,7 @@
     "source": {
         "type": "git",
         "url": "https://github.com/Itseez/opencv.git",
-        "revision": "3.0.0"
+        "revision": "3.1.0"
     }
 },
 {
@@ -403,7 +403,7 @@
     "source": {
         "type": "git",
         "url": "https://github.com/Itseez/opencv_contrib.git",
-        "revision": "3.0.0"
+        "revision": "3.1.0"
 	}
 },
 {
@@ -447,7 +447,7 @@
     "source": {
         "type": "git",
         "url": "https://github.com/cjlin1/libsvm.git",
-        "revision": "v320"
+        "revision": "v321"
 	}
 },
 {
