@@ -1,0 +1,13 @@
+diff --exclude=.git --exclude=.hg -rupN ./src/redsvd-h/include/RedSVD/RedSVD-h ./src/redsvd-h_patched/include/RedSVD/RedSVD-h
+--- ./src/redsvd-h/include/RedSVD/RedSVD-h	2015-11-24 20:11:04.000000000 +0100
++++ ./src/redsvd-h_patched/include/RedSVD/RedSVD-h	2016-01-06 13:38:16.000000000 +0100
+@@ -152,7 +152,8 @@ namespace RedSVD
+ 			// Range(C) = Range(B)
+ 			DenseMatrix C = Z.transpose() * B; 
+ 			
+-			Eigen::JacobiSVD<DenseMatrix> svdOfC(C, Eigen::ComputeThinU | Eigen::ComputeThinV);
++			//Eigen::JacobiSVD<DenseMatrix> svdOfC(C, Eigen::ComputeThinU | Eigen::ComputeThinV);
++			Eigen::BDCSVD<DenseMatrix> svdOfC(C, Eigen::ComputeThinU | Eigen::ComputeThinV);
+ 			
+ 			// C = USV^T
+ 			// A = Z * U * S * V^T * Y^T()

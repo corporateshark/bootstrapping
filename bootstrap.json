@@ -500,6 +500,10 @@
         "type": "git",
         "url": "https://github.com/ntessore/redsvd-h.git",
         "revision": "81a2da8222375fefaef6f2150e076bc0538d6c13"
+    },
+    "postprocess": {
+        "type": "patch",
+        "file": "redsvd-h_81a2da8222375fefaef6f2150e076bc0538d6c13.patch"
     }
 }
 ]
