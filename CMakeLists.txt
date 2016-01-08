@@ -14,6 +14,7 @@ set(USE_FAST OFF CACHE BOOL "Use FAST")
 set(USE_ICONV OFF CACHE BOOL "Use iconv")
 set(USE_ZOPFLI OFF CACHE BOOL "Use Zopfli")
 set(USE_BROTLI OFF CACHE BOOL "Use Brotli")
+set(USE_LIBLINEAR OFF CACHE BOOL "Use liblinear")
 
 if (USE_ZLIB)
     add_subdirectory(./cmake/z EXCLUDE_FROM_ALL)
@@ -61,6 +62,10 @@ endif()
 
 if(USE_ZOPFLI)
     add_subdirectory(./cmake/zopfli EXCLUDE_FROM_ALL)
+endif()
+
+if(USE_LIBLINEAR)
+    add_subdirectory(./cmake/liblinear EXCLUDE_FROM_ALL)
 endif()
 
 if (ANDROID_MK)
