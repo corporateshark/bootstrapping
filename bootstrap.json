@@ -505,5 +505,12 @@
         "type": "patch",
         "file": "redsvd-h_81a2da8222375fefaef6f2150e076bc0538d6c13.patch"
     }
+},
+{
+    "name": "geographiclib",
+    "source": {
+        "type": "archive",
+        "url": "http://downloads.sourceforge.net/project/geographiclib/distrib/GeographicLib-1.45.tar.gz"
+    }
 }
 ]
