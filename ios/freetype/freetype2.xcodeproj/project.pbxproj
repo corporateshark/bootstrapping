@@ -1277,6 +1277,8 @@
 					DARWIN_NO_CARBON,
 				);
 				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
 				HEADER_SEARCH_PATHS = (
 					../../src/freetype/include/,
 					../../src/freetype/src/,
@@ -1300,6 +1302,8 @@
 					DARWIN_NO_CARBON,
 				);
 				GCC_VERSION = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
 				HEADER_SEARCH_PATHS = (
 					../../src/freetype/include/,
 					../../src/freetype/src/,
