@@ -378,7 +378,7 @@
     "source": {
         "type": "git",
         "url": "https://github.com/bagder/curl.git",
-        "revision": "curl-7_45_0"
+        "revision": "curl-7_46_0"
     },
     "postprocess": {
         "type": "script",
