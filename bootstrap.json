@@ -417,7 +417,7 @@
     "source": {
         "type": "git",
         "url": "https://chromium.googlesource.com/webm/libvpx",
-        "revision": "v1.4.0"
+        "revision": "v1.5.0"
     },
     "postprocess": {
         "type": "script",
