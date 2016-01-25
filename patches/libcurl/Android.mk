@@ -46,7 +46,15 @@
 
 LOCAL_PATH:= $(call my-dir)
 
-common_CFLAGS := -Wpointer-arith -Wwrite-strings -Wunused -Winline -Wnested-externs -Wmissing-declarations -Wmissing-prototypes -Wno-long-long -Wfloat-equal -Wno-multichar -Wsign-compare -Wno-format-nonliteral -Wendif-labels -Wstrict-prototypes -Wdeclaration-after-statement -Wno-system-headers -fno-short-enums -DHAVE_CONFIG_H -mfpu=vfp -mfloat-abi=hard -mhard-float -fno-short-enums -D_NDK_MATH_NO_SOFTFP=1
+common_CFLAGS := -Wpointer-arith -Wwrite-strings -Wunused -Winline -Wnested-externs -Wmissing-declarations -Wmissing-prototypes -Wno-long-long -Wfloat-equal -Wno-multichar -Wsign-compare -Wno-format-nonliteral -Wendif-labels -Wstrict-prototypes -Wdeclaration-after-statement -Wno-system-headers -fno-short-enums -DHAVE_CONFIG_H -fno-short-enums
+
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
+    common_CFLAGS += -mfpu=neon -march=armv7-a
+endif
+
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a-hard)
+    common_CFLAGS += -mfloat-abi=hard -mfpu=neon -march=armv7-a -mhard-float -D_NDK_MATH_NO_SOFTFP=1
+endif
 
 #########################
 # Build the libcurl library

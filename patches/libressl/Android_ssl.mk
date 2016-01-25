@@ -62,9 +62,15 @@ LOCAL_CFLAGS += -DOPENSSL_NO_CAMELLIA -DOPENSSL_NO_CAPIENG -DOPENSSL_NO_CAST -DO
 # Extra
 LOCAL_CFLAGS += -DOPENSSL_NO_HW -DOPENSSL_NO_ENGINE -DZLIB -fno-short-enums
 
-LOCAL_CFLAGS += -mfpu=vfp -mfloat-abi=hard -mhard-float -fno-short-enums -D_NDK_MATH_NO_SOFTFP=1
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
+    LOCAL_CFLAGS += -mfpu=neon -march=armv7-a
+endif
 
-LOCAL_CFLAGS += -Wno-implicit-function-declaration
+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a-hard)
+    LOCAL_CFLAGS += -mfloat-abi=hard -mfpu=neon -march=armv7-a -mhard-float -D_NDK_MATH_NO_SOFTFP=1
+endif
+
+LOCAL_CFLAGS += -Wno-implicit-function-declaration -Wno-int-conversion
 
 LOCAL_C_INCLUDES := $(GLOBAL_C_INCLUDES)
 
