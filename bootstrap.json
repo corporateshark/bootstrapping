@@ -512,5 +512,13 @@
         "type": "archive",
         "url": "http://downloads.sourceforge.net/project/geographiclib/distrib/GeographicLib-1.45.tar.gz"
     }
+},
+{
+    "name": "nestegg",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/kinetiknz/nestegg",
+        "revision": "8374e436ad90afd61919ffe27aa5ff2887feacba"
+    }
 }
 ]
