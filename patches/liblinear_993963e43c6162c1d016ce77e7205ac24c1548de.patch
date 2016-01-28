@@ -1,0 +1,430 @@
+diff --git a/Makefile b/Makefile
+index 0534f2b..5ed8342 100644
+--- a/Makefile
++++ b/Makefile
+@@ -1,6 +1,7 @@
+ CXX ?= g++
+ CC ?= gcc
+-CFLAGS = -Wall -Wconversion -O3 -fPIC
++CFLAGS = -Wall -Wconversion -O3 -fPIC -std=c++11
++CXXFLAGS = $(CFLAGS) -std=c++11
+ LIBS = blas/blas.a
+ SHVER = 3
+ OS = $(shell uname)
+@@ -17,16 +18,16 @@ lib: linear.o tron.o blas/blas.a
+ 	$(CXX) $${SHARED_LIB_FLAG} linear.o tron.o blas/blas.a -o liblinear.so.$(SHVER)
+ 
+ train: tron.o linear.o train.c blas/blas.a
+-	$(CXX) $(CFLAGS) -o train train.c tron.o linear.o $(LIBS)
++	$(CXX) $(CXXFLAGS) -o train train.c tron.o linear.o $(LIBS)
+ 
+ predict: tron.o linear.o predict.c blas/blas.a
+-	$(CXX) $(CFLAGS) -o predict predict.c tron.o linear.o $(LIBS)
++	$(CXX) $(CXXFLAGS) -o predict predict.c tron.o linear.o $(LIBS)
+ 
+ tron.o: tron.cpp tron.h
+-	$(CXX) $(CFLAGS) -c -o tron.o tron.cpp
++	$(CXX) $(CXXFLAGS) -c -o tron.o tron.cpp
+ 
+ linear.o: linear.cpp linear.h
+-	$(CXX) $(CFLAGS) -c -o linear.o linear.cpp
++	$(CXX) $(CXXFLAGS) -c -o linear.o linear.cpp
+ 
+ blas/blas.a: blas/*.c blas/*.h
+ 	make -C blas OPTFLAGS='$(CFLAGS)' CC='$(CC)';
+diff --git a/linear.cpp b/linear.cpp
+index f9b9bdc..b2ef686 100644
+--- a/linear.cpp
++++ b/linear.cpp
+@@ -459,7 +459,7 @@ class Solver_MCSVM_CS
+ 	public:
+ 		Solver_MCSVM_CS(const problem *prob, int nr_class, double *C, double eps=0.1, int max_iter=100000);
+ 		~Solver_MCSVM_CS();
+-		void Solve(double *w);
++		void Solve(double *w, std::mt19937& rng);
+ 	private:
+ 		void solve_sub_problem(double A_i, int yi, double C_yi, int active_i, double *alpha_new);
+ 		bool be_shrunk(int i, int m, int yi, double alpha_i, double minG);
+@@ -534,7 +534,7 @@ bool Solver_MCSVM_CS::be_shrunk(int i, int m, int yi, double alpha_i, double min
+ 	return false;
+ }
+ 
+-void Solver_MCSVM_CS::Solve(double *w)
++void Solver_MCSVM_CS::Solve(double *w, std::mt19937& rng)
+ {
+ 	int i, m, s;
+ 	int iter = 0;
+@@ -587,7 +587,7 @@ void Solver_MCSVM_CS::Solve(double *w)
+ 		double stopping = -INF;
+ 		for(i=0;i<active_size;i++)
+ 		{
+-			int j = i+rand()%(active_size-i);
++			int j = i + std::uniform_int_distribution<int>(0, active_size-i - 1)(rng);
+ 			swap(index[i], index[j]);
+ 		}
+ 		for(s=0;s<active_size;s++)
+@@ -778,7 +778,7 @@ void Solver_MCSVM_CS::Solve(double *w)
+ 
+ static void solve_l2r_l1l2_svc(
+ 	const problem *prob, double *w, double eps,
+-	double Cp, double Cn, int solver_type)
++	double Cp, double Cn, int solver_type, std::mt19937& rng)
+ {
+ 	int l = prob->l;
+ 	int w_size = prob->n;
+@@ -845,7 +845,7 @@ static void solve_l2r_l1l2_svc(
+ 
+ 		for (i=0; i<active_size; i++)
+ 		{
+-			int j = i+rand()%(active_size-i);
++			int j = i + std::uniform_int_distribution<int>(0, active_size-i - 1)(rng);
+ 			swap(index[i], index[j]);
+ 		}
+ 
+@@ -981,7 +981,7 @@ static void solve_l2r_l1l2_svc(
+ 
+ static void solve_l2r_l1l2_svr(
+ 	const problem *prob, double *w, const parameter *param,
+-	int solver_type)
++	int solver_type, std::mt19937& rng)
+ {
+ 	int l = prob->l;
+ 	double C = param->C;
+@@ -1036,7 +1036,7 @@ static void solve_l2r_l1l2_svr(
+ 
+ 		for(i=0; i<active_size; i++)
+ 		{
+-			int j = i+rand()%(active_size-i);
++			int j = i + std::uniform_int_distribution<int>(0, active_size-i - 1)(rng);
+ 			swap(index[i], index[j]);
+ 		}
+ 
+@@ -1187,7 +1187,7 @@ static void solve_l2r_l1l2_svr(
+ #define GETI(i) (y[i]+1)
+ // To support weights for instances, use GETI(i) (i)
+ 
+-void solve_l2r_lr_dual(const problem *prob, double *w, double eps, double Cp, double Cn)
++void solve_l2r_lr_dual(const problem *prob, double *w, double eps, double Cp, double Cn, std::mt19937& rng)
+ {
+ 	int l = prob->l;
+ 	int w_size = prob->n;
+@@ -1237,7 +1237,7 @@ void solve_l2r_lr_dual(const problem *prob, double *w, double eps, double Cp, do
+ 	{
+ 		for (i=0; i<l; i++)
+ 		{
+-			int j = i+rand()%(l-i);
++			int j = i + std::uniform_int_distribution<int>(0, l - i - 1)(rng);
+ 			swap(index[i], index[j]);
+ 		}
+ 		int newton_iter = 0;
+@@ -1347,7 +1347,7 @@ void solve_l2r_lr_dual(const problem *prob, double *w, double eps, double Cp, do
+ 
+ static void solve_l1r_l2_svc(
+ 	problem *prob_col, double *w, double eps,
+-	double Cp, double Cn)
++	double Cp, double Cn, std::mt19937& rng)
+ {
+ 	int l = prob_col->l;
+ 	int w_size = prob_col->n;
+@@ -1408,7 +1408,7 @@ static void solve_l1r_l2_svc(
+ 
+ 		for(j=0; j<active_size; j++)
+ 		{
+-			int i = j+rand()%(active_size-j);
++			int i = j + std::uniform_int_distribution<int>(0, active_size-j - 1)(rng);
+ 			swap(index[i], index[j]);
+ 		}
+ 
+@@ -1626,7 +1626,7 @@ static void solve_l1r_l2_svc(
+ 
+ static void solve_l1r_lr(
+ 	const problem *prob_col, double *w, double eps,
+-	double Cp, double Cn)
++	double Cp, double Cn, std::mt19937& rng)
+ {
+ 	int l = prob_col->l;
+ 	int w_size = prob_col->n;
+@@ -1775,7 +1775,7 @@ static void solve_l1r_lr(
+ 
+ 			for(j=0; j<QP_active_size; j++)
+ 			{
+-				int i = j+rand()%(QP_active_size-j);
++				int i = j + std::uniform_int_distribution<int>(0, QP_active_size-j - 1)(rng);
+ 				swap(index[i], index[j]);
+ 			}
+ 
+@@ -2112,7 +2112,7 @@ static void group_classes(const problem *prob, int *nr_class_ret, int **label_re
+ 	free(data_label);
+ }
+ 
+-static void train_one(const problem *prob, const parameter *param, double *w, double Cp, double Cn)
++static void train_one(const problem *prob, const parameter *param, double *w, double Cp, double Cn, std::mt19937& rng)
+ {
+ 	//inner and outer tolerances for TRON
+ 	double eps = param->eps;
+@@ -2168,17 +2168,17 @@ static void train_one(const problem *prob, const parameter *param, double *w, do
+ 			break;
+ 		}
+ 		case L2R_L2LOSS_SVC_DUAL:
+-			solve_l2r_l1l2_svc(prob, w, eps, Cp, Cn, L2R_L2LOSS_SVC_DUAL);
++			solve_l2r_l1l2_svc(prob, w, eps, Cp, Cn, L2R_L2LOSS_SVC_DUAL, rng);
+ 			break;
+ 		case L2R_L1LOSS_SVC_DUAL:
+-			solve_l2r_l1l2_svc(prob, w, eps, Cp, Cn, L2R_L1LOSS_SVC_DUAL);
++			solve_l2r_l1l2_svc(prob, w, eps, Cp, Cn, L2R_L1LOSS_SVC_DUAL, rng);
+ 			break;
+ 		case L1R_L2LOSS_SVC:
+ 		{
+ 			problem prob_col;
+ 			feature_node *x_space = NULL;
+ 			transpose(prob, &x_space ,&prob_col);
+-			solve_l1r_l2_svc(&prob_col, w, primal_solver_tol, Cp, Cn);
++			solve_l1r_l2_svc(&prob_col, w, primal_solver_tol, Cp, Cn, rng);
+ 			delete [] prob_col.y;
+ 			delete [] prob_col.x;
+ 			delete [] x_space;
+@@ -2189,14 +2189,14 @@ static void train_one(const problem *prob, const parameter *param, double *w, do
+ 			problem prob_col;
+ 			feature_node *x_space = NULL;
+ 			transpose(prob, &x_space ,&prob_col);
+-			solve_l1r_lr(&prob_col, w, primal_solver_tol, Cp, Cn);
++			solve_l1r_lr(&prob_col, w, primal_solver_tol, Cp, Cn, rng);
+ 			delete [] prob_col.y;
+ 			delete [] prob_col.x;
+ 			delete [] x_space;
+ 			break;
+ 		}
+ 		case L2R_LR_DUAL:
+-			solve_l2r_lr_dual(prob, w, eps, Cp, Cn);
++			solve_l2r_lr_dual(prob, w, eps, Cp, Cn, rng);
+ 			break;
+ 		case L2R_L2LOSS_SVR:
+ 		{
+@@ -2214,10 +2214,10 @@ static void train_one(const problem *prob, const parameter *param, double *w, do
+ 
+ 		}
+ 		case L2R_L1LOSS_SVR_DUAL:
+-			solve_l2r_l1l2_svr(prob, w, param, L2R_L1LOSS_SVR_DUAL);
++			solve_l2r_l1l2_svr(prob, w, param, L2R_L1LOSS_SVR_DUAL, rng);
+ 			break;
+ 		case L2R_L2LOSS_SVR_DUAL:
+-			solve_l2r_l1l2_svr(prob, w, param, L2R_L2LOSS_SVR_DUAL);
++			solve_l2r_l1l2_svr(prob, w, param, L2R_L2LOSS_SVR_DUAL, rng);
+ 			break;
+ 		default:
+ 			fprintf(stderr, "ERROR: unknown solver_type\n");
+@@ -2258,7 +2258,7 @@ static double calc_start_C(const problem *prob, const parameter *param)
+ //
+ // Interface functions
+ //
+-model* train(const problem *prob, const parameter *param)
++model* train(const problem *prob, const parameter *param, std::mt19937& rng)
+ {
+ 	int i,j;
+ 	int l = prob->l;
+@@ -2280,7 +2280,7 @@ model* train(const problem *prob, const parameter *param)
+ 			model_->w[i] = 0;
+ 		model_->nr_class = 2;
+ 		model_->label = NULL;
+-		train_one(prob, param, model_->w, 0, 0);
++		train_one(prob, param, model_->w, 0, 0, rng);
+ 	}
+ 	else
+ 	{
+@@ -2336,7 +2336,7 @@ model* train(const problem *prob, const parameter *param)
+ 				for(j=start[i];j<start[i]+count[i];j++)
+ 					sub_prob.y[j] = i;
+ 			Solver_MCSVM_CS Solver(&sub_prob, nr_class, weighted_C, param->eps);
+-			Solver.Solve(model_->w);
++			Solver.Solve(model_->w, rng);
+ 		}
+ 		else
+ 		{
+@@ -2358,7 +2358,7 @@ model* train(const problem *prob, const parameter *param)
+ 					for(i=0;i<w_size;i++)
+ 						model_->w[i] = 0;
+ 
+-				train_one(&sub_prob, param, model_->w, weighted_C[0], weighted_C[1]);
++				train_one(&sub_prob, param, model_->w, weighted_C[0], weighted_C[1], rng);
+ 			}
+ 			else
+ 			{
+@@ -2384,7 +2384,7 @@ model* train(const problem *prob, const parameter *param)
+ 						for(j=0;j<w_size;j++)
+ 							w[j] = 0;
+ 
+-					train_one(&sub_prob, param, w, weighted_C[i], param->C);
++					train_one(&sub_prob, param, w, weighted_C[i], param->C, rng);
+ 
+ 					for(int j=0;j<w_size;j++)
+ 						model_->w[j*nr_class+i] = w[j];
+@@ -2406,7 +2406,7 @@ model* train(const problem *prob, const parameter *param)
+ 	return model_;
+ }
+ 
+-void cross_validation(const problem *prob, const parameter *param, int nr_fold, double *target)
++void cross_validation(const problem *prob, const parameter *param, int nr_fold, double *target, std::mt19937& rng)
+ {
+ 	int i;
+ 	int *fold_start;
+@@ -2421,7 +2421,7 @@ void cross_validation(const problem *prob, const parameter *param, int nr_fold,
+ 	for(i=0;i<l;i++) perm[i]=i;
+ 	for(i=0;i<l;i++)
+ 	{
+-		int j = i+rand()%(l-i);
++		int j = i + std::uniform_int_distribution<int>(0, l-i - 1)(rng);
+ 		swap(perm[i],perm[j]);
+ 	}
+ 	for(i=0;i<=nr_fold;i++)
+@@ -2453,7 +2453,7 @@ void cross_validation(const problem *prob, const parameter *param, int nr_fold,
+ 			subprob.y[k] = prob->y[perm[j]];
+ 			++k;
+ 		}
+-		struct model *submodel = train(&subprob,param);
++		struct model *submodel = train(&subprob,param, rng);
+ 		for(j=begin;j<end;j++)
+ 			target[perm[j]] = predict(submodel,prob->x[perm[j]]);
+ 		free_and_destroy_model(&submodel);
+@@ -2464,7 +2464,7 @@ void cross_validation(const problem *prob, const parameter *param, int nr_fold,
+ 	free(perm);
+ }
+ 
+-void find_parameter_C(const problem *prob, const parameter *param, int nr_fold, double start_C, double max_C, double *best_C, double *best_rate)
++void find_parameter_C(const problem *prob, const parameter *param, int nr_fold, double start_C, double max_C, double *best_C, double *best_rate, std::mt19937& rng)
+ {
+ 	// variables for CV
+ 	int i;
+@@ -2492,7 +2492,7 @@ void find_parameter_C(const problem *prob, const parameter *param, int nr_fold,
+ 	for(i=0;i<l;i++) perm[i]=i;
+ 	for(i=0;i<l;i++)
+ 	{
+-		int j = i+rand()%(l-i);
++		int j = i + std::uniform_int_distribution<int>(0, l-i - 1)(rng);
+ 		swap(perm[i],perm[j]);
+ 	}
+ 	for(i=0;i<=nr_fold;i++)
+@@ -2543,7 +2543,7 @@ void find_parameter_C(const problem *prob, const parameter *param, int nr_fold,
+ 			int end = fold_start[i+1];
+ 
+ 			param1.init_sol = prev_w[i];
+-			struct model *submodel = train(&subprob[i],&param1);
++			struct model *submodel = train(&subprob[i],&param1, rng);
+ 
+ 			int total_w_size;
+ 			if(submodel->nr_class == 2)
+diff --git a/linear.h b/linear.h
+index bc6aaf8..16c2019 100644
+--- a/linear.h
++++ b/linear.h
+@@ -1,6 +1,8 @@
+ #ifndef _LIBLINEAR_H
+ #define _LIBLINEAR_H
+ 
++#include<random>
++
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+@@ -45,9 +47,9 @@ struct model
+ 	double bias;
+ };
+ 
+-struct model* train(const struct problem *prob, const struct parameter *param);
+-void cross_validation(const struct problem *prob, const struct parameter *param, int nr_fold, double *target);
+-void find_parameter_C(const struct problem *prob, const struct parameter *param, int nr_fold, double start_C, double max_C, double *best_C, double *best_rate);
++struct model* train(const struct problem *prob, const struct parameter *param, std::mt19937& rng);
++void cross_validation(const struct problem *prob, const struct parameter *param, int nr_fold, double *target, std::mt19937& rng);
++void find_parameter_C(const struct problem *prob, const struct parameter *param, int nr_fold, double start_C, double max_C, double *best_C, double *best_rate, std::mt19937& rng);
+ 
+ double predict_values(const struct model *model_, const struct feature_node *x, double* dec_values);
+ double predict(const struct model *model_, const struct feature_node *x);
+diff --git a/train.c b/train.c
+index 4fc61a0..caca843 100644
+--- a/train.c
++++ b/train.c
+@@ -84,8 +84,8 @@ static char* readline(FILE *input)
+ 
+ void parse_command_line(int argc, char **argv, char *input_file_name, char *model_file_name);
+ void read_problem(const char *filename);
+-void do_cross_validation();
+-void do_find_parameter_C();
++void do_cross_validation(std::mt19937& rng);
++void do_find_parameter_C(std::mt19937& rng);
+ 
+ struct feature_node *x_space;
+ struct parameter param;
+@@ -100,13 +100,23 @@ double bias;
+ 
+ int main(int argc, char **argv)
+ {
++	std::mt19937 rng(0);
+ 	char input_file_name[1024];
+ 	char model_file_name[1024];
+ 	const char *error_msg;
+ 
+ 	parse_command_line(argc, argv, input_file_name, model_file_name);
+ 	read_problem(input_file_name);
++
++    printf("%d\n", prob.x[0][9].index);
++    printf("%f\n", prob.x[0][9].value);
++    printf("%f\n", prob.y[1]);
++
++
+ 	error_msg = check_parameter(&prob,&param);
++    printf("%d\n", param.solver_type);
++    printf("%f\n", param.eps);
++    printf("%f\n", param.C);
+ 
+ 	if(error_msg)
+ 	{
+@@ -116,15 +126,15 @@ int main(int argc, char **argv)
+ 
+ 	if (flag_find_C)
+ 	{
+-		do_find_parameter_C();
++		do_find_parameter_C(rng);
+ 	}
+ 	else if(flag_cross_validation)
+ 	{
+-		do_cross_validation();
++		do_cross_validation(rng);
+ 	}
+ 	else
+ 	{
+-		model_=train(&prob, &param);
++		model_=train(&prob, &param, rng);
+ 		if(save_model(model_file_name, model_))
+ 		{
+ 			fprintf(stderr,"can't save model to file %s\n",model_file_name);
+@@ -141,7 +151,7 @@ int main(int argc, char **argv)
+ 	return 0;
+ }
+ 
+-void do_find_parameter_C()
++void do_find_parameter_C(std::mt19937& rng)
+ {
+ 	double start_C, best_C, best_rate;
+ 	double max_C = 1024;
+@@ -150,11 +160,11 @@ void do_find_parameter_C()
+ 	else
+ 		start_C = -1.0;
+ 	printf("Doing parameter search with %d-fold cross validation.\n", nr_fold);
+-	find_parameter_C(&prob, &param, nr_fold, start_C, max_C, &best_C, &best_rate);
++	find_parameter_C(&prob, &param, nr_fold, start_C, max_C, &best_C, &best_rate, rng);
+ 	printf("Best C = %g  CV accuracy = %g%%\n", best_C, 100.0*best_rate);
+ }
+ 
+-void do_cross_validation()
++void do_cross_validation(std::mt19937& rng)
+ {
+ 	int i;
+ 	int total_correct = 0;
+@@ -162,7 +172,7 @@ void do_cross_validation()
+ 	double sumv = 0, sumy = 0, sumvv = 0, sumyy = 0, sumvy = 0;
+ 	double *target = Malloc(double, prob.l);
+ 
+-	cross_validation(&prob,&param,nr_fold,target);
++	cross_validation(&prob,&param,nr_fold,target,rng);
+ 	if(param.solver_type == L2R_L2LOSS_SVR ||
+ 	   param.solver_type == L2R_L1LOSS_SVR_DUAL ||
+ 	   param.solver_type == L2R_L2LOSS_SVR_DUAL)

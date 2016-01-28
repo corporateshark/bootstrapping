@@ -446,7 +446,12 @@
         "type": "git",
         "url": "https://github.com/cjlin1/liblinear.git",
         "revision": "v210"
-	}
+	},
+	"postprocess": {
+        "type": "patch",
+        "file": "liblinear_993963e43c6162c1d016ce77e7205ac24c1548de.patch",
+        "pnum": "1"
+    }
 },
 {
     "name": "libsvm",
