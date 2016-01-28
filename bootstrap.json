@@ -524,6 +524,10 @@
         "type": "git",
         "url": "https://github.com/kinetiknz/nestegg",
         "revision": "8374e436ad90afd61919ffe27aa5ff2887feacba"
+    },
+    "postprocess": {
+        "type": "script",
+        "file": "libnestegg.py"
     }
 }
 ]
