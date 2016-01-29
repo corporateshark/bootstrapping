@@ -58,11 +58,24 @@ index f5dba61..08a15b7 100644
          double m_scale;
          double m_value;
      };
+diff --git a/include/internal/catch_test_case_registry_impl.hpp b/include/internal/catch_test_case_registry_impl.hpp
+index 728adcb..fa84ba2 100644
+--- a/include/internal/catch_test_case_registry_impl.hpp
++++ b/include/internal/catch_test_case_registry_impl.hpp
+@@ -107,7 +107,7 @@ namespace Catch {
+             if( m_sortedFunctions.empty() )
+                 enforceNoDuplicateTestCases( m_functions );
+ 
+-            if(  m_currentSortOrder != config.runOrder() || m_sortedFunctions.empty() ) {
++            if(  m_sortedFunctions. empty() || m_currentSortOrder != config.runOrder() ) {
+                 m_sortedFunctions = sortTests( config, m_functions );
+                 m_currentSortOrder = config.runOrder();
+             }
 diff --git a/single_include/catch.hpp b/single_include/catch.hpp
-index de61226..31db5d9 100644
+index 1d0d808..922e857 100644
 --- a/single_include/catch.hpp
 +++ b/single_include/catch.hpp
-@@ -2114,12 +2114,14 @@ namespace Detail {
+@@ -2581,12 +2581,14 @@ namespace Detail {
      public:
          explicit Approx ( double value )
          :   m_epsilon( std::numeric_limits<float>::epsilon()*100 ),
@@ -77,7 +90,7 @@ index de61226..31db5d9 100644
              m_scale( other.m_scale ),
              m_value( other.m_value )
          {}
-@@ -2131,13 +2133,19 @@ namespace Detail {
+@@ -2598,13 +2600,19 @@ namespace Detail {
          Approx operator()( double value ) {
              Approx approx( value );
              approx.epsilon( m_epsilon );
@@ -98,7 +111,7 @@ index de61226..31db5d9 100644
          }
  
          friend bool operator == ( Approx const& lhs, double rhs ) {
-@@ -2157,6 +2165,11 @@ namespace Detail {
+@@ -2624,6 +2632,11 @@ namespace Detail {
              return *this;
          }
  
@@ -110,7 +123,7 @@ index de61226..31db5d9 100644
          Approx& scale( double newScale ) {
              m_scale = newScale;
              return *this;
-@@ -2170,6 +2183,7 @@ namespace Detail {
+@@ -2637,6 +2650,7 @@ namespace Detail {
  
      private:
          double m_epsilon;
@@ -118,3 +131,12 @@ index de61226..31db5d9 100644
          double m_scale;
          double m_value;
      };
+@@ -6268,7 +6282,7 @@ namespace Catch {
+             if( m_sortedFunctions.empty() )
+                 enforceNoDuplicateTestCases( m_functions );
+ 
+-            if(  m_currentSortOrder != config.runOrder() || m_sortedFunctions.empty() ) {
++            if( m_sortedFunctions.empty() || m_currentSortOrder != config.runOrder() ) {
+                 m_sortedFunctions = sortTests( config, m_functions );
+                 m_currentSortOrder = config.runOrder();
+             }
