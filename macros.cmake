@@ -22,11 +22,10 @@ endmacro()
 
 # Process the CMake options
 macro(process_cmake_options OPTIONS_INCLUDE_DIRS)
-
 	set(EXTERNAL_ROOT ${CMAKE_CURRENT_LIST_DIR})
 
 	# Local temporary variable to store the resulting include directories
-	set(INCLUDE_DIRS )
+	set(INCLUDE_DIRS ${${OPTIONS_INCLUDE_DIRS}})
 
 	if(USE_LIBJPEG)
 		if(USE_LIBJPEG_TURBO)
