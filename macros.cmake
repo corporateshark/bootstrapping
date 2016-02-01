@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-# TODO: No longer used, why is this needed?
+# SK 01.02.2016: this is used to construct good looking file groups for Visual Studio
 macro(setup_source_groups src_files)
 	foreach(FILE ${src_files})
 		get_filename_component(PARENT_DIR "${FILE}" PATH)
