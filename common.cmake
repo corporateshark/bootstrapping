@@ -33,7 +33,7 @@ if(MSVC)
 else()
 
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -march=native")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations -Wno-deprecated-declarations -Wno-gnu-designator -Wno-unknown-pragmas")
+	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations -Wno-gnu-designator -Wno-unknown-pragmas -Wno-deprecated-register -Wno-multichar")
 	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -march=native")
 
 	# TODO: Auto-detect whether or not ARM NEON is supported by the hardware
