@@ -75,7 +75,7 @@ endif()
 if(USE_LIBPNG)
 	# Searches for a system installation
 	if(NOT FORCE_EXTERNAL)
-		find_package(PNG QUIET) # https://cmake.org/cmake/help/v3.1/module/FindPNG.html
+		find_package(PNG 1.5.9 QUIET) # https://cmake.org/cmake/help/v3.1/module/FindPNG.html
 	endif()
 
 	# If not found, use the version from "external" instead
