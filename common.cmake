@@ -129,7 +129,7 @@ endif()
 if(USE_ZLIB)
 	# Searches for a system installation
 	if(NOT FORCE_EXTERNAL)
-		find_package(ZLIB QUIET) # https://cmake.org/cmake/help/v3.1/module/FindZLIB.html
+		find_package(ZLIB 1.2.5 QUIET) # https://cmake.org/cmake/help/v3.1/module/FindZLIB.html
 	endif()
 
 	# If not found, use the version from "external" instead
