@@ -13,7 +13,7 @@ LOCAL_SRC_FILES := \
 	../src/nestegg/src/nestegg.c \
 	../src/nestegg/halloc/src/halloc.c
 
-LOCAL_CFLAGS += -O3
+LOCAL_CFLAGS += -O3 -D_LIBP_ALIGN_H_
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
     LOCAL_ARM_NEON := true
