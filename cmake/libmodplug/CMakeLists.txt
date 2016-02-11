@@ -28,6 +28,7 @@ if(APPLE)
         -DMODPLUG_STATIC
         -DMODPLUG_NO_FILESAVE
         -DMODPLUG_BASIC_SUPPORT
+        -DHAVE_SINF
     )
 endif(APPLE)
 

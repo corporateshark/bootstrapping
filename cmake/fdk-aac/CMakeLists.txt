@@ -7,6 +7,10 @@ if(MSVC)
 	set(CMAKE_CXX_FLAGS "/EHsc /RTC1 /MTd /Zp16 /GS /Qpar /MP /wd4244")
 endif(MSVC)
 
+if(APPLE)
+    add_definitions(-Wno-c++11-narrowing)
+endif(APPLE)
+
 include_directories(
 	.
 	../../src/fdk-aac/libAACdec/include

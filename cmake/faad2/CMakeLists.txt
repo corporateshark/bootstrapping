@@ -7,6 +7,10 @@ if(MSVC)
 	set(CMAKE_CXX_FLAGS "/EHsc /RTC1 /MTd /Zp16 /GS /Qpar /MP /wd4244")
 endif(MSVC)
 
+if(APPLE)
+    add_definitions(-DHAVE_STDINT_H)
+endif(APPLE)
+
 add_definitions(
 	-D__MINGW32__
 	-DHAVE_LRINTF

@@ -9,6 +9,11 @@ if(MSVC)
 	set(CMAKE_CXX_FLAGS_DEBUG "/Ox /EHsc /MT /Zp16 /GS /Qpar /MP /wd4244")
 endif(MSVC)
 
+if(APPLE)
+	add_definitions(-Wno-reserved-user-defined-literal)
+endif(APPLE)
+
+
 add_definitions(
 	-DCODEC_FOR_TESTBED
 )
