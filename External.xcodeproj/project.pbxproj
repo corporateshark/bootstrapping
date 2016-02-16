@@ -25,6 +25,55 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2D05E0671C7363A2007710F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E0511C7363A1007710F9 /* libaac.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D05E0301C735F84007710F9;
+			remoteInfo = libaac;
+		};
+		2D05E06A1C7363A2007710F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E0541C7363A1007710F9 /* libcurl.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D05E01B1C735F71007710F9;
+			remoteInfo = libcurl;
+		};
+		2D05E06E1C7363A2007710F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E0571C7363A1007710F9 /* libMp4v2.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D05DFDC1C735ED9007710F9;
+			remoteInfo = libMp4v2;
+		};
+		2D05E0711C7363A2007710F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E05A1C7363A1007710F9 /* libOpenH264.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D05DFF11C735EFE007710F9;
+			remoteInfo = libOpenH264;
+		};
+		2D05E0741C7363A2007710F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E05D1C7363A1007710F9 /* libTheora.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D05DFC71C735EA6007710F9;
+			remoteInfo = libTheora;
+		};
+		2D05E0781C7363A2007710F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E0601C7363A1007710F9 /* libvpx.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D05E0451C735F9C007710F9;
+			remoteInfo = libvpx;
+		};
+		2D05E07B1C7363A2007710F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E0631C7363A1007710F9 /* nestegg.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D05DF9D1C735E4D007710F9;
+			remoteInfo = nestegg;
+		};
 		2D5CFD431B95CF1000303A20 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2D5CFD3F1B95CF1000303A20 /* freetype2.xcodeproj */;
@@ -224,6 +273,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2D05E0511C7363A1007710F9 /* libaac.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libaac.xcodeproj; path = ios/libaac/libaac.xcodeproj; sourceTree = SOURCE_ROOT; };
+		2D05E0541C7363A1007710F9 /* libcurl.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libcurl.xcodeproj; path = ios/libcurl/libcurl.xcodeproj; sourceTree = SOURCE_ROOT; };
+		2D05E0571C7363A1007710F9 /* libMp4v2.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libMp4v2.xcodeproj; path = ios/libMp4v2/libMp4v2.xcodeproj; sourceTree = SOURCE_ROOT; };
+		2D05E05A1C7363A1007710F9 /* libOpenH264.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libOpenH264.xcodeproj; path = ios/libOpenH264/libOpenH264.xcodeproj; sourceTree = SOURCE_ROOT; };
+		2D05E05D1C7363A1007710F9 /* libTheora.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libTheora.xcodeproj; path = ios/libTheora/libTheora.xcodeproj; sourceTree = SOURCE_ROOT; };
+		2D05E0601C7363A1007710F9 /* libvpx.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = libvpx.xcodeproj; path = ios/libvpx/libvpx.xcodeproj; sourceTree = SOURCE_ROOT; };
+		2D05E0631C7363A1007710F9 /* nestegg.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = nestegg.xcodeproj; path = ios/nestegg/nestegg.xcodeproj; sourceTree = SOURCE_ROOT; };
 		2D0900021B6A6D1100E89463 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D09002E1B6A6DEB00E89463 /* libexternal-layar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libexternal-layar.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D09FFF11B6A6D1100E89463 /* libexternal-blippar.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libexternal-blippar.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -275,9 +331,72 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D05E0521C7363A1007710F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2D05E0681C7363A2007710F9 /* liblibaac.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2D05E0551C7363A1007710F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2D05E06B1C7363A2007710F9 /* liblibcurl.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2D05E0581C7363A1007710F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2D05E06F1C7363A2007710F9 /* liblibMp4v2.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2D05E05B1C7363A1007710F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2D05E0721C7363A2007710F9 /* liblibOpenH264.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2D05E05E1C7363A1007710F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2D05E0751C7363A2007710F9 /* liblibTheora.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2D05E0611C7363A1007710F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2D05E0791C7363A2007710F9 /* liblibvpx.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2D05E0641C7363A1007710F9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2D05E07C1C7363A2007710F9 /* libnestegg.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		2D0900001B6A6D1100E89463 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				2D05E0511C7363A1007710F9 /* libaac.xcodeproj */,
+				2D05E0541C7363A1007710F9 /* libcurl.xcodeproj */,
+				2D05E0571C7363A1007710F9 /* libMp4v2.xcodeproj */,
+				2D05E05A1C7363A1007710F9 /* libOpenH264.xcodeproj */,
+				2D05E05D1C7363A1007710F9 /* libTheora.xcodeproj */,
+				2D05E0601C7363A1007710F9 /* libvpx.xcodeproj */,
+				2D05E0631C7363A1007710F9 /* nestegg.xcodeproj */,
 				2DE34F4B1BCFFA1200FF178A /* libjpeg-turbo.xcodeproj */,
 				2DF399A01BC69C890086A34D /* id3v2lib.xcodeproj */,
 				2D5CFD3F1B95CF1000303A20 /* freetype2.xcodeproj */,
@@ -528,6 +647,14 @@
 					ProjectRef = 2D60DB451B861F07001C431F /* jpeg.xcodeproj */;
 				},
 				{
+					ProductGroup = 2D05E0521C7363A1007710F9 /* Products */;
+					ProjectRef = 2D05E0511C7363A1007710F9 /* libaac.xcodeproj */;
+				},
+				{
+					ProductGroup = 2D05E0551C7363A1007710F9 /* Products */;
+					ProjectRef = 2D05E0541C7363A1007710F9 /* libcurl.xcodeproj */;
+				},
+				{
 					ProductGroup = 2DE34F4C1BCFFA1200FF178A /* Products */;
 					ProjectRef = 2DE34F4B1BCFFA1200FF178A /* libjpeg-turbo.xcodeproj */;
 				},
@@ -536,8 +663,20 @@
 					ProjectRef = 2D60DB481B861F07001C431F /* libModPlug.xcodeproj */;
 				},
 				{
+					ProductGroup = 2D05E0581C7363A1007710F9 /* Products */;
+					ProjectRef = 2D05E0571C7363A1007710F9 /* libMp4v2.xcodeproj */;
+				},
+				{
 					ProductGroup = 2D60DB4C1B861F07001C431F /* Products */;
 					ProjectRef = 2D60DB4B1B861F07001C431F /* libogg.xcodeproj */;
+				},
+				{
+					ProductGroup = 2D05E05B1C7363A1007710F9 /* Products */;
+					ProjectRef = 2D05E05A1C7363A1007710F9 /* libOpenH264.xcodeproj */;
+				},
+				{
+					ProductGroup = 2D05E05E1C7363A1007710F9 /* Products */;
+					ProjectRef = 2D05E05D1C7363A1007710F9 /* libTheora.xcodeproj */;
 				},
 				{
 					ProductGroup = 2D60DB521B861F07001C431F /* Products */;
@@ -546,6 +685,14 @@
 				{
 					ProductGroup = 2D60DB551B861F07001C431F /* Products */;
 					ProjectRef = 2D60DB541B861F07001C431F /* libVorbis.xcodeproj */;
+				},
+				{
+					ProductGroup = 2D05E0611C7363A1007710F9 /* Products */;
+					ProjectRef = 2D05E0601C7363A1007710F9 /* libvpx.xcodeproj */;
+				},
+				{
+					ProductGroup = 2D05E0641C7363A1007710F9 /* Products */;
+					ProjectRef = 2D05E0631C7363A1007710F9 /* nestegg.xcodeproj */;
 				},
 				{
 					ProductGroup = 2D60DB4F1B861F07001C431F /* Products */;
@@ -565,6 +712,55 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		2D05E0681C7363A2007710F9 /* liblibaac.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liblibaac.a;
+			remoteRef = 2D05E0671C7363A2007710F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2D05E06B1C7363A2007710F9 /* liblibcurl.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liblibcurl.a;
+			remoteRef = 2D05E06A1C7363A2007710F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2D05E06F1C7363A2007710F9 /* liblibMp4v2.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liblibMp4v2.a;
+			remoteRef = 2D05E06E1C7363A2007710F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2D05E0721C7363A2007710F9 /* liblibOpenH264.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liblibOpenH264.a;
+			remoteRef = 2D05E0711C7363A2007710F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2D05E0751C7363A2007710F9 /* liblibTheora.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liblibTheora.a;
+			remoteRef = 2D05E0741C7363A2007710F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2D05E0791C7363A2007710F9 /* liblibvpx.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = liblibvpx.a;
+			remoteRef = 2D05E0781C7363A2007710F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2D05E07C1C7363A2007710F9 /* libnestegg.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libnestegg.a;
+			remoteRef = 2D05E07B1C7363A2007710F9 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		2D5CFD441B95CF1000303A20 /* libFreetype2.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
