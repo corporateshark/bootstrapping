@@ -3,8 +3,8 @@ cmake_minimum_required(VERSION 2.8)
 project("libvpx")
 
 if(MSVC)
-	set(CMAKE_C_FLAGS "/EHsc /RTC1 /MTd /Zp16 /GS /Qpar /MP /wd4244")
-	set(CMAKE_CXX_FLAGS "/EHsc /RTC1 /MTd /Zp16 /GS /Qpar /MP /wd4244")
+	set(CMAKE_C_FLAGS "/EHsc /Zp16 /GS /Qpar /MP /wd4244")
+	set(CMAKE_CXX_FLAGS "/EHsc /Zp16 /GS /Qpar /MP /wd4244")
 endif(MSVC)
 
 add_definitions(

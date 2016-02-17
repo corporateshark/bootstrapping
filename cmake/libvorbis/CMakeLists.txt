@@ -6,8 +6,8 @@ if(MSVC)
 	add_definitions(
 		-D_CRT_SECURE_NO_WARNINGS
 	)
-	set(CMAKE_C_FLAGS "/EHsc /RTC1 /MTd /Zp16 /GS /Qpar /MP /wd4244")
-	set(CMAKE_CXX_FLAGS "/EHsc /RTC1 /MTd /Zp16 /GS /Qpar /MP /wd4244")
+	set(CMAKE_C_FLAGS "/EHsc /Zp16 /GS /Qpar /MP /wd4244")
+	set(CMAKE_CXX_FLAGS "/EHsc /Zp16 /GS /Qpar /MP /wd4244")
 endif(MSVC)
 
 include_directories(
