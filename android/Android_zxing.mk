@@ -126,4 +126,10 @@ ifeq ($(TARGET_ARCH_ABI),x86)
 	LOCAL_CFLAGS += -m32 -march=i686 -mtune=atom -mssse3 -mfpmath=sse
 endif
 
+#   Allow building for 64 bit; avoids nuclear option LOCAL_CFLAGS += -DNO_ICONV)
+ifneq (,$(findstring 64, $(TARGET_ARCH_ABI)))
+    LOCAL_C_INCLUDES += \
+        $(LOCAL_PATH)/../src/libiconv/include
+endif
+
 include $(BUILD_STATIC_LIBRARY)
