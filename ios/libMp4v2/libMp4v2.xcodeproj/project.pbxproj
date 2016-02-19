@@ -19,7 +19,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2D05DFDC1C735ED9007710F9 /* liblibMp4v2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibMp4v2.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D05DFDC1C735ED9007710F9 /* libmp4v2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libmp4v2.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +44,7 @@
 		2D05DFDD1C735ED9007710F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2D05DFDC1C735ED9007710F9 /* liblibMp4v2.a */,
+				2D05DFDC1C735ED9007710F9 /* libmp4v2.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -59,9 +59,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2D05DFDB1C735ED9007710F9 /* libMp4v2 */ = {
+		2D05DFDB1C735ED9007710F9 /* mp4v2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D05DFE51C735ED9007710F9 /* Build configuration list for PBXNativeTarget "libMp4v2" */;
+			buildConfigurationList = 2D05DFE51C735ED9007710F9 /* Build configuration list for PBXNativeTarget "mp4v2" */;
 			buildPhases = (
 				2D05DFD81C735ED9007710F9 /* Sources */,
 				2D05DFD91C735ED9007710F9 /* Frameworks */,
@@ -71,9 +71,9 @@
 			);
 			dependencies = (
 			);
-			name = libMp4v2;
+			name = mp4v2;
 			productName = libMp4v2;
-			productReference = 2D05DFDC1C735ED9007710F9 /* liblibMp4v2.a */;
+			productReference = 2D05DFDC1C735ED9007710F9 /* libmp4v2.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +102,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2D05DFDB1C735ED9007710F9 /* libMp4v2 */,
+				2D05DFDB1C735ED9007710F9 /* mp4v2 */,
 			);
 		};
 /* End PBXProject section */
@@ -228,7 +228,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D05DFE51C735ED9007710F9 /* Build configuration list for PBXNativeTarget "libMp4v2" */ = {
+		2D05DFE51C735ED9007710F9 /* Build configuration list for PBXNativeTarget "mp4v2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D05DFE61C735ED9007710F9 /* Debug */,

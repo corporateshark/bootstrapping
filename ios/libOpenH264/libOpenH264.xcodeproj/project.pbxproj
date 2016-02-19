@@ -19,7 +19,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2D05DFF11C735EFE007710F9 /* liblibOpenH264.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibOpenH264.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D05DFF11C735EFE007710F9 /* libopenH264.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libopenH264.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +44,7 @@
 		2D05DFF21C735EFE007710F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2D05DFF11C735EFE007710F9 /* liblibOpenH264.a */,
+				2D05DFF11C735EFE007710F9 /* libopenH264.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -59,9 +59,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2D05DFF01C735EFE007710F9 /* libOpenH264 */ = {
+		2D05DFF01C735EFE007710F9 /* openH264 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D05DFFA1C735EFE007710F9 /* Build configuration list for PBXNativeTarget "libOpenH264" */;
+			buildConfigurationList = 2D05DFFA1C735EFE007710F9 /* Build configuration list for PBXNativeTarget "openH264" */;
 			buildPhases = (
 				2D05DFED1C735EFE007710F9 /* Sources */,
 				2D05DFEE1C735EFE007710F9 /* Frameworks */,
@@ -71,9 +71,9 @@
 			);
 			dependencies = (
 			);
-			name = libOpenH264;
+			name = openH264;
 			productName = libOpenH264;
-			productReference = 2D05DFF11C735EFE007710F9 /* liblibOpenH264.a */;
+			productReference = 2D05DFF11C735EFE007710F9 /* libopenH264.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +102,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2D05DFF01C735EFE007710F9 /* libOpenH264 */,
+				2D05DFF01C735EFE007710F9 /* openH264 */,
 			);
 		};
 /* End PBXProject section */
@@ -228,7 +228,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D05DFFA1C735EFE007710F9 /* Build configuration list for PBXNativeTarget "libOpenH264" */ = {
+		2D05DFFA1C735EFE007710F9 /* Build configuration list for PBXNativeTarget "openH264" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D05DFFB1C735EFE007710F9 /* Debug */,

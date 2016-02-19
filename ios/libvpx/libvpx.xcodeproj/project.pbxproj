@@ -19,7 +19,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2D05E0451C735F9C007710F9 /* liblibvpx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibvpx.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D05E0451C735F9C007710F9 /* libvpx.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libvpx.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +44,7 @@
 		2D05E0461C735F9C007710F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2D05E0451C735F9C007710F9 /* liblibvpx.a */,
+				2D05E0451C735F9C007710F9 /* libvpx.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -59,9 +59,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2D05E0441C735F9C007710F9 /* libvpx */ = {
+		2D05E0441C735F9C007710F9 /* vpx */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D05E04E1C735F9C007710F9 /* Build configuration list for PBXNativeTarget "libvpx" */;
+			buildConfigurationList = 2D05E04E1C735F9C007710F9 /* Build configuration list for PBXNativeTarget "vpx" */;
 			buildPhases = (
 				2D05E0411C735F9C007710F9 /* Sources */,
 				2D05E0421C735F9C007710F9 /* Frameworks */,
@@ -71,9 +71,9 @@
 			);
 			dependencies = (
 			);
-			name = libvpx;
+			name = vpx;
 			productName = libvpx;
-			productReference = 2D05E0451C735F9C007710F9 /* liblibvpx.a */;
+			productReference = 2D05E0451C735F9C007710F9 /* libvpx.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +102,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2D05E0441C735F9C007710F9 /* libvpx */,
+				2D05E0441C735F9C007710F9 /* vpx */,
 			);
 		};
 /* End PBXProject section */
@@ -228,7 +228,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D05E04E1C735F9C007710F9 /* Build configuration list for PBXNativeTarget "libvpx" */ = {
+		2D05E04E1C735F9C007710F9 /* Build configuration list for PBXNativeTarget "vpx" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D05E04F1C735F9C007710F9 /* Debug */,

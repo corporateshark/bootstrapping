@@ -19,7 +19,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2D05DFC71C735EA6007710F9 /* liblibTheora.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibTheora.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D05DFC71C735EA6007710F9 /* libtheora.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheora.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +44,7 @@
 		2D05DFC81C735EA6007710F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2D05DFC71C735EA6007710F9 /* liblibTheora.a */,
+				2D05DFC71C735EA6007710F9 /* libtheora.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -59,9 +59,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2D05DFC61C735EA6007710F9 /* libTheora */ = {
+		2D05DFC61C735EA6007710F9 /* theora */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D05DFD01C735EA6007710F9 /* Build configuration list for PBXNativeTarget "libTheora" */;
+			buildConfigurationList = 2D05DFD01C735EA6007710F9 /* Build configuration list for PBXNativeTarget "theora" */;
 			buildPhases = (
 				2D05DFC31C735EA6007710F9 /* Sources */,
 				2D05DFC41C735EA6007710F9 /* Frameworks */,
@@ -71,9 +71,9 @@
 			);
 			dependencies = (
 			);
-			name = libTheora;
+			name = theora;
 			productName = libTheora;
-			productReference = 2D05DFC71C735EA6007710F9 /* liblibTheora.a */;
+			productReference = 2D05DFC71C735EA6007710F9 /* libtheora.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +102,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2D05DFC61C735EA6007710F9 /* libTheora */,
+				2D05DFC61C735EA6007710F9 /* theora */,
 			);
 		};
 /* End PBXProject section */
@@ -228,7 +228,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D05DFD01C735EA6007710F9 /* Build configuration list for PBXNativeTarget "libTheora" */ = {
+		2D05DFD01C735EA6007710F9 /* Build configuration list for PBXNativeTarget "theora" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D05DFD11C735EA6007710F9 /* Debug */,

@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D05E07D1C7377C0007710F9 /* libaac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E0681C7363A2007710F9 /* libaac.a */; };
+		2D05E07E1C7377C0007710F9 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E06B1C7363A2007710F9 /* libcurl.a */; };
+		2D05E07F1C7377C0007710F9 /* libmp4v2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E06F1C7363A2007710F9 /* libmp4v2.a */; };
+		2D05E0801C7377C0007710F9 /* libnestegg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E07C1C7363A2007710F9 /* libnestegg.a */; };
+		2D05E0811C7377C0007710F9 /* libopenH264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E0721C7363A2007710F9 /* libopenH264.a */; };
+		2D05E0821C7377C0007710F9 /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E0751C7363A2007710F9 /* libtheora.a */; };
+		2D05E0831C7377C0007710F9 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E0791C7363A2007710F9 /* libvpx.a */; };
 		2D5CFD581B95CF2D00303A20 /* libFreetype2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5CFD441B95CF1000303A20 /* libFreetype2.a */; };
 		2D60DB3B1B861EDF001C431F /* External.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D60DB3A1B861EDF001C431F /* External.m */; };
 		2D60DB9A1B862344001C431F /* External.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D60DB3A1B861EDF001C431F /* External.m */; };
@@ -72,6 +79,55 @@
 			containerPortal = 2D05E0631C7363A1007710F9 /* nestegg.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 2D05DF9D1C735E4D007710F9;
+			remoteInfo = nestegg;
+		};
+		2D05E0981C73783D007710F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E0511C7363A1007710F9 /* libaac.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D05E02F1C735F84007710F9;
+			remoteInfo = aac;
+		};
+		2D05E09A1C73783D007710F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E0541C7363A1007710F9 /* libcurl.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D05E01A1C735F71007710F9;
+			remoteInfo = curl;
+		};
+		2D05E09C1C73783D007710F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E0571C7363A1007710F9 /* libMp4v2.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D05DFDB1C735ED9007710F9;
+			remoteInfo = mp4v2;
+		};
+		2D05E09E1C73783D007710F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E05A1C7363A1007710F9 /* libOpenH264.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D05DFF01C735EFE007710F9;
+			remoteInfo = openH264;
+		};
+		2D05E0A01C73783D007710F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E05D1C7363A1007710F9 /* libTheora.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D05DFC61C735EA6007710F9;
+			remoteInfo = theora;
+		};
+		2D05E0A21C73783D007710F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E0601C7363A1007710F9 /* libvpx.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D05E0441C735F9C007710F9;
+			remoteInfo = vpx;
+		};
+		2D05E0A41C73783D007710F9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E0631C7363A1007710F9 /* nestegg.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D05DF9C1C735E4D007710F9;
 			remoteInfo = nestegg;
 		};
 		2D5CFD431B95CF1000303A20 /* PBXContainerItemProxy */ = {
@@ -318,6 +374,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D05E07D1C7377C0007710F9 /* libaac.a in Frameworks */,
+				2D05E07E1C7377C0007710F9 /* libcurl.a in Frameworks */,
+				2D05E07F1C7377C0007710F9 /* libmp4v2.a in Frameworks */,
+				2D05E0801C7377C0007710F9 /* libnestegg.a in Frameworks */,
+				2D05E0811C7377C0007710F9 /* libopenH264.a in Frameworks */,
+				2D05E0821C7377C0007710F9 /* libtheora.a in Frameworks */,
+				2D05E0831C7377C0007710F9 /* libvpx.a in Frameworks */,
 				2DE350781BD6934F00FF178A /* libjpeg.a in Frameworks */,
 				2DE350471BD6482200FF178A /* libzxing.a in Frameworks */,
 				2DF399B91BC69E240086A34D /* libid3v2lib.a in Frameworks */,
@@ -334,7 +397,7 @@
 		2D05E0521C7363A1007710F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2D05E0681C7363A2007710F9 /* liblibaac.a */,
+				2D05E0681C7363A2007710F9 /* libaac.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -342,7 +405,7 @@
 		2D05E0551C7363A1007710F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2D05E06B1C7363A2007710F9 /* liblibcurl.a */,
+				2D05E06B1C7363A2007710F9 /* libcurl.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -350,7 +413,7 @@
 		2D05E0581C7363A1007710F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2D05E06F1C7363A2007710F9 /* liblibMp4v2.a */,
+				2D05E06F1C7363A2007710F9 /* libmp4v2.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -358,7 +421,7 @@
 		2D05E05B1C7363A1007710F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2D05E0721C7363A2007710F9 /* liblibOpenH264.a */,
+				2D05E0721C7363A2007710F9 /* libopenH264.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -366,7 +429,7 @@
 		2D05E05E1C7363A1007710F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2D05E0751C7363A2007710F9 /* liblibTheora.a */,
+				2D05E0751C7363A2007710F9 /* libtheora.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -374,7 +437,7 @@
 		2D05E0611C7363A1007710F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2D05E0791C7363A2007710F9 /* liblibvpx.a */,
+				2D05E0791C7363A2007710F9 /* libvpx.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -584,6 +647,13 @@
 			buildRules = (
 			);
 			dependencies = (
+				2D05E0991C73783D007710F9 /* PBXTargetDependency */,
+				2D05E09B1C73783D007710F9 /* PBXTargetDependency */,
+				2D05E09D1C73783D007710F9 /* PBXTargetDependency */,
+				2D05E09F1C73783D007710F9 /* PBXTargetDependency */,
+				2D05E0A11C73783D007710F9 /* PBXTargetDependency */,
+				2D05E0A31C73783D007710F9 /* PBXTargetDependency */,
+				2D05E0A51C73783D007710F9 /* PBXTargetDependency */,
 				2DE350771BD6934300FF178A /* PBXTargetDependency */,
 				2DE3504A1BD6482A00FF178A /* PBXTargetDependency */,
 				2DF399B81BC69CEC0086A34D /* PBXTargetDependency */,
@@ -712,45 +782,45 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		2D05E0681C7363A2007710F9 /* liblibaac.a */ = {
+		2D05E0681C7363A2007710F9 /* libaac.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = liblibaac.a;
+			path = libaac.a;
 			remoteRef = 2D05E0671C7363A2007710F9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		2D05E06B1C7363A2007710F9 /* liblibcurl.a */ = {
+		2D05E06B1C7363A2007710F9 /* libcurl.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = liblibcurl.a;
+			path = libcurl.a;
 			remoteRef = 2D05E06A1C7363A2007710F9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		2D05E06F1C7363A2007710F9 /* liblibMp4v2.a */ = {
+		2D05E06F1C7363A2007710F9 /* libmp4v2.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = liblibMp4v2.a;
+			path = libmp4v2.a;
 			remoteRef = 2D05E06E1C7363A2007710F9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		2D05E0721C7363A2007710F9 /* liblibOpenH264.a */ = {
+		2D05E0721C7363A2007710F9 /* libopenH264.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = liblibOpenH264.a;
+			path = libopenH264.a;
 			remoteRef = 2D05E0711C7363A2007710F9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		2D05E0751C7363A2007710F9 /* liblibTheora.a */ = {
+		2D05E0751C7363A2007710F9 /* libtheora.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = liblibTheora.a;
+			path = libtheora.a;
 			remoteRef = 2D05E0741C7363A2007710F9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		2D05E0791C7363A2007710F9 /* liblibvpx.a */ = {
+		2D05E0791C7363A2007710F9 /* libvpx.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = liblibvpx.a;
+			path = libvpx.a;
 			remoteRef = 2D05E0781C7363A2007710F9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
@@ -867,6 +937,41 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2D05E0991C73783D007710F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = aac;
+			targetProxy = 2D05E0981C73783D007710F9 /* PBXContainerItemProxy */;
+		};
+		2D05E09B1C73783D007710F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = curl;
+			targetProxy = 2D05E09A1C73783D007710F9 /* PBXContainerItemProxy */;
+		};
+		2D05E09D1C73783D007710F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = mp4v2;
+			targetProxy = 2D05E09C1C73783D007710F9 /* PBXContainerItemProxy */;
+		};
+		2D05E09F1C73783D007710F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = openH264;
+			targetProxy = 2D05E09E1C73783D007710F9 /* PBXContainerItemProxy */;
+		};
+		2D05E0A11C73783D007710F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = theora;
+			targetProxy = 2D05E0A01C73783D007710F9 /* PBXContainerItemProxy */;
+		};
+		2D05E0A31C73783D007710F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = vpx;
+			targetProxy = 2D05E0A21C73783D007710F9 /* PBXContainerItemProxy */;
+		};
+		2D05E0A51C73783D007710F9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = nestegg;
+			targetProxy = 2D05E0A41C73783D007710F9 /* PBXContainerItemProxy */;
+		};
 		2D5CFD551B95CF2300303A20 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Freetype2;

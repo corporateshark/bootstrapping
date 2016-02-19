@@ -19,7 +19,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2D05E01B1C735F71007710F9 /* liblibcurl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = liblibcurl.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D05E01B1C735F71007710F9 /* libcurl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcurl.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,7 +44,7 @@
 		2D05E01C1C735F71007710F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2D05E01B1C735F71007710F9 /* liblibcurl.a */,
+				2D05E01B1C735F71007710F9 /* libcurl.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -59,9 +59,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2D05E01A1C735F71007710F9 /* libcurl */ = {
+		2D05E01A1C735F71007710F9 /* curl */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2D05E0241C735F71007710F9 /* Build configuration list for PBXNativeTarget "libcurl" */;
+			buildConfigurationList = 2D05E0241C735F71007710F9 /* Build configuration list for PBXNativeTarget "curl" */;
 			buildPhases = (
 				2D05E0171C735F71007710F9 /* Sources */,
 				2D05E0181C735F71007710F9 /* Frameworks */,
@@ -71,9 +71,9 @@
 			);
 			dependencies = (
 			);
-			name = libcurl;
+			name = curl;
 			productName = libcurl;
-			productReference = 2D05E01B1C735F71007710F9 /* liblibcurl.a */;
+			productReference = 2D05E01B1C735F71007710F9 /* libcurl.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +102,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2D05E01A1C735F71007710F9 /* libcurl */,
+				2D05E01A1C735F71007710F9 /* curl */,
 			);
 		};
 /* End PBXProject section */
@@ -228,7 +228,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D05E0241C735F71007710F9 /* Build configuration list for PBXNativeTarget "libcurl" */ = {
+		2D05E0241C735F71007710F9 /* Build configuration list for PBXNativeTarget "curl" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D05E0251C735F71007710F9 /* Debug */,
