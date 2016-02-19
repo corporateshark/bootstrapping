@@ -6,77 +6,55 @@
 	objectVersion = 46;
 	objects = {
 
-/* Begin PBXCopyFilesBuildPhase section */
-		2D05E0191C735F71007710F9 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		2D05E01B1C735F71007710F9 /* libcurl.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcurl.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D581AA91C778F0100DD46CB /* build.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
+		2D581AAA1C778F0100DD46CB /* xcodebuild.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = xcodebuild.sh; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		2D05E0181C735F71007710F9 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		2D05E0121C735F71007710F9 = {
 			isa = PBXGroup;
 			children = (
-				2D05E01D1C735F71007710F9 /* libcurl */,
-				2D05E01C1C735F71007710F9 /* Products */,
+				2D05E01D1C735F71007710F9 /* Headers */,
+				2D581AA81C778EE600DD46CB /* Source */,
+				2D581AA91C778F0100DD46CB /* build.sh */,
+				2D581AAA1C778F0100DD46CB /* xcodebuild.sh */,
 			);
 			sourceTree = "<group>";
 		};
-		2D05E01C1C735F71007710F9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2D05E01B1C735F71007710F9 /* libcurl.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		2D05E01D1C735F71007710F9 /* libcurl */ = {
+		2D05E01D1C735F71007710F9 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
 			);
+			name = Headers;
 			path = libcurl;
+			sourceTree = "<group>";
+		};
+		2D581AA81C778EE600DD46CB /* Source */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
-/* Begin PBXNativeTarget section */
-		2D05E01A1C735F71007710F9 /* curl */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2D05E0241C735F71007710F9 /* Build configuration list for PBXNativeTarget "curl" */;
+/* Begin PBXLegacyTarget section */
+		2D581AA41C778DF700DD46CB /* libcurl */ = {
+			isa = PBXLegacyTarget;
+			buildArgumentsString = "$(ACTION)";
+			buildConfigurationList = 2D581AA71C778DF700DD46CB /* Build configuration list for PBXLegacyTarget "libcurl" */;
 			buildPhases = (
-				2D05E0171C735F71007710F9 /* Sources */,
-				2D05E0181C735F71007710F9 /* Frameworks */,
-				2D05E0191C735F71007710F9 /* CopyFiles */,
 			);
-			buildRules = (
-			);
+			buildToolPath = "$(PROJECT_DIR)/xcodebuild.sh";
+			buildWorkingDirectory = "";
 			dependencies = (
 			);
-			name = curl;
+			name = libcurl;
+			passBuildSettingsInEnvironment = 1;
 			productName = libcurl;
-			productReference = 2D05E01B1C735F71007710F9 /* libcurl.a */;
-			productType = "com.apple.product-type.library.static";
 		};
-/* End PBXNativeTarget section */
+/* End PBXLegacyTarget section */
 
 /* Begin PBXProject section */
 		2D05E0131C735F71007710F9 /* Project object */ = {
@@ -85,7 +63,7 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Blippar;
 				TargetAttributes = {
-					2D05E01A1C735F71007710F9 = {
+					2D581AA41C778DF700DD46CB = {
 						CreatedOnToolsVersion = 7.2;
 					};
 				};
@@ -98,24 +76,14 @@
 				en,
 			);
 			mainGroup = 2D05E0121C735F71007710F9;
-			productRefGroup = 2D05E01C1C735F71007710F9 /* Products */;
+			productRefGroup = 2D05E0121C735F71007710F9;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2D05E01A1C735F71007710F9 /* curl */,
+				2D581AA41C778DF700DD46CB /* libcurl */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXSourcesBuildPhase section */
-		2D05E0171C735F71007710F9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
 		2D05E0221C735F71007710F9 /* Debug */ = {
@@ -198,21 +166,26 @@
 			};
 			name = Release;
 		};
-		2D05E0251C735F71007710F9 /* Debug */ = {
+		2D581AA51C778DF700DD46CB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				OTHER_LDFLAGS = "-ObjC";
+				DEBUGGING_SYMBOLS = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 			};
 			name = Debug;
 		};
-		2D05E0261C735F71007710F9 /* Release */ = {
+		2D581AA61C778DF700DD46CB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				OTHER_LDFLAGS = "-ObjC";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				OTHER_CFLAGS = "";
+				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
@@ -228,14 +201,13 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D05E0241C735F71007710F9 /* Build configuration list for PBXNativeTarget "curl" */ = {
+		2D581AA71C778DF700DD46CB /* Build configuration list for PBXLegacyTarget "libcurl" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2D05E0251C735F71007710F9 /* Debug */,
-				2D05E0261C735F71007710F9 /* Release */,
+				2D581AA51C778DF700DD46CB /* Debug */,
+				2D581AA61C778DF700DD46CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
