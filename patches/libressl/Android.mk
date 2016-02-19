@@ -5,4 +5,7 @@ subdirs := $(addprefix $(LOCAL_PATH)/,$(addsuffix /Android.mk, \
 		ssl \
 	))
 
+#   Suppress stupid compiler warnings
+LOCAL_CFLAGS += -Wno-pointer-sign
+
 include $(subdirs)
