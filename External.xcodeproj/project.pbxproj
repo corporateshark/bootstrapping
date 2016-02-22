@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2D05E07D1C7377C0007710F9 /* libaac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E0681C7363A2007710F9 /* libaac.a */; };
-		2D05E07E1C7377C0007710F9 /* libcurl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E06B1C7363A2007710F9 /* libcurl.a */; };
 		2D05E07F1C7377C0007710F9 /* libmp4v2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E06F1C7363A2007710F9 /* libmp4v2.a */; };
 		2D05E0801C7377C0007710F9 /* libnestegg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E07C1C7363A2007710F9 /* libnestegg.a */; };
 		2D05E0811C7377C0007710F9 /* libopenH264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E0721C7363A2007710F9 /* libopenH264.a */; };
@@ -38,13 +37,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 2D05E0301C735F84007710F9;
 			remoteInfo = libaac;
-		};
-		2D05E06A1C7363A2007710F9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2D05E0541C7363A1007710F9 /* libcurl.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 2D05E01B1C735F71007710F9;
-			remoteInfo = libcurl;
 		};
 		2D05E06E1C7363A2007710F9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -81,54 +73,12 @@
 			remoteGlobalIDString = 2D05DF9D1C735E4D007710F9;
 			remoteInfo = nestegg;
 		};
-		2D05E0981C73783D007710F9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2D05E0511C7363A1007710F9 /* libaac.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 2D05E02F1C735F84007710F9;
-			remoteInfo = aac;
-		};
-		2D05E09A1C73783D007710F9 /* PBXContainerItemProxy */ = {
+		2D581AC21C7B4B3200DD46CB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2D05E0541C7363A1007710F9 /* libcurl.xcodeproj */;
 			proxyType = 1;
-			remoteGlobalIDString = 2D05E01A1C735F71007710F9;
-			remoteInfo = curl;
-		};
-		2D05E09C1C73783D007710F9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2D05E0571C7363A1007710F9 /* libMp4v2.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 2D05DFDB1C735ED9007710F9;
-			remoteInfo = mp4v2;
-		};
-		2D05E09E1C73783D007710F9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2D05E05A1C7363A1007710F9 /* libOpenH264.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 2D05DFF01C735EFE007710F9;
-			remoteInfo = openH264;
-		};
-		2D05E0A01C73783D007710F9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2D05E05D1C7363A1007710F9 /* libTheora.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 2D05DFC61C735EA6007710F9;
-			remoteInfo = theora;
-		};
-		2D05E0A21C73783D007710F9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2D05E0601C7363A1007710F9 /* libvpx.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 2D05E0441C735F9C007710F9;
-			remoteInfo = vpx;
-		};
-		2D05E0A41C73783D007710F9 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2D05E0631C7363A1007710F9 /* nestegg.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 2D05DF9C1C735E4D007710F9;
-			remoteInfo = nestegg;
+			remoteGlobalIDString = 2D581AA41C778DF700DD46CB;
+			remoteInfo = libcurl;
 		};
 		2D5CFD431B95CF1000303A20 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -375,7 +325,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D05E07D1C7377C0007710F9 /* libaac.a in Frameworks */,
-				2D05E07E1C7377C0007710F9 /* libcurl.a in Frameworks */,
 				2D05E07F1C7377C0007710F9 /* libmp4v2.a in Frameworks */,
 				2D05E0801C7377C0007710F9 /* libnestegg.a in Frameworks */,
 				2D05E0811C7377C0007710F9 /* libopenH264.a in Frameworks */,
@@ -405,7 +354,6 @@
 		2D05E0551C7363A1007710F9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2D05E06B1C7363A2007710F9 /* libcurl.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -647,13 +595,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				2D05E0991C73783D007710F9 /* PBXTargetDependency */,
-				2D05E09B1C73783D007710F9 /* PBXTargetDependency */,
-				2D05E09D1C73783D007710F9 /* PBXTargetDependency */,
-				2D05E09F1C73783D007710F9 /* PBXTargetDependency */,
-				2D05E0A11C73783D007710F9 /* PBXTargetDependency */,
-				2D05E0A31C73783D007710F9 /* PBXTargetDependency */,
-				2D05E0A51C73783D007710F9 /* PBXTargetDependency */,
 				2DE350771BD6934300FF178A /* PBXTargetDependency */,
 				2DE3504A1BD6482A00FF178A /* PBXTargetDependency */,
 				2DF399B81BC69CEC0086A34D /* PBXTargetDependency */,
@@ -661,6 +602,7 @@
 				2D60DCFD1B8DC7C0001C431F /* PBXTargetDependency */,
 				2D60DBA21B86236F001C431F /* PBXTargetDependency */,
 				2D60DBA41B86236F001C431F /* PBXTargetDependency */,
+				2D581AC31C7B4B3200DD46CB /* PBXTargetDependency */,
 			);
 			name = "external-blippar";
 			productName = External;
@@ -787,13 +729,6 @@
 			fileType = archive.ar;
 			path = libaac.a;
 			remoteRef = 2D05E0671C7363A2007710F9 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		2D05E06B1C7363A2007710F9 /* libcurl.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libcurl.a;
-			remoteRef = 2D05E06A1C7363A2007710F9 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		2D05E06F1C7363A2007710F9 /* libmp4v2.a */ = {
@@ -937,40 +872,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2D05E0991C73783D007710F9 /* PBXTargetDependency */ = {
+		2D581AC31C7B4B3200DD46CB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = aac;
-			targetProxy = 2D05E0981C73783D007710F9 /* PBXContainerItemProxy */;
-		};
-		2D05E09B1C73783D007710F9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = curl;
-			targetProxy = 2D05E09A1C73783D007710F9 /* PBXContainerItemProxy */;
-		};
-		2D05E09D1C73783D007710F9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = mp4v2;
-			targetProxy = 2D05E09C1C73783D007710F9 /* PBXContainerItemProxy */;
-		};
-		2D05E09F1C73783D007710F9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = openH264;
-			targetProxy = 2D05E09E1C73783D007710F9 /* PBXContainerItemProxy */;
-		};
-		2D05E0A11C73783D007710F9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = theora;
-			targetProxy = 2D05E0A01C73783D007710F9 /* PBXContainerItemProxy */;
-		};
-		2D05E0A31C73783D007710F9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = vpx;
-			targetProxy = 2D05E0A21C73783D007710F9 /* PBXContainerItemProxy */;
-		};
-		2D05E0A51C73783D007710F9 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = nestegg;
-			targetProxy = 2D05E0A41C73783D007710F9 /* PBXContainerItemProxy */;
+			name = libcurl;
+			targetProxy = 2D581AC21C7B4B3200DD46CB /* PBXContainerItemProxy */;
 		};
 		2D5CFD551B95CF2300303A20 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
