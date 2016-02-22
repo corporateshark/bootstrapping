@@ -1,8 +1,8 @@
 ####### Common Configuration
 
-if ! [ $# -eq 7 ]
+if ! [ $# -eq 8 ]
 then
-echo "Usage: build.sh <build_directory> <install_directory> <action> <product_name> <debug/release> <ios_deployment_target> <iPhoneOS/iPhoneSimulator>"
+echo "Usage: build.sh <build_directory> <install_directory> <action> <product_name> <debug/release> <ios_deployment_target> <iPhoneOS/iPhoneSimulator> <header_dir>"
 exit 1
 fi
 
@@ -33,6 +33,7 @@ PRODUCT_NAME="$4"
 CONFIGURATION="$5"
 IPHONEOS_DEPLOYMENT_TARGET="$6"
 PLATFORM="$7"
+HEADER_DIR="$8"
 
 echo "BUILDDIR=$BUILDDIR"
 echo "INSTALLDIR=$INSTALLDIR"
@@ -42,6 +43,7 @@ echo "PRODUCT_NAME=$PRODUCT_NAME"
 echo "CONFIGURATION=$CONFIGURATION"
 echo "IPHONEOS_DEPLOYMENT_TARGET=$IPHONEOS_DEPLOYMENT_TARGET"
 echo "PLATFORM=$PLATFORM"
+echo "HEADER_DIR=$HEADER_DIR"
 
 if [ "$ACTION" == "build" ];
     then
@@ -193,8 +195,19 @@ then
 
         mkdir -p ${BUILDDIR}/i386 && cd ${BUILDDIR}/i386
         build_for_arch i386 i386-apple-darwin $IOS_SYSROOT ${BUILDDIR}/i386
+
         mkdir -p ${BUILDDIR}/x86_64 && cd ${BUILDDIR}/x86_64
         build_for_arch x86_64 x86_64-apple-darwin $IOS_SYSROOT ${BUILDDIR}/x86_64
+
+        HEADER_COPY_DIR=${HEADER_DIR}/i386
+        echo "Copying headers to ${HEADER_COPY_DIR}"
+        mkdir -p ${HEADER_COPY_DIR}
+        cp ${BUILDDIR}/i386/include/curl/*.h ${HEADER_COPY_DIR}/
+
+        HEADER_COPY_DIR=${HEADER_DIR}/x86_64
+        echo "Copying headers to ${HEADER_COPY_DIR}"
+        mkdir -p ${HEADER_COPY_DIR}
+        cp ${BUILDDIR}/x86_64/include/curl/*.h ${HEADER_COPY_DIR}/
 
         echo "Creating Universal Binary for $PLATFORM"
         (cd $INSTALLDIR && lipo -create ${BUILDDIR}/x86_64/lib/libcurl.a ${BUILDDIR}/i386/lib/libcurl.a -o "$PRODUCT_NAME".a)
@@ -210,10 +223,21 @@ then
         mkdir -p ${BUILDDIR}/arm64 && cd ${BUILDDIR}/arm64
         build_for_arch arm64 arm-apple-darwin $IOS_SYSROOT ${BUILDDIR}/arm64
 
+        HEADER_COPY_DIR=${HEADER_DIR}/curl/armv7
+        echo "Copying headers to ${HEADER_COPY_DIR}"
+        mkdir -p ${HEADER_COPY_DIR}
+        cp ${BUILDDIR}/armv7/include/curl/*.h ${HEADER_COPY_DIR}/
+
+        HEADER_COPY_DIR=${HEADER_DIR}/curl/arm64
+        echo "Copying headers to ${HEADER_COPY_DIR}"
+        mkdir -p ${HEADER_COPY_DIR}
+        cp ${BUILDDIR}/arm64/include/curl/*.h ${HEADER_COPY_DIR}/
+
         echo "Creating Universal Binary for $PLATFORM"
         (cd $INSTALLDIR && lipo -create ${BUILDDIR}/arm64/lib/libcurl.a ${BUILDDIR}/armv7/lib/libcurl.a -o "$PRODUCT_NAME".a)
         echo "BUILT PRODUCT: $INSTALLDIR/$PRODUCT_NAME.a"
         lipo -info $INSTALLDIR/$PRODUCT_NAME.a
+
     fi
 
 else
