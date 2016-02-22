@@ -131,7 +131,7 @@ function configure_for_arch()
     SDKROOT=""
     echo "Temporaily unsetting SDKROOT"
 
-    (cd $PREFIX ; $SRCDIR/configure --disable-shared --enable-static ${SSL_FLAG} --host="${HOST}" --prefix=${PREFIX})
+    (cd $PREFIX ; $SRCDIR/configure --disable-shared --enable-static --enable-threaded-resolver ${SSL_FLAG} --host="${HOST}" --prefix=${PREFIX})
 
     if [[ $? -ne 0 ]] ; then
         echo "Errors while running configure. Exiting.."
