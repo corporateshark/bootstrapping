@@ -63,6 +63,8 @@ IOS_GCC=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoo
 IPHONEOSVERSION="-miphoneos-version-min=$IPHONEOS_DEPLOYMENT_TARGET"
 CPUS=$(sysctl -n hw.logicalcpu_max)
 
+####### Custom Configuration
+
 if [ "$CONFIGURATION" == "Debug" ];
 then
 OPTIMIZATION_LEVEL="-O1"
@@ -71,8 +73,6 @@ OPTIMIZATION_LEVEL="-Os"
 fi
 
 echo "OPTIMIZATION_LEVEL=$OPTIMIZATION_LEVEL"
-
-####### Custom Configuration
 
 SSL_FLAG=--with-darwinssl
 echo "SSL_FLAG=$SSL_FLAG"
@@ -178,7 +178,7 @@ then
         clean ${BUILDDIR}/x86_64 ${INSTALLDIR}/x86_64
     else
         clean ${BUILDDIR}/armv7 ${INSTALLDIR}/armv7
-        clean ${BUILDDIR}/armv7s ${INSTALLDIR}/armv7s
+        #clean ${BUILDDIR}/armv7s ${INSTALLDIR}/armv7s
         clean ${BUILDDIR}/arm64 ${INSTALLDIR}/arm64
     fi
 
@@ -205,13 +205,13 @@ then
 
         mkdir -p ${BUILDDIR}/armv7 && cd ${BUILDDIR}/armv7
         build_for_arch armv7 armv7-apple-darwin $IOS_SYSROOT ${BUILDDIR}/armv7
-        mkdir -p ${BUILDDIR}/armv7s && cd ${BUILDDIR}/armv7s
-        build_for_arch armv7s armv7-apple-darwin $IOS_SYSROOT ${BUILDDIR}/armv7s
+        #mkdir -p ${BUILDDIR}/armv7s && cd ${BUILDDIR}/armv7s
+        #build_for_arch armv7s armv7-apple-darwin $IOS_SYSROOT ${BUILDDIR}/armv7s
         mkdir -p ${BUILDDIR}/arm64 && cd ${BUILDDIR}/arm64
         build_for_arch arm64 arm-apple-darwin $IOS_SYSROOT ${BUILDDIR}/arm64
 
         echo "Creating Universal Binary for $PLATFORM"
-        (cd $INSTALLDIR && lipo -create ${BUILDDIR}/arm64/lib/libcurl.a ${BUILDDIR}/armv7/lib/libcurl.a ${BUILDDIR}/armv7s/lib/libcurl.a -o "$PRODUCT_NAME".a)
+        (cd $INSTALLDIR && lipo -create ${BUILDDIR}/arm64/lib/libcurl.a ${BUILDDIR}/armv7/lib/libcurl.a -o "$PRODUCT_NAME".a)
         echo "BUILT PRODUCT: $INSTALLDIR/$PRODUCT_NAME.a"
         lipo -info $INSTALLDIR/$PRODUCT_NAME.a
     fi

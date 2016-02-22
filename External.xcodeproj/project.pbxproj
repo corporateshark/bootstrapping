@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D05E07D1C7377C0007710F9 /* libaac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E0681C7363A2007710F9 /* libaac.a */; };
-		2D05E07F1C7377C0007710F9 /* libmp4v2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E06F1C7363A2007710F9 /* libmp4v2.a */; };
-		2D05E0801C7377C0007710F9 /* libnestegg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E07C1C7363A2007710F9 /* libnestegg.a */; };
-		2D05E0811C7377C0007710F9 /* libopenH264.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E0721C7363A2007710F9 /* libopenH264.a */; };
-		2D05E0821C7377C0007710F9 /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E0751C7363A2007710F9 /* libtheora.a */; };
-		2D05E0831C7377C0007710F9 /* libvpx.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E0791C7363A2007710F9 /* libvpx.a */; };
 		2D5CFD581B95CF2D00303A20 /* libFreetype2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D5CFD441B95CF1000303A20 /* libFreetype2.a */; };
 		2D60DB3B1B861EDF001C431F /* External.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D60DB3A1B861EDF001C431F /* External.m */; };
 		2D60DB9A1B862344001C431F /* External.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D60DB3A1B861EDF001C431F /* External.m */; };
@@ -324,12 +318,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D05E07D1C7377C0007710F9 /* libaac.a in Frameworks */,
-				2D05E07F1C7377C0007710F9 /* libmp4v2.a in Frameworks */,
-				2D05E0801C7377C0007710F9 /* libnestegg.a in Frameworks */,
-				2D05E0811C7377C0007710F9 /* libopenH264.a in Frameworks */,
-				2D05E0821C7377C0007710F9 /* libtheora.a in Frameworks */,
-				2D05E0831C7377C0007710F9 /* libvpx.a in Frameworks */,
 				2DE350781BD6934F00FF178A /* libjpeg.a in Frameworks */,
 				2DE350471BD6482200FF178A /* libzxing.a in Frameworks */,
 				2DF399B91BC69E240086A34D /* libid3v2lib.a in Frameworks */,
@@ -983,7 +971,6 @@
 				GCC_WARN_UNUSED_VARIABLE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1028,7 +1015,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_WARN_UNUSED_VALUE = NO;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LIBTOOLFLAGS = "\"$CONFIGURATION_BUILD_DIR/libcurl.a\"";
 				PRODUCT_NAME = "external-blippar";
 				SKIP_INSTALL = YES;
 			};
@@ -1038,7 +1025,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_WARN_UNUSED_VALUE = NO;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LIBTOOLFLAGS = "\"$CONFIGURATION_BUILD_DIR/libcurl.a\"";
 				PRODUCT_NAME = "external-blippar";
 				SKIP_INSTALL = YES;
 			};
@@ -1047,7 +1034,6 @@
 		2D09002C1B6A6DEB00E89463 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -1056,7 +1042,6 @@
 		2D09002D1B6A6DEB00E89463 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -1102,7 +1087,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_WARN_UNUSED_VALUE = NO;
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LIBTOOLFLAGS = "\"$CONFIGURATION_BUILD_DIR/libcurl.a\"";
 				PRODUCT_NAME = "external-blippar";
 				SKIP_INSTALL = YES;
 			};
@@ -1111,7 +1096,6 @@
 		2D10B8131BA17DB600C7D855 /* Distribution */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
