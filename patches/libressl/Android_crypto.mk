@@ -557,4 +557,10 @@ LOCAL_SRC_FILES += $(non_arm_src_files)
 #LOCAL_LDLIBS += -ldl
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE:= libcrypto_static
+
+#   Suppress stupid compiler warnings
+ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
+    LOCAL_CFLAGS += -Wno-asm-operand-widths
+endif
+
 include $(BUILD_STATIC_LIBRARY)
