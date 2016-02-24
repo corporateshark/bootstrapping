@@ -1,7 +1,7 @@
 diff --exclude=.git --exclude=.hg -rupN ./src/libcurl/Android.mk ./src/libcurl_patched/Android.mk
 --- ./src/libcurl/Android.mk	1970-01-01 01:00:00.000000000 +0100
 +++ ./src/libcurl_patched/Android.mk	2016-01-26 14:28:32.000000000 +0100
-@@ -0,0 +1,82 @@
+@@ -0,0 +1,87 @@
 +# Google Android makefile for curl and libcurl
 +#
 +# Place the curl source (including this makefile) into external/curl/ in the
@@ -82,6 +82,11 @@ diff --exclude=.git --exclude=.hg -rupN ./src/libcurl/Android.mk ./src/libcurl_p
 +# Actually, this doesn't quite work because the build system searches
 +# for NOTICE files before it gets to this point, so it will only be seen
 +# on subsequent builds.
++
++#   Suppress stupid compiler warnings
++ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
++    LOCAL_CFLAGS += -Wno-asm-operand-widths
++endif
 +
 +include $(BUILD_STATIC_LIBRARY)
 diff --exclude=.git --exclude=.hg -rupN ./src/libcurl/include/curl/curl.h ./src/libcurl_patched/include/curl/curl.h
