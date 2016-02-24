@@ -132,4 +132,9 @@ ifneq (,$(findstring 64, $(TARGET_ARCH_ABI)))
         $(LOCAL_PATH)/../src/libiconv/include
 endif
 
+#   Suppress stupid compiler warnings
+ifneq (,$(findstring 64, $(TARGET_ARCH_ABI)))
+    LOCAL_CFLAGS += -Wno-absolute-value
+endif
+
 include $(BUILD_STATIC_LIBRARY)
