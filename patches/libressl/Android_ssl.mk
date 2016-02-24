@@ -74,4 +74,7 @@ LOCAL_CFLAGS += -Wno-implicit-function-declaration -Wno-int-conversion
 
 LOCAL_C_INCLUDES := $(GLOBAL_C_INCLUDES)
 
+#   Suppress stupid compiler warnings
+LOCAL_CFLAGS += -Wno-pointer-sign
+
 include $(BUILD_STATIC_LIBRARY)
