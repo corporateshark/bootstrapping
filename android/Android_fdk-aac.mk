@@ -94,5 +94,12 @@ endif
 
 #   Suppress stupid compiler warnings
 LOCAL_CFLAGS += -Wno-parentheses-equality -Wno-unsequenced
+ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
+    #   64 bit: loads of warnings e.g.
+    #   Please set architecture characterization defines for your platform (FDK_HIGH_PERFORMANCE)!
+    #   Extremely slow implementation of [fixmuldiv2_DD, fixmuldiv2BitExact_DD, fixmulBitExact_DD, ...] !!
+    #   Note: ideally would specify -Wno-#warnings, but attempting to escape the "#" causes disaster
+    LOCAL_CFLAGS := -Wno-c++11-narrowing -w -Xanalyzer -analyzer-disable-all-checks
+endif
 
 include $(BUILD_STATIC_LIBRARY)
