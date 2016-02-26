@@ -1,17 +1,19 @@
-if ! [ $# -eq 5 ]
-  then
-    echo "Usage: build.sh <build_directory> <install_directory> <action> <product_name> <debug/release>"
-    exit 1
+####### Common Configuration
+
+if ! [ $# -eq 8 ]
+then
+echo "Usage: build.sh <build_directory> <install_directory> <action> <product_name> <debug/release> <ios_deployment_target> <iPhoneOS/iPhoneSimulator> <header_dir>"
+exit 1
 fi
 
 if [ -z "$1" ]; then
-    echo "ERROR: Build Directory is not valid."
-    exit 1
+echo "ERROR: Build Directory is not valid."
+exit 1
 fi
 
 if [ -z "$2" ]; then
-    echo "ERROR: Install Directory is not valid."
-    exit 1
+echo "ERROR: Install Directory is not valid."
+exit 1
 fi
 
 #Create build directory if not exists
@@ -20,8 +22,58 @@ fi
 #Create install directory if not exists
 [ -d "$2" ] || mkdir -p "$2"
 
+# get some absolute paths
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BUILDDIR="$( cd "$1" && pwd )"
+INSTALLDIR="$( cd "$2" && pwd )"
+EXTSRCDIR=$DIR/../../src
+SRCDIR=$EXTSRCDIR/libjpeg-turbo
+ACTION="$3"
+PRODUCT_NAME="$4"
+CONFIGURATION="$5"
+IPHONEOS_DEPLOYMENT_TARGET="$6"
+PLATFORM="$7"
+HEADER_DIR="$8"
 
-function clean(){
+echo "BUILDDIR=$BUILDDIR"
+echo "INSTALLDIR=$INSTALLDIR"
+echo "SRCDIR=$SRCDIR"
+echo "ACTION=$ACTION"
+echo "PRODUCT_NAME=$PRODUCT_NAME"
+echo "CONFIGURATION=$CONFIGURATION"
+echo "IPHONEOS_DEPLOYMENT_TARGET=$IPHONEOS_DEPLOYMENT_TARGET"
+echo "PLATFORM=$PLATFORM"
+echo "HEADER_DIR=$HEADER_DIR"
+
+if [ "$ACTION" == "build" ];
+then
+	if [ -f $INSTALLDIR/$PRODUCT_NAME.a ];
+	then
+	echo "Not building since file already exists at $INSTALLDIR/$PRODUCT_NAME.a. Please clean to rebuild"
+	lipo -info $INSTALLDIR/$PRODUCT_NAME.a
+	exit 0
+	fi
+fi
+
+# some useful variables
+
+IOS_PLATFORMDIR=/Applications/Xcode.app/Contents/Developer/Platforms/$PLATFORM.platform
+IOS_SYSROOT=$IOS_PLATFORMDIR/Developer/SDKs/$PLATFORM.sdk
+
+DEVROOT=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain
+IOS_GCC=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
+IPHONEOSVERSION="-miphoneos-version-min=$IPHONEOS_DEPLOYMENT_TARGET"
+CPUS=$(sysctl -n hw.logicalcpu_max)
+
+if [ "$CONFIGURATION" == "Debug" ];
+then
+OPTIMIZATION_LEVEL="-O1"
+else
+OPTIMIZATION_LEVEL="-O3"
+fi
+
+function clean()
+{
   echo "Cleaning.."
   if [ -d "$BUILDDIRECTORY" ]; then
     cd $BUILDDIRECTORY
@@ -37,7 +89,8 @@ function clean(){
   fi
 }
 
-function autoreconfigure(){
+function autoreconfigure()
+{
   echo "AutoReconfiguring..."
 
   set -x
@@ -52,7 +105,8 @@ function autoreconfigure(){
   fi
 }
 
-function configure(){
+function configure()
+{
   echo "Configuring..."
    # We have to temporarily unset SDKROOT for configuration to go through
   PREVIOUS_SDKROOT=$SDKROOT
@@ -81,7 +135,8 @@ function configure(){
   SDKROOT=$PREVIOUS_SDKROOT
 }
 
-function build(){
+function build()
+{
   echo "Building.."
 
   set -x
@@ -97,50 +152,8 @@ function build(){
   fi
 }
 
-
-# get some absolute paths
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-BUILDDIR="$( cd "$1" && pwd )"
-INSTALLDIR="$( cd "$2" && pwd )"
-EXTSRCDIR=$DIR/../../src
-SRCDIR=$EXTSRCDIR/libjpeg-turbo
-ACTION="$3"
-PRODUCT_NAME="$4"
-CONFIGURATION="$5"
-
-echo "BUILDDIR=$BUILDDIR"
-echo "INSTALLDIR=$INSTALLDIR"
-echo "SRCDIR=$SRCDIR"
-echo "ACTION=$ACTION"
-echo "PRODUCT_NAME=$PRODUCT_NAME"
-echo "CONFIGURATION=$CONFIGURATION"
-
-
-if [ "$ACTION" == "build" ];
-then
-  if [ -f $INSTALLDIR/$PRODUCT_NAME.a ];
-  then
-    echo "Not building since file already exists at $INSTALLDIR/$PRODUCT_NAME.a. Please clean to rebuild"
-    exit 0
-  fi
-fi
-
 # add gas-preprocessor to PATH
 PATH=$EXTSRCDIR/gas-preprocessor:$PATH
-
-# some useful variables
-IOS_PLATFORMDIR=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform
-IOS_SYSROOT=$IOS_PLATFORMDIR/Developer/SDKs/iPhoneOS.sdk
-IOS_GCC=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
-IPHONEOSVERSION="-miphoneos-version-min=5.1"
-CPUS=$(sysctl -n hw.logicalcpu_max)
-
-if [ "$CONFIGURATION" == "Debug" ];
-then
-    OPTIMIZATION_LEVEL="-O1"
-else
-    OPTIMIZATION_LEVEL="-O3"
-fi
 
 echo "OPTIMIZATION_LEVEL=$OPTIMIZATION_LEVEL"
 
@@ -170,6 +183,12 @@ then
   mkdir -p $BUILDDIRECTORY && cd $BUILDDIRECTORY 
   configure
   build
+
+  HEADER_COPY_DIR=${HEADER_DIR}/libjpeg-turbo/armv7
+  echo "Copying headers to ${HEADER_COPY_DIR}"
+  mkdir -p ${HEADER_COPY_DIR}
+  cp ${INSTALLDIR}/armv7/include/*.h ${HEADER_COPY_DIR}/
+
 else
   echo "Unrecognized Action: $ACTION"
 fi
@@ -193,6 +212,12 @@ then
   mkdir -p $BUILDDIRECTORY && cd $BUILDDIRECTORY
   configure
   build
+
+  HEADER_COPY_DIR=${HEADER_DIR}/libjpeg-turbo/armv7s
+  echo "Copying headers to ${HEADER_COPY_DIR}"
+  mkdir -p ${HEADER_COPY_DIR}
+  cp ${INSTALLDIR}/armv7s/include/*.h ${HEADER_COPY_DIR}/
+
 else
   echo "Unrecognized Action: $ACTION"
 fi
@@ -216,6 +241,12 @@ then
   mkdir -p $BUILDDIRECTORY && cd $BUILDDIRECTORY
   configure
   build
+
+  HEADER_COPY_DIR=${HEADER_DIR}/libjpeg-turbo/arm64
+  echo "Copying headers to ${HEADER_COPY_DIR}"
+  mkdir -p ${HEADER_COPY_DIR}
+  cp ${INSTALLDIR}/arm64/include/*.h ${HEADER_COPY_DIR}/
+
 else
   echo "Unrecognized Action: $ACTION"
 fi

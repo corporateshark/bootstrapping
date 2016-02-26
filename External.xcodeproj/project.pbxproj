@@ -20,7 +20,6 @@
 		2D60DBA81B862384001C431F /* libOGG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB6B1B861F07001C431F /* libOGG.a */; };
 		2D60DCFE1B8DC7D8001C431F /* libVorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB711B861F07001C431F /* libVorbis.a */; };
 		2DE350471BD6482200FF178A /* libzxing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB771B861F07001C431F /* libzxing.a */; };
-		2DE350781BD6934F00FF178A /* libjpeg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB651B861F07001C431F /* libjpeg.a */; };
 		2DF399B91BC69E240086A34D /* libid3v2lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF399A51BC69C890086A34D /* libid3v2lib.a */; };
 /* End PBXBuildFile section */
 
@@ -228,13 +227,6 @@
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = zxing;
 		};
-		2DE350761BD6934300FF178A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 2D60DB451B861F07001C431F /* jpeg.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 4C6F9AC615DA68AE00D599B4;
-			remoteInfo = jpeg;
-		};
 		2DF399A41BC69C890086A34D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2DF399A01BC69C890086A34D /* id3v2lib.xcodeproj */;
@@ -248,6 +240,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 2DF399931BC69C670086A34D;
 			remoteInfo = id3v2lib;
+		};
+		4C0DF9B71C7E32E00032CE1F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2DE34F4B1BCFFA1200FF178A /* libjpeg-turbo.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2DE34F431BCFF57D00FF178A;
+			remoteInfo = "libjpeg-turbo";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -318,7 +317,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DE350781BD6934F00FF178A /* libjpeg.a in Frameworks */,
 				2DE350471BD6482200FF178A /* libzxing.a in Frameworks */,
 				2DF399B91BC69E240086A34D /* libid3v2lib.a in Frameworks */,
 				2D5CFD581B95CF2D00303A20 /* libFreetype2.a in Frameworks */,
@@ -583,7 +581,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				2DE350771BD6934300FF178A /* PBXTargetDependency */,
+				4C0DF9B81C7E32E00032CE1F /* PBXTargetDependency */,
 				2DE3504A1BD6482A00FF178A /* PBXTargetDependency */,
 				2DF399B81BC69CEC0086A34D /* PBXTargetDependency */,
 				2D5CFD551B95CF2300303A20 /* PBXTargetDependency */,
@@ -920,15 +918,15 @@
 			name = zxing;
 			targetProxy = 2DE350491BD6482A00FF178A /* PBXContainerItemProxy */;
 		};
-		2DE350771BD6934300FF178A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = jpeg;
-			targetProxy = 2DE350761BD6934300FF178A /* PBXContainerItemProxy */;
-		};
 		2DF399B81BC69CEC0086A34D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = id3v2lib;
 			targetProxy = 2DF399B71BC69CEC0086A34D /* PBXContainerItemProxy */;
+		};
+		4C0DF9B81C7E32E00032CE1F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "libjpeg-turbo";
+			targetProxy = 4C0DF9B71C7E32E00032CE1F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1015,7 +1013,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_WARN_UNUSED_VALUE = NO;
-				OTHER_LIBTOOLFLAGS = "\"$CONFIGURATION_BUILD_DIR/libcurl.a\"";
+				OTHER_LIBTOOLFLAGS = "\"$CONFIGURATION_BUILD_DIR/libcurl.a\" \"$CONFIGURATION_BUILD_DIR/libjpeg-turbo.a\"";
 				PRODUCT_NAME = "external-blippar";
 				SKIP_INSTALL = YES;
 			};
@@ -1025,7 +1023,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_WARN_UNUSED_VALUE = NO;
-				OTHER_LIBTOOLFLAGS = "\"$CONFIGURATION_BUILD_DIR/libcurl.a\"";
+				OTHER_LIBTOOLFLAGS = "\"$CONFIGURATION_BUILD_DIR/libcurl.a\"  \"$CONFIGURATION_BUILD_DIR/libjpeg-turbo.a\"";
 				PRODUCT_NAME = "external-blippar";
 				SKIP_INSTALL = YES;
 			};
@@ -1087,7 +1085,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				GCC_WARN_UNUSED_VALUE = NO;
-				OTHER_LIBTOOLFLAGS = "\"$CONFIGURATION_BUILD_DIR/libcurl.a\"";
+				OTHER_LIBTOOLFLAGS = "\"$CONFIGURATION_BUILD_DIR/libcurl.a\"  \"$CONFIGURATION_BUILD_DIR/libjpeg-turbo.a\"";
 				PRODUCT_NAME = "external-blippar";
 				SKIP_INSTALL = YES;
 			};
