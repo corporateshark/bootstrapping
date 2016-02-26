@@ -199,12 +199,12 @@ then
         mkdir -p ${BUILDDIR}/x86_64 && cd ${BUILDDIR}/x86_64
         build_for_arch x86_64 x86_64-apple-darwin $IOS_SYSROOT ${BUILDDIR}/x86_64
 
-        HEADER_COPY_DIR=${HEADER_DIR}/i386
+        HEADER_COPY_DIR=${HEADER_DIR}/curl/i386
         echo "Copying headers to ${HEADER_COPY_DIR}"
         mkdir -p ${HEADER_COPY_DIR}
         cp ${BUILDDIR}/i386/include/curl/*.h ${HEADER_COPY_DIR}/
 
-        HEADER_COPY_DIR=${HEADER_DIR}/x86_64
+        HEADER_COPY_DIR=${HEADER_DIR}/curl/x86_64
         echo "Copying headers to ${HEADER_COPY_DIR}"
         mkdir -p ${HEADER_COPY_DIR}
         cp ${BUILDDIR}/x86_64/include/curl/*.h ${HEADER_COPY_DIR}/
