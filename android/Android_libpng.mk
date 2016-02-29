@@ -6,6 +6,10 @@ LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/../src/zlib \
     $(LOCAL_PATH)/../src/libpng \
 
+LOCAL_EXPORT_C_INCLUDES := \
+    $(LOCAL_PATH)/../src/zlib \
+    $(LOCAL_PATH)/../src/libpng \
+
 LOCAL_SRC_FILES := \
     ../src/libpng/png.c \
     ../src/libpng/pngerror.c \

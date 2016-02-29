@@ -5,6 +5,9 @@ LOCAL_MODULE := libjpeg
 LOCAL_C_INCLUDES := \
     $(LOCAL_PATH)/../src/libjpeg \
 
+LOCAL_EXPORT_C_INCLUDES := \
+    $(LOCAL_PATH)/../src/libjpeg \
+
 LOCAL_SRC_FILES := \
     ../src/libjpeg/jaricom.c \
     ../src/libjpeg/jcapimin.c \
