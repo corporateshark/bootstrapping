@@ -269,9 +269,9 @@
 {
     "name": "freetype",
     "source": {
-        "type": "git",
-        "url": "http://git.savannah.gnu.org/cgit/freetype/freetype2.git",
-        "revision": "0963526435b39080e7fc45610aee3b3e2e2383b0"
+        "type": "archive",
+        "url": "http://download.savannah.gnu.org/releases/freetype/freetype-2.6.3.tar.bz2",
+        "sha1": "6c98bd5d0be313207c37ca23d25faf983486aee5"
     },
     "postprocess": {
         "type": "patch",
