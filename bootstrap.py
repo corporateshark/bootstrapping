@@ -178,7 +178,7 @@ def extractFile(filename, target_dir):
             zfile.close()
             dieIfNonZero(executeCommand(TOOL_COMMAND_UNZIP + " " + filename + " -d " + extract_dir_abs))
 
-    elif extension == ".tar" or extension == ".gz" or extension == ".bz2":
+    elif extension == ".tar" or extension == ".gz" or extension == ".bz2" or extension == ".xz":
         tfile = tarfile.open(filename)
         extract_dir = os.path.commonprefix(tfile.getnames())
         extract_dir_local = ""
