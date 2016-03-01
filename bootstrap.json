@@ -529,5 +529,12 @@
         "type": "script",
         "file": "libnestegg.py"
     }
+},
+{
+    "name": "duktape",
+    "source": {
+        "type": "archive",
+        "url": "http://duktape.org/duktape-1.4.0.tar.xz"
+    }
 }
 ]
