@@ -4,6 +4,7 @@ from __future__ import print_function
 import platform
 import os
 import sys
+import io
 import shutil
 import subprocess
 import zipfile
@@ -31,6 +32,13 @@ try:
 except:
     scp_available = False
     print("WARNING: Please install the Python packages [paramiko, scp] for full script operation.")
+
+try:
+    import lzma
+    lzma_available = True
+except:
+    print("WARNING: Python package lzma (pyliblzma) not available; extraction of .tar.xz files may not be supported.")
+    lzma_available = False
 
 SRC_DIR_BASE = "src"
 ARCHIVE_DIR_BASE = "archives"
@@ -150,6 +158,26 @@ def cloneRepository(type, url, target_name, revision = None, try_only_local_oper
         raise ValueError("Cloning " + type + " repositories not implemented.")
 
 
+def decompressTarXZFile(src_filename, dst_filename):
+    if not lzma_available:
+        raise RuntimeError("lzma extraction not available; please install package lzma (pyliblzma) and try again")
+
+    try:
+        fs = open(src_filename, "rb")
+        if not fs:
+            raise RuntimeError("Opening file " + src_filename + " failed")
+        fd = open(dst_filename, "wb")
+        if not fd:
+            raise RuntimeError("Opening file " + dst_filename + " failed")
+
+        decompressed = lzma.decompress(fs.read())
+        fd.write(decompressed)
+    finally:
+        fs.close()
+        fd.close()
+
+
+
 def extractFile(filename, target_dir):
     if os.path.exists(target_dir):
         shutil.rmtree(target_dir)
@@ -179,6 +207,17 @@ def extractFile(filename, target_dir):
             dieIfNonZero(executeCommand(TOOL_COMMAND_UNZIP + " " + filename + " -d " + extract_dir_abs))
 
     elif extension == ".tar" or extension == ".gz" or extension == ".bz2" or extension == ".xz":
+
+        if extension == ".xz":# and not lzma_available:
+            stem2, extension2 = os.path.splitext(os.path.basename(stem))
+            if extension2 == ".tar":
+                # we extract the .tar.xz file to a .tar file before we uncompress that
+                tar_filename = os.path.join(os.path.dirname(filename), stem)
+                decompressTarXZFile(filename, tar_filename)
+                filename = tar_filename
+            else:
+                raise RuntimeError("Unable to extract .xz file that is not a .tar.xz file.")
+
         tfile = tarfile.open(filename)
         extract_dir = os.path.commonprefix(tfile.getnames())
         extract_dir_local = ""
@@ -708,7 +747,7 @@ def main(argv):
             # write out cached state
             writeJSONData(sdata, state_filename)
         except:
-            log("ERROR: Failure to bootstrap library " + name)
+            log("ERROR: Failure to bootstrap library " + name + " (reason: " + str(sys.exc_info()[0]) + ")")
             failed_libraries.append(name)
 
     if failed_libraries:
