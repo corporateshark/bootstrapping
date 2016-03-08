@@ -115,14 +115,14 @@ function configure()
 
   set -x
 
-  $SRCDIR/configure \
-    --prefix=$INSTALLDIRECTORY \
+  (cd $BUILDDIRECTORY ;$SRCDIR/configure \
+    --prefix=$BUILDDIRECTORY \
     --host "$HOST" \
     CC="$IOS_GCC" \
     LD="$IOS_GCC" \
     CFLAGS="$CFLAGS" \
     LDFLAGS="$LDFLAGS" \
-    CCASFLAGS="$CCASFLAGS"
+    CCASFLAGS="$CCASFLAGS" )
 
   set +x
 
@@ -187,7 +187,7 @@ then
   HEADER_COPY_DIR=${HEADER_DIR}/libjpeg-turbo/armv7
   echo "Copying headers to ${HEADER_COPY_DIR}"
   mkdir -p ${HEADER_COPY_DIR}
-  cp ${INSTALLDIR}/armv7/include/*.h ${HEADER_COPY_DIR}/
+  cp ${BUILDDIR}/armv7/include/*.h ${HEADER_COPY_DIR}/
 
 else
   echo "Unrecognized Action: $ACTION"
@@ -216,7 +216,7 @@ then
   HEADER_COPY_DIR=${HEADER_DIR}/libjpeg-turbo/armv7s
   echo "Copying headers to ${HEADER_COPY_DIR}"
   mkdir -p ${HEADER_COPY_DIR}
-  cp ${INSTALLDIR}/armv7s/include/*.h ${HEADER_COPY_DIR}/
+  cp ${BUILDDIR}/armv7s/include/*.h ${HEADER_COPY_DIR}/
 
 else
   echo "Unrecognized Action: $ACTION"
@@ -245,7 +245,7 @@ then
   HEADER_COPY_DIR=${HEADER_DIR}/libjpeg-turbo/arm64
   echo "Copying headers to ${HEADER_COPY_DIR}"
   mkdir -p ${HEADER_COPY_DIR}
-  cp ${INSTALLDIR}/arm64/include/*.h ${HEADER_COPY_DIR}/
+  cp ${BUILDDIR}/arm64/include/*.h ${HEADER_COPY_DIR}/
 
 else
   echo "Unrecognized Action: $ACTION"
@@ -255,12 +255,22 @@ fi
 
 if [ "$ACTION" == "clean" ]
 then
+
+  HEADERDIRECTORY=${HEADER_DIR}/libjpeg-turbo
+  echo "Removing Headers $HEADERDIRECTORY"
+
+  if [ -d "$HEADERDIRECTORY" ]; then
+  rm -rf "$HEADERDIRECTORY"
+  fi
+
   echo "Removing Universal Binaries"
   rm -f $INSTALLDIR/*.a
 elif [ "$ACTION" == "build" ]
 then
   echo "Creating Universal Binary"
-  (cd $INSTALLDIR && lipo -create arm64/lib/libturbojpeg.a armv7/lib/libturbojpeg.a armv7s/lib/libturbojpeg.a -o "$PRODUCT_NAME".a)
+  set -x
+  (cd $INSTALLDIR && lipo -create ${BUILDDIR}/arm64/lib/libturbojpeg.a ${BUILDDIR}/armv7/lib/libturbojpeg.a ${BUILDDIR}/armv7s/lib/libturbojpeg.a -o "$PRODUCT_NAME".a)
+  set +x
   echo "BUILT PRODUCT: $INSTALLDIR/$PRODUCT_NAME.a"
 else
   echo "Unrecognized Action: $ACTION"

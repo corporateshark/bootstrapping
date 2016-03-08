@@ -87,11 +87,16 @@ function clean()
     echo "Cleaning $BUILDDIRECTORY"
 
     if [ -d "$BUILDDIRECTORY" ]; then
-        (cd $BUILDDIRECTORY ; make distclean)
+        cd $BUILDDIRECTORY
+
+        set -x
+
+        make distclean
+
+        set +x
     fi
 
     echo "Cleaning $INSTALLDIRECTORY"
-
     if [ -d "$INSTALLDIRECTORY" ]; then
         rm -rf "$INSTALLDIRECTORY"
     fi
@@ -182,6 +187,11 @@ then
         clean ${BUILDDIR}/armv7 ${INSTALLDIR}/armv7
         #clean ${BUILDDIR}/armv7s ${INSTALLDIR}/armv7s
         clean ${BUILDDIR}/arm64 ${INSTALLDIR}/arm64
+    fi
+
+    HEADERDIRECTORY=${HEADER_DIR}/curl
+    if [ -d "$HEADERDIRECTORY" ]; then
+        rm -rf "$HEADERDIRECTORY"
     fi
 
     rm -f $INSTALLDIR/*.a
