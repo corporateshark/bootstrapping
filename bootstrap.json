@@ -381,8 +381,8 @@
         "revision": "curl-7_46_0"
     },
     "postprocess": {
-        "type": "patch",
-        "file": "libcurl_e2ae32ff5f3ab6f0819590f61f248f17df12987f.patch"
+        "type": "script",
+        "file": "libcurl.py"
     }
 },
 {
