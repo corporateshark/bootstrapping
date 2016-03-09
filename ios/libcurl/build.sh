@@ -189,9 +189,8 @@ then
         clean ${BUILDDIR}/arm64 ${INSTALLDIR}/arm64
     fi
 
-    HEADERDIRECTORY=${HEADER_DIR}/curl
-    if [ -d "$HEADERDIRECTORY" ]; then
-        rm -rf "$HEADERDIRECTORY"
+    if [ -d "$HEADER_DIR" ]; then
+        rm -rf "$HEADER_DIR"
     fi
 
     rm -f $INSTALLDIR/*.a
@@ -209,15 +208,15 @@ then
         mkdir -p ${BUILDDIR}/x86_64 && cd ${BUILDDIR}/x86_64
         build_for_arch x86_64 x86_64-apple-darwin $IOS_SYSROOT ${BUILDDIR}/x86_64
 
-        HEADER_COPY_DIR=${HEADER_DIR}/curl/i386
+        HEADER_COPY_DIR=${HEADER_DIR}/i386
         echo "Copying headers to ${HEADER_COPY_DIR}"
         mkdir -p ${HEADER_COPY_DIR}
-        cp ${BUILDDIR}/i386/include/curl/*.h ${HEADER_COPY_DIR}/
+        cp -R ${BUILDDIR}/i386/include/curl ${HEADER_COPY_DIR}/
 
-        HEADER_COPY_DIR=${HEADER_DIR}/curl/x86_64
+        HEADER_COPY_DIR=${HEADER_DIR}/x86_64
         echo "Copying headers to ${HEADER_COPY_DIR}"
         mkdir -p ${HEADER_COPY_DIR}
-        cp ${BUILDDIR}/x86_64/include/curl/*.h ${HEADER_COPY_DIR}/
+        cp -R ${BUILDDIR}/x86_64/include/curl ${HEADER_COPY_DIR}/
 
         echo "Creating Universal Binary for $PLATFORM"
         (cd $INSTALLDIR && lipo -create ${BUILDDIR}/x86_64/lib/libcurl.a ${BUILDDIR}/i386/lib/libcurl.a -o "$PRODUCT_NAME".a)
@@ -233,15 +232,15 @@ then
         mkdir -p ${BUILDDIR}/arm64 && cd ${BUILDDIR}/arm64
         build_for_arch arm64 arm-apple-darwin $IOS_SYSROOT ${BUILDDIR}/arm64
 
-        HEADER_COPY_DIR=${HEADER_DIR}/curl/armv7
+        HEADER_COPY_DIR=${HEADER_DIR}/armv7
         echo "Copying headers to ${HEADER_COPY_DIR}"
         mkdir -p ${HEADER_COPY_DIR}
-        cp ${BUILDDIR}/armv7/include/curl/*.h ${HEADER_COPY_DIR}/
+        cp -R ${BUILDDIR}/armv7/include/curl ${HEADER_COPY_DIR}/
 
-        HEADER_COPY_DIR=${HEADER_DIR}/curl/arm64
+        HEADER_COPY_DIR=${HEADER_DIR}/arm64
         echo "Copying headers to ${HEADER_COPY_DIR}"
         mkdir -p ${HEADER_COPY_DIR}
-        cp ${BUILDDIR}/arm64/include/curl/*.h ${HEADER_COPY_DIR}/
+        cp -R ${BUILDDIR}/arm64/include/curl ${HEADER_COPY_DIR}/
 
         echo "Creating Universal Binary for $PLATFORM"
         (cd $INSTALLDIR && lipo -create ${BUILDDIR}/arm64/lib/libcurl.a ${BUILDDIR}/armv7/lib/libcurl.a -o "$PRODUCT_NAME".a)
