@@ -55,6 +55,7 @@ ifeq ($(TARGET_ARCH_ABI),x86)
 endif
 
 #   Suppress stupid compiler warnings
-LOCAL_CFLAGS += -Wno-parentheses
+LOCAL_CFLAGS += -Wno-parentheses -Wno-shift-negative-value
+
 
 include $(BUILD_STATIC_LIBRARY)

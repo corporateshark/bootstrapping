@@ -46,4 +46,7 @@ ifeq ($(TARGET_ARCH_ABI),x86)
 	LOCAL_CFLAGS += -m32 -march=i686 -mtune=atom -mssse3 -mfpmath=sse
 endif
 
+#   Suppress stupid compiler warnings
+LOCAL_CFLAGS += -Wno-shift-negative-value
+
 include $(BUILD_STATIC_LIBRARY)
