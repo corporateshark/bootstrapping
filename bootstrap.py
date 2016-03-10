@@ -18,11 +18,13 @@ try:
     from urllib.request import urlparse
     from urllib.request import urlunparse
     from urllib.request import urlretrieve
+    from urllib.request import URLopener
     from urllib.request import quote
 except ImportError:
     from urlparse import urlparse
     from urlparse import urlunparse
     from urllib import urlretrieve
+    from urllib import URLopener
     from urllib import quote
 
 try:
@@ -63,6 +65,9 @@ TOOL_COMMAND_SVN = "svn"
 TOOL_COMMAND_PATCH = "patch"
 TOOL_COMMAND_TAR = "tar"
 TOOL_COMMAND_UNZIP = "unzip"
+
+# hack to fool some websites into actually downloading a requested file, instead of returning an error
+USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36"
 
 if platform.system() == "Windows":
     os.environ['CYGWIN'] = "nodosfilewarning"
@@ -318,6 +323,7 @@ def downloadAndExtractFile(url, download_dir, target_dir_name, sha1_hash = None,
         if p.scheme == "ssh":
             downloadSCP(p.hostname, p.username, p.path, download_dir)
         else:
+            URLopener.version = USER_AGENT
             urlretrieve(url, target_filename)
     else:
         log("Skipping download of " + url + "; already downloaded")
