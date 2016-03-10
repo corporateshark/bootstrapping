@@ -66,9 +66,6 @@ TOOL_COMMAND_PATCH = "patch"
 TOOL_COMMAND_TAR = "tar"
 TOOL_COMMAND_UNZIP = "unzip"
 
-# hack to fool some websites into actually downloading a requested file, instead of returning an error
-USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36"
-
 if platform.system() == "Windows":
     os.environ['CYGWIN'] = "nodosfilewarning"
 
@@ -80,6 +77,10 @@ def log(string):
 def dlog(string):
     if DEBUG_OUTPUT:
         print("*** " + string)
+
+
+class MyURLOpener(URLopener):
+    pass
 
 
 def executeCommand(command, printCommand = False, quiet = False):
@@ -300,7 +301,7 @@ def computeFileHash(filename):
     return hasher.hexdigest()
 
 
-def downloadAndExtractFile(url, download_dir, target_dir_name, sha1_hash = None, force_download = False):
+def downloadAndExtractFile(url, download_dir, target_dir_name, sha1_hash = None, force_download = False, user_agent = None):
     if not os.path.isdir(download_dir):
         os.mkdir(download_dir)
 
@@ -323,8 +324,11 @@ def downloadAndExtractFile(url, download_dir, target_dir_name, sha1_hash = None,
         if p.scheme == "ssh":
             downloadSCP(p.hostname, p.username, p.path, download_dir)
         else:
-#            URLopener.version = USER_AGENT
-            urlretrieve(url, target_filename)
+            if user_agent is not None:
+                MyURLOpener.version = user_agent
+                MyURLOpener().retrieve(url, target_filename)
+            else:
+                urlretrieve(url, target_filename)
     else:
         log("Skipping download of " + url + "; already downloaded")
 
@@ -669,10 +673,11 @@ def main(argv):
 
                 if src_type == "archive":
                     sha1 = source.get('sha1', None)
+                    user_agent = source.get('user-agent', None)
                     try:
                         if force_fallback:
                             raise RuntimeError
-                        downloadAndExtractFile(src_url, ARCHIVE_DIR, name, sha1, force_download = opt_clean_archives)
+                        downloadAndExtractFile(src_url, ARCHIVE_DIR, name, sha1, force_download = opt_clean_archives, user_agent = user_agent)
                     except:
                         if FALLBACK_URL:
                             if not force_fallback:

@@ -60,7 +60,8 @@
     "source": {
         "type": "archive",
         "url": "http://www.ijg.org/files/jpegsrc.v9a.tar.gz",
-        "sha1": "d65ed6f88d318f7380a3a5f75d578744e732daca"
+        "sha1": "d65ed6f88d318f7380a3a5f75d578744e732daca",
+        "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36"
     },
     "postprocess": {
         "type": "script",
