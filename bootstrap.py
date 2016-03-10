@@ -323,7 +323,7 @@ def downloadAndExtractFile(url, download_dir, target_dir_name, sha1_hash = None,
         if p.scheme == "ssh":
             downloadSCP(p.hostname, p.username, p.path, download_dir)
         else:
-            URLopener.version = USER_AGENT
+#            URLopener.version = USER_AGENT
             urlretrieve(url, target_filename)
     else:
         log("Skipping download of " + url + "; already downloaded")
