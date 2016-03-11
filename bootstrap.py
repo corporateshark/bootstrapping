@@ -12,6 +12,7 @@ import tarfile
 import hashlib
 import json
 import getopt
+import traceback
 #import progressbar
 
 try:
@@ -759,6 +760,7 @@ def main(argv):
             writeJSONData(sdata, state_filename)
         except:
             log("ERROR: Failure to bootstrap library " + name + " (reason: " + str(sys.exc_info()[0]) + ")")
+            traceback.print_exc()
             failed_libraries.append(name)
 
     if failed_libraries:
