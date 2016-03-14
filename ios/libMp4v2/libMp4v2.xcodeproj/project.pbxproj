@@ -793,17 +793,20 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
+					"-ffast-math",
 					"-DMP4V2_USE_STATIC_LIB",
 					"-Wno-c++11-narrowing",
 					"-Wno-reserved-user-defined-literal",
 				);
 				"OTHER_CFLAGS[sdk=iphoneos*]" = (
+					"-ffast-math",
 					"-mfpu=neon",
 					"-DMP4V2_USE_STATIC_LIB",
 					"-Wno-c++11-narrowing",
 					"-Wno-reserved-user-defined-literal",
 				);
 				"OTHER_CFLAGS[sdk=iphonesimulator*]" = (
+					"-ffast-math",
 					"-m32",
 					"-mtune=atom",
 					"-mssse3",
@@ -849,17 +852,20 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
+					"-ffast-math",
 					"-DMP4V2_USE_STATIC_LIB",
 					"-Wno-c++11-narrowing",
 					"-Wno-reserved-user-defined-literal",
 				);
 				"OTHER_CFLAGS[sdk=iphoneos*]" = (
+					"-ffast-math",
 					"-mfpu=neon",
 					"-DMP4V2_USE_STATIC_LIB",
 					"-Wno-c++11-narrowing",
 					"-Wno-reserved-user-defined-literal",
 				);
 				"OTHER_CFLAGS[sdk=iphonesimulator*]" = (
+					"-ffast-math",
 					"-m32",
 					"-mtune=atom",
 					"-mssse3",
