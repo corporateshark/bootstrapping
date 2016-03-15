@@ -6,6 +6,51 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2DE47A081C9866CB00F0AF47 /* analyze.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479BC1C9866CA00F0AF47 /* analyze.c */; };
+		2DE47A091C9866CB00F0AF47 /* apiwrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479BD1C9866CA00F0AF47 /* apiwrapper.c */; };
+		2DE47A0A1C9866CB00F0AF47 /* bitpack.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479BF1C9866CA00F0AF47 /* bitpack.c */; };
+		2DE47A0B1C9866CB00F0AF47 /* cpu.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479C11C9866CA00F0AF47 /* cpu.c */; };
+		2DE47A0C1C9866CB00F0AF47 /* decapiwrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479C41C9866CA00F0AF47 /* decapiwrapper.c */; };
+		2DE47A0D1C9866CB00F0AF47 /* decinfo.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479C51C9866CA00F0AF47 /* decinfo.c */; };
+		2DE47A0E1C9866CB00F0AF47 /* decode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479C71C9866CA00F0AF47 /* decode.c */; };
+		2DE47A0F1C9866CB00F0AF47 /* dequant.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479C81C9866CA00F0AF47 /* dequant.c */; };
+		2DE47A101C9866CB00F0AF47 /* encapiwrapper.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479CA1C9866CA00F0AF47 /* encapiwrapper.c */; };
+		2DE47A111C9866CB00F0AF47 /* encfrag.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479CB1C9866CA00F0AF47 /* encfrag.c */; };
+		2DE47A121C9866CB00F0AF47 /* encinfo.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479CC1C9866CA00F0AF47 /* encinfo.c */; };
+		2DE47A131C9866CB00F0AF47 /* encode.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479CE1C9866CA00F0AF47 /* encode.c */; };
+		2DE47A141C9866CB00F0AF47 /* encoder_disabled.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479CF1C9866CA00F0AF47 /* encoder_disabled.c */; };
+		2DE47A151C9866CB00F0AF47 /* enquant.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479D01C9866CA00F0AF47 /* enquant.c */; };
+		2DE47A161C9866CB00F0AF47 /* fdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479D21C9866CA00F0AF47 /* fdct.c */; };
+		2DE47A171C9866CB00F0AF47 /* fragment.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479D31C9866CA00F0AF47 /* fragment.c */; };
+		2DE47A181C9866CB00F0AF47 /* huffdec.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479D41C9866CA00F0AF47 /* huffdec.c */; };
+		2DE47A191C9866CB00F0AF47 /* huffenc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479D61C9866CA00F0AF47 /* huffenc.c */; };
+		2DE47A1A1C9866CB00F0AF47 /* idct.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479D91C9866CA00F0AF47 /* idct.c */; };
+		2DE47A1B1C9866CB00F0AF47 /* info.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479DA1C9866CA00F0AF47 /* info.c */; };
+		2DE47A1C1C9866CB00F0AF47 /* internal.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479DB1C9866CA00F0AF47 /* internal.c */; };
+		2DE47A1D1C9866CB00F0AF47 /* mathops.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479DF1C9866CA00F0AF47 /* mathops.c */; };
+		2DE47A1E1C9866CB00F0AF47 /* mcenc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479E11C9866CA00F0AF47 /* mcenc.c */; };
+		2DE47A1F1C9866CB00F0AF47 /* quant.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479E41C9866CA00F0AF47 /* quant.c */; };
+		2DE47A201C9866CB00F0AF47 /* rate.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479E61C9866CA00F0AF47 /* rate.c */; };
+		2DE47A211C9866CB00F0AF47 /* state.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479E71C9866CA00F0AF47 /* state.c */; };
+		2DE47A251C9866CB00F0AF47 /* tokenize.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479EB1C9866CA00F0AF47 /* tokenize.c */; };
+		2DE47A261C9866CB00F0AF47 /* mmxencfrag.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479F01C9866CA00F0AF47 /* mmxencfrag.c */; };
+		2DE47A271C9866CB00F0AF47 /* mmxfdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479F11C9866CA00F0AF47 /* mmxfdct.c */; };
+		2DE47A281C9866CB00F0AF47 /* mmxfrag.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479F21C9866CA00F0AF47 /* mmxfrag.c */; };
+		2DE47A291C9866CB00F0AF47 /* mmxidct.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479F41C9866CA00F0AF47 /* mmxidct.c */; };
+		2DE47A2A1C9866CB00F0AF47 /* mmxstate.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479F61C9866CA00F0AF47 /* mmxstate.c */; };
+		2DE47A2B1C9866CB00F0AF47 /* sse2fdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479F71C9866CA00F0AF47 /* sse2fdct.c */; };
+		2DE47A2C1C9866CB00F0AF47 /* x86enc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479F81C9866CA00F0AF47 /* x86enc.c */; };
+		2DE47A2D1C9866CB00F0AF47 /* x86state.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479FB1C9866CB00F0AF47 /* x86state.c */; };
+		2DE47A2E1C9866CB00F0AF47 /* mmxencfrag.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479FD1C9866CB00F0AF47 /* mmxencfrag.c */; };
+		2DE47A2F1C9866CB00F0AF47 /* mmxfdct.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479FE1C9866CB00F0AF47 /* mmxfdct.c */; };
+		2DE47A301C9866CB00F0AF47 /* mmxfrag.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE479FF1C9866CB00F0AF47 /* mmxfrag.c */; };
+		2DE47A311C9866CB00F0AF47 /* mmxidct.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE47A011C9866CB00F0AF47 /* mmxidct.c */; };
+		2DE47A321C9866CB00F0AF47 /* mmxstate.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE47A031C9866CB00F0AF47 /* mmxstate.c */; };
+		2DE47A331C9866CB00F0AF47 /* x86enc.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE47A041C9866CB00F0AF47 /* x86enc.c */; };
+		2DE47A341C9866CB00F0AF47 /* x86state.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DE47A071C9866CB00F0AF47 /* x86state.c */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		2D05DFC51C735EA6007710F9 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -20,6 +65,74 @@
 
 /* Begin PBXFileReference section */
 		2D05DFC71C735EA6007710F9 /* libtheora.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libtheora.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		2DE479BC1C9866CA00F0AF47 /* analyze.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = analyze.c; path = ../../src/libtheora/lib/analyze.c; sourceTree = SOURCE_ROOT; };
+		2DE479BD1C9866CA00F0AF47 /* apiwrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = apiwrapper.c; path = ../../src/libtheora/lib/apiwrapper.c; sourceTree = SOURCE_ROOT; };
+		2DE479BE1C9866CA00F0AF47 /* apiwrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = apiwrapper.h; path = ../../src/libtheora/lib/apiwrapper.h; sourceTree = SOURCE_ROOT; };
+		2DE479BF1C9866CA00F0AF47 /* bitpack.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = bitpack.c; path = ../../src/libtheora/lib/bitpack.c; sourceTree = SOURCE_ROOT; };
+		2DE479C01C9866CA00F0AF47 /* bitpack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bitpack.h; path = ../../src/libtheora/lib/bitpack.h; sourceTree = SOURCE_ROOT; };
+		2DE479C11C9866CA00F0AF47 /* cpu.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cpu.c; path = ../../src/libtheora/lib/cpu.c; sourceTree = SOURCE_ROOT; };
+		2DE479C21C9866CA00F0AF47 /* cpu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = cpu.h; path = ../../src/libtheora/lib/cpu.h; sourceTree = SOURCE_ROOT; };
+		2DE479C31C9866CA00F0AF47 /* dct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dct.h; path = ../../src/libtheora/lib/dct.h; sourceTree = SOURCE_ROOT; };
+		2DE479C41C9866CA00F0AF47 /* decapiwrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = decapiwrapper.c; path = ../../src/libtheora/lib/decapiwrapper.c; sourceTree = SOURCE_ROOT; };
+		2DE479C51C9866CA00F0AF47 /* decinfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = decinfo.c; path = ../../src/libtheora/lib/decinfo.c; sourceTree = SOURCE_ROOT; };
+		2DE479C61C9866CA00F0AF47 /* decint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = decint.h; path = ../../src/libtheora/lib/decint.h; sourceTree = SOURCE_ROOT; };
+		2DE479C71C9866CA00F0AF47 /* decode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = decode.c; path = ../../src/libtheora/lib/decode.c; sourceTree = SOURCE_ROOT; };
+		2DE479C81C9866CA00F0AF47 /* dequant.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dequant.c; path = ../../src/libtheora/lib/dequant.c; sourceTree = SOURCE_ROOT; };
+		2DE479C91C9866CA00F0AF47 /* dequant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dequant.h; path = ../../src/libtheora/lib/dequant.h; sourceTree = SOURCE_ROOT; };
+		2DE479CA1C9866CA00F0AF47 /* encapiwrapper.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = encapiwrapper.c; path = ../../src/libtheora/lib/encapiwrapper.c; sourceTree = SOURCE_ROOT; };
+		2DE479CB1C9866CA00F0AF47 /* encfrag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = encfrag.c; path = ../../src/libtheora/lib/encfrag.c; sourceTree = SOURCE_ROOT; };
+		2DE479CC1C9866CA00F0AF47 /* encinfo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = encinfo.c; path = ../../src/libtheora/lib/encinfo.c; sourceTree = SOURCE_ROOT; };
+		2DE479CD1C9866CA00F0AF47 /* encint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = encint.h; path = ../../src/libtheora/lib/encint.h; sourceTree = SOURCE_ROOT; };
+		2DE479CE1C9866CA00F0AF47 /* encode.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = encode.c; path = ../../src/libtheora/lib/encode.c; sourceTree = SOURCE_ROOT; };
+		2DE479CF1C9866CA00F0AF47 /* encoder_disabled.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = encoder_disabled.c; path = ../../src/libtheora/lib/encoder_disabled.c; sourceTree = SOURCE_ROOT; };
+		2DE479D01C9866CA00F0AF47 /* enquant.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = enquant.c; path = ../../src/libtheora/lib/enquant.c; sourceTree = SOURCE_ROOT; };
+		2DE479D11C9866CA00F0AF47 /* enquant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = enquant.h; path = ../../src/libtheora/lib/enquant.h; sourceTree = SOURCE_ROOT; };
+		2DE479D21C9866CA00F0AF47 /* fdct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fdct.c; path = ../../src/libtheora/lib/fdct.c; sourceTree = SOURCE_ROOT; };
+		2DE479D31C9866CA00F0AF47 /* fragment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fragment.c; path = ../../src/libtheora/lib/fragment.c; sourceTree = SOURCE_ROOT; };
+		2DE479D41C9866CA00F0AF47 /* huffdec.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = huffdec.c; path = ../../src/libtheora/lib/huffdec.c; sourceTree = SOURCE_ROOT; };
+		2DE479D51C9866CA00F0AF47 /* huffdec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = huffdec.h; path = ../../src/libtheora/lib/huffdec.h; sourceTree = SOURCE_ROOT; };
+		2DE479D61C9866CA00F0AF47 /* huffenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = huffenc.c; path = ../../src/libtheora/lib/huffenc.c; sourceTree = SOURCE_ROOT; };
+		2DE479D71C9866CA00F0AF47 /* huffenc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = huffenc.h; path = ../../src/libtheora/lib/huffenc.h; sourceTree = SOURCE_ROOT; };
+		2DE479D81C9866CA00F0AF47 /* huffman.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = huffman.h; path = ../../src/libtheora/lib/huffman.h; sourceTree = SOURCE_ROOT; };
+		2DE479D91C9866CA00F0AF47 /* idct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = idct.c; path = ../../src/libtheora/lib/idct.c; sourceTree = SOURCE_ROOT; };
+		2DE479DA1C9866CA00F0AF47 /* info.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = info.c; path = ../../src/libtheora/lib/info.c; sourceTree = SOURCE_ROOT; };
+		2DE479DB1C9866CA00F0AF47 /* internal.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = internal.c; path = ../../src/libtheora/lib/internal.c; sourceTree = SOURCE_ROOT; };
+		2DE479DC1C9866CA00F0AF47 /* internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = internal.h; path = ../../src/libtheora/lib/internal.h; sourceTree = SOURCE_ROOT; };
+		2DE479DD1C9866CA00F0AF47 /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Makefile.am; path = ../../src/libtheora/lib/Makefile.am; sourceTree = SOURCE_ROOT; };
+		2DE479DE1C9866CA00F0AF47 /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Makefile.in; path = ../../src/libtheora/lib/Makefile.in; sourceTree = SOURCE_ROOT; };
+		2DE479DF1C9866CA00F0AF47 /* mathops.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mathops.c; path = ../../src/libtheora/lib/mathops.c; sourceTree = SOURCE_ROOT; };
+		2DE479E01C9866CA00F0AF47 /* mathops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = mathops.h; path = ../../src/libtheora/lib/mathops.h; sourceTree = SOURCE_ROOT; };
+		2DE479E11C9866CA00F0AF47 /* mcenc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = mcenc.c; path = ../../src/libtheora/lib/mcenc.c; sourceTree = SOURCE_ROOT; };
+		2DE479E21C9866CA00F0AF47 /* modedec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = modedec.h; path = ../../src/libtheora/lib/modedec.h; sourceTree = SOURCE_ROOT; };
+		2DE479E31C9866CA00F0AF47 /* ocintrin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ocintrin.h; path = ../../src/libtheora/lib/ocintrin.h; sourceTree = SOURCE_ROOT; };
+		2DE479E41C9866CA00F0AF47 /* quant.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = quant.c; path = ../../src/libtheora/lib/quant.c; sourceTree = SOURCE_ROOT; };
+		2DE479E51C9866CA00F0AF47 /* quant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = quant.h; path = ../../src/libtheora/lib/quant.h; sourceTree = SOURCE_ROOT; };
+		2DE479E61C9866CA00F0AF47 /* rate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = rate.c; path = ../../src/libtheora/lib/rate.c; sourceTree = SOURCE_ROOT; };
+		2DE479E71C9866CA00F0AF47 /* state.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = state.c; path = ../../src/libtheora/lib/state.c; sourceTree = SOURCE_ROOT; };
+		2DE479EB1C9866CA00F0AF47 /* tokenize.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tokenize.c; path = ../../src/libtheora/lib/tokenize.c; sourceTree = SOURCE_ROOT; };
+		2DE479F01C9866CA00F0AF47 /* mmxencfrag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmxencfrag.c; sourceTree = "<group>"; };
+		2DE479F11C9866CA00F0AF47 /* mmxfdct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmxfdct.c; sourceTree = "<group>"; };
+		2DE479F21C9866CA00F0AF47 /* mmxfrag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmxfrag.c; sourceTree = "<group>"; };
+		2DE479F31C9866CA00F0AF47 /* mmxfrag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmxfrag.h; sourceTree = "<group>"; };
+		2DE479F41C9866CA00F0AF47 /* mmxidct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmxidct.c; sourceTree = "<group>"; };
+		2DE479F51C9866CA00F0AF47 /* mmxloop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmxloop.h; sourceTree = "<group>"; };
+		2DE479F61C9866CA00F0AF47 /* mmxstate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmxstate.c; sourceTree = "<group>"; };
+		2DE479F71C9866CA00F0AF47 /* sse2fdct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = sse2fdct.c; sourceTree = "<group>"; };
+		2DE479F81C9866CA00F0AF47 /* x86enc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = x86enc.c; sourceTree = "<group>"; };
+		2DE479F91C9866CA00F0AF47 /* x86enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x86enc.h; sourceTree = "<group>"; };
+		2DE479FA1C9866CA00F0AF47 /* x86int.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x86int.h; sourceTree = "<group>"; };
+		2DE479FB1C9866CB00F0AF47 /* x86state.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = x86state.c; sourceTree = "<group>"; };
+		2DE479FD1C9866CB00F0AF47 /* mmxencfrag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmxencfrag.c; sourceTree = "<group>"; };
+		2DE479FE1C9866CB00F0AF47 /* mmxfdct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmxfdct.c; sourceTree = "<group>"; };
+		2DE479FF1C9866CB00F0AF47 /* mmxfrag.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmxfrag.c; sourceTree = "<group>"; };
+		2DE47A001C9866CB00F0AF47 /* mmxfrag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmxfrag.h; sourceTree = "<group>"; };
+		2DE47A011C9866CB00F0AF47 /* mmxidct.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmxidct.c; sourceTree = "<group>"; };
+		2DE47A021C9866CB00F0AF47 /* mmxloop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = mmxloop.h; sourceTree = "<group>"; };
+		2DE47A031C9866CB00F0AF47 /* mmxstate.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = mmxstate.c; sourceTree = "<group>"; };
+		2DE47A041C9866CB00F0AF47 /* x86enc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = x86enc.c; sourceTree = "<group>"; };
+		2DE47A051C9866CB00F0AF47 /* x86enc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x86enc.h; sourceTree = "<group>"; };
+		2DE47A061C9866CB00F0AF47 /* x86int.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = x86int.h; sourceTree = "<group>"; };
+		2DE47A071C9866CB00F0AF47 /* x86state.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = x86state.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +165,101 @@
 		2D05DFC91C735EA6007710F9 /* libTheora */ = {
 			isa = PBXGroup;
 			children = (
+				2DE479BB1C9866CA00F0AF47 /* lib */,
 			);
 			path = libTheora;
+			sourceTree = "<group>";
+		};
+		2DE479BB1C9866CA00F0AF47 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				2DE479BC1C9866CA00F0AF47 /* analyze.c */,
+				2DE479BD1C9866CA00F0AF47 /* apiwrapper.c */,
+				2DE479BE1C9866CA00F0AF47 /* apiwrapper.h */,
+				2DE479BF1C9866CA00F0AF47 /* bitpack.c */,
+				2DE479C01C9866CA00F0AF47 /* bitpack.h */,
+				2DE479C11C9866CA00F0AF47 /* cpu.c */,
+				2DE479C21C9866CA00F0AF47 /* cpu.h */,
+				2DE479C31C9866CA00F0AF47 /* dct.h */,
+				2DE479C41C9866CA00F0AF47 /* decapiwrapper.c */,
+				2DE479C51C9866CA00F0AF47 /* decinfo.c */,
+				2DE479C61C9866CA00F0AF47 /* decint.h */,
+				2DE479C71C9866CA00F0AF47 /* decode.c */,
+				2DE479C81C9866CA00F0AF47 /* dequant.c */,
+				2DE479C91C9866CA00F0AF47 /* dequant.h */,
+				2DE479CA1C9866CA00F0AF47 /* encapiwrapper.c */,
+				2DE479CB1C9866CA00F0AF47 /* encfrag.c */,
+				2DE479CC1C9866CA00F0AF47 /* encinfo.c */,
+				2DE479CD1C9866CA00F0AF47 /* encint.h */,
+				2DE479CE1C9866CA00F0AF47 /* encode.c */,
+				2DE479CF1C9866CA00F0AF47 /* encoder_disabled.c */,
+				2DE479D01C9866CA00F0AF47 /* enquant.c */,
+				2DE479D11C9866CA00F0AF47 /* enquant.h */,
+				2DE479D21C9866CA00F0AF47 /* fdct.c */,
+				2DE479D31C9866CA00F0AF47 /* fragment.c */,
+				2DE479D41C9866CA00F0AF47 /* huffdec.c */,
+				2DE479D51C9866CA00F0AF47 /* huffdec.h */,
+				2DE479D61C9866CA00F0AF47 /* huffenc.c */,
+				2DE479D71C9866CA00F0AF47 /* huffenc.h */,
+				2DE479D81C9866CA00F0AF47 /* huffman.h */,
+				2DE479D91C9866CA00F0AF47 /* idct.c */,
+				2DE479DA1C9866CA00F0AF47 /* info.c */,
+				2DE479DB1C9866CA00F0AF47 /* internal.c */,
+				2DE479DC1C9866CA00F0AF47 /* internal.h */,
+				2DE479DD1C9866CA00F0AF47 /* Makefile.am */,
+				2DE479DE1C9866CA00F0AF47 /* Makefile.in */,
+				2DE479DF1C9866CA00F0AF47 /* mathops.c */,
+				2DE479E01C9866CA00F0AF47 /* mathops.h */,
+				2DE479E11C9866CA00F0AF47 /* mcenc.c */,
+				2DE479E21C9866CA00F0AF47 /* modedec.h */,
+				2DE479E31C9866CA00F0AF47 /* ocintrin.h */,
+				2DE479E41C9866CA00F0AF47 /* quant.c */,
+				2DE479E51C9866CA00F0AF47 /* quant.h */,
+				2DE479E61C9866CA00F0AF47 /* rate.c */,
+				2DE479E71C9866CA00F0AF47 /* state.c */,
+				2DE479EB1C9866CA00F0AF47 /* tokenize.c */,
+				2DE479EF1C9866CA00F0AF47 /* x86 */,
+				2DE479FC1C9866CB00F0AF47 /* x86_vc */,
+			);
+			name = lib;
+			path = ../../../src/libtheora/lib;
+			sourceTree = "<group>";
+		};
+		2DE479EF1C9866CA00F0AF47 /* x86 */ = {
+			isa = PBXGroup;
+			children = (
+				2DE479F01C9866CA00F0AF47 /* mmxencfrag.c */,
+				2DE479F11C9866CA00F0AF47 /* mmxfdct.c */,
+				2DE479F21C9866CA00F0AF47 /* mmxfrag.c */,
+				2DE479F31C9866CA00F0AF47 /* mmxfrag.h */,
+				2DE479F41C9866CA00F0AF47 /* mmxidct.c */,
+				2DE479F51C9866CA00F0AF47 /* mmxloop.h */,
+				2DE479F61C9866CA00F0AF47 /* mmxstate.c */,
+				2DE479F71C9866CA00F0AF47 /* sse2fdct.c */,
+				2DE479F81C9866CA00F0AF47 /* x86enc.c */,
+				2DE479F91C9866CA00F0AF47 /* x86enc.h */,
+				2DE479FA1C9866CA00F0AF47 /* x86int.h */,
+				2DE479FB1C9866CB00F0AF47 /* x86state.c */,
+			);
+			path = x86;
+			sourceTree = "<group>";
+		};
+		2DE479FC1C9866CB00F0AF47 /* x86_vc */ = {
+			isa = PBXGroup;
+			children = (
+				2DE479FD1C9866CB00F0AF47 /* mmxencfrag.c */,
+				2DE479FE1C9866CB00F0AF47 /* mmxfdct.c */,
+				2DE479FF1C9866CB00F0AF47 /* mmxfrag.c */,
+				2DE47A001C9866CB00F0AF47 /* mmxfrag.h */,
+				2DE47A011C9866CB00F0AF47 /* mmxidct.c */,
+				2DE47A021C9866CB00F0AF47 /* mmxloop.h */,
+				2DE47A031C9866CB00F0AF47 /* mmxstate.c */,
+				2DE47A041C9866CB00F0AF47 /* x86enc.c */,
+				2DE47A051C9866CB00F0AF47 /* x86enc.h */,
+				2DE47A061C9866CB00F0AF47 /* x86int.h */,
+				2DE47A071C9866CB00F0AF47 /* x86state.c */,
+			);
+			path = x86_vc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -112,6 +318,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DE47A251C9866CB00F0AF47 /* tokenize.c in Sources */,
+				2DE47A331C9866CB00F0AF47 /* x86enc.c in Sources */,
+				2DE47A341C9866CB00F0AF47 /* x86state.c in Sources */,
+				2DE47A2B1C9866CB00F0AF47 /* sse2fdct.c in Sources */,
+				2DE47A151C9866CB00F0AF47 /* enquant.c in Sources */,
+				2DE47A1A1C9866CB00F0AF47 /* idct.c in Sources */,
+				2DE47A191C9866CB00F0AF47 /* huffenc.c in Sources */,
+				2DE47A181C9866CB00F0AF47 /* huffdec.c in Sources */,
+				2DE47A0C1C9866CB00F0AF47 /* decapiwrapper.c in Sources */,
+				2DE47A091C9866CB00F0AF47 /* apiwrapper.c in Sources */,
+				2DE47A081C9866CB00F0AF47 /* analyze.c in Sources */,
+				2DE47A101C9866CB00F0AF47 /* encapiwrapper.c in Sources */,
+				2DE47A0E1C9866CB00F0AF47 /* decode.c in Sources */,
+				2DE47A1F1C9866CB00F0AF47 /* quant.c in Sources */,
+				2DE47A261C9866CB00F0AF47 /* mmxencfrag.c in Sources */,
+				2DE47A271C9866CB00F0AF47 /* mmxfdct.c in Sources */,
+				2DE47A0F1C9866CB00F0AF47 /* dequant.c in Sources */,
+				2DE47A211C9866CB00F0AF47 /* state.c in Sources */,
+				2DE47A111C9866CB00F0AF47 /* encfrag.c in Sources */,
+				2DE47A131C9866CB00F0AF47 /* encode.c in Sources */,
+				2DE47A0B1C9866CB00F0AF47 /* cpu.c in Sources */,
+				2DE47A2D1C9866CB00F0AF47 /* x86state.c in Sources */,
+				2DE47A2A1C9866CB00F0AF47 /* mmxstate.c in Sources */,
+				2DE47A2C1C9866CB00F0AF47 /* x86enc.c in Sources */,
+				2DE47A161C9866CB00F0AF47 /* fdct.c in Sources */,
+				2DE47A1C1C9866CB00F0AF47 /* internal.c in Sources */,
+				2DE47A1E1C9866CB00F0AF47 /* mcenc.c in Sources */,
+				2DE47A0D1C9866CB00F0AF47 /* decinfo.c in Sources */,
+				2DE47A321C9866CB00F0AF47 /* mmxstate.c in Sources */,
+				2DE47A2E1C9866CB00F0AF47 /* mmxencfrag.c in Sources */,
+				2DE47A1B1C9866CB00F0AF47 /* info.c in Sources */,
+				2DE47A121C9866CB00F0AF47 /* encinfo.c in Sources */,
+				2DE47A201C9866CB00F0AF47 /* rate.c in Sources */,
+				2DE47A311C9866CB00F0AF47 /* mmxidct.c in Sources */,
+				2DE47A301C9866CB00F0AF47 /* mmxfrag.c in Sources */,
+				2DE47A291C9866CB00F0AF47 /* mmxidct.c in Sources */,
+				2DE47A141C9866CB00F0AF47 /* encoder_disabled.c in Sources */,
+				2DE47A281C9866CB00F0AF47 /* mmxfrag.c in Sources */,
+				2DE47A0A1C9866CB00F0AF47 /* bitpack.c in Sources */,
+				2DE47A2F1C9866CB00F0AF47 /* mmxfdct.c in Sources */,
+				2DE47A1D1C9866CB00F0AF47 /* mathops.c in Sources */,
+				2DE47A171C9866CB00F0AF47 /* fragment.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,15 +396,39 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_MISSING_PARENTHESES = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$SRCROOT/../../src/libtheora\"",
+					"\"$SRCROOT/../../src/libtheora/include\"",
+					"\"$SRCROOT/../../src/libogg/include\"",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CFLAGS = (
+					"-Wno-shift-op-parentheses",
+					"-DTHEORA_DISABLE_ENCODE",
+					"-DSTDC_HEADERS=1",
+					"-DHAVE_UNISTD_H=1",
+					"-DHAVE_STDINT_H=1",
+				);
+				"OTHER_CFLAGS[sdk=iphonesimulator*]" = (
+					"-Wno-shift-op-parentheses",
+					"-DTHEORA_DISABLE_ENCODE",
+					"-DSTDC_HEADERS=1",
+					"-DHAVE_UNISTD_H=1",
+					"-DHAVE_STDINT_H=1",
+					"-m32",
+					"-mtune=atom",
+					"-mssse3",
+					"-mfpmath=sse",
+				);
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -185,14 +457,38 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_MISSING_PARENTHESES = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"\"$SRCROOT/../../src/libtheora\"",
+					"\"$SRCROOT/../../src/libtheora/include\"",
+					"\"$SRCROOT/../../src/libogg/include\"",
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = (
+					"-Wno-shift-op-parentheses",
+					"-DTHEORA_DISABLE_ENCODE",
+					"-DSTDC_HEADERS=1",
+					"-DHAVE_UNISTD_H=1",
+					"-DHAVE_STDINT_H=1",
+				);
+				"OTHER_CFLAGS[sdk=iphonesimulator*]" = (
+					"-Wno-shift-op-parentheses",
+					"-DTHEORA_DISABLE_ENCODE",
+					"-DSTDC_HEADERS=1",
+					"-DHAVE_UNISTD_H=1",
+					"-DHAVE_STDINT_H=1",
+					"-m32",
+					"-mtune=atom",
+					"-mssse3",
+					"-mfpmath=sse",
+				);
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

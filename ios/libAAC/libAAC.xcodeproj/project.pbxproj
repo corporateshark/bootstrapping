@@ -701,6 +701,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
+					"-DFDK_HIGH_PERFORMANCE",
 					"-Wno-unsequenced",
 					"-Wno-deprecated-register",
 					"-Wno-c++11-narrowing",

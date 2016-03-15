@@ -800,7 +800,6 @@
 				);
 				"OTHER_CFLAGS[sdk=iphoneos*]" = (
 					"-ffast-math",
-					"-mfpu=neon",
 					"-DMP4V2_USE_STATIC_LIB",
 					"-Wno-c++11-narrowing",
 					"-Wno-reserved-user-defined-literal",
@@ -859,7 +858,6 @@
 				);
 				"OTHER_CFLAGS[sdk=iphoneos*]" = (
 					"-ffast-math",
-					"-mfpu=neon",
 					"-DMP4V2_USE_STATIC_LIB",
 					"-Wno-c++11-narrowing",
 					"-Wno-reserved-user-defined-literal",

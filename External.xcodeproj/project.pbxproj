@@ -227,6 +227,27 @@
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = zxing;
 		};
+		2DE479B01C98665700F0AF47 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D4047391C973901000671CF /* libMp4v2.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D05DFDB1C735ED9007710F9;
+			remoteInfo = mp4v2;
+		};
+		2DE479B21C98665700F0AF47 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E0511C7363A1007710F9 /* libaac.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D05E02F1C735F84007710F9;
+			remoteInfo = aac;
+		};
+		2DE47A351C9868D300F0AF47 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2D05E05D1C7363A1007710F9 /* libTheora.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 2D05DFC61C735EA6007710F9;
+			remoteInfo = theora;
+		};
 		2DF399A41BC69C890086A34D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2DF399A01BC69C890086A34D /* id3v2lib.xcodeproj */;
@@ -581,6 +602,9 @@
 			buildRules = (
 			);
 			dependencies = (
+				2DE47A361C9868D300F0AF47 /* PBXTargetDependency */,
+				2DE479B11C98665700F0AF47 /* PBXTargetDependency */,
+				2DE479B31C98665700F0AF47 /* PBXTargetDependency */,
 				4C0DF9B81C7E32E00032CE1F /* PBXTargetDependency */,
 				2DE3504A1BD6482A00FF178A /* PBXTargetDependency */,
 				2DF399B81BC69CEC0086A34D /* PBXTargetDependency */,
@@ -917,6 +941,21 @@
 			isa = PBXTargetDependency;
 			name = zxing;
 			targetProxy = 2DE350491BD6482A00FF178A /* PBXContainerItemProxy */;
+		};
+		2DE479B11C98665700F0AF47 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = mp4v2;
+			targetProxy = 2DE479B01C98665700F0AF47 /* PBXContainerItemProxy */;
+		};
+		2DE479B31C98665700F0AF47 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = aac;
+			targetProxy = 2DE479B21C98665700F0AF47 /* PBXContainerItemProxy */;
+		};
+		2DE47A361C9868D300F0AF47 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = theora;
+			targetProxy = 2DE47A351C9868D300F0AF47 /* PBXContainerItemProxy */;
 		};
 		2DF399B81BC69CEC0086A34D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
