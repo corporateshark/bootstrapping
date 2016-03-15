@@ -886,6 +886,7 @@
 					"\"$SRCROOT/../../src/mp4v2\"",
 					"\"$SRCROOT/../../src/mp4v2/include\"",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -901,6 +902,7 @@
 					"\"$SRCROOT/../../src/mp4v2\"",
 					"\"$SRCROOT/../../src/mp4v2/include\"",
 				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
