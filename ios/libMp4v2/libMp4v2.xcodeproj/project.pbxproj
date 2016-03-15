@@ -880,6 +880,8 @@
 		2D05DFE61C735ED9007710F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				HEADER_SEARCH_PATHS = (
 					"\"$SRCROOT/../../src/mp4v2\"",
 					"\"$SRCROOT/../../src/mp4v2/include\"",
@@ -893,6 +895,8 @@
 		2D05DFE71C735ED9007710F9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
 				HEADER_SEARCH_PATHS = (
 					"\"$SRCROOT/../../src/mp4v2\"",
 					"\"$SRCROOT/../../src/mp4v2/include\"",

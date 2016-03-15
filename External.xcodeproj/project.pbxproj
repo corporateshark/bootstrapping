@@ -20,6 +20,9 @@
 		2D60DBA81B862384001C431F /* libOGG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB6B1B861F07001C431F /* libOGG.a */; };
 		2D60DCFE1B8DC7D8001C431F /* libVorbis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB711B861F07001C431F /* libVorbis.a */; };
 		2DE350471BD6482200FF178A /* libzxing.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D60DB771B861F07001C431F /* libzxing.a */; };
+		2DE47ADE1C9873B900F0AF47 /* libaac.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E0681C7363A2007710F9 /* libaac.a */; };
+		2DE47ADF1C9873B900F0AF47 /* libmp4v2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D40473E1C973902000671CF /* libmp4v2.a */; };
+		2DE47AE41C9873BF00F0AF47 /* libtheora.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D05E0751C7363A2007710F9 /* libtheora.a */; };
 		2DF399B91BC69E240086A34D /* libid3v2lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DF399A51BC69C890086A34D /* libid3v2lib.a */; };
 /* End PBXBuildFile section */
 
@@ -338,6 +341,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2DE47AE41C9873BF00F0AF47 /* libtheora.a in Frameworks */,
+				2DE47ADE1C9873B900F0AF47 /* libaac.a in Frameworks */,
+				2DE47ADF1C9873B900F0AF47 /* libmp4v2.a in Frameworks */,
 				2DE350471BD6482200FF178A /* libzxing.a in Frameworks */,
 				2DF399B91BC69E240086A34D /* libid3v2lib.a in Frameworks */,
 				2D5CFD581B95CF2D00303A20 /* libFreetype2.a in Frameworks */,
