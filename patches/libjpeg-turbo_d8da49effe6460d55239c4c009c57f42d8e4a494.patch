@@ -1,3 +1,21 @@
+diff --exclude=.git --exclude=.hg -rupN ./src/libjpeg-turbo/simd/jsimd_arm64_neon.S ./src/libjpeg-turbo_patched/simd/jsimd_arm64_neon.S
+--- ./src/libjpeg-turbo/simd/jsimd_arm64_neon.S	2016-03-16 14:20:59.000000000 +0000
++++ ./src/libjpeg-turbo_patched/simd/jsimd_arm64_neon.S	2016-03-16 14:20:59.000000000 +0000
+@@ -30,7 +30,13 @@
+ #endif
+
+ .text
+-.arch armv8-a+fp+simd
++//  16 Mar 2016, Steve Madsen, Blippar, London UK
++//  Commented out due to build error w/clang in latest NDK bundle
++//      jni/../../../../External/android/../src/libjpeg-turbo/simd/jsimd_arm64_neon.S:33:1: error: unknown directive
++//      .arch armv8-a+fp+simd
++//  Refs
++//      https://github.com/libjpeg-turbo/libjpeg-turbo/issues/33
++//.arch armv8-a+fp+simd
+
+
+ #define RESPECT_STRICT_ALIGNMENT 1
 diff --exclude=.git --exclude=.hg -rupN ./src/libjpeg-turbo/include_android/jconfig.h ./src/libjpeg-turbo_patched/include_android/jconfig.h
 --- ./src/libjpeg-turbo/include_android/jconfig.h	1970-01-01 01:00:00.000000000 +0100
 +++ ./src/libjpeg-turbo_patched/include_android/jconfig.h	2016-02-29 15:57:47.000000000 +0100
