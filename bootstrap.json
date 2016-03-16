@@ -212,18 +212,6 @@
     }
 },
 {
-    "name": "libtremolo",
-    "source": {
-        "type": "archive",
-        "url": "http://wss.co.uk/pinknoise/tremolo/Tremolo008.zip",
-        "sha1": "b12e3f31153b8ff82fcc8475cc0da9817abb28d6"
-    },
-    "postprocess": {
-        "type": "patch",
-        "file": "libtremolo_b12e3f31153b8ff82fcc8475cc0da9817abb28d6.patch"
-    }
-},
-{
     "name": "libogg",
     "source": {
         "type": "archive",
