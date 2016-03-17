@@ -45,14 +45,22 @@ echo "IPHONEOS_DEPLOYMENT_TARGET=$IPHONEOS_DEPLOYMENT_TARGET"
 echo "PLATFORM=$PLATFORM"
 echo "HEADER_DIR=$HEADER_DIR"
 
+glibtoolize --version >/dev/null 2>&1 || { echo "error: glibtoolize is required but it's not installed.  Aborting." >&2; exit 1; }
+automake --version >/dev/null 2>&1 || { echo "error: automake is required but it's not installed.  Aborting." >&2; exit 1; }
+autoconf --version >/dev/null 2>&1 || { echo "error: autoconf is required but it's not installed.  Aborting." >&2; exit 1; }
+
 if [ "$ACTION" == "build" ];
 then
-	if [ -f $INSTALLDIR/$PRODUCT_NAME.a ];
+	if [ -f "$INSTALLDIR/$PRODUCT_NAME.a" ];
 	then
-	echo "Not building since file already exists at $INSTALLDIR/$PRODUCT_NAME.a. Please clean to rebuild"
-	lipo -info $INSTALLDIR/$PRODUCT_NAME.a
-	exit 0
-	fi
+
+    echo "Not building since file already exists at $INSTALLDIR/$PRODUCT_NAME.a. Please clean to rebuild"
+
+	lipo -info "$INSTALLDIR/$PRODUCT_NAME.a"
+
+    exit 0
+
+    fi
 fi
 
 # some useful variables
@@ -75,22 +83,29 @@ fi
 function clean()
 {
   echo "Cleaning.."
+
   if [ -d "$BUILDDIRECTORY" ]; then
-    cd $BUILDDIRECTORY
+
+    cd "$BUILDDIRECTORY"
 
     set -x
 
     make distclean
 
     set +x
+
   fi
+
   if [ -d "$INSTALLDIRECTORY" ]; then
+
     rm -rf "$INSTALLDIRECTORY"
+
   fi
 }
 
 function autoreconfigure()
 {
+
   echo "AutoReconfiguring..."
 
   set -x
@@ -100,8 +115,11 @@ function autoreconfigure()
   set +x
 
   if [[ $? -ne 0 ]] ; then
+
     echo "Errors while running autoreconf. Exiting.."
+
     exit 1
+
   fi
 }
 
@@ -109,14 +127,14 @@ function configure()
 {
   echo "Configuring..."
    # We have to temporarily unset SDKROOT for configuration to go through
-  PREVIOUS_SDKROOT=$SDKROOT
+  PREVIOUS_SDKROOT="$SDKROOT"
   SDKROOT=""
   echo "Temporaily unsetting SDKROOT"
 
   set -x
 
-  (cd $BUILDDIRECTORY ;$SRCDIR/configure \
-    --prefix=$BUILDDIRECTORY \
+  (cd "$BUILDDIRECTORY" ; "$SRCDIR/configure" \
+    --prefix="$BUILDDIRECTORY" \
     --host "$HOST" \
     CC="$IOS_GCC" \
     LD="$IOS_GCC" \
@@ -132,7 +150,7 @@ function configure()
   fi
 
   echo "Setting SDKROOT Back to $PREVIOUS_SDKROOT"
-  SDKROOT=$PREVIOUS_SDKROOT
+  SDKROOT="$PREVIOUS_SDKROOT"
 }
 
 function build()
@@ -153,22 +171,23 @@ function build()
 }
 
 # add gas-preprocessor to PATH
-PATH=$EXTSRCDIR/gas-preprocessor:$PATH
+
+PATH="$EXTSRCDIR/gas-preprocessor":$PATH
 
 echo "OPTIMIZATION_LEVEL=$OPTIMIZATION_LEVEL"
 
-if [ "$ACTION" == "build" ];
+if [ "$ACTION" == "build" ] || [ "$ACTION" == "install" ]
 then
   # call autoreconf in source dir
-  cd $SRCDIR
+  cd "$SRCDIR"
   autoreconfigure
 fi
 
 # build for ARMv7
 
 arch="armv7"
-BUILDDIRECTORY=$BUILDDIR/$arch
-INSTALLDIRECTORY=$INSTALLDIR/$arch
+BUILDDIRECTORY="$BUILDDIR/$arch"
+INSTALLDIRECTORY="$INSTALLDIR/$arch"
 IOS_CFLAGS="-arch $arch $IPHONEOSVERSION"
 HOST="arm-apple-darwin10"
 CFLAGS="-mfloat-abi=softfp -isysroot $IOS_SYSROOT $OPTIMIZATION_LEVEL $IOS_CFLAGS"
@@ -177,50 +196,70 @@ CCASFLAGS="-no-integrated-as $IOS_CFLAGS"
 
 if [ "$ACTION" == "clean" ]
 then
+
   clean
-elif [ "$ACTION" == "build" ]
+
+elif [ "$ACTION" == "build" ] || [ "$ACTION" == "install" ]
 then
-  mkdir -p $BUILDDIRECTORY && cd $BUILDDIRECTORY 
+
+  mkdir -p "$BUILDDIRECTORY" && cd "$BUILDDIRECTORY"
+
   configure
+
   build
 
-  HEADER_COPY_DIR=${HEADER_DIR}/armv7
+  HEADER_COPY_DIR="${HEADER_DIR}/armv7"
+
   echo "Copying headers to ${HEADER_COPY_DIR}"
-  mkdir -p ${HEADER_COPY_DIR}
-  cp ${BUILDDIR}/armv7/include/*.h ${HEADER_COPY_DIR}/
+
+  mkdir -p "${HEADER_COPY_DIR}"
+
+  cp "${BUILDDIR}/armv7/include/"*.h "${HEADER_COPY_DIR}/"
 
 else
+
   echo "Unrecognized Action: $ACTION"
+
 fi
 
 # build for ARMv7s
 
-arch="armv7s"
-BUILDDIRECTORY=$BUILDDIR/$arch
-INSTALLDIRECTORY=$INSTALLDIR/$arch
-IOS_CFLAGS="-arch $arch $IPHONEOSVERSION"
-HOST="arm-apple-darwin10"
-CFLAGS="-mfloat-abi=softfp -isysroot $IOS_SYSROOT $OPTIMIZATION_LEVEL $IOS_CFLAGS"
-LDFLAGS="-mfloat-abi=softfp -isysroot $IOS_SYSROOT $IOS_CFLAGS"
-CCASFLAGS="-no-integrated-as $IOS_CFLAGS"
-
-if [ "$ACTION" == "clean" ]
-then
-  clean
-elif [ "$ACTION" == "build" ]
-then
-  mkdir -p $BUILDDIRECTORY && cd $BUILDDIRECTORY
-  configure
-  build
-
-  HEADER_COPY_DIR=${HEADER_DIR}/armv7s
-  echo "Copying headers to ${HEADER_COPY_DIR}"
-  mkdir -p ${HEADER_COPY_DIR}
-  cp ${BUILDDIR}/armv7s/include/*.h ${HEADER_COPY_DIR}/
-
-else
-  echo "Unrecognized Action: $ACTION"
-fi
+#arch="armv7s"
+#BUILDDIRECTORY="$BUILDDIR/$arch"
+#INSTALLDIRECTORY="$INSTALLDIR/$arch"
+#IOS_CFLAGS="-arch $arch $IPHONEOSVERSION"
+#HOST="arm-apple-darwin10"
+#CFLAGS="-mfloat-abi=softfp -isysroot $IOS_SYSROOT $OPTIMIZATION_LEVEL $IOS_CFLAGS"
+#LDFLAGS="-mfloat-abi=softfp -isysroot $IOS_SYSROOT $IOS_CFLAGS"
+#CCASFLAGS="-no-integrated-as $IOS_CFLAGS"
+#
+#if [ "$ACTION" == "clean" ]
+#then
+#
+#  clean
+#
+#elif [ "$ACTION" == "build" ] || [ "$ACTION" == "install" ]
+#then
+#
+#  mkdir -p $BUILDDIRECTORY && cd $BUILDDIRECTORY
+#
+#  configure
+#
+#  build
+#
+#  HEADER_COPY_DIR="${HEADER_DIR}/armv7s"
+#
+#  echo "Copying headers to ${HEADER_COPY_DIR}"
+#
+#  mkdir -p "${HEADER_COPY_DIR}"
+#
+#  cp "${BUILDDIR}/armv7s/include/"*.h "${HEADER_COPY_DIR}/"
+#
+#else
+#
+#  echo "Unrecognized Action: $ACTION"
+#
+#fi
 
 # build for ARMv8
 
@@ -235,17 +274,25 @@ CCASFLAGS=""
 
 if [ "$ACTION" == "clean" ]
 then
-  clean
-elif [ "$ACTION" == "build" ]
+
+    clean
+
+elif [ "$ACTION" == "build" ] || [ "$ACTION" == "install" ]
 then
-  mkdir -p $BUILDDIRECTORY && cd $BUILDDIRECTORY
+
+  mkdir -p "$BUILDDIRECTORY" && cd "$BUILDDIRECTORY"
+
   configure
+
   build
 
-  HEADER_COPY_DIR=${HEADER_DIR}/arm64
+  HEADER_COPY_DIR="${HEADER_DIR}/arm64"
+
   echo "Copying headers to ${HEADER_COPY_DIR}"
-  mkdir -p ${HEADER_COPY_DIR}
-  cp ${BUILDDIR}/arm64/include/*.h ${HEADER_COPY_DIR}/
+
+  mkdir -p "${HEADER_COPY_DIR}"
+
+  cp "${BUILDDIR}/arm64/include/"*.h "${HEADER_COPY_DIR}/"
 
 else
   echo "Unrecognized Action: $ACTION"
@@ -259,20 +306,28 @@ then
   echo "Removing Headers $HEADER_DIR"
 
   if [ -d "$HEADER_DIR" ]; then
+
     rm -rf "$HEADER_DIR"
+
   fi
 
   echo "Removing Universal Binaries"
-  rm -f $INSTALLDIR/*.a
 
-elif [ "$ACTION" == "build" ]
+  rm -f "$INSTALLDIR/*.a"
+
+elif [ "$ACTION" == "build" ] || [ "$ACTION" == "install" ]
 then
 
   echo "Creating Universal Binary"
+
   set -x
-  (cd $INSTALLDIR && lipo -create ${BUILDDIR}/arm64/lib/libturbojpeg.a ${BUILDDIR}/armv7/lib/libturbojpeg.a ${BUILDDIR}/armv7s/lib/libturbojpeg.a -o "$PRODUCT_NAME".a)
+
+  (cd "$INSTALLDIR" && lipo -create "${BUILDDIR}/arm64/lib/libturbojpeg.a" "${BUILDDIR}/armv7/lib/libturbojpeg.a" -o "$PRODUCT_NAME".a)
+
   set +x
+
   echo "BUILT PRODUCT: $INSTALLDIR/$PRODUCT_NAME.a"
+
 else
   echo "Unrecognized Action: $ACTION"
 fi

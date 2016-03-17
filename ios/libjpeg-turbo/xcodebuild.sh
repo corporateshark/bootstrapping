@@ -25,6 +25,11 @@ fi
 
 "$PROJECT_DIR"/build.sh "$CONFIGURATION_TEMP_DIR" "$CONFIGURATION_BUILD_DIR" "$ACTION" "$PRODUCT_NAME" "$CONFIGURATION" "$IPHONEOS_DEPLOYMENT_TARGET" "$PLATFORM" "$HEADER_DIR"
 
+if [[ $? -ne 0 ]] ; then
+    echo "Errors while running build. Exiting.."
+    exit 1
+fi
+
 if [[ "$CONFIGURATION_BUILD_DIR" == "$PROJECT_DIR"* ]] && [[ "$ACTION" == "build" ]]
 then
     # If the build is inside the source directory then create symbolic link in root external repository to make linking work
