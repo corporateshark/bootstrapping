@@ -8,6 +8,7 @@ cmake_minimum_required(VERSION 2.8)
 
 # Options
 option(FORCE_EXTERNAL "Force the use of libraries from external; don't use system versions" OFF)
+option(BOOTSTRAPPING "Bootstrap external libraries if needed" ON)
 
 #===================================================================================================
 
@@ -17,6 +18,50 @@ include(${EXTERNAL_ROOT}/macros.cmake)
 
 # Set where 'find_package()' should look
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${EXTERNAL_ROOT}/cmake/")
+
+#===================================================================================================
+
+# Macro to run external bootstrapping for a specific library (if not yet done)
+macro(bootstrap_library LIBRARY_TO_BOOTSTRAP)
+	if(BOOTSTRAPPING)
+		message(STATUS "Running the bootstrapping script to retrieve '${LIBRARY_TO_BOOTSTRAP}'...")
+		execute_process(
+				COMMAND python bootstrap.py -n ${LIBRARY_TO_BOOTSTRAP}
+				WORKING_DIRECTORY ${EXTERNAL_ROOT}
+				RESULT_VARIABLE BOOTSTRAP_RESULT
+		)
+		if(NOT ${BOOTSTRAP_RESULT} STREQUAL "0")
+			message(FATAL_ERROR "Bootstrapping failed.")
+		endif()
+	endif()
+endmacro()
+
+# Checks if there is an 'external_libraries.txt' file present. Note that these files are no longer
+# needed if the proper USE_LIBRARYNAME options are given: it will automatically boostrap the
+# necessary files.
+set(EXTERNAL_LIBRARIES_FILE "")
+if(EXISTS "${CMAKE_SOURCE_DIR}/external_libraries.txt")
+	set(EXTERNAL_LIBRARIES_FILE "${CMAKE_SOURCE_DIR}/external_libraries.txt")
+elseif(EXISTS "${CMAKE_SOURCE_DIR}/libs/external_libraries.txt")
+	set(EXTERNAL_LIBRARIES_FILE "${CMAKE_SOURCE_DIR}/libs/external_libraries.txt")
+endif()
+
+# If there is an 'external_libraries.txt' file present, bootstrap that file
+if(NOT ${EXTERNAL_LIBRARIES_FILE} STREQUAL "")
+	if(BOOTSTRAPPING)
+		message(STATUS "Running the external libraries bootstrapping script (might take a while the first time)...")
+		execute_process(
+				COMMAND python bootstrap.py -N ${EXTERNAL_LIBRARIES_FILE}
+				WORKING_DIRECTORY ${EXTERNAL_ROOT}
+				RESULT_VARIABLE BOOTSTRAP_RESULT
+		)
+		if(NOT ${BOOTSTRAP_RESULT} STREQUAL "0")
+			message(FATAL_ERROR "Bootstrapping failed.")
+		endif()
+	endif()
+endif()
+
+#===================================================================================================
 
 # Sets the default build type to release
 if(NOT CMAKE_BUILD_TYPE)
@@ -87,6 +132,7 @@ if(USE_LIBPNG)
 
 	# If not found, use the version from "external" instead
 	if(NOT PNG_FOUND)
+		bootstrap_library("libpng")
 		add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/cmake/png "png" EXCLUDE_FROM_ALL)
 		set(PNG_INCLUDE_DIRS ${EXTERNAL_ROOT}/src/libpng)
 		set(PNG_LIBRARIES "png")
@@ -101,6 +147,7 @@ endif()
 if(USE_LIBJPEG)
 	if(USE_LIBJPEG_TURBO)
 		# No 'find_package' for LIBJPEG_TURBO available, only looking in "external"
+		bootstrap_library("libjpeg-turbo")
 		add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/cmake/jpeg-turbo "jpeg-turbo" EXCLUDE_FROM_ALL)
 		set(JPEG_INCLUDE_DIR ${EXTERNAL_ROOT}/src/libjpeg-turbo ${EXTERNAL_ROOT}/src/libjpeg-turbo/include_x86_64 ${EXTERNAL_ROOT}/src/libjpeg-turbo/simd)
 		set(JPEG_LIBRARIES "jpeg-turbo")
@@ -121,6 +168,7 @@ if(USE_LIBJPEG)
 
 		# If not found, use the version from "external" instead
 		if(NOT JPEG_FOUND)
+			bootstrap_library("libjpeg")
 			add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/cmake/jpeg "jpeg" EXCLUDE_FROM_ALL)
 			set(JPEG_INCLUDE_DIR ${EXTERNAL_ROOT}/src/libjpeg)
 			set(JPEG_LIBRARIES "jpeg")
@@ -141,6 +189,7 @@ if(USE_ZLIB)
 
 	# If not found, use the version from "external" instead
 	if(NOT ZLIB_FOUND)
+		bootstrap_library("zlib")
 		add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/cmake/z "z" EXCLUDE_FROM_ALL)
 		set(ZLIB_INCLUDE_DIRS ${EXTERNAL_ROOT}/src/zlib)
 		set(ZLIB_LIBRARIES "z")
@@ -160,6 +209,7 @@ if(USE_BZIP2)
 
 	# If not found, use the version from "external" instead
 	if(NOT BZIP2_FOUND)
+		bootstrap_library("bzip2")
 		add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/cmake/bz2 "bz2" EXCLUDE_FROM_ALL)
 		set(BZIP2_INCLUDE_DIR ${EXTERNAL_ROOT}/src/bzip2)
 		set(BZIP2_LIBRARIES "z")
@@ -179,6 +229,7 @@ if(USE_GIFLIB)
 
 	# If not found, use the version from "external" instead
 	if(NOT GIF_FOUND)
+		bootstrap_library("giflib")
 		add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/cmake/gif "gif" EXCLUDE_FROM_ALL)
 		set(GIF_INCLUDE_DIR ${EXTERNAL_ROOT}/src/giflib/lib)
 		set(GIF_LIBRARIES "z")
@@ -192,6 +243,7 @@ endif()
 
 if(USE_ZOPFLI)
 	# No 'find_package' for ZOPFLI available, only looking in "external"
+	bootstrap_library("zopfli")
 	add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/cmake/zopfli "zopfli" EXCLUDE_FROM_ALL)
 	set(ZOPFLI_INCLUDE_DIR ${EXTERNAL_ROOT}/src/zopfli/src)
 	set(ZOPFLI_LIBRARIES "zopfli")
@@ -204,6 +256,7 @@ endif()
 
 if(USE_BROTLI)
 	# No 'find_package' for BROTLI available, only looking in "external"
+	bootstrap_library("brotli")
 	add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/cmake/brotli "brotli" EXCLUDE_FROM_ALL)
 	set(BROTLI_INCLUDE_DIR ${EXTERNAL_ROOT}/src)
 	set(BROTLI_LIBRARIES "brotli")
@@ -243,6 +296,7 @@ endif()
 
 if(USE_LIBLINEAR)
 	# No 'find_package' for LIBLINEAR available, only looking in "external"
+	bootstrap_library("liblinear")
 	add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/cmake/liblinear "liblinear" EXCLUDE_FROM_ALL)
 	set(LIBLINEAR_INCLUDE_DIR ${EXTERNAL_ROOT}/src/liblinear)
 	set(LIBLINEAR_LIBRARIES "liblinear")
@@ -255,6 +309,7 @@ endif()
 
 if(USE_ZXING)
 	# No 'find_package' for ZXING available, only looking in "external"
+	bootstrap_library("zxing")
 	add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/cmake/zxing "zxing" EXCLUDE_FROM_ALL)
 	set(ZXING_INCLUDE_DIR ${EXTERNAL_ROOT}/src/zxing)
 	set(ZXING_LIBRARIES "zxing")
@@ -267,6 +322,7 @@ endif()
 
 if(USE_AGAST)
 	# No 'find_package' for AGAST available, only looking in "external"
+	bootstrap_library("agast")
 	add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/cmake/AGAST "agast" EXCLUDE_FROM_ALL)
 	set(AGAST_INCLUDE_DIR ${EXTERNAL_ROOT}/src/agast)
 	set(AGAST_LIBRARIES "AGAST")
@@ -279,6 +335,7 @@ endif()
 
 if(USE_FAST)
 	# No 'find_package' for FAST available, only looking in "external"
+	bootstrap_library("fast")
 	add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/cmake/FAST "fast" EXCLUDE_FROM_ALL)
 	set(FAST_INCLUDE_DIR ${EXTERNAL_ROOT}/src/fast)
 	set(FAST_LIBRARIES "FAST")
@@ -291,6 +348,7 @@ endif()
 
 if(USE_ICONV)
 	# No 'find_package' for ICONV available, only looking in "external"
+	bootstrap_library("iconv")
 	add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/cmake/iconv "iconv" EXCLUDE_FROM_ALL)
 	set(ICONV_INCLUDE_DIR ${EXTERNAL_ROOT}/src)
 	set(ICONV_LIBRARIES "iconv")
