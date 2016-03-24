@@ -69,6 +69,13 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 message(STATUS "Setting build type to '${CMAKE_BUILD_TYPE}'")
 
+# Adds a new address sanitizer build type named 'Sanitizer'
+set(CMAKE_CXX_FLAGS_SANITIZER "-O2 -g -fsanitize=address -fno-omit-frame-pointer")
+set(CMAKE_C_FLAGS_SANITIZER "-O2 -g -fsanitize=address -fno-omit-frame-pointer")
+set(CMAKE_EXE_LINKER_FLAGS_SANITIZER "")
+set(CMAKE_SHARED_LINKER_FLAGS_SANITIZER "")
+mark_as_advanced(CMAKE_CXX_FLAGS_SANITIZER CMAKE_C_FLAGS_SANITIZER CMAKE_EXE_LINKER_FLAGS_SANITIZER CMAKE_SHARED_LINKER_FLAGS_SANITIZER)
+
 #===================================================================================================
 
 # Compiler flags for Visual Studio
