@@ -125,7 +125,7 @@ set(USE_BOOST TRUE)
 
 # Threading library (pthread on UNIX systems)
 if(USE_THREAD)
-	find_package(threads QUIET)
+	find_package(Threads QUIET)
 	set(BLIPPAR_LIBRARIES ${BLIPPAR_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
 endif()
 
