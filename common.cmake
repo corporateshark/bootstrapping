@@ -200,6 +200,7 @@ endif()
 
 if(USE_LIBJPEG)
 	if(USE_LIBJPEG_TURBO)
+		message(FATAL_ERROR "LIBJPEG_TURBO not supported (for now)")
 		# No 'find_package' for LIBJPEG_TURBO available, only looking in "external"
 		bootstrap_library("libjpeg-turbo")
 		add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/cmake/jpeg-turbo "jpeg-turbo" EXCLUDE_FROM_ALL)
