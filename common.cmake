@@ -117,13 +117,41 @@ if (CMAKE_CXX_COMPILER_ID MATCHES "Clang" AND DEFINED LLVM_ROOT)
 endif()
 
 #===================================================================================================
+# This section contains all common and always-used libraries
+set(USE_EIGEN TRUE)
+set(USE_BOOST TRUE)
 
-# Requires boost. Note: set "BOOST_ROOT" to point to a custom Boost installation
-# https://cmake.org/cmake/help/latest/module/FindBoost.html
-find_package(Boost 1.58 REQUIRED)
-if(Boost_FOUND)
+# Eigen: header only from external
+if(USE_EIGEN)
+	bootstrap_library("eigen")
+	set(EIGEN_INCLUDE_DIRS ${EXTERNAL_ROOT}/src/eigen)
+	set(BLIPPAR_INCLUDE_DIRS ${BLIPPAR_INCLUDE_DIRS} ${EIGEN_INCLUDE_DIRS})
+	message(STATUS "Configured with Eigen: ${EIGEN_INCLUDE_DIRS}")
+endif()
+
+# Use boost in two ways:
+# - default: header only
+# - when specifying USE_BOOST_COMPONENTS: use specific components
+if(USE_BOOST)
+	# Searches for a system installation
+	if(NOT FORCE_EXTERNAL)
+		find_package(Boost 1.58 COMPONENTS ${USE_BOOST_COMPONENTS} QUIET) # https://cmake.org/cmake/help/latest/module/FindBoost.html
+	endif()
+
+	# If not found, use the version from "external" instead
+	if(NOT Boost_FOUND)
+		bootstrap_library("boost")
+		set(Boost_INCLUDE_DIRS ${EXTERNAL_ROOT}/src/boost)
+		set(Boost_LIBRARIES "")
+		set(Boost_LIB_VERSION "1_60")
+	endif()
+
 	set(BLIPPAR_INCLUDE_DIRS ${BLIPPAR_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
-	message(STATUS "Configured with Boost: ${Boost_INCLUDE_DIRS}")
+	set(BLIPPAR_LIBRARIES ${BLIPPAR_LIBRARIES} ${Boost_LIBRARIES})
+	message(STATUS "Configured with Boost ${Boost_LIB_VERSION}: ${Boost_INCLUDE_DIRS}")
+	if(NOT "${USE_BOOST_COMPONENTS}" STREQUAL "OFF")
+		message(STATUS "Configured with Boost components: ${USE_BOOST_COMPONENTS}")
+	endif()
 endif()
 
 #===================================================================================================
