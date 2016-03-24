@@ -748,6 +748,77 @@
 			};
 			name = Release;
 		};
+		2DFB82461CA43E61009436CA /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CFLAGS = (
+					"-DFDK_HIGH_PERFORMANCE",
+					"-Wno-unsequenced",
+					"-Wno-deprecated-register",
+					"-Wno-c++11-narrowing",
+					"-ffast-math",
+				);
+				"OTHER_CFLAGS[sdk=iphoneos*]" = (
+					"-mfpu=neon",
+					"-Wno-unsequenced",
+					"-Wno-deprecated-register",
+					"-Wno-c++11-narrowing",
+					"-ffast-math",
+				);
+				"OTHER_CFLAGS[sdk=iphonesimulator*]" = (
+					"-m32",
+					"-mtune=atom",
+					"-mssse3",
+					"-mfpmath=sse",
+					"-Wno-unsequenced",
+					"-Wno-deprecated-register",
+					"-Wno-c++11-narrowing",
+					"-ffast-math",
+				);
+				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "\"$SRCROOT/../../src/fdk-aac/libFDK/include\" \"$SRCROOT/../../src/fdk-aac/libAACdec/include\" \"$SRCROOT/../../src/fdk-aac/libSYS/include\" \"$SRCROOT/../../src/fdk-aac/libMpegTPDec/include\" \"$SRCROOT/../../src/fdk-aac/libSBRdec/include\" \"$SRCROOT/../../src/fdk-aac/libPCMutils/include\"";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		2DFB82471CA43E61009436CA /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Distribution;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -756,6 +827,7 @@
 			buildConfigurations = (
 				2D05E0371C735F84007710F9 /* Debug */,
 				2D05E0381C735F84007710F9 /* Release */,
+				2DFB82461CA43E61009436CA /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -765,6 +837,7 @@
 			buildConfigurations = (
 				2D05E03A1C735F84007710F9 /* Debug */,
 				2D05E03B1C735F84007710F9 /* Release */,
+				2DFB82471CA43E61009436CA /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

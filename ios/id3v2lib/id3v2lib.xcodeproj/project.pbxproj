@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2DF399AC1BC69CB60086A34D /* frame.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DF399A71BC69CB60086A34D /* frame.c */; settings = {ASSET_TAGS = (); }; };
-		2DF399AD1BC69CB60086A34D /* header.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DF399A81BC69CB60086A34D /* header.c */; settings = {ASSET_TAGS = (); }; };
-		2DF399AE1BC69CB60086A34D /* id3v2lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DF399A91BC69CB60086A34D /* id3v2lib.c */; settings = {ASSET_TAGS = (); }; };
-		2DF399AF1BC69CB60086A34D /* types.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DF399AA1BC69CB60086A34D /* types.c */; settings = {ASSET_TAGS = (); }; };
-		2DF399B01BC69CB60086A34D /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DF399AB1BC69CB60086A34D /* utils.c */; settings = {ASSET_TAGS = (); }; };
+		2DF399AC1BC69CB60086A34D /* frame.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DF399A71BC69CB60086A34D /* frame.c */; };
+		2DF399AD1BC69CB60086A34D /* header.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DF399A81BC69CB60086A34D /* header.c */; };
+		2DF399AE1BC69CB60086A34D /* id3v2lib.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DF399A91BC69CB60086A34D /* id3v2lib.c */; };
+		2DF399AF1BC69CB60086A34D /* types.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DF399AA1BC69CB60086A34D /* types.c */; };
+		2DF399B01BC69CB60086A34D /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 2DF399AB1BC69CB60086A34D /* utils.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -249,6 +249,51 @@
 			};
 			name = Release;
 		};
+		2DFB82521CA43EB7009436CA /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Distribution;
+		};
+		2DFB82531CA43EB7009436CA /* Distribution */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Distribution;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -257,6 +302,7 @@
 			buildConfigurations = (
 				2DF3999B1BC69C670086A34D /* Debug */,
 				2DF3999C1BC69C670086A34D /* Release */,
+				2DFB82521CA43EB7009436CA /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -266,6 +312,7 @@
 			buildConfigurations = (
 				2DF3999E1BC69C670086A34D /* Debug */,
 				2DF3999F1BC69C670086A34D /* Release */,
+				2DFB82531CA43EB7009436CA /* Distribution */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
