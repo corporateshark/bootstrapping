@@ -118,8 +118,16 @@ endif()
 
 #===================================================================================================
 # This section contains all common and always-used libraries
+set(USE_THREAD TRUE)
 set(USE_EIGEN TRUE)
+set(USE_CATCH TRUE)
 set(USE_BOOST TRUE)
+
+# Threading library (pthread on UNIX systems)
+if(USE_THREAD)
+	find_package(threads QUIET)
+	set(BLIPPAR_LIBRARIES ${BLIPPAR_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT})
+endif()
 
 # Eigen: header only from external
 if(USE_EIGEN)
@@ -127,6 +135,14 @@ if(USE_EIGEN)
 	set(EIGEN_INCLUDE_DIRS ${EXTERNAL_ROOT}/src/eigen)
 	set(BLIPPAR_INCLUDE_DIRS ${BLIPPAR_INCLUDE_DIRS} ${EIGEN_INCLUDE_DIRS})
 	message(STATUS "Configured with Eigen: ${EIGEN_INCLUDE_DIRS}")
+endif()
+
+# Catch: header only from external
+if(USE_CATCH)
+	bootstrap_library("catch")
+	set(CATCH_INCLUDE_DIRS ${EXTERNAL_ROOT}/src/catch/single_include)
+	set(BLIPPAR_INCLUDE_DIRS ${BLIPPAR_INCLUDE_DIRS} ${CATCH_INCLUDE_DIRS})
+	message(STATUS "Configured with Catch: ${CATCH_INCLUDE_DIRS}")
 endif()
 
 # Use boost in two ways:
@@ -144,12 +160,15 @@ if(USE_BOOST)
 		set(Boost_INCLUDE_DIRS ${EXTERNAL_ROOT}/src/boost)
 		set(Boost_LIBRARIES "")
 		set(Boost_LIB_VERSION "1_60")
+		if(USE_BOOST_COMPONENTS)
+			message(FATAL_ERROR "Boost components required but using version from external (header-only)")
+		endif()
 	endif()
 
 	set(BLIPPAR_INCLUDE_DIRS ${BLIPPAR_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 	set(BLIPPAR_LIBRARIES ${BLIPPAR_LIBRARIES} ${Boost_LIBRARIES})
 	message(STATUS "Configured with Boost ${Boost_LIB_VERSION}: ${Boost_INCLUDE_DIRS}")
-	if(NOT "${USE_BOOST_COMPONENTS}" STREQUAL "OFF")
+	if(USE_BOOST_COMPONENTS)
 		message(STATUS "Configured with Boost components: ${USE_BOOST_COMPONENTS}")
 	endif()
 endif()
