@@ -313,11 +313,11 @@
     "source": {
         "type": "git",
         "url": "https://github.com/philsquared/Catch.git",
-        "revision": "fdc42d0af47f58fa13a42b685bbeaf55a8347673"
+        "revision": "c984fc3ecde60b59efa2203e82261acac8ac8502"
     },
     "postprocess": {
         "type": "patch",
-        "file": "catch_fdc42d0af47f58fa13a42b685bbeaf55a8347673.patch",
+        "file": "catch_c984fc3ecde60b59efa2203e82261acac8ac8502.patch",
         "pnum": "1"
     }
 },
