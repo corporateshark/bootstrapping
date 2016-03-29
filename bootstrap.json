@@ -4,7 +4,7 @@
     "source": {
         "type": "git",
         "url": "https://github.com/Microsoft/GSL.git",
-        "revision": "85ffc8d222957ca7d6d30fb75fa61fe1e01fa1d4"
+        "revision": "5ae7e71f0988c02cffc45308aab21c1713a8c205"
     }
 },
 {
@@ -273,7 +273,7 @@
     "source": {
         "type": "git",
         "url": "https://github.com/google/snappy.git",
-        "revision": "0852af76065ba0f35944527e14787f7ae5e0b3ac"
+        "revision": "2b9152d9c5bed71dffb7f7f6c7a3ec48b058ff2d"
     }
 },
 {
@@ -281,7 +281,7 @@
     "source": {
         "type": "git",
         "url": "https://github.com/google/zopfli.git",
-        "revision": "89cf773beef75d7f4d6d378debdf299378c3314e"
+        "revision": "9152da47c04f3c567e1e971ba029885152aab502"
     }
 },
 {
@@ -289,7 +289,7 @@
     "source": {
         "type": "git",
         "url": "https://github.com/google/brotli.git",
-        "revision": "933bb9bd800c8f5f7f6a02382d33c902a98ef73a"
+        "revision": "98ed7a23a83d64133b0a36a884e489bffb0eb864"
     }
 },
 {
