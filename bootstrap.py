@@ -40,7 +40,7 @@ try:
     import lzma
     lzma_available = True
 except:
-    print("WARNING: Python package lzma (pyliblzma) not available; extraction of .tar.xz files may not be supported.")
+    print("WARNING: Python package 'pylzma' not available; extraction of .tar.xz files may not be supported.")
     lzma_available = False
 
 SRC_DIR_BASE = "src"
