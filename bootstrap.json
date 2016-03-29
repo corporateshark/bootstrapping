@@ -525,5 +525,13 @@
         "type": "archive",
         "url": "http://duktape.org/duktape-1.4.0.tar.xz"
     }
+},
+{
+    "name": "hana",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/boostorg/hana.git",
+        "revision": "v0.7.0"
+    }
 }
 ]
