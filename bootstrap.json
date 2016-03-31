@@ -533,5 +533,13 @@
         "url": "https://github.com/boostorg/hana.git",
         "revision": "v0.7.0"
     }
+},
+{
+    "name": "libyuv",
+    "source": {
+        "type": "git",
+        "url": "https://chromium.googlesource.com/libyuv/libyuv",
+        "revision": "master"
+    }
 }
 ]
