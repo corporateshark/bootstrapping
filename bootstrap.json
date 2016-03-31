@@ -539,7 +539,7 @@
     "source": {
         "type": "git",
         "url": "https://chromium.googlesource.com/libyuv/libyuv",
-        "revision": "master"
+        "revision": "5065743a110bb2edd79e71de5df71a31f3009a96"
     }
 }
 ]
