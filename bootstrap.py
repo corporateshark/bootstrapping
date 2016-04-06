@@ -40,7 +40,12 @@ try:
     import lzma
     lzma_available = True
 except:
-    print("WARNING: Python package 'pylzma' not available; extraction of .tar.xz files may not be supported.")
+    print("WARNING: Python lzma library not available; extraction of .tar.xz files may not be supported.")
+    print("Installation on Ubuntu:")
+    print("> apt-get install python-lzma")
+    print("Installation on Mac OS X:")
+    print("> brew install xz")
+    print("> pip install pyliblzma")
     lzma_available = False
 
 SRC_DIR_BASE = "src"
