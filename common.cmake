@@ -349,6 +349,22 @@ if(USE_OPENCV)
 	message(STATUS "Configured with OPENCV: ${OpenCV_INCLUDE_DIRS}")
 endif()
 
+# Torch
+if(USE_TORCH)
+	find_package(Torch REQUIRED)
+#	find_package(CUDA 7.5 REQUIRED))
+
+	set(BLIPPAR_INCLUDE_DIRS ${BLIPPAR_INCLUDE_DIRS} ${Torch_INSTALL_INCLUDE})
+	link_directories(${Torch_INSTALL_LIB})                                                                                                                                                                                     
+	set(BLIPPAR_LIBRARIES ${BLIPPAR_LIBRARIES} 
+			TH
+			luaT
+			luajit
+	)
+	add_definitions(-DBLIPPAR_USE_TORCH)
+	message(STATUS "Configured with Torch: ${Torch_INSTALL_INCLUDE}")
+endif()
+
 if(USE_LIBLINEAR)
 	# No 'find_package' for LIBLINEAR available, only looking in "external"
 	bootstrap_library("liblinear")
