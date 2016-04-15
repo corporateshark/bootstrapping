@@ -408,7 +408,7 @@
 					"\"$SRCROOT/../../src/libtheora/include\"",
 					"\"$SRCROOT/../../src/libogg/include\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
@@ -469,7 +469,7 @@
 					"\"$SRCROOT/../../src/libtheora/include\"",
 					"\"$SRCROOT/../../src/libogg/include\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
 					"-Wno-shift-op-parentheses",
@@ -548,7 +548,7 @@
 					"\"$SRCROOT/../../src/libtheora/include\"",
 					"\"$SRCROOT/../../src/libogg/include\"",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
 					"-Wno-shift-op-parentheses",
