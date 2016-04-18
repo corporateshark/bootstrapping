@@ -260,8 +260,6 @@ then
 
     if [ "$PLATFORM" == "iPhoneSimulator" ]
     then
-        if [ -f $FILE ];
-
         #nasm -hf >/dev/null 2>&1 || { echo "error: autoconf is required but it's not installed.  Aborting." >&2; exit 1; }
 
         # build for i686
@@ -296,6 +294,7 @@ then
 
         echo "BUILT PRODUCT: $INSTALLDIR/$PRODUCT_NAME.a"
     fi
+
 else
   echo "Unrecognized Action: $ACTION"
 fi
