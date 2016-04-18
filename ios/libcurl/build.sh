@@ -160,7 +160,7 @@ function configure_for_arch()
 
     export PATH="${DEVROOT}/usr/bin/:${PATH}"
 
-    export CFLAGS="-arch ${ARCH} -pipe $OPTIMIZATION_LEVEL -gdwarf-2 -isysroot ${IOS_SYSROOT} -miphoneos-version-min=${IPHONEOS_DEPLOYMENT_TARGET} -fembed-bitcode"
+    export CFLAGS="-arch ${ARCH} -pipe $OPTIMIZATION_LEVEL -isysroot ${IOS_SYSROOT} -miphoneos-version-min=${IPHONEOS_DEPLOYMENT_TARGET} -fembed-bitcode"
 
     export LDFLAGS="-arch ${ARCH} -isysroot ${IOS_SYSROOT}"
 

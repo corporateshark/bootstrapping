@@ -35,7 +35,11 @@ then
     # If the build is inside the source directory then create symbolic link in root external repository to make linking work
 
     EXTERNAL_PROJECT_DIR="$PROJECT_DIR/../.."
-    EXTERNAL_PROJECT_BUILD_DIR="$EXTERNAL_PROJECT_DIR/build/$CONFIGURATION-iphoneos"
+     if [[ "$PLATFORM" == "iPhoneOS" ]] ; then
+        EXTERNAL_PROJECT_BUILD_DIR="$EXTERNAL_PROJECT_DIR/build/$CONFIGURATION-iphoneos"
+    else
+        EXTERNAL_PROJECT_BUILD_DIR="$EXTERNAL_PROJECT_DIR/build/$CONFIGURATION-iphonesimulator"
+    fi
     EXTERNAL_PROJECT_INCLUDE_DIR="$EXTERNAL_PROJECT_BUILD_DIR/include"
 
     #Create EXTERNAL_PROJECT_INCLUDE_DIR directory if not exists

@@ -26,8 +26,8 @@ fi
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 BUILDDIR="$( cd "$1" && pwd )"
 INSTALLDIR="$( cd "$2" && pwd )"
-EXTSRCDIR=$DIR/../../src
-SRCDIR=$EXTSRCDIR/libjpeg-turbo
+EXTSRCDIR="$DIR/../../src"
+SRCDIR="$EXTSRCDIR/libjpeg-turbo"
 ACTION="$3"
 PRODUCT_NAME="$4"
 CONFIGURATION="$5"
@@ -66,11 +66,15 @@ fi
 # some useful variables
 
 IOS_PLATFORMDIR=/Applications/Xcode.app/Contents/Developer/Platforms/$PLATFORM.platform
+
 IOS_SYSROOT=$IOS_PLATFORMDIR/Developer/SDKs/$PLATFORM.sdk
 
 DEVROOT=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain
+
 IOS_GCC=/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang
+
 IPHONEOSVERSION="-miphoneos-version-min=$IPHONEOS_DEPLOYMENT_TARGET"
+
 CPUS=$(sysctl -n hw.logicalcpu_max)
 
 if [ "$CONFIGURATION" == "Debug" ];
@@ -82,11 +86,12 @@ fi
 
 function clean()
 {
-  echo "Cleaning.."
+  ARCH=$1
+  echo "Cleaning...$ARCH"
 
-  if [ -d "$BUILDDIRECTORY" ]; then
+  if [ -d "$BUILDDIR/$ARCH" ]; then
 
-    cd "$BUILDDIRECTORY"
+    cd "$BUILDDIR/$ARCH"
 
     set -x
 
@@ -96,9 +101,9 @@ function clean()
 
   fi
 
-  if [ -d "$INSTALLDIRECTORY" ]; then
+  if [ -d "$INSTALLDIR/$ARCH" ]; then
 
-    rm -rf "$INSTALLDIRECTORY"
+    rm -rf "$INSTALLDIR/$ARCH"
 
   fi
 }
@@ -133,19 +138,22 @@ function configure()
 
   set -x
 
-  (cd "$BUILDDIRECTORY" ; "$SRCDIR/configure" \
-    --prefix="$BUILDDIRECTORY" \
+  (cd "$BUILDDIR/$ARCH" ; "$SRCDIR/configure" \
+    --prefix="$BUILDDIR/$ARCH" \
     --host "$HOST" \
-    CC="$IOS_GCC" \
-    LD="$IOS_GCC" \
     CFLAGS="$CFLAGS" \
     LDFLAGS="$LDFLAGS" \
-    CCASFLAGS="$CCASFLAGS" )
+    CCASFLAGS="$CCASFLAGS" \
+    NASM="$NASMFLAGS")
 
   set +x
 
   if [[ $? -ne 0 ]] ; then
+
     echo "Errors while running configure. Exiting.."
+
+    echo "$PREFIX/config.log"
+
     exit 1
   fi
 
@@ -160,14 +168,57 @@ function build()
   set -x
 
   make -j$CPUS
+
   make install
 
   set +x
 
   if [[ $? -ne 0 ]] ; then
+
       echo "Errors while running make. Exiting.."
+
       exit 1
   fi
+}
+
+function build_for_arch()
+{
+    ARCH=$1
+
+    HOST=$2
+
+    EXTRA_CFLAGS_AND_LDFLAGS=$3
+
+    EXTRA_CCASFLAGS=$4
+
+    NASMFLAGS=$5
+
+    BUILDDIRECTORY="$BUILDDIR/$ARCH"
+
+    PREFIX="$BUILDDIRECTORY"
+
+    export CFLAGS="-arch ${ARCH} -pipe $OPTIMIZATION_LEVEL -isysroot ${IOS_SYSROOT} -miphoneos-version-min=${IPHONEOS_DEPLOYMENT_TARGET} -fembed-bitcode $EXTRA_CFLAGS_AND_LDFLAGS"
+
+    export HOST="$HOST"
+
+    export LDFLAGS="-arch ${ARCH} -isysroot ${IOS_SYSROOT} $EXTRA_CFLAGS_AND_LDFLAGS"
+
+    export CCASFLAGS="$EXTRA_CCASFLAGS"
+
+    mkdir -p "$BUILDDIRECTORY" && cd "$BUILDDIRECTORY"
+
+    configure $ARCH
+
+    build
+
+    HEADER_COPY_DIR="${HEADER_DIR}/$ARCH"
+    INCLUDE_COPY_DIR="${BUILDDIR}/$ARCH/include"
+
+    echo "Copying headers from ${INCLUDE_COPY_DIR} to ${HEADER_COPY_DIR}"
+
+    mkdir -p "${HEADER_COPY_DIR}"
+
+    cp "${INCLUDE_COPY_DIR}/"*.h "${HEADER_COPY_DIR}/"
 }
 
 # add gas-preprocessor to PATH
@@ -176,158 +227,75 @@ PATH="$EXTSRCDIR/gas-preprocessor":$PATH
 
 echo "OPTIMIZATION_LEVEL=$OPTIMIZATION_LEVEL"
 
-if [ "$ACTION" == "build" ] || [ "$ACTION" == "install" ]
-then
-  # call autoreconf in source dir
-  cd "$SRCDIR"
-  autoreconfigure
-fi
-
-# build for ARMv7
-
-arch="armv7"
-BUILDDIRECTORY="$BUILDDIR/$arch"
-INSTALLDIRECTORY="$INSTALLDIR/$arch"
-IOS_CFLAGS="-arch $arch $IPHONEOSVERSION"
-HOST="arm-apple-darwin10"
-CFLAGS="-mfloat-abi=softfp -isysroot $IOS_SYSROOT $OPTIMIZATION_LEVEL $IOS_CFLAGS"
-LDFLAGS="-mfloat-abi=softfp -isysroot $IOS_SYSROOT $IOS_CFLAGS"
-CCASFLAGS="-no-integrated-as $IOS_CFLAGS"
+# Build + combine the binaries
 
 if [ "$ACTION" == "clean" ]
 then
 
-  clean
+    if [ "$PLATFORM" == "iPhoneSimulator" ]
+    then
+        clean "i386"
+
+        clean "x86_64"
+    else
+        clean "armv7"
+
+        #clean ${BUILDDIR}/armv7s ${INSTALLDIR}/armv7s
+
+        clean "arm64"
+    fi
+
+    if [ -d "$HEADER_DIR" ]; then
+
+        rm -rf "$HEADER_DIR"
+    fi
+
+    rm -f "$INSTALLDIR/*.a"
 
 elif [ "$ACTION" == "build" ] || [ "$ACTION" == "install" ]
 then
+    # call autoreconf in source dir
+    cd "$SRCDIR"
+    autoreconfigure
 
-  mkdir -p "$BUILDDIRECTORY" && cd "$BUILDDIRECTORY"
+    if [ "$PLATFORM" == "iPhoneSimulator" ]
+    then
+        if [ -f $FILE ];
 
-  configure
+        #nasm -hf >/dev/null 2>&1 || { echo "error: autoconf is required but it's not installed.  Aborting." >&2; exit 1; }
 
-  build
+        # build for i686
+        build_for_arch i386 i386-apple-darwin "-m32" "" ""
 
-  HEADER_COPY_DIR="${HEADER_DIR}/armv7"
+        # build for x86_64
+        build_for_arch x86_64 x86_64-apple-darwin "" "" "/usr/local/bin/nasm"
 
-  echo "Copying headers to ${HEADER_COPY_DIR}"
+        echo "Creating Universal Binary for $PLATFORM"
 
-  mkdir -p "${HEADER_COPY_DIR}"
+        set -x
 
-  cp "${BUILDDIR}/armv7/include/"*.h "${HEADER_COPY_DIR}/"
+        (cd "$INSTALLDIR" && lipo -create "${BUILDDIR}/i386/lib/libturbojpeg.a" "${BUILDDIR}/x86_64/lib/libturbojpeg.a" -o "$PRODUCT_NAME".a)
 
-else
+        set +x
 
-  echo "Unrecognized Action: $ACTION"
+        echo "BUILT PRODUCT: $INSTALLDIR/$PRODUCT_NAME.a"
+    else
+        # build for ARMv7
+        build_for_arch armv7 arm-apple-darwin10 "-mfloat-abi=softfp" "-no-integrated-as -arch armv7 $IPHONEOSVERSION" ""
 
-fi
+        # build for ARMv8
+        build_for_arch arm64 aarch64-apple-darwin "" "" ""
 
-# build for ARMv7s
+        echo "Creating Universal Binary for $PLATFORM"
 
-#arch="armv7s"
-#BUILDDIRECTORY="$BUILDDIR/$arch"
-#INSTALLDIRECTORY="$INSTALLDIR/$arch"
-#IOS_CFLAGS="-arch $arch $IPHONEOSVERSION"
-#HOST="arm-apple-darwin10"
-#CFLAGS="-mfloat-abi=softfp -isysroot $IOS_SYSROOT $OPTIMIZATION_LEVEL $IOS_CFLAGS"
-#LDFLAGS="-mfloat-abi=softfp -isysroot $IOS_SYSROOT $IOS_CFLAGS"
-#CCASFLAGS="-no-integrated-as $IOS_CFLAGS"
-#
-#if [ "$ACTION" == "clean" ]
-#then
-#
-#  clean
-#
-#elif [ "$ACTION" == "build" ] || [ "$ACTION" == "install" ]
-#then
-#
-#  mkdir -p $BUILDDIRECTORY && cd $BUILDDIRECTORY
-#
-#  configure
-#
-#  build
-#
-#  HEADER_COPY_DIR="${HEADER_DIR}/armv7s"
-#
-#  echo "Copying headers to ${HEADER_COPY_DIR}"
-#
-#  mkdir -p "${HEADER_COPY_DIR}"
-#
-#  cp "${BUILDDIR}/armv7s/include/"*.h "${HEADER_COPY_DIR}/"
-#
-#else
-#
-#  echo "Unrecognized Action: $ACTION"
-#
-#fi
+        set -x
 
-# build for ARMv8
+        (cd "$INSTALLDIR" && lipo -create "${BUILDDIR}/arm64/lib/libturbojpeg.a" "${BUILDDIR}/armv7/lib/libturbojpeg.a" -o "$PRODUCT_NAME".a)
 
-arch="arm64"
-BUILDDIRECTORY=$BUILDDIR/$arch
-INSTALLDIRECTORY=$INSTALLDIR/$arch
-IOS_CFLAGS="-arch $arch $IPHONEOSVERSION"
-HOST="aarch64-apple-darwin"
-CFLAGS="-isysroot $IOS_SYSROOT $OPTIMIZATION_LEVEL $IOS_CFLAGS" 
-LDFLAGS="-isysroot $IOS_SYSROOT $IOS_CFLAGS"
-CCASFLAGS=""
+        set +x
 
-if [ "$ACTION" == "clean" ]
-then
-
-    clean
-
-elif [ "$ACTION" == "build" ] || [ "$ACTION" == "install" ]
-then
-
-  mkdir -p "$BUILDDIRECTORY" && cd "$BUILDDIRECTORY"
-
-  configure
-
-  build
-
-  HEADER_COPY_DIR="${HEADER_DIR}/arm64"
-
-  echo "Copying headers to ${HEADER_COPY_DIR}"
-
-  mkdir -p "${HEADER_COPY_DIR}"
-
-  cp "${BUILDDIR}/arm64/include/"*.h "${HEADER_COPY_DIR}/"
-
-else
-  echo "Unrecognized Action: $ACTION"
-fi
-
-# Combine the binaries
-
-if [ "$ACTION" == "clean" ]
-then
-
-  echo "Removing Headers $HEADER_DIR"
-
-  if [ -d "$HEADER_DIR" ]; then
-
-    rm -rf "$HEADER_DIR"
-
-  fi
-
-  echo "Removing Universal Binaries"
-
-  rm -f "$INSTALLDIR/*.a"
-
-elif [ "$ACTION" == "build" ] || [ "$ACTION" == "install" ]
-then
-
-  echo "Creating Universal Binary"
-
-  set -x
-
-  (cd "$INSTALLDIR" && lipo -create "${BUILDDIR}/arm64/lib/libturbojpeg.a" "${BUILDDIR}/armv7/lib/libturbojpeg.a" -o "$PRODUCT_NAME".a)
-
-  set +x
-
-  echo "BUILT PRODUCT: $INSTALLDIR/$PRODUCT_NAME.a"
-
+        echo "BUILT PRODUCT: $INSTALLDIR/$PRODUCT_NAME.a"
+    fi
 else
   echo "Unrecognized Action: $ACTION"
 fi
