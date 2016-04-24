@@ -49,7 +49,7 @@ glibtoolize --version >/dev/null 2>&1 || { echo "error: glibtoolize is required 
 automake --version >/dev/null 2>&1 || { echo "error: automake is required but it's not installed.  Aborting." >&2; exit 1; }
 autoconf --version >/dev/null 2>&1 || { echo "error: autoconf is required but it's not installed.  Aborting." >&2; exit 1; }
 
-if [ "$ACTION" == "build" ];
+if [ "$ACTION" == "build" ] || [ "$ACTION" == "install" ];
     then
     if [ -f "$INSTALLDIR/$PRODUCT_NAME.a" ];
         then

@@ -30,15 +30,15 @@ if [[ $? -ne 0 ]] ; then
     exit 1
 fi
 
-if [[ "$CONFIGURATION_BUILD_DIR" == "$PROJECT_DIR"* ]] && [[ "$ACTION" == "build" ]]
+if [[ "$CONFIGURATION_BUILD_DIR" == "$PROJECT_DIR"* ]] && ([ "$ACTION" == "build" ] || [ "$ACTION" == "install" ])
 then
     # If the build is inside the source directory then create symbolic link in root external repository to make linking work
 
     EXTERNAL_PROJECT_DIR="$PROJECT_DIR/../.."
      if [[ "$PLATFORM" == "iPhoneOS" ]] ; then
-        EXTERNAL_PROJECT_BUILD_DIR="$EXTERNAL_PROJECT_DIR/build/$CONFIGURATION-iphoneos"
+        EXTERNAL_PROJECT_BUILD_DIR="$EXTERNAL_PROJECT_DIR/$ACTION/$CONFIGURATION-iphoneos"
     else
-        EXTERNAL_PROJECT_BUILD_DIR="$EXTERNAL_PROJECT_DIR/build/$CONFIGURATION-iphonesimulator"
+        EXTERNAL_PROJECT_BUILD_DIR="$EXTERNAL_PROJECT_DIR/$ACTION/$CONFIGURATION-iphonesimulator"
     fi
     EXTERNAL_PROJECT_INCLUDE_DIR="$EXTERNAL_PROJECT_BUILD_DIR/include"
 
