@@ -174,6 +174,20 @@ if(USE_BOOST)
 endif()
 
 #===================================================================================================
+
+# Conditionally compiles with CUDA libraries
+if(USE_CUDA)
+	find_package(CUDA QUIET) # https://cmake.org/cmake/help/v3.1/module/FindCUDA.html
+	if(CUDA_FOUND)
+		message(STATUS "Configured with CUDA ${CUDA_VERSION_STRING}: ${CUDA_TOOLKIT_ROOT_DIR}")
+		link_directories(${CUDA_TOOLKIT_ROOT_DIR}/lib64)
+		set(BLIPPAR_INCLUDE_DIRS ${BLIPPAR_INCLUDE_DIRS} ${CUDA_INCLUDE_DIRS})
+		set(BLIPPAR_LIBRARIES ${BLIPPAR_LIBRARIES} cuda cudart cublas)
+		add_definitions(-DBLIPPAR_USE_CUDA)
+	endif()
+endif()
+
+#===================================================================================================
 # This section contains all the external libraries, either taken from the system installation or
 # from the external repository. Note that they have to appear in the order in which they should be
 # linked, e.g. zlib after libpng because zlib is a dependency of libpng.
