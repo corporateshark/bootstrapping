@@ -8,8 +8,9 @@ macro(setup_source_groups src_files)
 
 		# skip src or include and changes /'s to \\'s
 		string(REGEX REPLACE "(\\./)?(src|include)/?" "" GROUP "${PARENT_DIR}")
+		string(REPLACE "${CMAKE_SOURCE_DIR}/" "" GROUP "${GROUP}")
 		string(REPLACE "/" "\\" GROUP "${GROUP}")
-
+	
 		# group into "Source Files" and "Header Files"
 		if(${FILE} MATCHES ".*/.+[.]cpp")
 			set(GROUP "Source Files\\\\${GROUP}")

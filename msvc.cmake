@@ -2,7 +2,7 @@ if(MSVC)
     add_definitions(
             -D_CRT_SECURE_NO_WARNINGS
     )
-    set(MSVC_FLAGS "/wd4456 /wd4457 /wd4458 /wd4018 /wd4068 /wd4996")
+    set(MSVC_FLAGS "/wd4309 /wd4456 /wd4457 /wd4458 /wd4018 /wd4068 /wd4996")
     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${MSVC_FLAGS}")
     set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} ${MSVC_FLAGS}")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${MSVC_FLAGS}")
