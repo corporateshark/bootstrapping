@@ -6,6 +6,6 @@ subdirs := $(addprefix $(LOCAL_PATH)/,$(addsuffix /Android.mk, \
 	))
 
 #   Suppress stupid compiler warnings
-LOCAL_CFLAGS += -Wno-pointer-sign
+LOCAL_CFLAGS += -Wno-pointer-sign -Wno-parentheses-equality
 
 include $(subdirs)
