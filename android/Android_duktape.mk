@@ -24,4 +24,6 @@ ifeq ($(TARGET_ARCH_ABI),x86)
 	LOCAL_CFLAGS += -m32 -march=i686 -mtune=atom -mssse3 -mfpmath=sse
 endif
 
+LOCAL_CFLAGS += -Wno-parentheses-equality
+
 include $(BUILD_STATIC_LIBRARY)
