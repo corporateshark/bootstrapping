@@ -541,5 +541,13 @@
         "url": "https://chromium.googlesource.com/libyuv/libyuv",
         "revision": "5065743a110bb2edd79e71de5df71a31f3009a96"
     }
+},
+{
+    "name": "glfw",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/glfw/glfw.git",
+        "revision": "30306e54705c3adae9fe082c816a3be71963485c"
+    }
 }
 ]
