@@ -133,12 +133,6 @@ else ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
         $(SOURCE_PATH)/simd/jsimd_arm_neon.S \
 
     LOCAL_CFLAGS += -DSIZEOF_SIZE_T=4
-else ifeq ($(TARGET_ARCH_ABI),armeabi-v7a-hard)
-    LOCAL_SRC_FILES += \
-        $(SOURCE_PATH)/simd/jsimd_arm.c \
-        $(SOURCE_PATH)/simd/jsimd_arm_neon.S \
-
-    LOCAL_CFLAGS += -DSIZEOF_SIZE_T=4
 else ifeq ($(TARGET_ARCH_ABI),armeabi)
     LOCAL_CFLAGS += -DSIZEOF_SIZE_T=4
 else ifeq ($(TARGET_ARCH_ABI),arm64-v8a)
@@ -152,11 +146,6 @@ endif
 LOCAL_ASMFLAGS += -DELF
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
-    LOCAL_ARM_NEON := true
-    LOCAL_CFLAGS += -D__ARM_HAVE_NEON -mfpu=neon -march=armv7-a
-endif
-
-ifeq ($(TARGET_ARCH_ABI),armeabi-v7a-hard)
     LOCAL_ARM_NEON := true
     LOCAL_CFLAGS += -D__ARM_HAVE_NEON -mfloat-abi=hard -mfpu=neon -march=armv7-a
 endif

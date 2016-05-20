@@ -48,11 +48,6 @@ LOCAL_CPPFLAGS += -DHAVE_CONFIG_H -DMODPLUG_BUILD -DMODPLUG_STATIC -DMODPLUG_NO_
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
     LOCAL_ARM_NEON := true
-    LOCAL_CFLAGS += -mfpu=neon -march=armv7-a
-endif
-
-ifeq ($(TARGET_ARCH_ABI),armeabi-v7a-hard)
-    LOCAL_ARM_NEON := true
     LOCAL_CFLAGS += -mfloat-abi=hard -mfpu=neon -march=armv7-a
 endif
 

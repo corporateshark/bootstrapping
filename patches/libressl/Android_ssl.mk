@@ -63,10 +63,6 @@ LOCAL_CFLAGS += -DOPENSSL_NO_CAMELLIA -DOPENSSL_NO_CAPIENG -DOPENSSL_NO_CAST -DO
 LOCAL_CFLAGS += -DOPENSSL_NO_HW -DOPENSSL_NO_ENGINE -DZLIB -fno-short-enums
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
-    LOCAL_CFLAGS += -mfpu=neon -march=armv7-a
-endif
-
-ifeq ($(TARGET_ARCH_ABI),armeabi-v7a-hard)
     LOCAL_CFLAGS += -mfloat-abi=hard -mfpu=neon -march=armv7-a -mhard-float -D_NDK_MATH_NO_SOFTFP=1
 endif
 
