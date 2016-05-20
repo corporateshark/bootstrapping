@@ -56,7 +56,9 @@ LOCAL_CFLAGS += -Wno-tautological-compare -Wno-shift-op-parentheses -Wno-logical
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
     LOCAL_ARM_NEON := true
-    LOCAL_CFLAGS += -mfloat-abi=hard -mfpu=neon -march=armv7-a -DLIBYUV_NEON
+    #LOCAL_CFLAGS += -mfloat-abi=hard
+    LOCAL_CFLAGS += -mfpu=neon -march=armv7-a
+    LOCAL_CFLAGS += -DLIBYUV_NEON
 endif
 
 ifeq ($(TARGET_ARCH_ABI),x86)

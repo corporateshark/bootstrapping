@@ -43,7 +43,8 @@ LOCAL_CFLAGS := -O2 -ffast-math -DAL_BUILD_LIBRARY -DAL_ALEXT_PROTOTYPES -Wno-in
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
     LOCAL_ARM_NEON := true
-    LOCAL_CFLAGS += -mfloat-abi=hard -mfpu=neon -march=armv7-a
+    #LOCAL_CFLAGS += -mfloat-abi=hard
+    LOCAL_CFLAGS += -mfpu=neon -march=armv7-a
     LOCAL_CFLAGS += -D_ARM_ASSEM_
 endif
 
