@@ -52,8 +52,6 @@ ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
     # armeabi-v7a-hard deprecation note: "-mfloat-abi=hard" and "-mhard-float" cause link failure e.g.
     #   ndk-r11c/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/lib/gcc/arm-linux-androideabi/4.9/../../../../arm-linux-androideabi/bin/ld: \
     #   error: ./obj/local/armeabi-v7a/libcurl.a(formdata.o) uses VFP register arguments, output does not
-    #common_CFLAGS += -mfloat-abi=hard
-    #common_CFLAGS += -mhard-float
     common_CFLAGS += -mfpu=neon -march=armv7-a
     common_CFLAGS += -D_NDK_MATH_NO_SOFTFP=1
 endif

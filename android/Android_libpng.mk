@@ -38,7 +38,6 @@ endif
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
     LOCAL_ARM_NEON := true
-    #LOCAL_CPPFLAGS += -mfloat-abi=hard
     LOCAL_CPPFLAGS += -mfpu=neon -march=armv7-a
 endif
 

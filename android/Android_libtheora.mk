@@ -42,7 +42,6 @@ LOCAL_CFLAGS += -DTHEORA_DISABLE_ENCODE -DSTDC_HEADERS=1 -DHAVE_UNISTD_H=1 -DHAV
 
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
     LOCAL_ARM_NEON := true
-    #LOCAL_CFLAGS += -mfloat-abi=hard
     LOCAL_CFLAGS += -mfpu=neon -march=armv7-a
 endif
 
