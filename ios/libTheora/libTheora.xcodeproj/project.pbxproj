@@ -500,6 +500,12 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				WARNING_CFLAGS = (
+					"-Wno-conditional-uninitialized",
+					"-Wno-shift-negative-value",
+					"-Wno-tautological-compare",
+					"-Wno-unused-function",
+				);
 			};
 			name = Debug;
 		};
@@ -509,6 +515,12 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				WARNING_CFLAGS = (
+					"-Wno-conditional-uninitialized",
+					"-Wno-shift-negative-value",
+					"-Wno-tautological-compare",
+					"-Wno-unused-function",
+				);
 			};
 			name = Release;
 		};
@@ -579,6 +591,12 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				WARNING_CFLAGS = (
+					"-Wno-conditional-uninitialized",
+					"-Wno-shift-negative-value",
+					"-Wno-tautological-compare",
+					"-Wno-unused-function",
+				);
 			};
 			name = Distribution;
 		};

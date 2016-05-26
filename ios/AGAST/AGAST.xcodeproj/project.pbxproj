@@ -183,7 +183,10 @@
 				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
-				WARNING_CFLAGS = "-Wno-deprecated-register";
+				WARNING_CFLAGS = (
+					"-Wno-deprecated-register",
+					"-Wno-conversion",
+				);
 			};
 			name = AdHoc;
 		};
@@ -218,7 +221,10 @@
 				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				WARNING_CFLAGS = "-Wno-deprecated-register";
+				WARNING_CFLAGS = (
+					"-Wno-deprecated-register",
+					"-Wno-conversion",
+				);
 			};
 			name = Debug;
 		};
@@ -240,7 +246,10 @@
 				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
-				WARNING_CFLAGS = "-Wno-deprecated-register";
+				WARNING_CFLAGS = (
+					"-Wno-deprecated-register",
+					"-Wno-conversion",
+				);
 			};
 			name = Release;
 		};
@@ -285,7 +294,10 @@
 				MACH_O_TYPE = staticlib;
 				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
-				WARNING_CFLAGS = "-Wno-deprecated-register";
+				WARNING_CFLAGS = (
+					"-Wno-deprecated-register",
+					"-Wno-conversion",
+				);
 			};
 			name = Distribution;
 		};
