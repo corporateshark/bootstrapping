@@ -1,7 +1,7 @@
 diff --exclude=.git --exclude=.hg -rupN ./src/libcurl/Android.mk ./src/libcurl_patched/Android.mk
 --- ./src/libcurl/Android.mk	1970-01-01 01:00:00.000000000 +0100
 +++ ./src/libcurl_patched/Android.mk	2016-01-26 14:28:32.000000000 +0100
-@@ -0,0 +1,101 @@
+@@ -0,0 +1,100 @@
 +# Google Android makefile for curl and libcurl
 +#
 +# Place the curl source (including this makefile) into external/curl/ in the
@@ -54,12 +54,11 @@ diff --exclude=.git --exclude=.hg -rupN ./src/libcurl/Android.mk ./src/libcurl_p
 +
 +ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 +    LOCAL_ARM_NEON := true
++    # armeabi-v7a-hard deprecation note: "-mfloat-abi=hard" and "-mhard-float" cause link failure e.g.
++    #   ndk-r11c/toolchains/arm-linux-androideabi-4.9/prebuilt/darwin-x86_64/lib/gcc/arm-linux-androideabi/4.9/../../../../arm-linux-androideabi/bin/ld: \
++    #   error: ./obj/local/armeabi-v7a/libcurl.a(formdata.o) uses VFP register arguments, output does not
 +    common_CFLAGS += -mfpu=neon -march=armv7-a
-+endif
-+
-+ifeq ($(TARGET_ARCH_ABI),armeabi-v7a-hard)
-+    LOCAL_ARM_NEON := true
-+    common_CFLAGS += -mfloat-abi=hard -mfpu=neon -march=armv7-a -D_NDK_MATH_NO_SOFTFP=1 -mhard-float
++    common_CFLAGS += -D_NDK_MATH_NO_SOFTFP=1
 +endif
 +
 +ifeq ($(TARGET_ARCH_ABI),x86)

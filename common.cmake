@@ -104,7 +104,8 @@ else()
 
 	# TODO: Auto-detect whether or not ARM NEON is supported by the hardware
 	if(HAVE_NEON)
-		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mfloat-abi=hard -mfpu=neon")
+		#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mfloat-abi=hard -mfpu=neon")
+		set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mfpu=neon")
 	endif()
 
 endif()
