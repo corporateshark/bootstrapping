@@ -184,7 +184,11 @@ is updated, it should be updated to the respective latest version available.
 - We should be keeping the contained library versions reasonably up-to-date.
 
 
+License
+-------
+See the LICENSE file
+
 Bug reports, comments
 ---------------------
 
-Should go to michael@blippar.com.
+Should go to omar@blippar.com.
