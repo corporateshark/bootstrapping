@@ -261,7 +261,13 @@ def extractFile(filename, target_dir):
 
     # rename extracted folder to target_dir
     extract_dir_abs = os.path.join(SRC_DIR, extract_dir)
-    os.rename(extract_dir_abs, target_dir)
+
+    needRename = True
+
+    if platform.system() == "Windows":
+       needRename = extract_dir_abs.lower() != target_dir.lower()
+
+    if needRename: os.rename(extract_dir_abs, target_dir)
 
 
 def createArchiveFromDirectory(src_dir_name, archive_name, delete_existing_archive = False):
