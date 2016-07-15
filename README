@@ -1,3 +1,6 @@
+This is a fork of https://bitbucket.org/blippar/bootstrapping-external-libs
+---------------------------------------------------------------------------
+
 This repository holds our external (i.e. third party) libraries. After a fresh
 clone, the repository contains *only* metadata about the libraries, i.e. their
 names, where to retrieve them from, etc. In order to actually obtain or update
