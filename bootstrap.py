@@ -312,8 +312,7 @@ def computeFileHash(filename):
             buf = afile.read(blocksize)
     return hasher.hexdigest()
 
-
-def downloadAndExtractFile(url, download_dir, target_dir_name, sha1_hash = None, force_download = False, user_agent = None):
+def downloadFile(url, download_dir, target_dir_name, sha1_hash = None, force_download = False, user_agent = None):
     if not os.path.isdir(download_dir):
         os.mkdir(download_dir)
 
@@ -350,6 +349,9 @@ def downloadAndExtractFile(url, download_dir, target_dir_name, sha1_hash = None,
         if hash_file != sha1_hash:
             raise RuntimeError("Hash of " + target_filename + " (" + hash_file + ") differs from expected hash (" + sha1_hash + ")")
 
+
+def downloadAndExtractFile(url, download_dir, target_dir_name, sha1_hash = None, force_download = False, user_agent = None):
+    downloadFile(url, download_dir, target_dir_name, sha1_hash, force_download, user_agent)
     extractFile(target_filename, os.path.join(SRC_DIR, target_dir_name))
 
 
@@ -683,7 +685,30 @@ def main(argv):
                 src_type = source['type']
                 src_url = source['url']
 
-                if src_type == "archive":
+                if src_type == "sourcefile":
+                    sha1 = source.get('sha1', None)
+                    user_agent = source.get('user-agent', None)
+                    try:
+                        if force_fallback:
+                            raise RuntimeError
+                        downloadFile(src_url, ARCHIVE_DIR, name, sha1, force_download = opt_clean_archives, user_agent = user_agent)
+                        filename_rel = os.path.basename(src_url)
+                        shutil.copyfile( os.path.join(ARCHIVE_DIR, filename_rel), os.path.join(lib_dir, filename_rel) )
+                    except:
+                        if FALLBACK_URL:
+                            if not force_fallback:
+                                log("WARNING: Downloading of file " + src_url + " failed; trying fallback")
+
+                            p = urlparse(src_url)
+                            filename_rel = os.path.split(p.path)[1] # get original filename
+                            p = urlparse(FALLBACK_URL)
+                            fallback_src_url = urlunparse([p[0], p[1], p[2] + "/" + ARCHIVE_DIR_BASE + "/" + filename_rel, p[3], p[4], p[5]])
+                            downloadFile(fallback_src_url, ARCHIVE_DIR, name, sha1, force_download = True)
+                            shutil.copyfile( os.path.join(ARCHIVE_DIR, filename_rel), os.path.join(lib_dir, filename_rel) )
+                        else:
+                            shutil.rmtree(lib_dir)
+                            raise
+                elif src_type == "archive":
                     sha1 = source.get('sha1', None)
                     user_agent = source.get('user-agent', None)
                     try:
