@@ -349,9 +349,11 @@ def downloadFile(url, download_dir, target_dir_name, sha1_hash = None, force_dow
         if hash_file != sha1_hash:
             raise RuntimeError("Hash of " + target_filename + " (" + hash_file + ") differs from expected hash (" + sha1_hash + ")")
 
+    return target_filename
+
 
 def downloadAndExtractFile(url, download_dir, target_dir_name, sha1_hash = None, force_download = False, user_agent = None):
-    downloadFile(url, download_dir, target_dir_name, sha1_hash, force_download, user_agent)
+    target_filename = downloadFile(url, download_dir, target_dir_name, sha1_hash, force_download, user_agent)
     extractFile(target_filename, os.path.join(SRC_DIR, target_dir_name))
 
 
