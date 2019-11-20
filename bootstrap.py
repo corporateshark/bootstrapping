@@ -544,7 +544,7 @@ def main(argv):
         if opt in ("--debug-output",):
             DEBUG_OUTPUT = True
 
-    if platform.system() is not "Windows":
+    if platform.system() != "Windows":
         # Unfortunately some IDEs do not have a proper PATH environment variable set,
         # so we search manually for the required tools in some obvious locations.
         paths_to_search = os.environ["PATH"].split(":") + ["/usr/local/bin", "/opt/local/bin", "/usr/bin"]
@@ -564,7 +564,7 @@ def main(argv):
             try:
                 with open(name_file) as f:
                     opt_names_local = [l for l in (line.strip() for line in f) if l]
-                    opt_names_local = [l for l in opt_names_local if l[0] is not '#']
+                    opt_names_local = [l for l in opt_names_local if l[0] != '#']
                     opt_names += opt_names_local
                     dlog("Name file contains: " + ", ".join(opt_names_local))
             except:
