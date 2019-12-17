@@ -108,6 +108,8 @@ i.e. directly from the authors' websites or repositories.
 
 After script execution has finished, the following files and directories should
 have been added to the repository folder:
+
+```
     |- external
        |- .bootstrap.json
        |- archives/
@@ -116,6 +118,7 @@ have been added to the repository folder:
           |- ...
        |- src/
           |- ...
+```
 
 - The file .bootstrap.json contains the cached state of the last bootstrapping/
 pdating operation. The script always compares against this state, in order to
@@ -145,6 +148,8 @@ a single JSON file (bootstrap.json) that is being read by the script.
 The file should contain exactly one JSON array of objects, where each object
 contained in this array describes one library. This JSON schema gives an
 overview of the format:
+
+```
 [
 {
     "name": "LibraryName",
@@ -164,6 +169,7 @@ overview of the format:
 },
 ...
 ]
+```
 
 The library "name" specifies the name of the library, which in turn specifies
 the subdirectory name under the src/ directory. The name should be the common
@@ -204,14 +210,16 @@ prerequisites (such as copying header prototype files). All scripts have to
 be written in Python, in order to be compatible with all platforms, including
 Windows.
 
-Patches should be created using the 'diff' program from the external/ directory,
+Patches should be created using the `diff` program from the external/ directory,
 similar to this example:
+```
 > diff --exclude=".git" --exclude=".hg" -rupN \
       ./src/AGAST/ ./src/AGAST_patched/ > ./patches/agast.patch
+```
 The default -p argument for the patch command is 3, but this can be changed by
 an optional "pnum" field inside the postprocessing JSON object, containing a
 numeric value.
-For example, for patches created using 'git diff' or 'hg diff', a "pnum"
+For example, for patches created using `git diff` or `hg diff`, a "pnum"
 argument of "1" is likely needed. This method of creating a patch is
 discouraged, however, in favor of the cleaner method using the plain 'diff'
 command described above.
