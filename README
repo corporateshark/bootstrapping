@@ -1,5 +1,13 @@
 This is a fork of https://bitbucket.org/blippar/bootstrapping-external-libs
----------------------------------------------------------------------------
+------------------------------------------------------------------------------
+
+The Bootstrap script is a versatile dependencies manager for your C++
+projects. You can think of it as a portable (Windows, Linux, OSX) and a more
+feature-complete alternative to Google's Repo tool.
+
+------------------------------------------------------------------------------
+Original documentation:
+------------------------------------------------------------------------------
 
 This repository holds our external (i.e. third party) libraries. After a fresh
 clone, the repository contains *only* metadata about the libraries, i.e. their
