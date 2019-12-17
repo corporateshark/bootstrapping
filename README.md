@@ -9,6 +9,7 @@ Main features of Bootstrap:
 -  Cross-platform. Runs on Windows, Linux, and OSX.
 -  Full support of Git, Mercurial, SVN repositories.
 -  Full support of `.zip`, `.tar`, `.gz`, `.bz2`, `.xz` archives.
+-  Caching and fallback mechanisms.
 -  Rich error reporting.
 
 ## Usage
@@ -85,9 +86,8 @@ The script itself is written in Python and should "just work" using any standard
 Python 2 or 3 installation. The version control tools Git, Mercurial and
 Subversion must be installed and available on the environment path; in addition,
 the 'patch' program must be present on the user's system. On Windows, the script
-can be run either using Cygwin (just works as-is, as long as the above tools
-were installed using Cygwin's package management), or using natively installed
-tools (possibly with minor modifications to the script).
+can be run from the command line (for patching to work, ensure you have the Cygwin
+patch tool installed).
 
 
 Obtaining the libraries
