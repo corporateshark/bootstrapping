@@ -1,6 +1,3 @@
-This is a fork of abandoned https://bitbucket.org/blippar/bootstrapping-external-libs
-------------------------------------------------------------------------------
-
 The Bootstrap script is a versatile dependencies manager for your C++
 projects. You can think of it as a portable (Windows, Linux, OSX) and a more
 feature-complete alternative to Google's Repo tool.
@@ -11,18 +8,31 @@ Main features of Bootstrap:
 -  One-button-download philosophy. Just run the script to download and update all your dependencies.
 -  Cross-platform. Runs on Windows, Linux, and OSX.
 -  Full support of Git, Mercurial, SVN repositories.
--  Full support of .zip, .tar, .gz, .bz2, .xz archives.
+-  Full support of `.zip`, `.tar`, `.gz`, `.bz2`, `.xz` archives.
 -  Rich error reporting.
 
 ## Usage
 
-For instance, this simple JSON snippet will download the 'libjpeg' library from
+For instance, this minimalistic JSON snippet will clone the GLFW library from its Git repository
+and check out the revision which is tagged `3.3`.
+
+```JSON
+[{
+    "name": "glfw",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/glfw/glfw.git",
+        "revision": "3.3"
+    }
+}]
+```
+
+This simple JSON snippet will download the `libjpeg` library from
 the specified URL (via a custom user-agent string), check the archive integrity
 via SHA1, unpack the archive, and put its content into the `src/libjpeg` folder:
 
 ```JSON
-[
-{
+[{
     "name": "libjpeg",
     "source": {
         "type": "archive",
@@ -30,16 +40,14 @@ via SHA1, unpack the archive, and put its content into the `src/libjpeg` folder:
         "sha1": "d65ed6f88d318f7380a3a5f75d578744e732daca",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36"
     }
-}
-]
+}]
 ```
 
-This JSON snippet will download the 'nestegg' library from the Git repository,
+This JSON snippet will download the `nestegg` library from the Git repository,
 checkout the specified revision, and apply a patch via a custom Python script.
 
 ```JSON
-[
-{
+[{
     "name": "nestegg",
     "source": {
         "type": "git",
@@ -50,9 +58,14 @@ checkout the specified revision, and apply a patch via a custom Python script.
         "type": "script",
         "file": "libnestegg.py"
     }
-}
-]
+}]
 ```
+
+Read the comprehensive documentation below for further details.
+
+## P.S.
+
+This is a fork of an abandoned library https://bitbucket.org/blippar/bootstrapping-external-libs
 
 ------------------------------------------------------------------------------
 Original documentation:
