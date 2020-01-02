@@ -471,6 +471,7 @@ def printOptions():
         print("  --force-fallback        Force using the fallback URL instead of the original")
         print("                          sources")
         print("  --debug-output          Enables extra debugging output")
+        print("  --break-on-first-error  Terminate script once the first error is encountered")
         print("--------------------------------------------------------------------------------")
 
 
@@ -482,7 +483,9 @@ def main(argv):
         opts, args = getopt.getopt(
             argv,
             "ln:N:cCb:h",
-            ["list", "name=", "name-file=", "clean", "clean-all", "base-dir", "bootstrap-file=", "local-bootstrap-file=", "use-tar", "use-unzip", "repo-snapshots", "fallback-url=", "force-fallback", "debug-output", "help"])
+            ["list", "name=", "name-file=", "clean", "clean-all", "base-dir", "bootstrap-file=",
+             "local-bootstrap-file=", "use-tar", "use-unzip", "repo-snapshots", "fallback-url=",
+             "force-fallback", "debug-output", "help", "break-on-first-error"])
     except getopt.GetoptError:
         printOptions()
         return 0
@@ -498,6 +501,7 @@ def main(argv):
     local_bootstrap_filename = ""
     create_repo_snapshots = False
     force_fallback = False
+    break_on_first_error = False
 
     base_dir_path = ""
 
@@ -541,6 +545,8 @@ def main(argv):
         if opt in ("--force-fallback",):
             force_fallback = True
             log("Using fallback URL to fetch all libraries")
+        if opt in ("--break-on-first-error",):
+            break_on_first_error = True
         if opt in ("--debug-output",):
             DEBUG_OUTPUT = True
 
@@ -800,6 +806,8 @@ def main(argv):
             writeJSONData(sdata, state_filename)
         except:
             log("ERROR: Failure to bootstrap library " + name + " (reason: " + str(sys.exc_info()[0]) + ")")
+            if break_on_first_error:
+                exit(-1)
             traceback.print_exc()
             failed_libraries.append(name)
 
