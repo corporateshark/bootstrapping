@@ -445,6 +445,7 @@ def printOptions():
         print("  --name-file, -N         Specifies a file that contains a (sub)set of libraries")
         print("                          to be downloaded. One library name per line; lines")
         print("                          starting with '#' are considered comments.")
+        print("  --skip                  Specifies a name of a single library to be skipped")
         print("  --clean, -c             Remove library directory before obtaining library")
         print("  --clean-all, -C         Implies --clean, and also forces re-download of cached")
         print("                          archive files")
@@ -483,7 +484,7 @@ def main(argv):
         opts, args = getopt.getopt(
             argv,
             "ln:N:cCb:h",
-            ["list", "name=", "name-file=", "clean", "clean-all", "base-dir", "bootstrap-file=",
+            ["list", "name=", "name-file=", "skip=", "clean", "clean-all", "base-dir", "bootstrap-file=",
              "local-bootstrap-file=", "use-tar", "use-unzip", "repo-snapshots", "fallback-url=",
              "force-fallback", "debug-output", "help", "break-on-first-error"])
     except getopt.GetoptError:
@@ -492,6 +493,7 @@ def main(argv):
 
     opt_names = []
     name_files = []
+    skip_libs = []
     opt_clean = False
     opt_clean_archives = False
     list_libraries = False
@@ -515,6 +517,8 @@ def main(argv):
             opt_names.append(arg)
         if opt in ("-N", "--name-file"):
             name_files.append(os.path.abspath(arg))
+        if opt in ("--skip",):
+            skip_libs.append(arg)
         if opt in ("-c", "--clean"):
             opt_clean = True
         if opt in ("-C", "--clean-all"):
@@ -650,6 +654,9 @@ def main(argv):
         name = library.get('name', None)
         source = library.get('source', None)
         post = library.get('postprocess', None)
+
+        if (skip_libs) and (name in skip_libs):
+            continue
 
         if (opt_names) and (not name in opt_names):
             continue
