@@ -112,7 +112,7 @@ def executeCommand(command, printCommand = False, quiet = False):
 
 def dieIfNonZero(res):
     if res != 0:
-        raise ValueError("Command returned non-zero status.");
+        raise ValueError("Command returned non-zero status: " + str(res));
 
 
 def cloneRepository(type, url, target_name, revision = None, try_only_local_operations = False):
