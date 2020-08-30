@@ -199,7 +199,7 @@ def extractFile(filename, target_dir):
     log("Extracting file " + filename)
     stem, extension = os.path.splitext(os.path.basename(filename))
 
-    if extension == ".zip":
+    if extension == ".zip" or extension == "":
         zfile = zipfile.ZipFile(filename)
         extract_dir = os.path.commonprefix(zfile.namelist())
         extract_dir_local = ""
