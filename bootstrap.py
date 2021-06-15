@@ -13,6 +13,7 @@ import hashlib
 import json
 import getopt
 import traceback
+import urllib
 #import progressbar
 
 try:
@@ -818,6 +819,12 @@ def main(argv):
 
             # write out cached state
             writeJSONData(sdata, state_filename)
+        except urllib.error.URLError as e:
+            log("ERROR: Failure to bootstrap library " + name + " (urllib.error.URLError: reason " + str(e.reason) + ")")
+            if break_on_first_error:
+                exit(-1)
+            traceback.print_exc()
+            failed_libraries.append(name)
         except:
             log("ERROR: Failure to bootstrap library " + name + " (reason: " + str(sys.exc_info()[0]) + ")")
             if break_on_first_error:
