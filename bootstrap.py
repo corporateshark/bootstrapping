@@ -20,7 +20,6 @@ try:
     from urllib.request import urlparse
     from urllib.request import urlunparse
     from urllib.request import urlretrieve
-    from urllib.request import URLopener
     from urllib.request import quote
 except ImportError:
     from urlparse import urlparse
@@ -86,11 +85,6 @@ def log(string):
 def dlog(string):
     if DEBUG_OUTPUT:
         print("*** " + string)
-
-
-class MyURLOpener(URLopener):
-    pass
-
 
 def executeCommand(command, printCommand = False, quiet = False):
 
@@ -345,8 +339,11 @@ def downloadFile(url, download_dir, target_dir_name, sha1_hash = None, force_dow
             downloadSCP(p.hostname, p.username, p.path, download_dir)
         else:
             if user_agent is not None:
-                MyURLOpener.version = user_agent
-                MyURLOpener().retrieve(url, target_filename)
+                opener = urllib.request.build_opener()
+                opener.addheaders = [('User-agent', user_agent)]
+                f = open(target_filename, 'wb')
+                f.write(opener.open(url).read())
+                f.close()
             else:
                 urlretrieve(url, target_filename)
     else:
