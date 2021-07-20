@@ -109,9 +109,15 @@ def dieIfNonZero(res):
     if res != 0:
         raise ValueError("Command returned non-zero status: " + str(res));
 
+def escapifyPath(path):
+    if not path.find(" "):
+        return path
+    if platform.system() == "Windows":
+        return "\"" + path + "\""
+    return path.replace("\\ ", " ")
 
 def cloneRepository(type, url, target_name, revision = None, try_only_local_operations = False):
-    target_dir = os.path.join(SRC_DIR, target_name)
+    target_dir = escapifyPath(os.path.join(SRC_DIR, target_name))
     target_dir_exists = os.path.exists(target_dir)
     log("Cloning " + url + " to " + target_dir)
 
