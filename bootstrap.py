@@ -15,19 +15,16 @@ import getopt
 import traceback
 import urllib
 import ssl
-#import progressbar
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
 try:
     from urllib.request import urlparse
     from urllib.request import urlunparse
-    from urllib.request import urlretrieve
     from urllib.request import quote
 except ImportError:
     from urlparse import urlparse
     from urlparse import urlunparse
-    from urllib import urlretrieve
     from urllib import URLopener
     from urllib import quote
 
@@ -305,14 +302,14 @@ def downloadSCP(hostname, username, path, target_dir):
     scpc = scp.SCPClient(ssh.get_transport())
     scpc.get(path, local_path = target_dir);
 
-
-# def downloadProgress(count, block_size, total_size):
-#     global pbar
-#     if count == 0:
-#         pbar = progressbar.ProgressBar(maxval = total_size / block_size)
-#     else:
-#         pbar.update(count - 1)
-
+def downloadProgress(cur_size, total_size):
+    percent = int((cur_size / total_size)*100)
+    print("[", end = "")
+    for i in range(percent):
+        print("*", end = "")
+    for i in range(percent, 100):
+        print(".", end = "")
+    print("]", percent, "% (", "%.2f" % (cur_size / (1024*1024)), "Mb )", end = "\r")
 
 def computeFileHash(filename):
     blocksize = 65536
@@ -347,14 +344,28 @@ def downloadFile(url, download_dir, target_dir_name, sha1_hash = None, force_dow
         if p.scheme == "ssh":
             downloadSCP(p.hostname, p.username, p.path, download_dir)
         else:
+            opener = urllib.request.build_opener()
             if user_agent is not None:
-                opener = urllib.request.build_opener()
                 opener.addheaders = [('User-agent', user_agent)]
-                f = open(target_filename, 'wb')
-                f.write(opener.open(url).read())
-                f.close()
-            else:
-                urlretrieve(url, target_filename)
+            f = open(target_filename, 'wb')
+            with opener.open(url) as response:
+                Length = response.getheader('content-length')
+                BlockSize = 128*1024 # default value
+                if Length:
+                    Length = int(Length)
+                    BlockSize = max(BlockSize, Length // 1000)
+                    Size = 0
+                    while True:
+                        Buffer = response.read(BlockSize)
+                        if not Buffer:
+                            break
+                        f.write(Buffer)
+                        Size += len(Buffer)
+                        downloadProgress(Size, Length)
+                    print();
+                else:
+                    f.write(response.read())
+            f.close()
     else:
         log("Skipping download of " + url + "; already downloaded")
 
