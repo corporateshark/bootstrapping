@@ -305,11 +305,12 @@ def downloadSCP(hostname, username, path, target_dir):
 def downloadProgress(cur_size, total_size):
     percent = int((cur_size / total_size)*100)
     print("[", end = "")
-    for i in range(percent):
+    for i in range(int(percent/2)):
         print("*", end = "")
-    for i in range(percent, 100):
+    for i in range(int(percent/2), 50):
         print(".", end = "")
-    print("]", percent, "% (", "%.2f" % (cur_size / (1024*1024)), "Mb )", end = "\r")
+    print("] " + str(percent) + "% --- ", end = "")
+    print("%.2f" % (cur_size / (1024*1024)), "Mb", end = "\r")
 
 def computeFileHash(filename):
     blocksize = 65536
