@@ -374,7 +374,9 @@ def downloadFile(url, download_dir, target_dir_name, sha1_hash = None, force_dow
     if sha1_hash is not None and sha1_hash != "":
         hash_file = computeFileHash(target_filename)
         if hash_file != sha1_hash:
-            raise RuntimeError("Hash of " + target_filename + " (" + hash_file + ") differs from expected hash (" + sha1_hash + ")")
+            errorStr = "Hash of " + target_filename + " (" + hash_file + ") differs from expected hash (" + sha1_hash + ")"
+            log(errorStr)
+            raise RuntimeError(errorStr)
 
     return target_filename
 
