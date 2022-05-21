@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 from __future__ import print_function
 import platform
@@ -75,7 +75,7 @@ TOOL_COMMAND_UNZIP = "unzip"
 if platform.system() == "Windows":
     os.environ['CYGWIN'] = "nodosfilewarning"
 
-if platform.system() == "Linux":
+if (platform.system() == "Linux") or (platform.system() == "Darwin"):
     TOOL_COMMAND_PYTHON = "python3"
 
 def log(string):
