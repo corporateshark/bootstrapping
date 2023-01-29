@@ -4,7 +4,7 @@
     "source": {
         "type": "archive",
         "url": "http://www.ijg.org/files/jpegsrc.v9d.tar.gz",
-        "sha1": "e44187fc7717896d4372271ddd4aa1d465c811b8",
+        "sha1": "19b32a12988eae920d142243373841ed78cd4374",
         "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36"
     }
 },
