@@ -880,6 +880,9 @@ def main(argv):
 
     log("Finished")
 
+    # touch the state cache file
+    os.utime(state_filename, None);
+
     return 0
 
 if __name__ == "__main__":
