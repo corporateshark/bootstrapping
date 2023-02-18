@@ -94,6 +94,9 @@ TOOL_COMMAND_UNZIP = "unzip"
 if platform.system() == "Windows":
     os.environ['CYGWIN'] = "nodosfilewarning"
 
+if not sys.version_info[0] >= 3:
+    raise ValueError("I require Python 3.0 or a later version")
+
 def log(string):
     print("--- " + string)
 
