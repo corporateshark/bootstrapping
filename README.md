@@ -2,7 +2,8 @@
 
 The Bootstrap script is a versatile dependencies manager for your C++
 projects. You can think of it as a portable (Windows, Linux, OSX) and a more
-feature-complete alternative to Google's Repo tool.
+feature-complete alternative to Google's Repo tool. The script itself is written 
+in Python and should "just work" using any standard Python 3 installation.
 
 ## Introduction
 
