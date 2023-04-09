@@ -454,13 +454,16 @@ def readJSONData(filename):
     try:
         json_data = open(filename).read()
     except:
-        log("ERROR: Could not read JSON file " + filename)
+        log("ERROR: Could not read JSON file: " + filename)
         return None
 
     try:
         data = json.loads(json_data)
+    except json.JSONDecodeError as e:
+        log("ERROR: Could not parse JSON document: {}\n    {} (line {}:{})\n".format(filename, e.msg, e.lineno, e.colno))
+        return None
     except:
-        log("ERROR: Could not parse JSON document")
+        log("ERROR: Could not parse JSON document: " + filename)
         return None
 
     return data
