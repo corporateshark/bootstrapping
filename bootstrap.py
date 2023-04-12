@@ -83,7 +83,7 @@ FALLBACK_URL = ""
 USE_TAR = False
 USE_UNZIP = False
 
-TOOL_COMMAND_PYTHON = sys.executable
+TOOL_COMMAND_PYTHON = sys.executable if not " " in sys.executable else '"{}"'.format(sys.executable)
 TOOL_COMMAND_GIT = "git"
 TOOL_COMMAND_HG = "hg"
 TOOL_COMMAND_SVN = "svn"
