@@ -5,7 +5,7 @@
 # sk@linderdaum.com
 #
 # The MIT License (MIT)
-# Copyright (c) 2016-2024, Sergey Kosarevsky
+# Copyright (c) 2016-2025, Sergey Kosarevsky
 #
 # ---
 # Based on https://bitbucket.org/blippar/bootstrapping-external-libs
