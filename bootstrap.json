@@ -31,5 +31,14 @@
         "type": "patch",
         "file": "libmodplug_771ee75bb8bfcfe95eae434ed1f3b2c5b63b2cb3.patch"
     }
+},
+{
+    "name": "stb",
+    "predicate": "platform.system() != 'Windows' or os.getenv('DOWNLOAD_STB') != None",
+    "source": {
+        "type": "git",
+        "url": "https://github.com/nothings/stb.git",
+        "revision": "ae721c50eaf761660b4f90cc590453cdb0c2acd0"
+    }
 }
 ]

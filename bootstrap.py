@@ -709,12 +709,19 @@ def main(argv):
         name = library.get('name', None)
         source = library.get('source', None)
         post = library.get('postprocess', None)
+        predicate = library.get('predicate', None)
 
         if (skip_libs) and (name in skip_libs):
             continue
 
         if (opt_names) and (not name in opt_names):
             continue
+
+        if predicate is not None:
+            log("Running predicate code for '" + name + "'")
+            if eval(predicate) is not True:
+                log("Predicate is not True for '" + name + "'; skipping library")
+                continue
 
         lib_dir = os.path.join(SRC_DIR, name)
         lib_dir = lib_dir.replace(os.path.sep, '/')

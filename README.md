@@ -32,7 +32,7 @@ and check out the revision which is tagged `3.3`.
 ```
 
 This simple JSON snippet will download the `libjpeg` library from
-the specified URL (via a custom user-agent string), check the archive integrity
+the specified URL (via a custom `user-agent` string), check the archive integrity
 via SHA1, unpack the archive, and put its content into the `src/libjpeg` folder:
 
 ```JSON
@@ -49,10 +49,13 @@ via SHA1, unpack the archive, and put its content into the `src/libjpeg` folder:
 
 This JSON snippet will download the `nestegg` library from the Git repository,
 checkout the specified revision, and apply a patch via a custom Python script.
+You can also provide an optional `predicate` string to run custom Python code
+to determine whether the library needs to be downloaded.
 
 ```JSON
 [{
     "name": "nestegg",
+    "predicate": "platform.system() != 'Windows' or os.getenv('DOWNLOAD_STB') != None",
     "source": {
         "type": "git",
         "url": "https://github.com/kinetiknz/nestegg",
