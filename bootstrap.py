@@ -633,7 +633,7 @@ def main(argv):
                     opt_names += opt_names_local
                     dlog("Name file contains: " + ", ".join(opt_names_local))
             except:
-                log("ERROR: cannot parse name file " + name_file)
+                log("ERROR: cannot parse name file '" + name_file + "'")
                 return -1
 
     if force_fallback and not FALLBACK_URL:
@@ -732,7 +732,7 @@ def main(argv):
                     break
 
         if cached_state_ok:
-            log("Cached state for " + name + " equals expected state; skipping library")
+            log("Cached state for '" + name + "' equals expected state; skipping library")
             continue
         else:
             # remove cached state for library
@@ -750,10 +750,10 @@ def main(argv):
             # download source
             if source is not None:
                 if 'type' not in source:
-                    log("ERROR: Invalid schema for " + name + ": 'source' object must have a 'type'")
+                    log("ERROR: Invalid schema for '" + name + "': 'source' object must have a 'type'")
                     return -1
                 if 'url' not in source:
-                    log("ERROR: Invalid schema for " + name + ": 'source' object must have a 'url'")
+                    log("ERROR: Invalid schema for '" + name + "': 'source' object must have a 'url'")
                     return -1
                 src_type = source['type']
                 src_url = source['url']
@@ -815,7 +815,7 @@ def main(argv):
                         cloneRepository(src_type, src_url, name, revision, False, recursive)
 
                         if create_repo_snapshots:
-                            log("Creating snapshot of library repository " + name)
+                            log("Creating snapshot of library repository '" + name + "'")
                             repo_dir = os.path.join(SRC_DIR, name)
                             archive_filename = os.path.join(SNAPSHOT_DIR, archive_name)
 
@@ -847,10 +847,10 @@ def main(argv):
             # post-processing
             if post is not None:
                 if 'type' not in post:
-                    log("ERROR: Invalid schema for " + name + ": 'postprocess' object must have a 'type'")
+                    log("ERROR: Invalid schema for '" + name + "': 'postprocess' object must have a 'type'")
                     return -1
                 if 'file' not in post:
-                    log("ERROR: Invalid schema for " + name + ": 'postprocess' object must have a 'file'")
+                    log("ERROR: Invalid schema for '" + name + "': 'postprocess' object must have a 'file'")
                     return -1
                 post_type = post['type']
                 post_file = post['file']
@@ -869,13 +869,13 @@ def main(argv):
             # write out cached state
             writeJSONData(sdata, state_filename)
         except urllib.error.URLError as e:
-            log("ERROR: Failure to bootstrap library " + name + " (urllib.error.URLError: reason " + str(e.reason) + ")")
+            log("ERROR: Failure to bootstrap library '" + name + "' (urllib.error.URLError: reason " + str(e.reason) + ")")
             if break_on_first_error:
                 exit(-1)
             traceback.print_exc()
             failed_libraries.append(name)
         except:
-            log("ERROR: Failure to bootstrap library " + name + " (reason: " + str(sys.exc_info()[0]) + ")")
+            log("ERROR: Failure to bootstrap library '" + name + "' (reason: " + str(sys.exc_info()[0]) + ")")
             if break_on_first_error:
                 exit(-1)
             traceback.print_exc()
