@@ -70,6 +70,15 @@ to determine whether the library needs to be downloaded.
 
 Read the comprehensive documentation below for further details.
 
+# Projects using this script
+
+- **[IGL](https://github.com/facebook/igl/)** - Meta's Intermediate Graphics Library (IGL) is a cross-platform library that commands the GPU. License: MIT.
+- **[LightweightVK](https://github.com/corporateshark/lightweightvk)** - lightweight C++ bindless Vulkan 1.3 wrapper. License: MIT.
+- **[Mastering Graphics Programming with Vulkan](https://github.com/PacktPublishing/Mastering-Graphics-Programming-with-Vulkan)**
+- **[3D Graphics Rendering Cookbook](https://github.com/PacktPublishing/3D-Graphics-Rendering-Cookbook)**
+- **[Vulkan 3D Graphics Rendering Cookbook](https://github.com/PacktPublishing/3D-Graphics-Rendering-Cookbook-Second-Edition)**
+
+
 ## P.S.
 
 This is a fork of an abandoned library https://bitbucket.org/blippar/bootstrapping-external-libs
