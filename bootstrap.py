@@ -67,6 +67,8 @@ except:
     print("> pip install pyliblzma")
     lzma_available = False
 
+BOOTSTRAP_VERSION = "1.0.6 (2025)"
+
 SRC_DIR_BASE = "src"
 ARCHIVE_DIR_BASE = "archives"
 SNAPSHOT_DIR_BASE = "snapshots"
@@ -489,6 +491,8 @@ def listLibraries(data):
 
 def printOptions():
         print("--------------------------------------------------------------------------------")
+        print(BOOTSTRAP_VERSION)
+        print("--------------------------------------------------------------------------------")
         print("Downloads external libraries, and applies patches or scripts if necessary.")
         print("If the --name argument is not provided, all available libraries will be")
         print("downloaded.")
@@ -528,6 +532,7 @@ def printOptions():
         print("                          sources")
         print("  --debug-output          Enables extra debugging output")
         print("  --break-on-first-error  Terminate script once the first error is encountered")
+        print("  --version               Print the script version")
         print("--------------------------------------------------------------------------------")
 
 
@@ -541,7 +546,7 @@ def main(argv):
             "ln:N:cCb:h",
             ["list", "name=", "name-file=", "skip=", "clean", "clean-all", "base-dir", "bootstrap-file=",
              "local-bootstrap-file=", "use-tar", "use-unzip", "repo-snapshots", "fallback-url=",
-             "force-fallback", "debug-output", "help", "break-on-first-error"])
+             "force-fallback", "debug-output", "help", "break-on-first-error", "version"])
     except getopt.GetoptError:
         printOptions()
         return 0
@@ -565,6 +570,9 @@ def main(argv):
     for opt, arg in opts:
         if opt in ("-h", "--help"):
             printOptions()
+            return 0
+        if opt in ("--version"):
+            print(BOOTSTRAP_VERSION)
             return 0
         if opt in ("-l", "--list"):
             list_libraries = True
