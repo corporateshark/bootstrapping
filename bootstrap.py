@@ -67,7 +67,7 @@ except:
     print("> pip install pyliblzma")
     lzma_available = False
 
-BOOTSTRAP_VERSION = "1.0.6 (2025)"
+BOOTSTRAP_VERSION = "1.0.7 (2025)"
 
 SRC_DIR_BASE = "src"
 ARCHIVE_DIR_BASE = "archives"
@@ -228,7 +228,17 @@ def extractFile(filename, target_dir):
     stem, extension = os.path.splitext(os.path.basename(filename))
 
     if extension == ".zip" or extension == "":
-        zfile = zipfile.ZipFile(filename)
+        zfile = None
+        try:
+            zfile = zipfile.ZipFile(filename)
+        except zipfile.BadZipFile:
+            print("WARNING: Invalid ZIP file '" + filename + "'")
+            if os.path.exists(filename) and os.path.getsize(filename) == 0:
+                print("WARNING: Zero-sized file was deleted. Run the script again.")
+                os.remove(filename)
+            else:
+                print("WARNING: Try deleting the cached file and run the script again.")
+            raise RuntimeError("Updating to revision not implemented for SVN.") from None
         extract_dir = os.path.commonprefix(zfile.namelist())
         hasFolder = False
         for fname in zfile.namelist():
