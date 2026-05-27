@@ -103,8 +103,8 @@ if platform.system() == "Windows":
         kernel32.GetConsoleMode(handle, ctypes.byref(mode))
         kernel32.SetConsoleMode(handle, mode.value | 0x0004)
 
-if not sys.version_info[0] >= 3:
-    raise ValueError("I require Python 3.0 or a later version")
+if sys.version_info < (3, 5):
+    raise ValueError("I require Python 3.5 or a later version")
 
 def log(string):
     print("--- " + string)
