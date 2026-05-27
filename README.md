@@ -74,6 +74,7 @@ Read the comprehensive documentation below for further details.
 
 - **[IGL](https://github.com/facebook/igl/)** - Meta's Intermediate Graphics Library (IGL) is a cross-platform library that commands the GPU. License: MIT.
 - **[LightweightVK](https://github.com/corporateshark/lightweightvk)** - lightweight C++ bindless Vulkan 1.3 wrapper. License: MIT.
+- **[LightweightVK @ Meta](https://github.com/facebook/lightweightvk)** - Meta's fork of [LightweightVK](https://github.com/corporateshark/lightweightvk). License: MIT.
 - **[Mastering Graphics Programming with Vulkan](https://github.com/PacktPublishing/Mastering-Graphics-Programming-with-Vulkan)**
 - **[3D Graphics Rendering Cookbook](https://github.com/PacktPublishing/3D-Graphics-Rendering-Cookbook)**
 - **[Vulkan 3D Graphics Rendering Cookbook](https://github.com/PacktPublishing/3D-Graphics-Rendering-Cookbook-Second-Edition)**
