@@ -265,7 +265,7 @@ def extractFile(filename, target_dir):
         extract_dir_abs = os.path.join(SRC_DIR, extract_dir_local)
 
         try:
-            os.mkdirs(extract_dir_abs)
+            os.makedirs(extract_dir_abs, exist_ok=True)
         except:
             pass
 
@@ -297,7 +297,7 @@ def extractFile(filename, target_dir):
         extract_dir_abs = os.path.join(SRC_DIR, extract_dir_local)
 
         try:
-            os.mkdirs(extract_dir_abs)
+            os.makedirs(extract_dir_abs, exist_ok=True)
         except:
             pass
 
