@@ -218,17 +218,16 @@ def decompressTarXZFile(src_filename, dst_filename):
 
     try:
         fs = open(src_filename, "rb")
-        if not fs:
-            raise RuntimeError("Opening file " + src_filename + " failed")
+    except:
+        raise RuntimeError("Opening file " + src_filename + " failed")
+    try:
         fd = open(dst_filename, "wb")
-        if not fd:
-            raise RuntimeError("Opening file " + dst_filename + " failed")
-
+    except:
+        fs.close()
+        raise RuntimeError("Opening file " + dst_filename + " failed")
+    with fs, fd:
         decompressed = lzma.decompress(fs.read())
         fd.write(decompressed)
-    finally:
-        fs.close()
-        fd.close()
 
 
 
@@ -397,25 +396,24 @@ def downloadFile(url, download_dir, target_dir_name, sha1_hash = None, force_dow
             opener = urllib.request.build_opener()
             if user_agent is not None:
                 opener.addheaders = [('User-agent', user_agent)]
-            f = open(target_filename, 'wb')
-            with opener.open(url) as response:
-                Length = response.getheader('content-length')
-                BlockSize = 128*1024 # default value
-                if Length:
-                    Length = int(Length)
-                    BlockSize = max(BlockSize, Length // 1000)
-                    Size = 0
-                    while True:
-                        Buffer = response.read(BlockSize)
-                        if not Buffer:
-                            break
-                        f.write(Buffer)
-                        Size += len(Buffer)
-                        downloadProgress(Size, Length)
-                    print();
-                else:
-                    f.write(response.read())
-            f.close()
+            with open(target_filename, 'wb') as f:
+                with opener.open(url) as response:
+                    Length = response.getheader('content-length')
+                    BlockSize = 128*1024 # default value
+                    if Length:
+                        Length = int(Length)
+                        BlockSize = max(BlockSize, Length // 1000)
+                        Size = 0
+                        while True:
+                            Buffer = response.read(BlockSize)
+                            if not Buffer:
+                                break
+                            f.write(Buffer)
+                            Size += len(Buffer)
+                            downloadProgress(Size, Length)
+                        print();
+                    else:
+                        f.write(response.read())
     else:
         log("Skipping download of " + url + "; already downloaded")
 
