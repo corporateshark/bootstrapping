@@ -5,7 +5,7 @@
 # sk@linderdaum.com
 #
 # The MIT License (MIT)
-# Copyright (c) 2016-2025, Sergey Kosarevsky
+# Copyright (c) 2016-2026, Sergey Kosarevsky
 #
 # ---
 # Based on https://bitbucket.org/blippar/bootstrapping-external-libs
@@ -19,7 +19,6 @@
 #
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-from __future__ import print_function
 import platform
 import os
 import sys
@@ -33,20 +32,12 @@ import json
 import getopt
 import traceback
 import urllib
+import urllib.request
 import ssl
 import ctypes
+from urllib.parse import urlparse, urlunparse, quote
 
 ssl._create_default_https_context = ssl._create_unverified_context
-
-try:
-    from urllib.request import urlparse
-    from urllib.request import urlunparse
-    from urllib.request import quote
-except ImportError:
-    from urlparse import urlparse
-    from urlparse import urlunparse
-    from urllib import URLopener
-    from urllib import quote
 
 try:
     import paramiko
