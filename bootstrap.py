@@ -48,7 +48,6 @@ try:
     scp_available = True
 except:
     scp_available = False
-    print("WARNING: Please install the Python packages [paramiko, scp] for full script operation.")
 
 try:
     import lzma
