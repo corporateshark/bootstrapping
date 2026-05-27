@@ -33,6 +33,14 @@
     }
 },
 {
+    "name": "3D-Graphics-Rendering-Cookbook/data",
+    "source": {
+        "type": "sourcefile",
+        "url": "https://raw.githubusercontent.com/PacktPublishing/3D-Graphics-Rendering-Cookbook/e8bf80a2f4f2f9fafc49860f4d5b201101d42af8/data/OpenSans-Light.ttf",
+        "sha1": "40442c189568184b6e6c27a25d69f14d91b65039"
+    }
+},
+{
     "name": "stb",
     "predicate": "platform.system() != 'Windows' or os.getenv('DOWNLOAD_STB') != None",
     "source": {
