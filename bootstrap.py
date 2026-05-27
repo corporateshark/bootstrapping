@@ -25,6 +25,7 @@ import sys
 import io
 import shutil
 import subprocess
+import tempfile
 import zipfile
 import tarfile
 import hashlib
@@ -396,24 +397,33 @@ def downloadFile(url, download_dir, target_dir_name, sha1_hash = None, force_dow
             opener = urllib.request.build_opener()
             if user_agent is not None:
                 opener.addheaders = [('User-agent', user_agent)]
-            with open(target_filename, 'wb') as f:
-                with opener.open(url) as response:
-                    Length = response.getheader('content-length')
-                    BlockSize = 128*1024 # default value
-                    if Length:
-                        Length = int(Length)
-                        BlockSize = max(BlockSize, Length // 1000)
-                        Size = 0
-                        while True:
-                            Buffer = response.read(BlockSize)
-                            if not Buffer:
-                                break
-                            f.write(Buffer)
-                            Size += len(Buffer)
-                            downloadProgress(Size, Length)
-                        print();
-                    else:
-                        f.write(response.read())
+            # download to a temporary file first, so a failed download doesn't leave a partial file behind
+            fd, tmp_filename = tempfile.mkstemp(dir=download_dir)
+            try:
+                with os.fdopen(fd, 'wb') as f:
+                    with opener.open(url) as response:
+                        Length = response.getheader('content-length')
+                        BlockSize = 128*1024 # default value
+                        if Length:
+                            Length = int(Length)
+                            BlockSize = max(BlockSize, Length // 1000)
+                            Size = 0
+                            while True:
+                                Buffer = response.read(BlockSize)
+                                if not Buffer:
+                                    break
+                                f.write(Buffer)
+                                Size += len(Buffer)
+                                downloadProgress(Size, Length)
+                            print();
+                        else:
+                            f.write(response.read())
+                os.replace(tmp_filename, target_filename)
+            except:
+                # clean up the partial download
+                if os.path.exists(tmp_filename):
+                    os.remove(tmp_filename)
+                raise
     else:
         log("Skipping download of " + url + "; already downloaded")
 
