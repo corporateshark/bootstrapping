@@ -450,7 +450,7 @@ def applyPatchFile(patch_name, dir_name, pnum):
     if res != 0:
         warning("ERROR: patch application failure; has this patch already been applied?")
         executeCommand(TOOL_COMMAND_PATCH + " --dry-run " + arguments, printCommand = True)
-        exit(255)
+        raise RuntimeError("Patch application failure for " + patch_name)
     else:
         dieIfNonZero(executeCommand(TOOL_COMMAND_PATCH + " " + arguments, quiet = True))
 
