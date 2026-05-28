@@ -934,8 +934,9 @@ def main(argv):
 
     log("Finished")
 
-    # touch the state cache file
-    os.utime(state_filename, None)
+    # touch the state cache file (may not exist if no libraries were processed)
+    if os.path.exists(state_filename):
+        os.utime(state_filename, None)
 
     return 0
 
