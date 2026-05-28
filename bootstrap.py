@@ -135,12 +135,12 @@ def executeCommand(command, printCommand = False, quiet = False):
         else:
             log(">>> " + command)
 
-    return subprocess.call(command, shell = True, stdout=out, stderr=err);
+    return subprocess.call(command, shell = True, stdout=out, stderr=err)
 
 
 def dieIfNonZero(res):
     if res != 0:
-        raise ValueError("Command returned non-zero status: " + str(res));
+        raise ValueError("Command returned non-zero status: " + str(res))
 
 def escapifyPath(path):
     if path.find(" ") == -1:
@@ -348,7 +348,7 @@ def downloadSCP(hostname, username, path, target_dir):
     ssh.load_system_host_keys()
     ssh.connect(hostname = hostname, username = username)
     scpc = scp.SCPClient(ssh.get_transport())
-    scpc.get(path, local_path = target_dir);
+    scpc.get(path, local_path = target_dir)
 
 def downloadProgress(cur_size, total_size):
     percent = int((cur_size / total_size)*100)
@@ -414,7 +414,7 @@ def downloadFile(url, download_dir, target_dir_name, sha1_hash = None, force_dow
                                 f.write(Buffer)
                                 Size += len(Buffer)
                                 downloadProgress(Size, Length)
-                            print();
+                            print()
                         else:
                             f.write(response.read())
                 os.replace(tmp_filename, target_filename)
@@ -466,7 +466,7 @@ def runPythonScript(script_name):
     log("Running Python script " + script_name)
     patch_dir = os.path.join(BASE_DIR, "patches")
     filename = os.path.join(patch_dir, script_name)
-    dieIfNonZero(executeCommand(TOOL_COMMAND_PYTHON + " " + escapifyPath(filename), False));
+    dieIfNonZero(executeCommand(TOOL_COMMAND_PYTHON + " " + escapifyPath(filename), False))
 
 
 def findToolCommand(command, paths_to_search, required = False):
@@ -478,7 +478,7 @@ def findToolCommand(command, paths_to_search, required = False):
         if os.path.exists(command_abs):
             command_res = command_abs
             found = True
-            break;
+            break
 
     if required and not found:
         warning("WARNING: command " + command + " not found, but required by script")
@@ -675,7 +675,7 @@ def main(argv):
 
     if force_fallback and not FALLBACK_URL:
         warning("Error: cannot force usage of the fallback location without specifying a fallback URL")
-        return -1;
+        return -1
 
     state_filename = os.path.join(os.path.dirname(os.path.splitext(bootstrap_filename)[0]), \
                                   "." + os.path.basename(os.path.splitext(bootstrap_filename)[0])) \
@@ -687,7 +687,7 @@ def main(argv):
     # read canonical libraries data
     data = readJSONData(bootstrap_filename)
     if data is None:
-        return -1;
+        return -1
 
     # some sanity checking
     for library in data:
@@ -701,7 +701,7 @@ def main(argv):
         local_data = readJSONData(local_bootstrap_filename)
 
         if local_data is None:
-            return -1;
+            return -1
 
         # some sanity checking
         for local_library in local_data:
@@ -935,7 +935,7 @@ def main(argv):
     log("Finished")
 
     # touch the state cache file
-    os.utime(state_filename, None);
+    os.utime(state_filename, None)
 
     return 0
 
