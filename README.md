@@ -3,7 +3,7 @@
 The Bootstrap script is a versatile dependencies manager for your C++
 projects. You can think of it as a portable (Windows, Linux, OSX) and a more
 feature-complete alternative to Google's Repo tool. The script itself is written 
-in Python and should "just work" using any standard Python&nbsp;3 installation.
+in Python and should "just work" using any standard Python 3.6+ installation.
 
 ## Introduction
 
@@ -80,26 +80,11 @@ Read the comprehensive documentation below for further details.
 - **[Vulkan 3D Graphics Rendering Cookbook](https://github.com/PacktPublishing/3D-Graphics-Rendering-Cookbook-Second-Edition)**
 
 
-## P.S.
-
-This is a fork of an abandoned library https://bitbucket.org/blippar/bootstrapping-external-libs
-
-------------------------------------------------------------------------------
-Original documentation:
-------------------------------------------------------------------------------
-
-This repository holds our external (i.e. third party) libraries. After a fresh
-clone, the repository contains *only* metadata about the libraries, i.e. their
-names, where to retrieve them from, etc. In order to actually obtain or update
-the libraries, the user must run a bootstrapping script, which downloads all
-third-party libraries and places them into a src/ directory.
-
-
 Prerequisites
 -------------
 
 The script itself is written in Python and should "just work" using any standard
-Python 2 or 3 installation. The version control tools Git, Mercurial and
+Python 3.6+ installation. The version control tools Git, Mercurial and
 Subversion must be installed and available on the environment path; in addition,
 the 'patch' program must be present on the user's system. On Windows, the script
 can be run from the command line (for patching to work, ensure you have the Cygwin
@@ -168,9 +153,9 @@ overview of the format:
 {
     "name": "LibraryName",
     "source": {
-        "type": "archive|git|hg|svn",
+        "type": "archive|sourcefile|git|hg|svn",
         "url": "http://...",
-        "sha1": "0123456789...0123456789",  # for type == archive
+        "sha1": "0123456789...0123456789",  # for type == archive or sourcefile
         "revision": "0123456789"  # for type == git|hg|svn
     },
     "postprocess": {
@@ -193,15 +178,18 @@ numbers or other information that may change between versions.
 For each library, the "source" field contains information about where to obtain
 the library from, in the form of a JSON object.
 
-The source "type" field can be one of the following types: "archive", "git",
-"hg", or "svn". The first type describes an archive file (such as .zip, .tar.gz,
-.tar.bz2 files), while the last three types describe different repository types.
+The source "type" field can be one of the following types: "archive",
+"sourcefile", "git", "hg", or "svn". The "archive" type describes an archive file
+(such as .zip, .tar.gz, .tar.bz2 files) that is downloaded and uncompressed, while
+"sourcefile" downloads a single file as-is (without uncompressing it). The last
+three types describe different repository types.
 
-The "url" value contains the URL of the archive to be downloaded in case the
-type is 'archive', and the respository URL otherwise.
+The "url" value contains the URL of the file to be downloaded in case the type
+is 'archive' or 'sourcefile', and the repository URL otherwise.
 
-If the source type is 'archive', then the optional "sha1" field can (and should)
-be used to add the SHA1 hash of the archive, for verification purposes.
+If the source type is 'archive' or 'sourcefile', then the optional "sha1" field
+can (and should) be used to add the SHA1 hash of the downloaded file, for
+verification purposes.
 
 For repositories (i.e. type is 'git|hg|svn'), an optional "revision" field can
 specify the particular revision/commit to be checked out. If the revision field
@@ -215,7 +203,7 @@ directory. Post-processing can be of type "patch" or "script"; in both cases,
 the filename has to be given in the "file" field.
 
 For type 'patch', the file field specifies a patch file to be contained in the
-patches/ directory. For type 'file', the file field specified a script that is
+patches/ directory. For type 'script', the file field specifies a script that is
 run from the patches/ directory. Patches can be used to make minor modifications
 to a library, such as silencing warning or to fix bugs which have not been
 included in the upstream version of the library. Scripts can embody any more
@@ -267,25 +255,14 @@ third-party code base are discouraged.
 warning, let's try to get our patch accepted upstream. If we then update to a
 newer version of the library, we won't need a patch file anymore.
 
-- All patch files should adhere to the naming
-  <library_name>_<sha1_hash>.patch
-where <sha1_hash> is the hash of either the archive file or the repository.
-This enables to keep multiple patches for the same library, in case different
-project need different versions of a library (via using local bootstrapping
-files).
-
 - The canonical bootstrapping JSON file should always contain the respective
 latest version of each library that is used across our codebase. If a library
 is updated, it should be updated to the respective latest version available.
 
-- We should be keeping the contained library versions reasonably up-to-date.
-
 
 License
 -------
-See the LICENSE file
 
-Bug reports, comments
----------------------
+This is a fork of an abandoned library https://bitbucket.org/blippar/bootstrapping-external-libs
 
-Should go to omar@blippar.com.
+See the [LICENSE](LICENSE) file.
